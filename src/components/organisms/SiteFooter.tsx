@@ -5,12 +5,13 @@ import { Wordmark } from "@/components/atoms/Wordmark";
 import { NewsletterSignup } from "@/components/molecules/NewsletterSignup";
 
 const involvedLinks: [string, string][] = [
-  ["Pray with us", "/involved"],
+  ["Pray with us", "/prayer"],
   ["Become a member", "/involved"],
   ["Serve part-time", "/involved"],
   ["Support a missionary", "/missionaries"],
   ["Church partnership", "/involved/partnership"],
   ["Give now", "/give"],
+  ["Missionary portal", "/portal/login"],
 ];
 
 const contactRows: { icon: LucideIcon; text: string }[] = [

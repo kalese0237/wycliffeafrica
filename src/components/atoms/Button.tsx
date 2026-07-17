@@ -39,7 +39,7 @@ function buttonClassName({
   );
 }
 
-export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type"> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   iconLeft?: React.ReactNode;
@@ -57,6 +57,7 @@ export function Button({
   className,
   disabled,
   href,
+  type = "button",
   ...rest
 }: ButtonProps) {
   const classes = buttonClassName({ variant, size, disabled, className });
@@ -72,7 +73,7 @@ export function Button({
   }
 
   return (
-    <button type="button" disabled={disabled} className={classes} {...rest}>
+    <button type={type} disabled={disabled} className={classes} {...rest}>
       {iconLeft}
       {children}
       {iconRight}

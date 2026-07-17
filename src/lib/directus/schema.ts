@@ -19,6 +19,9 @@ export interface StoryRecord {
 
 export type UpdateType = "update" | "prayer";
 
+/** Directus-style workflow status. Public queries only ever read `published`. */
+export type PublishStatus = "draft" | "published" | "archived";
+
 export interface FieldUpdateRecord {
   id: string;
   type: UpdateType;
@@ -27,6 +30,13 @@ export interface FieldUpdateRecord {
   body: string;
   date: string;
   image?: string;
+  /** Missionary submissions land as `draft`; an admin publishes them. */
+  status: PublishStatus;
+  /**
+   * Prayer requests only: render anonymized on public pages (no name or
+   * portrait, region instead of place) for workers in security-restricted areas.
+   */
+  sensitive?: boolean;
 }
 
 export interface MissionaryRecord {
@@ -36,6 +46,10 @@ export interface MissionaryRecord {
   place: string;
   roles: string;
   intro: string;
+  /** Longer profile paragraphs for the missionary profile page. */
+  bio?: string[];
+  /** Directus user id owning this profile — links portal logins to the record. */
+  user?: string;
   image?: string;
 }
 

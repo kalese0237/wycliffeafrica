@@ -1,4 +1,6 @@
 export * from "./FormField";
+export * from "./MissionaryCard";
+export * from "./PrayerRequestCard";
 export * from "./NewsletterSignup";
 export * from "./PhotoPlaceholder";
 export * from "./ProgressBar";

@@ -15,6 +15,10 @@ const MISSIONARIES: MissionaryRecord[] = [
     roles: "Translation Team Advisors",
     intro:
       "Samuel and Grace walk alongside mother-tongue translators drafting the New Testament, checking each book with the community until it reads clearly and naturally.",
+    bio: [
+      "Samuel grew up in Kisumu hearing Scripture read in a language his grandmother never fully understood. That memory carried him through linguistics training and, in 2014, into full-time translation work with Grace, a trained teacher.",
+      "Today they serve the Turkana cluster as team advisors: coaching mother-tongue translators through drafting, arranging community checks in village congregations, and preparing each book for consultant review. Their long-term prayer is a complete Turkana New Testament read aloud in every church in the region.",
+    ],
   },
   {
     id: "wanjiru",
@@ -24,6 +28,10 @@ const MISSIONARIES: MissionaryRecord[] = [
     roles: "Literacy Specialist",
     intro:
       "Miriam develops reading primers and adult literacy programmes so that when Scripture arrives, communities can read it for themselves.",
+    bio: [
+      "A translated Bible no one can read stays closed. Miriam joined the movement after a decade teaching primary school, convinced that literacy is the bridge between a finished translation and a transformed community.",
+      "From Nairobi she designs reading primers, trains volunteer literacy teachers, and runs adult reading groups in partner language areas — most recently in the Kakuma refugee settlement.",
+    ],
   },
   {
     id: "mwangi",
@@ -33,6 +41,10 @@ const MISSIONARIES: MissionaryRecord[] = [
     roles: "Scripture Engagement",
     intro:
       "David helps churches put translated Scripture to use in worship, discipleship and daily life — through song, audio and Bible study.",
+    bio: [
+      "David's conviction is simple: translation is finished not when the books are printed, but when people meet God in them. He serves churches in South Sudan as a Scripture engagement facilitator.",
+      "His weeks are spent helping congregations weave newly translated Scripture into worship — recording Scripture songs with local choirs, distributing audio Bibles for listening groups, and training pastors to preach from the mother-tongue text.",
+    ],
   },
   {
     id: "achieng",
@@ -41,6 +53,10 @@ const MISSIONARIES: MissionaryRecord[] = [
     place: "Uganda",
     roles: "Language Survey Specialist",
     intro: "Esther travels across language areas gathering the data that guides where translation work is needed most.",
+    bio: [
+      "Before a single verse can be drafted, someone has to listen. Esther leads survey trips across Uganda's language areas — recording word lists, testing comprehension between dialects, and sitting with elders to understand how communities actually speak.",
+      "Her reports guide where the movement begins its next translation projects, making her work the first chapter of every future Scripture launch.",
+    ],
   },
   {
     id: "kamau",
@@ -49,6 +65,10 @@ const MISSIONARIES: MissionaryRecord[] = [
     place: "Nairobi, Kenya",
     roles: "Finance & Administration",
     intro: "Joseph stewards the funds entrusted to the movement, ensuring every gift is accounted for and directed to the field.",
+    bio: [
+      "Every translation project runs on trust — of language communities, of churches, and of the givers who fund the work. Joseph keeps that trust: he manages the movement's accounts from Nairobi, ensuring every gift is tracked from donor to field.",
+      "A certified accountant, he left corporate practice in 2018 because he wanted his ledgers to count for something eternal.",
+    ],
   },
   {
     id: "njoroge",
@@ -57,6 +77,10 @@ const MISSIONARIES: MissionaryRecord[] = [
     place: "Cameroon",
     roles: "Bible Translation Advisors",
     intro: "Peter and Hannah serve a cluster of related languages, training local translators and checking drafts with consultants.",
+    bio: [
+      "Peter and Hannah moved to Cameroon in 2019 to serve a cluster of four related languages in the Northwest. Rather than translating themselves, they train and mentor local translation teams — one team per language, sharing tools, terminology and checked drafts across the cluster.",
+      "Their joy is watching a community leader read a freshly checked chapter aloud and hearing the room answer back in recognition.",
+    ],
   },
 ];
 
@@ -117,6 +141,7 @@ const UPDATES: FieldUpdateRecord[] = [
     title: "New Testament draft reaches Turkana churches",
     body: "After three years of drafting and community checking, the Gospels are now being read aloud in Sunday services across six Turkana congregations.",
     date: "June 2026",
+    status: "published",
   },
   {
     id: "u2",
@@ -125,6 +150,7 @@ const UPDATES: FieldUpdateRecord[] = [
     title: "Pray for the literacy workshop in Kakuma",
     body: "Miriam leaves next week to train twelve new literacy teachers. Pray for safe travel and for teachers eager to learn.",
     date: "June 2026",
+    status: "published",
   },
   {
     id: "u3",
@@ -133,6 +159,7 @@ const UPDATES: FieldUpdateRecord[] = [
     title: "First recorded Scripture songs released",
     body: "A local choir has recorded the first Scripture songs in their language — already spreading through phones and radio in the community.",
     date: "May 2026",
+    status: "published",
   },
   {
     id: "u4",
@@ -141,6 +168,7 @@ const UPDATES: FieldUpdateRecord[] = [
     title: "Pray for Peter & Hannah's consultant check",
     body: "An outside consultant arrives this month to check the drafted books. Pray for clarity, patience, and unity with the translation team.",
     date: "May 2026",
+    status: "published",
   },
   {
     id: "u5",
@@ -149,6 +177,7 @@ const UPDATES: FieldUpdateRecord[] = [
     title: "Language survey completed in three new communities",
     body: "Esther's team has finished surveying three previously undocumented language communities — the first step toward future translation work.",
     date: "April 2026",
+    status: "published",
   },
   {
     id: "u6",
@@ -157,6 +186,17 @@ const UPDATES: FieldUpdateRecord[] = [
     title: "Pray for provision as we close the fiscal year",
     body: "Joseph asks for prayer as the team finalises this year's accounts — for wisdom in stewardship and provision for next year's projects.",
     date: "April 2026",
+    status: "published",
+  },
+  {
+    id: "u7",
+    type: "prayer",
+    missionaryId: "mwangi",
+    title: "Pray for a listening group in a restricted area",
+    body: "A new Scripture listening group has begun meeting quietly in a community where open Christian gatherings draw hostility. Pray for the group's protection, and for the Word to take root.",
+    date: "June 2026",
+    status: "published",
+    sensitive: true,
   },
 ];
 
@@ -213,11 +253,15 @@ export async function getMissionaryBySlug(slug: string): Promise<MissionaryRecor
 }
 
 export async function getUpdates(): Promise<FieldUpdateRecord[]> {
-  return UPDATES;
+  return UPDATES.filter((u) => u.status === "published");
 }
 
 export async function getUpdatesForMissionary(missionaryId: string): Promise<FieldUpdateRecord[]> {
-  return UPDATES.filter((u) => u.missionaryId === missionaryId);
+  return UPDATES.filter((u) => u.missionaryId === missionaryId && u.status === "published");
+}
+
+export async function getPrayerRequests(): Promise<FieldUpdateRecord[]> {
+  return UPDATES.filter((u) => u.type === "prayer" && u.status === "published");
 }
 
 export async function getResources(): Promise<ResourceRecord[]> {
@@ -228,6 +272,6 @@ export async function getFaqs(): Promise<FaqRecord[]> {
   return FAQS;
 }
 
-export function getMissionaryById(id: string): MissionaryRecord | undefined {
+export async function getMissionaryById(id: string): Promise<MissionaryRecord | undefined> {
   return MISSIONARIES.find((m) => m.id === id);
 }

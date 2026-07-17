@@ -1,6 +1,7 @@
 export * from "./DonationCTA";
 export * from "./ImpactStats";
 export * from "./PageHero";
+export * from "./portal";
 export * from "./PageIntro";
 export * from "./SiteFooter";
 export * from "./SiteHeader";

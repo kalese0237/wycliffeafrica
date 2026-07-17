@@ -33,6 +33,8 @@ const NAV: NavItem[] = [
     menu: [
       ["Our Missionaries", "/missionaries"],
       ["Support Your Missionary", "/missionaries"],
+      ["Prayer Requests", "/prayer"],
+      ["Missionary Portal", "/portal/login"],
     ],
   },
   {
@@ -44,7 +46,7 @@ const NAV: NavItem[] = [
       ["Support a Missionary", "/missionaries"],
       ["Church Partnership", "/involved/partnership"],
       ["Motivate your Church", "/involved/motivate-your-church"],
-      ["Pray with Us", "/involved"],
+      ["Pray with Us", "/prayer"],
       ["Give", "/give"],
     ],
   },
