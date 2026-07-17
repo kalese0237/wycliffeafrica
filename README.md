@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Wycliffe Africa website
 
-## Getting Started
+Content-led ministry platform for Wycliffe Africa, built from the Wycliffe
+Africa design system.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Next.js (App Router) + TypeScript + Tailwind CSS v4** — tokens live as CSS
+  custom properties in [`src/app/globals.css`](src/app/globals.css) (`@theme`),
+  ported verbatim from the design system tokens. Never hardcode a hex/px value —
+  use the token utilities (`bg-primary`, `text-strong`, `tracking-caps`, ...).
+- **Directus (headless CMS)** — client scaffolded in
+  [`src/lib/directus/`](src/lib/directus/) but no live instance yet. Pages read
+  from [`src/lib/content.ts`](src/lib/content.ts), which currently re-exports
+  mock fixtures (`src/lib/mock-data.ts`) shaped identically to the Directus
+  schema; swap its re-exports to `directus/queries` when an instance exists.
+- **Fonts** — Cormorant Garamond (display), Karla (body/UI), JetBrains Mono
+  (data), loaded via `next/font/google` in `src/app/layout.tsx`. These are
+  stand-ins pending licensed binaries from Wycliffe Africa.
+- **Icons** — `lucide-react`, monochrome only.
+
+## Strict atomic design
+
+```
+src/components/
+  atoms/       Button, Input, Badge, Tag, Icon, Wordmark, Divider, Avatar
+  molecules/   StatItem, ProgressBar, FormField, StoryCard, ResourceCard,
+               NewsletterSignup, UpdateCard, PhotoPlaceholder
+  organisms/   SiteHeader, SiteFooter, DonationCTA, ImpactStats, PageHero,
+               PageIntro, StickySideNav, UpdatesGrid, ContactForm,
+               QuestionnaireForm, home/*, give/*
+  templates/   PageTemplate
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Pages (`src/app/*/page.tsx`) compose templates + organisms only.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Running
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Node v23 via nvm (WSL). Package manager is **pnpm** (pinned via the
+`packageManager` field; native build scripts approved in `pnpm-workspace.yaml`):
 
-## Learn More
+```bash
+pnpm install
+pnpm dev     # dev server on :3000
+pnpm build   # production build (26 static pages)
+pnpm lint
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Status / next pass
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Fully built: Home, About Us, Give, Get Involved, Motivate your Church.
+- Scaffolded with lighter content (real routes, shared template):
+  Church Partnership, Resources, FAQs, Stories (+detail), Missionaries
+  (+detail), Updates, Contact, Questionnaire.
+- Photography is intentionally `PhotoPlaceholder` (striped gradient + caption)
+  per the design system — drop in real photography at the same aspect ratios.
+- Form submissions are stubbed (`preventDefault`) pending the Directus pass.

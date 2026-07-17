@@ -1,26 +1,193 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* =====================================================================
+   Wycliffe Africa — design tokens
+   Ported from the Wycliffe Africa design system tokens.
+   Values are final brand values — do not hand-pick new ones; re-theme by
+   repointing the semantic aliases only.
+   ===================================================================== */
+
+@theme {
+  /* -------------------------------------------------------------
+     COLOR — neutrals (warm-adjacent, navy-tinted)
+  ------------------------------------------------------------- */
+  --color-paper-0: #ffffff;
+  --color-paper-1: #f6f7fa;
+  --color-paper-2: #eef0f5;
+  --color-paper-3: #dce0e9;
+  --color-ink-0: #030308;
+  --color-ink-1: #23263f;
+  --color-ink-2: #565b70;
+  --color-ink-3: #878ca0;
+
+  /* Navy — primary brand ramp */
+  --color-navy-900: #030308;
+  --color-navy-800: #08090f;
+  --color-navy-700: #0e1020;
+  --color-navy-600: #2f3468;
+  --color-navy-500: #454b82;
+  --color-navy-300: #9a9fc0;
+  --color-navy-100: #e2e4ef;
+  --color-navy-050: #eff0f7;
+
+  /* Green — accent / action ramp (logo color) */
+  --color-green-700: #1e7d08;
+  --color-green-600: #269a0b;
+  --color-green-500: #33b00f;
+  --color-green-400: #5cc23f;
+  --color-green-300: #8dd674;
+  --color-green-200: #c1e8b3;
+  --color-green-100: #e6f5de;
+
+  /* Journey tags — six visitor-path colors (pills only) */
+  --color-tag-give: #1e7d08;
+  --color-tag-give-tint: #e6f5de;
+  --color-tag-serve: #1f2350;
+  --color-tag-serve-tint: #e2e4ef;
+  --color-tag-churches: #0f6f7d;
+  --color-tag-churches-tint: #d9edf0;
+  --color-tag-pray: #4a4fa0;
+  --color-tag-pray-tint: #e4e5f4;
+  --color-tag-stories: #b0761a;
+  --color-tag-stories-tint: #f6ecd6;
+  --color-tag-resources: #4f5a69;
+  --color-tag-resources-tint: #e7eaef;
+
+  /* Semantic feedback */
+  --color-success: #269a0b;
+  --color-warning: #b0761a;
+  --color-danger: #c2372c;
+  --color-info: #0f6f7d;
+
+  /* Semantic aliases — what components should reference */
+  --color-page: var(--color-paper-0);
+  --color-card: var(--color-paper-0);
+  --color-sunk: var(--color-paper-1);
+
+  --color-strong: var(--color-ink-0);
+  --color-body: var(--color-ink-1);
+  --color-muted: var(--color-ink-2);
+  --color-faint: var(--color-ink-3);
+  --color-on-primary: #ffffff;
+  --color-on-accent: #0b0c26;
+
+  --color-hair: var(--color-paper-3);
+  --color-line-strong: var(--color-ink-3);
+
+  /* Primary (navy) — headers, primary actions, text */
+  --color-primary: var(--color-navy-900);
+  --color-primary-hover: var(--color-navy-700);
+  --color-primary-active: #060714;
+  --color-primary-tint: var(--color-navy-050);
+  --color-primary-border: var(--color-navy-100);
+
+  /* Accent (green) — action, growth, translation progress */
+  --color-accent: var(--color-green-500);
+  --color-accent-hover: var(--color-green-600);
+  --color-accent-tint: var(--color-green-100);
+  --color-accent-border: var(--color-green-200);
+
+  /* Spark — one emphasis moment per view (e.g. Give) */
+  --color-spark: var(--color-green-500);
+  --color-spark-tint: var(--color-green-100);
+
+  --color-link: var(--color-green-700);
+  --color-link-hover: #155f05;
+  --color-focus-ring: var(--color-green-400);
+
+  /* -------------------------------------------------------------
+     TYPE SCALE — major third (1.25), anchored at 16px body
+  ------------------------------------------------------------- */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.25rem;
+  --text-lg: 1.5625rem;
+  --text-xl: 1.953rem;
+  --text-2xl: 2.441rem;
+  --text-3xl: 3.3rem;
+  --text-4xl: 4.4rem;
+  --text-5xl: 5.6rem;
+
+  --tracking-tight: -0.015em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.02em;
+  --tracking-caps: 0.15em;
+
+  --leading-tight: 1.05;
+  --leading-snug: 1.2;
+  --leading-body: 1.62;
+
+  /* -------------------------------------------------------------
+     RADIUS — restrained; paper has soft, small corners
+  ------------------------------------------------------------- */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+
+  /* -------------------------------------------------------------
+     SHADOW — soft, warm, low ("paper lifting off a desk")
+  ------------------------------------------------------------- */
+  --shadow-sm: 0 1px 2px rgba(11, 12, 38, 0.07);
+  --shadow-md: 0 3px 12px rgba(11, 12, 38, 0.1);
+  --shadow-lg: 0 12px 34px rgba(11, 12, 38, 0.15);
+  --shadow-inset: inset 0 1px 2px rgba(11, 12, 38, 0.1);
+
+  --animate-fade-in: fade-in var(--dur-slow, 380ms) var(--ease-out, ease-out);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
+/* Font families are bound in the RootLayout via next/font, which sets these
+   CSS vars on <html>; `inline` because they reference those runtime vars. */
+@theme inline {
+  --font-display: var(--font-cormorant);
+  --font-body: var(--font-karla);
+  --font-ui: var(--font-karla);
+  --font-mono: var(--font-jbmono);
+}
+
+/* -------------------------------------------------------------
+   Non-utility tokens — referenced directly as CSS vars (e.g.
+   max-w-[var(--container-max)]), not generated into utility classes.
+   -------------------------------------------------------------
+   Spacing note: the brand's 4px-base scale (space-1..space-9 = 4/8/12/16/
+   24/32/48/64/96px) maps exactly onto Tailwind's default spacing scale
+   (base --spacing: 0.25rem) at keys 1/2/3/4/6/8/12/16/24 — use those
+   numeric utilities (p-4, gap-6, py-12, ...) directly, no custom scale
+   needed. */
+:root {
+  --container-max: 1200px;
+  --container-wide: 1320px;
+  --container-prose: 68ch;
+  --site-topbar-height: 42px;
+  --site-main-header-height: 74px;
+  --site-header-height: var(--site-main-header-height);
+  --site-header-stack-height: calc(var(--site-topbar-height) + var(--site-main-header-height));
+
+  --border-width: 1px;
+  --border-width-strong: 2px;
+
+  --dur-fast: 130ms;
+  --dur-base: 220ms;
+  --dur-slow: 380ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-page);
+  color: var(--color-body);
+  font-family: var(--font-body);
+  line-height: var(--leading-body);
 }
