@@ -20,7 +20,9 @@ export interface MissionaryProfileTemplateProps {
  */
 export function MissionaryProfileTemplate({ missionary: m, updates }: MissionaryProfileTemplateProps) {
   const firstName = m.name.split(" ")[0];
-  const prayerRequests = updates.filter((u) => u.type === "prayer");
+  // Sensitive requests appear only on /prayer, anonymized — showing them here
+  // next to the missionary's name would undo that protection.
+  const prayerRequests = updates.filter((u) => u.type === "prayer" && !u.sensitive);
   const fieldUpdates = updates.filter((u) => u.type === "update");
   const bio = m.bio?.length ? m.bio : [m.intro];
 
