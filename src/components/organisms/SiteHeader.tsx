@@ -15,8 +15,12 @@ interface NavItem {
   menu?: [string, string][];
 }
 
-const NAV: NavItem[] = [
-  { label: "Home", href: "/" },
+interface NavGroup {
+  label: string;
+  links: [string, string][];
+}
+
+const PRIMARY_NAV: NavItem[] = [
   {
     label: "About Us",
     href: "/about",
@@ -28,13 +32,11 @@ const NAV: NavItem[] = [
     ],
   },
   {
-    label: "Our Missionaries",
+    label: "Missionaries",
     href: "/missionaries",
     menu: [
       ["Our Missionaries", "/missionaries"],
       ["Support Your Missionary", "/missionaries"],
-      ["Prayer Requests", "/prayer"],
-      ["Missionary Portal", "/portal/login"],
     ],
   },
   {
@@ -46,8 +48,16 @@ const NAV: NavItem[] = [
       ["Support a Missionary", "/missionaries"],
       ["Church Partnership", "/involved/partnership"],
       ["Motivate your Church", "/involved/motivate-your-church"],
-      ["Pray with Us", "/prayer"],
-      ["Give", "/give"],
+    ],
+  },
+  {
+    label: "Updates",
+    href: "/updates",
+    menu: [
+      ["All Updates", "/updates"],
+      ["Missionary Updates", "/updates?type=update"],
+      ["Prayer Requests", "/prayer"],
+      ["Prayer Guide", "/prayer-guide.pdf"],
     ],
   },
   {
@@ -61,27 +71,46 @@ const NAV: NavItem[] = [
       ["Downloads", "/resources"],
     ],
   },
-  { label: "FAQs", href: "/faqs" },
-  { label: "Media", href: "/stories" },
-  { label: "Updates", href: "/updates" },
-  { label: "Contact", href: "/contact" },
+];
+
+const SECONDARY_NAV: NavGroup[] = [
+  {
+    label: "More",
+    links: [
+      ["Stories & Media", "/stories"],
+      ["FAQs", "/faqs"],
+      ["Contact", "/contact"],
+    ],
+  },
+  {
+    label: "Account",
+    links: [["Missionary Portal", "/portal/login"]],
+  },
 ];
 
 const TOP_BAR_HEIGHT = 42;
 const MAIN_HEADER_HEIGHT = 74;
 const COMPACT_MAIN_HEADER_HEIGHT = 48;
 
-function HamburgerIcon({ compact = false }: { compact?: boolean }) {
+function MenuIcon({ compact = false }: { compact?: boolean }) {
   return (
     <span
       aria-hidden
-      className={cn("flex flex-col justify-between", compact ? "h-[13px] w-[20px]" : "h-[16px] w-[24px]")}
+      className={cn(
+        "flex flex-col items-end justify-center",
+        compact ? "w-5 gap-1.5" : "w-6 gap-2",
+      )}
     >
       <span className="h-[2px] w-full rounded-pill bg-current" />
-      <span className="h-[2px] w-full rounded-pill bg-current" />
-      <span className="h-[2px] w-full rounded-pill bg-current" />
+      <span className="h-[2px] w-2/3 rounded-pill bg-current" />
     </span>
   );
+}
+
+function isActivePath(pathname: string, href: string) {
+  const targetPath = href.split(/[?#]/, 1)[0];
+  if (!targetPath || targetPath === "/") return pathname === targetPath;
+  return pathname === targetPath || pathname.startsWith(`${targetPath}/`);
 }
 
 export interface SiteHeaderProps {
@@ -130,6 +159,16 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
     };
   }, [drawerOpen]);
 
+  React.useEffect(() => {
+    if (!drawerOpen) return;
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setDrawerOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [drawerOpen]);
+
   const onPhoto = transparent && !scrolled;
 
   return (
@@ -171,48 +210,50 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
               scrolled ? "gap-3" : "gap-6",
             )}
           >
-            <nav className="-ml-3 hidden flex-none items-center gap-0.5 lg:flex">
-            {NAV.map((item) => {
-              const active = pathname === item.href;
-              return (
-                <div key={item.label} className="group relative">
-                  <Link
-                    href={item.href}
-                    className={cn(
-                      "relative inline-flex items-center gap-1 whitespace-nowrap rounded-sm px-3 font-ui font-semibold transition-[padding,font-size,color] duration-[300ms]",
-                      scrolled ? "py-1 text-sm" : "py-2.5 text-[15px]",
-                      onPhoto ? "text-white/90 hover:text-white" : "text-body hover:text-green-700",
-                      active && (onPhoto ? "text-white" : "text-green-700"),
-                    )}
-                  >
-                    {item.label}
-                    {item.menu && <ChevronDown size={15} />}
-                    <span
-                      className={cn(
-                        "absolute inset-x-3 bottom-1 h-[2px] origin-left scale-x-0 bg-green-500 transition-transform duration-300 group-hover:scale-x-100",
-                        active && "scale-x-100",
-                      )}
-                    />
-                  </Link>
-                  {item.menu && (
-                    <div className="invisible absolute left-0 top-full z-10 min-w-[240px] translate-y-1 rounded-md border border-hair bg-card py-2 opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
-                      {item.menu.map(([label, href]) => (
-                        <Link
-                          key={label}
-                          href={href}
-                          className="block px-4 py-2 font-ui text-sm text-body hover:bg-sunk hover:text-green-700"
-                        >
-                          {label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </nav>
+            <div className="flex-1" />
 
-          <div className="flex-1" />
+            <nav className="-ml-3 hidden flex-none items-center gap-0.5 lg:flex">
+              {PRIMARY_NAV.map((item) => {
+                const active = isActivePath(pathname, item.href);
+                return (
+                  <div key={item.label} className="group relative">
+                    <Link
+                      href={item.href}
+                      aria-current={active ? "page" : undefined}
+                      aria-haspopup={item.menu ? "menu" : undefined}
+                      className={cn(
+                        "relative inline-flex items-center gap-1 whitespace-nowrap rounded-sm px-3 font-ui font-semibold transition-[padding,font-size,color] duration-[300ms]",
+                        scrolled ? "py-1 text-sm" : "py-2.5 text-[15px]",
+                        onPhoto ? "text-white/90 hover:text-white" : "text-body hover:text-green-700",
+                        active && (onPhoto ? "text-white" : "text-green-700"),
+                      )}
+                    >
+                      {item.label}
+                      {item.menu && <ChevronDown size={15} />}
+                      <span
+                        className={cn(
+                          "absolute inset-x-3 bottom-1 h-[2px] origin-left scale-x-0 bg-green-500 transition-transform duration-300 group-hover:scale-x-100",
+                          active && "scale-x-100",
+                        )}
+                      />
+                    </Link>
+                    {item.menu && (
+                      <div className="invisible absolute left-0 top-full z-10 min-w-[240px] translate-y-1 rounded-md border border-hair bg-card py-2 opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                        {item.menu.map(([label, href]) => (
+                          <Link
+                            key={label}
+                            href={href}
+                            className="block px-4 py-2 font-ui text-sm text-body hover:bg-sunk hover:text-green-700"
+                          >
+                            {label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </nav>
 
           <button
             type="button"
@@ -239,14 +280,15 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
           <button
             type="button"
             aria-label="Open menu"
+            aria-controls="site-menu"
+            aria-expanded={drawerOpen}
             onClick={() => setDrawerOpen(true)}
             className={cn(
-              "inline-flex flex-none items-center justify-center rounded-sm border transition-[height,width,color,background-color,border-color] duration-[300ms]",
-              scrolled ? "h-8 w-8" : "h-10 w-10",
-              onPhoto ? "border-white/35 bg-white/90 text-body hover:bg-white" : "border-paper-2 bg-paper-2 text-body hover:bg-paper-3",
+              "inline-flex h-10 w-10 flex-none items-center justify-center rounded-full bg-transparent transition-[color,background-color] duration-[180ms]",
+              onPhoto ? "text-white hover:bg-white/10" : "text-body hover:bg-sunk",
             )}
           >
-            <HamburgerIcon compact={scrolled} />
+            <MenuIcon compact={scrolled} />
           </button>
           </div>
         </header>
@@ -261,7 +303,9 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
         )}
       />
       <nav
+        id="site-menu"
         aria-label="Site menu"
+        aria-hidden={!drawerOpen}
         className={cn(
           "fixed inset-y-0 right-0 z-[71] flex w-[min(720px,92vw)] flex-col overflow-y-auto bg-card shadow-lg transition-transform duration-[420ms] ease-[cubic-bezier(0,0,0.2,1)]",
           drawerOpen ? "translate-x-0" : "translate-x-full",
@@ -288,14 +332,14 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
         </div>
 
         <div className="relative grid gap-10 px-8 pb-14 pt-6 sm:px-16 sm:pt-5 lg:grid-cols-2 lg:gap-x-20 lg:gap-y-12 lg:px-16">
-          {NAV.map((item) => (
+          {PRIMARY_NAV.map((item) => (
             <section key={item.label}>
               <Link
                 href={item.href}
                 onClick={() => setDrawerOpen(false)}
                 className={cn(
                   "mb-6 block max-w-[12ch] font-display text-[34px] font-semibold leading-[1.15] text-body transition-colors hover:text-green-700",
-                  pathname === item.href && "text-green-700",
+                  isActivePath(pathname, item.href) && "text-green-700",
                 )}
               >
                 {item.label}
@@ -309,7 +353,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                         onClick={() => setDrawerOpen(false)}
                         className={cn(
                           "block max-w-[16ch] font-ui text-[22px] leading-snug tracking-wide text-body transition-colors hover:text-green-700",
-                          pathname === href && "text-green-700",
+                          isActivePath(pathname, href) && "text-green-700",
                         )}
                       >
                         {label}
@@ -318,6 +362,31 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                   ))}
                 </ul>
               )}
+            </section>
+          ))}
+
+          {SECONDARY_NAV.map((group) => (
+            <section key={group.label} className="border-t border-hair pt-7">
+              <h2 className="mb-5 font-ui text-xs font-bold uppercase tracking-caps text-muted">
+                {group.label}
+              </h2>
+              <ul className="space-y-4">
+                {group.links.map(([label, href]) => (
+                  <li key={label}>
+                    <Link
+                      href={href}
+                      onClick={() => setDrawerOpen(false)}
+                      aria-current={isActivePath(pathname, href) ? "page" : undefined}
+                      className={cn(
+                        "block font-ui text-[20px] leading-snug tracking-wide text-body transition-colors hover:text-green-700",
+                        isActivePath(pathname, href) && "text-green-700",
+                      )}
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </section>
           ))}
         </div>

@@ -1,4 +1,4 @@
-import * as React from "react";
+import { Suspense } from "react";
 import { PageTemplate } from "@/components/templates";
 import { UpdatesGrid } from "@/components/organisms/UpdatesGrid";
 import { getUpdates, getMissionaries } from "@/lib/content";
@@ -21,7 +21,9 @@ export default async function UpdatesPage() {
   return (
     <PageTemplate heroTitle="Updates from the Field">
       <section className="mx-auto max-w-[var(--container-max)] px-5 py-16 sm:px-12">
-        <UpdatesGrid updates={safeUpdates} authorNames={authorNames} />
+        <Suspense fallback={<div className="min-h-[320px]" aria-label="Loading updates" />}>
+          <UpdatesGrid updates={safeUpdates} authorNames={authorNames} />
+        </Suspense>
       </section>
     </PageTemplate>
   );
