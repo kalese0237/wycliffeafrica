@@ -38,7 +38,7 @@ export default async function PrayerPage() {
             soon as the office reviews them.
           </p>
         ) : (
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="flex flex-col gap-6">
             {requests.map((r) => (
               <PrayerRequestCard key={r.id} request={r} missionary={byId.get(r.missionaryId)} />
             ))}
@@ -50,15 +50,15 @@ export default async function PrayerPage() {
         <div className="mx-auto flex max-w-[var(--container-max)] flex-col items-start justify-between gap-6 px-5 py-14 sm:px-12 lg:flex-row lg:items-center">
           <div>
             <h2 className="mb-2 font-display text-xl font-semibold text-strong">
-              Pray with us every month
+              Pray with us every two weeks
             </h2>
             <p className="max-w-[58ch] font-body text-[15px] leading-relaxed text-muted">
-              The monthly prayer guide gathers requests from every field into one rhythm of prayer
-              for Bible translation across Africa.
+              The prayer guide gathers requests from every field into one rhythm of prayer for
+              Bible translation across Africa — free to download, updated every two weeks.
             </p>
           </div>
           <div className="flex flex-none flex-wrap gap-2.5">
-            <Button href="/resources" variant="primary" iconLeft={<BookOpen size={16} />}>
+            <Button href="/prayer-guide.pdf" variant="primary" iconLeft={<BookOpen size={16} />}>
               Get the prayer guide
             </Button>
             <Button href="/portal/login" variant="ghost" iconLeft={<LogIn size={15} />}>

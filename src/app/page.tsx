@@ -3,6 +3,7 @@ import { DonationCTA } from "@/components/organisms";
 import {
   HomeHero,
   HomeIntro,
+  MissionarySpotlight,
   ServeGiveCards,
   UpdatesFeed,
   ScriptureQuoteBand,
@@ -16,6 +17,7 @@ export default function HomePage() {
     <PageTemplate transparentHeader>
       <HomeHero />
       <HomeIntro />
+      <MissionarySpotlight />
       <UpdatesFeed />
       <ServeGiveCards />
       <ScriptureQuoteBand />

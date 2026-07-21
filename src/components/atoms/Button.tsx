@@ -7,10 +7,10 @@ export type ButtonSize = "sm" | "md" | "lg";
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary: "border-primary bg-primary text-on-primary hover:bg-primary-hover",
-  accent: "border-accent bg-accent text-on-accent hover:bg-accent-hover",
+  accent: "border-green-700 bg-green-700 text-white hover:bg-link-hover",
   secondary: "border-primary-border bg-card text-primary hover:bg-sunk",
   ghost: "border-transparent bg-transparent text-primary shadow-none hover:bg-sunk",
-  spark: "border-spark bg-spark text-on-accent hover:bg-accent-hover",
+  spark: "border-green-700 bg-green-700 text-white hover:bg-link-hover",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {

@@ -50,7 +50,7 @@ async function api(path, { method = "GET", body, ok404 = false } = {}) {
 const MISSIONARIES = [
   {
     id: "otieno",
-    slug: "otieno",
+    slug: "samuel-grace-otieno",
     name: "Samuel & Grace Otieno",
     place: "Turkana, Kenya",
     roles: "Translation Team Advisors",
@@ -63,7 +63,7 @@ const MISSIONARIES = [
   },
   {
     id: "wanjiru",
-    slug: "wanjiru",
+    slug: "miriam-wanjiru",
     name: "Miriam Wanjiru",
     place: "Nairobi, Kenya",
     roles: "Literacy Specialist",
@@ -76,7 +76,7 @@ const MISSIONARIES = [
   },
   {
     id: "mwangi",
-    slug: "mwangi",
+    slug: "david-mwangi",
     name: "David Mwangi",
     place: "South Sudan",
     roles: "Scripture Engagement",
@@ -89,7 +89,7 @@ const MISSIONARIES = [
   },
   {
     id: "achieng",
-    slug: "achieng",
+    slug: "esther-achieng",
     name: "Esther Achieng",
     place: "Uganda",
     roles: "Language Survey Specialist",
@@ -101,7 +101,7 @@ const MISSIONARIES = [
   },
   {
     id: "kamau",
-    slug: "kamau",
+    slug: "joseph-kamau",
     name: "Joseph Kamau",
     place: "Nairobi, Kenya",
     roles: "Finance & Administration",
@@ -113,7 +113,7 @@ const MISSIONARIES = [
   },
   {
     id: "njoroge",
-    slug: "njoroge",
+    slug: "peter-hannah-njoroge",
     name: "Peter & Hannah Njoroge",
     place: "Cameroon",
     roles: "Bible Translation Advisors",

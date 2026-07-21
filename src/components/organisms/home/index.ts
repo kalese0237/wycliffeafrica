@@ -1,5 +1,6 @@
 export * from "./HomeHero";
 export * from "./HomeIntro";
+export * from "./MissionarySpotlight";
 export * from "./MissionsMovementFeature";
 export * from "./ScriptureQuoteBand";
 export * from "./ServeGiveCards";

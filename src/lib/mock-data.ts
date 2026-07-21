@@ -8,8 +8,22 @@ import type { StoryRecord, FieldUpdateRecord, MissionaryRecord, ResourceRecord, 
 
 const MISSIONARIES: MissionaryRecord[] = [
   {
+    id: "barah",
+    slug: "frans-lilian-barah",
+    name: "Frans & Lilian Barah",
+    place: "Yaoundé, Cameroon",
+    roles: "Language Technology Consultant & Discipleship Ministry",
+    intro:
+      "Frans and Lilian are Cameroonian missionaries who have served together for more than two decades in Bible translation, church ministry, leadership development, and community transformation.",
+    bio: [
+      "Frans serves as a Language Technology Consultant and Associate Domain Team Leader for Language Technology in the SIL Africa Area. He trains, mentors, and supports Bible translation teams across Africa in using technology for translation, literacy, and the production of printed and digital Scripture resources. He is especially passionate about developing African leaders and building sustainable local capacity.",
+      "Lilian serves through discipleship, trauma healing, mentoring, and practical skills development. She has a special passion for children and young women, helping them grow spiritually and practically through Bible study, sewing, and life-skills training.",
+      "For more than two decades, Frans and Lilian have served together in Bible translation, church ministry, leadership development, and community transformation. Their calling: to know Christ and make Him known by equipping others and helping communities experience the transforming power of God's Word.",
+    ],
+  },
+  {
     id: "otieno",
-    slug: "otieno",
+    slug: "samuel-grace-otieno",
     name: "Samuel & Grace Otieno",
     place: "Turkana, Kenya",
     roles: "Translation Team Advisors",
@@ -22,7 +36,7 @@ const MISSIONARIES: MissionaryRecord[] = [
   },
   {
     id: "wanjiru",
-    slug: "wanjiru",
+    slug: "miriam-wanjiru",
     name: "Miriam Wanjiru",
     place: "Nairobi, Kenya",
     roles: "Literacy Specialist",
@@ -35,7 +49,7 @@ const MISSIONARIES: MissionaryRecord[] = [
   },
   {
     id: "mwangi",
-    slug: "mwangi",
+    slug: "david-mwangi",
     name: "David Mwangi",
     place: "South Sudan",
     roles: "Scripture Engagement",
@@ -48,7 +62,7 @@ const MISSIONARIES: MissionaryRecord[] = [
   },
   {
     id: "achieng",
-    slug: "achieng",
+    slug: "esther-achieng",
     name: "Esther Achieng",
     place: "Uganda",
     roles: "Language Survey Specialist",
@@ -60,7 +74,7 @@ const MISSIONARIES: MissionaryRecord[] = [
   },
   {
     id: "kamau",
-    slug: "kamau",
+    slug: "joseph-kamau",
     name: "Joseph Kamau",
     place: "Nairobi, Kenya",
     roles: "Finance & Administration",
@@ -72,7 +86,7 @@ const MISSIONARIES: MissionaryRecord[] = [
   },
   {
     id: "njoroge",
-    slug: "njoroge",
+    slug: "peter-hannah-njoroge",
     name: "Peter & Hannah Njoroge",
     place: "Cameroon",
     roles: "Bible Translation Advisors",
