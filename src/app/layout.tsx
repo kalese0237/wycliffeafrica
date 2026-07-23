@@ -28,7 +28,7 @@ const jbMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Wycliffe Africa — Bible translation across Africa",
   description:
-    "Partners in Bible translation. We work alongside African churches and communities so that every people group can know Scripture in the language of their heart.",
+    "An African-led movement raising, training and sending missionaries so that every language community in Africa can read Scripture in its own language.",
 };
 
 export default function RootLayout({

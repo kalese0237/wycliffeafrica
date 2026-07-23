@@ -15,15 +15,13 @@ export function MissionsMovementFeature() {
           </h2>
           <div className="space-y-4 font-body text-base leading-relaxed text-muted">
             <p>
-              Africa is the second-largest and second-most-populous continent in the world, with an estimated
-              population of over 1.3 billion people. It is home to the highest linguistic diversity in the world,
-              with well over 1,500 living languages — a diversity shaped by the continent&apos;s long, deep history.
+              Africa is the second-largest and second-most-populous continent, home to over 1.3 billion people.
+              It also has more living languages than anywhere else on earth — well over 1,500 of them.
             </p>
             <p>
-              Christianity in Africa began shortly after the founding of the Church and was well established in
-              North Africa within its first centuries. By the sixth century, missionaries had carried the faith
-              into the heart of the continent, shaped by early African voices including Tertullian, Perpetua,
-              Clement of Alexandria, Origen, and Augustine of Hippo.
+              Christianity here is not an import. The church was established in North Africa within its first
+              centuries — Tertullian, Perpetua, Clement of Alexandria, Origen and Augustine were all African —
+              and by the sixth century the faith had reached deep into the continent.
             </p>
           </div>
           <Button href="/contact" variant="accent" iconRight={<ArrowRight size={16} />} className="mt-6">

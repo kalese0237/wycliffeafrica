@@ -24,11 +24,11 @@ const MISSIONARY = {
   place: "Yaoundé, Cameroon",
   roles: "Language Technology Consultant & Discipleship Ministry",
   intro:
-    "Frans and Lilian are Cameroonian missionaries who have served together for more than two decades in Bible translation, church ministry, leadership development, and community transformation.",
+    "Frans and Lilian are Cameroonian missionaries based in Yaoundé — Frans in translation technology, Lilian in discipleship and trauma healing. They have served together for over twenty years.",
   bio: [
-    "Frans serves as a Language Technology Consultant and Associate Domain Team Leader for Language Technology in the SIL Africa Area. He trains, mentors, and supports Bible translation teams across Africa in using technology for translation, literacy, and the production of printed and digital Scripture resources. He is especially passionate about developing African leaders and building sustainable local capacity.",
-    "Lilian serves through discipleship, trauma healing, mentoring, and practical skills development. She has a special passion for children and young women, helping them grow spiritually and practically through Bible study, sewing, and life-skills training.",
-    "For more than two decades, Frans and Lilian have served together in Bible translation, church ministry, leadership development, and community transformation. Their calling: to know Christ and make Him known by equipping others and helping communities experience the transforming power of God's Word.",
+    "Frans is a Language Technology Consultant and Associate Domain Team Leader for Language Technology in the SIL Africa Area. He trains and supports Bible translation teams across Africa in the software they use for translation, literacy work, and producing printed and digital Scripture. What he cares about most is training African specialists, so that the work no longer depends on outside help.",
+    "Lilian's ministry is discipleship and trauma healing, mostly among children and young women. Her groups pair Bible study with sewing and other practical skills.",
+    "Two decades in, their aim has not changed: to know Christ and make Him known — mostly by equipping other people to do the work.",
   ],
 };
 

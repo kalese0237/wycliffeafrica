@@ -19,13 +19,13 @@ const WAYS: { icon: LucideIcon; title: string; body: string; href: string }[] = 
   {
     icon: HandHeart,
     title: "Pray",
-    body: "Join our prayer network and lift up translators, communities, and the work by name.",
+    body: "Join the prayer network and pray for translators and their communities by name.",
     href: "/involved",
   },
   {
     icon: UserPlus,
     title: "Become a Member",
-    body: "Serve long-term with Wycliffe Africa — your skills have a place in translation.",
+    body: "Make Wycliffe Africa your sending organisation and serve long-term.",
     href: "/involved",
   },
   {
@@ -43,7 +43,7 @@ const WAYS: { icon: LucideIcon; title: string; body: string; href: string }[] = 
   {
     icon: HeartHandshake,
     title: "Support a Missionary",
-    body: "Stand behind a field worker with monthly financial partnership.",
+    body: "Commit to one field worker with monthly giving and prayer.",
     href: "/missionaries",
   },
   {
@@ -61,7 +61,7 @@ const WAYS: { icon: LucideIcon; title: string; body: string; href: string }[] = 
   {
     icon: Gift,
     title: "Give",
-    body: "Fund translation, training, and Scripture engagement across Africa.",
+    body: "Fund the work itself — once, or month by month.",
     href: "/give",
   },
 ];
@@ -77,7 +77,7 @@ export default function InvolvedPage() {
         journey="serve"
         eyebrowLabel="Get Involved"
         title="There's a place for you in Bible translation."
-        subtitle="Whether you can pray, give, serve, or mobilise your church — every calling advances the Word among the languages of Africa."
+        subtitle="Some people move to the field. Most serve from where they are — praying, giving, or bringing their church along."
       />
 
       <section className="mx-auto grid max-w-[var(--container-max)] grid-cols-1 gap-6 px-5 pb-20 pt-4 sm:grid-cols-2 sm:px-12 lg:grid-cols-3">

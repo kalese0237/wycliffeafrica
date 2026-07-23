@@ -8,19 +8,19 @@ const CARDS: { icon: LucideIcon; title: string; href: string; body: string }[] =
     icon: Clock,
     title: "Serve part-time",
     href: "/involved",
-    body: "There are many full-time and part-time possibilities in Wycliffe Africa as an individual or a group.",
+    body: "You don't have to move to the field. Individuals and groups serve from home, on their own schedule.",
   },
   {
     icon: Compass,
     title: "Serve",
     href: "/involved",
-    body: "How can the Scriptures become available in the languages where they are still needed? Join the team.",
+    body: "Field assignments run from a few months to a career — and not only for linguists.",
   },
   {
     icon: Gift,
     title: "Give",
     href: "/give",
-    body: "One of the biggest challenges facing people who want to work for Wycliffe Africa is raising financial support.",
+    body: "Missionaries raise their own support before they can go. Monthly gifts get them to the field and keep them there.",
   },
 ];
 
