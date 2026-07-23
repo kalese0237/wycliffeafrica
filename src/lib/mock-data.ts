@@ -235,7 +235,7 @@ const RESOURCES: ResourceRecord[] = [
   { id: "r1", type: "report", title: "2026 Impact Report", meta: "12 pages", href: "#" },
   { id: "r2", type: "guide", title: "Prayer Guide for Bible Translation", meta: "Monthly", href: "#" },
   { id: "r3", type: "pdf", title: "Church Partnership Starter Pack", meta: "8 pages", href: "#" },
-  { id: "r4", type: "video", title: "Vision 2025 — Field Film", meta: "6 min", href: "#" },
+  { id: "r4", type: "video", title: "Vision 2025: Field Film", meta: "6 min", href: "#" },
   { id: "r5", type: "audio", title: "Field Update Podcast, Episode 12", meta: "24 min", href: "#" },
   { id: "r6", type: "pdf", title: "No Bible Sunday Planning Kit", meta: "5 pages", href: "#" },
 ];

@@ -6,7 +6,7 @@ import { LoginForm } from "@/components/organisms/portal";
 import { getPortalUser } from "@/lib/portal/auth";
 
 export const metadata = {
-  title: "Missionary Portal — Wycliffe Africa",
+  title: "Missionary Portal | Wycliffe Africa",
 };
 
 const FEATURES = [

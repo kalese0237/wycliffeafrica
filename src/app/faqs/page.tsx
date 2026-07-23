@@ -4,7 +4,7 @@ import { PageTemplate } from "@/components/templates";
 import { getFaqs } from "@/lib/content";
 
 export const metadata = {
-  title: "FAQs — Wycliffe Africa",
+  title: "FAQs | Wycliffe Africa",
 };
 
 export default async function FaqsPage() {

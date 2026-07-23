@@ -4,7 +4,7 @@ import { ResourceCard } from "@/components/molecules/ResourceCard";
 import { getResources } from "@/lib/content";
 
 export const metadata = {
-  title: "Resources — Wycliffe Africa",
+  title: "Resources | Wycliffe Africa",
 };
 
 export default async function ResourcesPage() {

@@ -10,7 +10,7 @@ import { getMySubmissions, getPortalUser } from "@/lib/portal/auth";
 import type { PublishStatus } from "@/lib/directus/schema";
 
 export const metadata = {
-  title: "Missionary Portal — Wycliffe Africa",
+  title: "Missionary Portal | Wycliffe Africa",
 };
 
 const STATUS_BADGE: Record<PublishStatus, { label: string; tone: BadgeTone }> = {

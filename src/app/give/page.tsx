@@ -7,7 +7,7 @@ import { Button } from "@/components/atoms/Button";
 import { GivingForm, GiveSupportPanel, MpesaPanel } from "@/components/organisms/give";
 
 export const metadata = {
-  title: "Give — Wycliffe Africa",
+  title: "Give | Wycliffe Africa",
 };
 
 export default function GivePage() {

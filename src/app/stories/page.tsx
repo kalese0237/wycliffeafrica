@@ -4,7 +4,7 @@ import { StoryCard } from "@/components/molecules/StoryCard";
 import { getStories } from "@/lib/content";
 
 export const metadata = {
-  title: "Media & Stories — Wycliffe Africa",
+  title: "Media & Stories | Wycliffe Africa",
 };
 
 export default async function StoriesPage() {

@@ -5,7 +5,7 @@ import { Button } from "@/components/atoms/Button";
 import { PhotoPlaceholder } from "@/components/molecules/PhotoPlaceholder";
 
 export const metadata = {
-  title: "Church Partnership — Wycliffe Africa",
+  title: "Church Partnership | Wycliffe Africa",
 };
 
 export default function ChurchPartnershipPage() {

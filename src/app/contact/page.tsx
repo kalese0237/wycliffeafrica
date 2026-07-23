@@ -11,7 +11,7 @@ const DETAILS: { icon: LucideIcon; label: string; value: string }[] = [
 ];
 
 export const metadata = {
-  title: "Contact — Wycliffe Africa",
+  title: "Contact | Wycliffe Africa",
 };
 
 export default function ContactPage() {

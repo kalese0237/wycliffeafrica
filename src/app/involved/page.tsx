@@ -67,7 +67,7 @@ const WAYS: { icon: LucideIcon; title: string; body: string; href: string }[] = 
 ];
 
 export const metadata = {
-  title: "Get Involved — Wycliffe Africa",
+  title: "Get Involved | Wycliffe Africa",
 };
 
 export default function InvolvedPage() {

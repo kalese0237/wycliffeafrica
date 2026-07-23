@@ -4,7 +4,7 @@ import { UpdatesGrid } from "@/components/organisms/UpdatesGrid";
 import { getUpdates, getMissionaries } from "@/lib/content";
 
 export const metadata = {
-  title: "Updates from the Field — Wycliffe Africa",
+  title: "Updates from the Field | Wycliffe Africa",
 };
 
 /** Re-check Directus for newly published updates every 5 minutes. */

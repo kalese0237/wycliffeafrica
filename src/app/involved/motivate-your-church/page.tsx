@@ -24,7 +24,7 @@ const COMMITTEE_TASKS = [
 ];
 
 export const metadata = {
-  title: "Motivate Your Church — Wycliffe Africa",
+  title: "Motivate Your Church | Wycliffe Africa",
 };
 
 export default function MotivateYourChurchPage() {

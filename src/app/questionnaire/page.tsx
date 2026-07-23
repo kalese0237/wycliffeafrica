@@ -3,7 +3,7 @@ import { PageTemplate } from "@/components/templates";
 import { QuestionnaireForm } from "@/components/organisms/QuestionnaireForm";
 
 export const metadata = {
-  title: "Preliminary Questionnaire — Wycliffe Africa",
+  title: "Preliminary Questionnaire | Wycliffe Africa",
 };
 
 export default function QuestionnairePage() {
