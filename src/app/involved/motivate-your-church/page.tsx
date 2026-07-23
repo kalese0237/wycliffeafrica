@@ -50,9 +50,8 @@ export default function MotivateYourChurchPage() {
           </h3>
           <p className="mb-4 font-body text-base leading-relaxed text-muted">
             This guides you through the process of setting up a Sunday at your church where the Bible cannot be
-            used. It is designed to help people appreciate the value of Scripture in their own lives, churches, and
-            cultures. It also serves to make people aware of others who live without the Bible and what they are
-            missing.
+            used. A Sunday without the Bible helps people feel what they normally take for granted — and notice
+            those who live without it every week.
           </p>
 
           <h3 className="mb-3 mt-8 font-display text-xl font-semibold text-green-700">Look on the Web</h3>
@@ -70,10 +69,9 @@ export default function MotivateYourChurchPage() {
 
           <h3 className="mb-3 mt-8 font-display text-xl font-semibold text-green-700">Form a Missions Committee</h3>
           <p className="mb-4 font-body text-base leading-relaxed text-muted">
-            If you can find several like-minded people motivated to reach African people groups for Christ, form a
-            committee to help lead your church in its missions effort. Missions committees help bring awareness of
-            missions issues to their church. They can also care for the missionaries sent out by their church. A
-            mission committee is extremely helpful for a church to maximize the impact of its mission efforts:
+            If you can find a few like-minded people, form a committee to lead your church&apos;s missions effort.
+            A committee keeps missions in front of the congregation, looks after the missionaries the church sends
+            out, and gets far more done than one person can alone:
           </p>
           <div className="flex flex-col gap-3.5">
             {COMMITTEE_TASKS.map((task) => (

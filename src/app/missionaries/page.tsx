@@ -27,8 +27,8 @@ export default async function MissionariesPage() {
           </h2>
           <p className="mx-auto max-w-[65ch] font-body text-base leading-relaxed text-muted sm:text-md">
             Every translation project is carried by people — translators, literacy teachers,
-            surveyors, administrators. Each missionary here serves through the prayers and monthly
-            support of partners like you.
+            surveyors, administrators. None of them draw a salary; each serves on the prayers and
+            monthly gifts of their supporters.
           </p>
           <div className="mt-9 grid overflow-hidden rounded-lg border border-hair bg-sunk text-left sm:grid-cols-3">
             <div className="flex items-center gap-3 border-b border-hair px-5 py-4 font-ui text-sm font-semibold text-body sm:border-b-0 sm:border-r">

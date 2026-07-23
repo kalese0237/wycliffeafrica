@@ -16,19 +16,17 @@ export function HomeIntro() {
             translated.
           </p>
           <p>
-            Evangelism, teaching, worship and typically all ministries are severely hampered unless people receive a
-            Bible in a language they can adequately understand. Across Africa, some hundreds of language groups
-            don&apos;t have Scriptures in their own language. Millions of people are still cut off from the
-            life-changing power of God&apos;s inspired Word.
+            Evangelism, teaching and worship are all hampered when people don&apos;t have a Bible in a language
+            they understand well. Hundreds of African language groups still have no Scripture at all — millions
+            of people, cut off from God&apos;s Word.
           </p>
           <p>
-            How can Scriptures become available in the languages where they are still needed? This vital ministry
-            can only happen through the work of a broad and skilled team — linguists, translators, literacy
-            teachers, ethnomusicologists, computer specialists, administrators and more.
+            How do Scriptures become available where they are still needed? Only through a broad, skilled team:
+            linguists, translators, literacy teachers, ethnomusicologists, computer specialists, administrators.
           </p>
           <p>
-            Perhaps someone like you. Are you passionately interested in reaching the unreached through Bible
-            translation? Contact us — below are ways you can get involved in this ministry.
+            Perhaps someone like you. If this is work you could see yourself in, contact us — the ways to get
+            involved are below.
           </p>
         </div>
       </div>

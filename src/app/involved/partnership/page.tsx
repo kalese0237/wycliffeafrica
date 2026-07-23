@@ -19,13 +19,13 @@ export default function ChurchPartnershipPage() {
             Mobilise your congregation for Bible translation
           </h2>
           <p className="mb-3.5 font-body text-base leading-relaxed text-muted">
-            Church partnership walks alongside congregations to adopt a language community in prayer, giving, and
-            people — until every group has the Word. Your church can stand behind a specific translation project,
-            missionary, or community for the long haul.
+            In a church partnership, your congregation takes on one language community and stays with it —
+            praying for the team by name, funding the project, sometimes sending your own people. It is a
+            commitment measured in years, not events.
           </p>
           <p className="mb-6 font-body text-base leading-relaxed text-muted">
-            Ready to start the conversation? Reach out and our partnerships team will help you find the right fit
-            for your congregation.
+            If that sounds like your church, write to us. The partnerships team will help you work out where to
+            begin.
           </p>
           <div className="flex flex-wrap gap-3">
             <Button href="/contact" variant="accent" iconRight={<ArrowRight size={16} />}>

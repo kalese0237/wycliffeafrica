@@ -17,7 +17,7 @@ export default function GivePage() {
         journey="give"
         eyebrowLabel="Give"
         title="Every gift moves a translation forward."
-        subtitle="Give once or monthly. Your gift is stewarded toward translation, training, checking, and Scripture engagement across the continent."
+        subtitle="Give once or monthly — toward a missionary's support, a specific project, or wherever the need is greatest."
       />
 
       <section className="mx-auto grid max-w-[var(--container-max)] grid-cols-1 items-start gap-7 px-5 pb-16 sm:px-12 lg:grid-cols-[1.1fr_0.9fr]">
@@ -59,7 +59,7 @@ export default function GivePage() {
       <section className="mx-auto grid max-w-[var(--container-max)] grid-cols-1 items-center gap-10 px-5 py-16 sm:px-12 lg:grid-cols-2 lg:gap-16">
         <PhotoPlaceholder caption="A church congregation" aspect="4/3" />
         <div>
-          <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">Adopt a church</div>
+          <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">Adopt a project</div>
           <h2 className="mb-4 mt-3 font-display text-2xl font-semibold text-strong">
             Stand behind a translation project
           </h2>

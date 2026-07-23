@@ -18,7 +18,7 @@ export interface DonationCTAProps {
 export function DonationCTA({
   eyebrow = "Support the work",
   title = "Put Scripture in reach of one more language.",
-  blurb = "Your gift funds translators, training, community checking, and Scripture engagement across Africa.",
+  blurb = "The work runs on supported people: the translators who draft, the consultants who check, the teachers who help communities read. Your gift keeps them at it.",
   primaryCta = "Give today",
   primaryHref = "/give",
   secondaryCta = "Support a missionary",

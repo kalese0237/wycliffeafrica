@@ -8,8 +8,8 @@ import { Button } from "@/components/atoms/Button";
 const VALUES: { icon: LucideIcon; title: string; body: string }[] = [
   { icon: BookOpen, title: "The Bible", body: "God's inspired Word, for every people in their heart language." },
   { icon: Users, title: "The Church", body: "Mobilising African believers and congregations for the task." },
-  { icon: Heart, title: "Integrity", body: "Faithful stewardship, accountability and Christ-like service." },
-  { icon: Globe, title: "The Unreached", body: "A relentless focus on languages still without Scripture." },
+  { icon: Heart, title: "Integrity", body: "Careful stewardship of every gift, and honest reporting of the work." },
+  { icon: Globe, title: "The Unreached", body: "Languages with no Scripture at all come first." },
 ];
 
 export const metadata = {
@@ -23,7 +23,7 @@ export default function AboutPage() {
         journey="serve"
         eyebrowLabel="About Us"
         title="Why Bible translation, and who we are"
-        subtitle="Wycliffe Africa is an African-led movement for Bible translation — because language should never be a barrier to the gospel."
+        subtitle="Wycliffe Africa is an African-led movement raising missionaries for Bible translation across the continent."
       />
 
       <section className="mx-auto grid max-w-[var(--container-max)] grid-cols-1 items-center gap-10 px-5 py-14 sm:px-12 lg:grid-cols-2 lg:gap-16">
@@ -31,11 +31,11 @@ export default function AboutPage() {
         <div>
           <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">Why Bible translation</div>
           <h2 className="mb-3.5 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
-            When people meet God in their own language, everything changes.
+            A borrowed language keeps the gospel at arm&apos;s length.
           </h2>
           <p className="mb-3.5 font-body text-base leading-relaxed text-muted sm:text-md">
-            A translated Bible reaches the heart in a way a borrowed language never can. It shapes worship,
-            discipleship, literacy and community — for generations.
+            People can learn in a second language, but few ever pray in one. When Scripture arrives in the mother
+            tongue, churches preach from it, schools teach reading with it, and it stays for generations.
           </p>
           <p className="font-body text-base leading-relaxed text-muted sm:text-md">
             Yet thousands of languages across Africa still wait. That is the task we exist for.

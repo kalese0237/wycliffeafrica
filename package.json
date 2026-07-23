@@ -11,6 +11,7 @@
     "portal:setup": "node scripts/setup-missionary-portal.mjs",
     "portal:provision": "node scripts/provision-missionary-portal-user.mjs",
     "portal:provision-reviewer": "node scripts/provision-portal-reviewer.mjs",
+    "portal:provision-website": "node scripts/provision-website-user.mjs",
     "portal:verify": "node scripts/verify-portal-permissions.mjs"
   },
   "dependencies": {

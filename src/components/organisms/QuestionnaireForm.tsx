@@ -40,7 +40,7 @@ export function QuestionnaireForm() {
       </FormField>
       <FormField
         label="What skills or training would you bring to Bible translation?"
-        helper="Linguistics, teaching, finance, IT, aviation, administration — every calling has a place."
+        helper="Linguistics, teaching, finance, IT, aviation, administration — the work needs them all."
         className="mb-4"
       >
         <textarea name="skills" rows={4} className={textareaClasses} />

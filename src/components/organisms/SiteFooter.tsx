@@ -30,8 +30,7 @@ export function SiteFooter() {
         <div>
           <Wordmark height={42} onDark />
           <p className="mt-5 max-w-[34ch] font-body text-sm leading-relaxed text-white/72">
-            The goal of Bible translation is for people everywhere, speakers of every language, to gain access to
-            Scriptures in the language they know best.
+            We work so that speakers of every language can read Scripture in the language they know best.
           </p>
         </div>
         <div>

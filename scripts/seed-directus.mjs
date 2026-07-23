@@ -55,12 +55,12 @@ const MISSIONARIES = [
     place: "Uganda",
     roles: "Programme Manager, Learning & Development – SIL Africa",
     intro:
-      "Lydia champions language-inclusive education and Scripture engagement across Uganda, helping refugee and host communities access learning and God’s Word in the languages they understand best.",
+      "Lydia works with schools and churches in Uganda so that refugee and host communities can learn — and read God’s Word — in the languages they speak at home.",
     bio: [
-      "Lydia Teera is a Ugandan mission leader and Programme Manager serving with the Learning & Development team at SIL Africa while seconded from Wycliffe Africa. With more than two decades of missionary service, Lydia is passionate about helping communities access education and Scripture in languages they understand best. Her work focuses on advocacy, alliance building, and strengthening partnerships that promote language-inclusive education and meaningful Scripture engagement across African communities.",
-      "In her current role, Lydia contributes to initiatives that address language barriers in education, particularly among refugee and host communities in Uganda. She has co-led evidence-based programs that equip educators with multilingual classroom strategies and practical approaches that governments and institutions can adopt in their education systems. Her work brings together research, training, and community engagement to ensure that language becomes a bridge—rather than a barrier—to learning, faith formation, and community transformation.",
-      "Lydia’s calling to missionary service began more than 20 years ago when she made the courageous decision to dedicate her life to advancing God’s mission through Bible translation and language development. Known for her strengths in advocacy, communication, and partnership building, she is also a co-author of a bridging program that supports refugee learners transitioning into Ugandan schools. Beyond her professional work, Lydia enjoys meaningful conversations around Scripture and the role of language in shaping identity and faith. She also loves sharing stories that highlight the impact of Bible translation and education initiatives, and when she is at home, she enjoys spending time in her garden.",
-      "Among the many language communities she has worked with, Lydia holds a special place in her heart for the Pokot, a marginalised tribe in northeastern Uganda facing low literacy, limited access to basic resources, and an undiscipled church shaped by language barriers and remote geography. She has dedicated significant time to supporting their language development. She is also a key contributor to Wycliffe Africa’s partnership with other mission organisations to recruit and send African missionaries into Bible translation work worldwide, having helped recruit several missionaries serving in Uganda.",
+      "Lydia Teera is a Ugandan mission leader serving as Programme Manager with the Learning & Development team at SIL Africa, seconded from Wycliffe Africa. She has been in missionary service for more than twenty years, most of them spent on one problem: across Africa, children and adults are asked to learn, worship and read Scripture in languages they only half understand.",
+      "Much of her current work is with refugee and host communities in Uganda, where a single classroom can hold speakers of five languages and the lessons reach none of them well. She has co-led programmes that train teachers to work multilingually, with methods practical enough for schools and governments to adopt, and she is co-author of a bridging programme that helps refugee children settle into Ugandan schools.",
+      "Her call to missions came more than twenty years ago, when she decided to give her working life to Bible translation and language development. Ask her about Scripture, or about what language does to a person’s sense of identity and faith, and the conversation will run long. At home, she gardens.",
+      "Among the communities she has served, the Pokot of northeastern Uganda hold a particular place in her heart: a marginalised people with low literacy, few basic services, and a church that has long lacked Scripture it can read. She has given years to their language development. She also works on Wycliffe Africa’s partnerships with other mission agencies to recruit and send African missionaries into translation work — several of those now serving in Uganda came through her.",
     ],
   },
   {
@@ -217,7 +217,7 @@ const STORIES = [
       "Across Africa, millions have never read a single verse in the language they think, pray and dream in. Bible translation closes that gap.",
     body: [
       "Across Africa, millions have never read a single verse in the language they think, pray and dream in. Bible translation closes that gap.",
-      "For years, prayers, songs and Sunday readings came in a language learned at school — never the one spoken at home. That distance is what Bible translation closes: not merely swapping words, but letting the living Word be heard in the tongue of the heart.",
+      "For generations, prayers, songs and Sunday readings have come in a language learned at school — never the one spoken at home. Translation closes that distance. When it does, people stop overhearing the gospel and start hearing it.",
     ],
     author: "Wycliffe Africa",
     place: "Continental",
@@ -230,9 +230,9 @@ const STORIES = [
     tagLabel: "Serve",
     title: "Becoming a member: your first step into the work",
     excerpt:
-      "From linguists to teachers, accountants to pilots — every calling has a place in Bible translation. Discover how to join.",
+      "Translation teams need more than linguists. Teachers, accountants, IT people and pilots all keep the work moving — here is how membership works.",
     body: [
-      "From linguists to teachers, accountants to pilots — every calling has a place in Bible translation. Discover how to join.",
+      "Translation teams need more than linguists. Teachers, accountants, IT people and pilots all keep the work moving — here is how membership works.",
     ],
     author: "Membership Team",
     place: "Nairobi, Kenya",
@@ -269,7 +269,7 @@ const FAQS = [
     id: "f1",
     question: "How is my gift used?",
     answer:
-      "Gifts are stewarded toward translation drafting, community checking, consultant review, training, and Scripture engagement across Africa. Visit the Give page for a full breakdown.",
+      "Most of it pays for people and their work on the field — drafting, community checking sessions, consultant visits, and training for African translators. The Give page has a fuller breakdown.",
   },
   {
     id: "f2",
