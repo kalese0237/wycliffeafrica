@@ -59,7 +59,7 @@ export default function AboutPage() {
                 </span>
                 <div>
                   <h3 className="mb-1 font-display text-md font-semibold text-strong">{title}</h3>
-                  <p className="font-body text-[15px] leading-relaxed text-muted">{body}</p>
+                  <p className="font-body text-base leading-relaxed text-muted">{body}</p>
                 </div>
               </div>
             ))}

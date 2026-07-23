@@ -1,4 +1,5 @@
 import * as React from "react";
+import Image from "next/image";
 import { ArrowRight, Heart, MapPin } from "lucide-react";
 import { Button } from "@/components/atoms/Button";
 import { PhotoPlaceholder } from "@/components/molecules/PhotoPlaceholder";
@@ -15,7 +16,13 @@ export async function MissionarySpotlight() {
   return (
     <section className="border-y border-hair bg-sunk">
       <div className="mx-auto grid max-w-[var(--container-max)] grid-cols-1 items-center gap-10 px-5 py-20 sm:px-12 lg:grid-cols-2 lg:gap-16">
-        <PhotoPlaceholder caption="Portrait" aspect="4/3" />
+        {missionary.image ? (
+          <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-hair bg-card shadow-md">
+            <Image src={`/media/${missionary.image}`} alt={`${missionary.name} portrait`} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+          </div>
+        ) : (
+          <PhotoPlaceholder caption="Portrait" aspect="4/3" />
+        )}
         <div>
           <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">
             Missionary Spotlight
@@ -27,7 +34,7 @@ export async function MissionarySpotlight() {
             <span className="flex items-center gap-1.5 font-ui text-xs font-bold uppercase tracking-wide text-green-700">
               <MapPin size={13} /> {missionary.place}
             </span>
-            <span className="font-ui text-[13px] text-faint">{missionary.roles}</span>
+            <span className="font-ui text-sm text-faint">{missionary.roles}</span>
           </div>
           <p className="mb-6 font-body text-base leading-relaxed text-muted sm:text-md">{missionary.intro}</p>
           <div className="flex flex-wrap gap-3">

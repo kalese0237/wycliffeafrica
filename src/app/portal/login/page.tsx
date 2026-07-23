@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { HandHeart, Newspaper, ShieldCheck } from "lucide-react";
 import { PageTemplate } from "@/components/templates";
 import { LoginForm } from "@/components/organisms/portal";
-import { getPortalUser, portalEnabled } from "@/lib/portal/auth";
+import { getPortalUser } from "@/lib/portal/auth";
 
 export const metadata = {
   title: "Missionary Portal — Wycliffe Africa",
@@ -28,7 +28,7 @@ const FEATURES = [
 ];
 
 export default async function PortalLoginPage() {
-  if (portalEnabled && (await getPortalUser())) redirect("/portal");
+  if (await getPortalUser()) redirect("/portal");
 
   return (
     <PageTemplate heroTitle="Missionary Portal">

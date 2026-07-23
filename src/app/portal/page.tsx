@@ -4,7 +4,7 @@ import { HandHeart, LogOut, MapPin, Newspaper } from "lucide-react";
 import { PageTemplate } from "@/components/templates";
 import { Badge, type BadgeTone } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
-import { SubmissionForm } from "@/components/organisms/portal";
+import { DraftEditor, SubmissionForm } from "@/components/organisms/portal";
 import { logoutAction } from "@/lib/portal/actions";
 import { getMySubmissions, getPortalUser } from "@/lib/portal/auth";
 import type { PublishStatus } from "@/lib/directus/schema";
@@ -17,6 +17,7 @@ const STATUS_BADGE: Record<PublishStatus, { label: string; tone: BadgeTone }> = 
   draft: { label: "In review", tone: "warning" },
   published: { label: "Published", tone: "success" },
   archived: { label: "Archived", tone: "neutral" },
+  rejected: { label: "Changes requested", tone: "danger" },
 };
 
 export default async function PortalDashboardPage() {
@@ -81,6 +82,14 @@ export default async function PortalDashboardPage() {
                             <Badge tone={badge.tone}>{badge.label}</Badge>
                           </div>
                           <div className="font-ui text-xs text-faint">{s.date}</div>
+                          <p className="mt-2 line-clamp-2 font-body text-sm leading-relaxed text-muted">{s.body}</p>
+                          {s.reviewNotes && (
+                            <div className="mt-3 rounded-md border border-hair bg-sunk p-3">
+                              <div className="font-ui text-xs font-bold uppercase tracking-wide text-body">Office feedback</div>
+                              <p className="mt-1 font-body text-sm leading-relaxed text-muted">{s.reviewNotes}</p>
+                            </div>
+                          )}
+                          {(s.status === "draft" || s.status === "rejected") && <DraftEditor submission={s} />}
                         </div>
                       </li>
                     );

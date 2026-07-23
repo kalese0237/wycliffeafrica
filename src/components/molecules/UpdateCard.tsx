@@ -1,4 +1,5 @@
 import * as React from "react";
+import Image from "next/image";
 import { Newspaper, HandHeart, ShieldCheck } from "lucide-react";
 import { Avatar } from "@/components/atoms/Avatar";
 import { PhotoPlaceholder } from "@/components/molecules/PhotoPlaceholder";
@@ -21,7 +22,13 @@ export function UpdateCard({ update, authorName, className }: UpdateCardProps) {
   return (
     <article className={cn("flex flex-col overflow-hidden rounded-lg border border-hair bg-card shadow-sm", className)}>
       {!isPrayer && (
-        <PhotoPlaceholder caption={update.title} aspect="16/9" className="rounded-none border-none shadow-none" />
+        update.image ? (
+          <div className="relative aspect-video overflow-hidden bg-sunk">
+            <Image src={`/media/${update.image}`} alt="" fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />
+          </div>
+        ) : (
+          <PhotoPlaceholder caption={update.title} aspect="16/9" className="rounded-none border-none shadow-none" />
+        )
       )}
       <div className="flex flex-1 flex-col gap-2.5 p-5">
         <span
@@ -34,7 +41,7 @@ export function UpdateCard({ update, authorName, className }: UpdateCardProps) {
           {isPrayer ? "Prayer request" : "Field update"}
         </span>
         <h3 className="font-display text-lg font-semibold leading-snug text-strong">{update.title}</h3>
-        <p className="flex-1 font-body text-[15px] leading-[1.55] text-muted">{update.body}</p>
+        <p className="flex-1 font-body text-base leading-[1.55] text-muted">{update.body}</p>
         <div className="mt-1.5 flex items-center gap-2.5 border-t border-hair pt-3">
           {sensitive ? (
             <span className="inline-flex h-8 w-8 flex-none items-center justify-center rounded-full bg-tag-pray-tint text-tag-pray">

@@ -105,7 +105,7 @@ function HeroStatTile({ icon: StatIcon, value, suffix, label }: HeroStat) {
           <span className="font-mono">{count.toLocaleString()}</span>
           {suffix && <span className="ml-1 text-md text-green-300">{suffix}</span>}
         </div>
-        <div className="mt-1.5 font-ui text-[13px] text-white/62">{label}</div>
+        <div className="mt-1.5 font-ui text-sm text-white/62">{label}</div>
       </div>
     </div>
   );
@@ -150,7 +150,7 @@ export function HomeHero() {
                 i === index ? "opacity-100" : "pointer-events-none opacity-0",
               )}
             >
-              <div className="flex items-center gap-3.5 font-ui text-[13px] font-bold uppercase tracking-[0.24em] text-green-400">
+              <div className="flex items-center gap-3.5 font-ui text-sm font-bold uppercase tracking-[0.24em] text-green-400">
                 <span className="h-[2px] w-[34px] bg-green-500" />
                 {slide.eyebrow}
               </div>

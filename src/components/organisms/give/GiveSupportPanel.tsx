@@ -25,7 +25,7 @@ export function GiveSupportPanel() {
             </span>
             <div>
               <div className="font-display text-md font-semibold text-strong">{title}</div>
-              <div className="font-ui text-[13px] text-faint">{body}</div>
+              <div className="font-ui text-sm text-faint">{body}</div>
             </div>
           </div>
         ))}

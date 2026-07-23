@@ -1,5 +1,6 @@
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, HandHeart, Heart, Mail, MapPin } from "lucide-react";
 import { PageTemplate } from "@/components/templates/PageTemplate";
 import { Button } from "@/components/atoms/Button";
@@ -39,7 +40,13 @@ export function MissionaryProfileTemplate({ missionary: m, updates }: Missionary
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-14">
           {/* Portrait + support rail */}
           <div className="lg:sticky lg:top-[calc(var(--site-header-stack-height,116px)+24px)]">
-            <PhotoPlaceholder caption="Portrait" aspect="4/5" />
+            {m.image ? (
+              <div className="relative aspect-[4/5] overflow-hidden rounded-lg border border-hair bg-sunk shadow-md">
+                <Image src={`/media/${m.image}`} alt={`${m.name} portrait`} fill sizes="(min-width: 1024px) 35vw, 100vw" className="object-cover" priority />
+              </div>
+            ) : (
+              <PhotoPlaceholder caption="Portrait" aspect="4/5" />
+            )}
             <div className="mt-5 rounded-lg border border-hair bg-sunk p-5">
               <h2 className="mb-1.5 font-display text-md font-semibold text-strong">
                 Partner with {firstName}
@@ -88,7 +95,7 @@ export function MissionaryProfileTemplate({ missionary: m, updates }: Missionary
                 <h2 className="mb-1.5 font-display text-2xl font-semibold text-strong">
                   Pray with {firstName}
                 </h2>
-                <p className="font-body text-[15px] text-muted">
+                <p className="font-body text-base text-muted">
                   Current prayer requests from the field.
                 </p>
               </div>

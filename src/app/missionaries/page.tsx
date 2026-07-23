@@ -19,41 +19,41 @@ export default async function MissionariesPage() {
 
   return (
     <PageTemplate heroTitle="Our Missionaries">
-      <section className="mx-auto max-w-[var(--container-max)] px-5 pb-4 pt-16 sm:px-12">
-        <div className="mx-auto mb-12 max-w-[720px] text-center">
+      <section className="mx-auto max-w-[var(--container-max)] px-5 pb-10 pt-14 sm:px-12 sm:pt-16">
+        <div className="mx-auto max-w-[760px] text-center">
           <Divider variant="accent" width={56} className="mx-auto mb-5" />
-          <h2 className="mb-4 font-display text-2xl font-semibold leading-tight text-strong">
+          <h2 className="mb-4 font-display text-xl font-semibold leading-tight text-strong sm:text-2xl">
             The people behind the work
           </h2>
-          <p className="font-body text-md leading-relaxed text-muted">
+          <p className="mx-auto max-w-[65ch] font-body text-base leading-relaxed text-muted sm:text-md">
             Every translation project is carried by people — translators, literacy teachers,
             surveyors, administrators. Each missionary here serves through the prayers and monthly
             support of partners like you.
           </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-            <div className="flex items-center gap-2.5 font-ui text-sm font-semibold text-body">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary-tint text-primary">
+          <div className="mt-9 grid overflow-hidden rounded-lg border border-hair bg-sunk text-left sm:grid-cols-3">
+            <div className="flex items-center gap-3 border-b border-hair px-5 py-4 font-ui text-sm font-semibold text-body sm:border-b-0 sm:border-r">
+              <span className="inline-flex h-10 w-10 flex-none items-center justify-center rounded-full bg-card text-primary shadow-sm">
                 <Users size={17} />
               </span>
-              {missionaries.length} serving missionaries
+              <span><strong className="block text-base text-strong">{missionaries.length}</strong> serving missionaries</span>
             </div>
-            <div className="flex items-center gap-2.5 font-ui text-sm font-semibold text-body">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary-tint text-primary">
+            <div className="flex items-center gap-3 border-b border-hair px-5 py-4 font-ui text-sm font-semibold text-body sm:border-b-0 sm:border-r">
+              <span className="inline-flex h-10 w-10 flex-none items-center justify-center rounded-full bg-card text-primary shadow-sm">
                 <Globe2 size={17} />
               </span>
-              {countries.size} countries across Africa
+              <span><strong className="block text-base text-strong">{countries.size}</strong> countries across Africa</span>
             </div>
-            <div className="flex items-center gap-2.5 font-ui text-sm font-semibold text-body">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary-tint text-primary">
+            <div className="flex items-center gap-3 px-5 py-4 font-ui text-sm font-semibold text-body">
+              <span className="inline-flex h-10 w-10 flex-none items-center justify-center rounded-full bg-card text-primary shadow-sm">
                 <HandHeart size={17} />
               </span>
-              100% partner supported
+              <span><strong className="block text-base text-strong">100%</strong> partner supported</span>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-[var(--container-max)] px-5 pb-16 sm:px-12">
+      <section className="mx-auto max-w-[var(--container-max)] px-5 pb-20 sm:px-12">
         <MissionaryDirectory missionaries={missionaries} />
       </section>
 
@@ -63,7 +63,7 @@ export default async function MissionariesPage() {
             <h2 className="mb-2 font-display text-xl font-semibold text-strong">
               Serving with Wycliffe Africa?
             </h2>
-            <p className="max-w-[58ch] font-body text-[15px] leading-relaxed text-muted">
+            <p className="max-w-[58ch] font-body text-base leading-relaxed text-muted">
               Sign in to the missionary portal to share field updates and prayer requests with your
               supporters. Submissions are reviewed by the office before publishing.
             </p>

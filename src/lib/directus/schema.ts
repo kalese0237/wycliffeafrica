@@ -20,7 +20,7 @@ export interface StoryRecord {
 export type UpdateType = "update" | "prayer";
 
 /** Directus-style workflow status. Public queries only ever read `published`. */
-export type PublishStatus = "draft" | "published" | "archived";
+export type PublishStatus = "draft" | "published" | "rejected" | "archived";
 
 export interface FieldUpdateRecord {
   id: string;
@@ -37,6 +37,12 @@ export interface FieldUpdateRecord {
    * portrait, region instead of place) for workers in security-restricted areas.
    */
   sensitive?: boolean;
+  /** Private feedback from the office; never included in public content queries. */
+  reviewNotes?: string;
+  reviewedAt?: string;
+  reviewedBy?: string;
+  date_created?: string;
+  date_updated?: string;
 }
 
 export interface MissionaryRecord {

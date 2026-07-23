@@ -65,7 +65,7 @@ export function PrayerRequestCard({ request, missionary, className }: PrayerRequ
           )}
         </div>
         <h3 className="mb-2 font-display text-lg font-semibold leading-snug text-strong">{request.title}</h3>
-        <p className="font-body text-[15px] leading-[1.55] text-muted">{request.body}</p>
+        <p className="font-body text-base leading-[1.55] text-muted">{request.body}</p>
       </div>
     </article>
   );
