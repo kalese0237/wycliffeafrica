@@ -96,18 +96,20 @@
   --color-focus-ring: var(--color-green-400);
 
   /* -------------------------------------------------------------
-     TYPE SCALE — major third (1.25), anchored at 16px body
+     TYPE SCALE — a restrained, readable scale anchored at 16px.
+     The previous major-third scale jumped from 16px to 20px to 25px,
+     which made adjacent hierarchy levels feel disconnected.
   ------------------------------------------------------------- */
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
-  --text-md: 1.25rem;
-  --text-lg: 1.5625rem;
-  --text-xl: 1.953rem;
-  --text-2xl: 2.441rem;
-  --text-3xl: 3.3rem;
-  --text-4xl: 4.4rem;
-  --text-5xl: 5.6rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.375rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.25rem;
+  --text-3xl: 3rem;
+  --text-4xl: 3.75rem;
+  --text-5xl: 4.5rem;
 
   --tracking-tight: -0.015em;
   --tracking-normal: 0em;
@@ -189,5 +191,6 @@ body {
   background: var(--color-page);
   color: var(--color-body);
   font-family: var(--font-body);
+  font-size: var(--text-base);
   line-height: var(--leading-body);
 }

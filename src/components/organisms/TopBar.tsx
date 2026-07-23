@@ -8,7 +8,7 @@ import { Mail, Phone, Facebook, Twitter, Youtube } from "lucide-react";
  */
 export function TopBar() {
   return (
-    <div className="flex h-[42px] items-center justify-between bg-navy-900 font-ui text-[13px] text-white">
+    <div className="flex h-[42px] items-center justify-between bg-navy-900 font-ui text-sm text-white">
       <a
         href="mailto:info@wycliffeafrica.org"
         className="flex h-full items-center gap-2 bg-green-600 px-5 hover:bg-green-700 sm:px-7"

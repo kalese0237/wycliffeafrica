@@ -22,10 +22,10 @@ export function MpesaPanel() {
       <div className="flex flex-col gap-2.5">
         {STEPS.map(([label, value], i) => (
           <div key={label} className="flex items-start gap-3">
-            <span className="mt-0.5 inline-flex h-[26px] w-[26px] flex-none items-center justify-center rounded-full bg-green-100 font-ui text-[13px] font-bold text-green-700">
+            <span className="mt-0.5 inline-flex h-[26px] w-[26px] flex-none items-center justify-center rounded-full bg-green-100 font-ui text-sm font-bold text-green-700">
               {i + 1}
             </span>
-            <span className="font-body text-[15px] leading-relaxed text-body">
+            <span className="font-body text-base leading-relaxed text-body">
               {label}
               {value && (
                 <>

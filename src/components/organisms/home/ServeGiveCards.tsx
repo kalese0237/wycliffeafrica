@@ -36,7 +36,7 @@ export function ServeGiveCards() {
                 <CardIcon size={22} />
               </span>
               <h3 className="mb-2 mt-3.5 font-display text-lg font-semibold text-strong">{title}</h3>
-              <p className="mb-4 flex-1 font-body text-[15px] leading-[1.55] text-muted">{body}</p>
+              <p className="mb-4 flex-1 font-body text-base leading-[1.55] text-muted">{body}</p>
               <Button href={href} variant="ghost" size="sm" iconRight={<ArrowRight size={14} />} className="w-fit px-0">
                 Read more
               </Button>

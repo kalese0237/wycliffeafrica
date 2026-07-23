@@ -9,6 +9,7 @@ import { FormField } from "@/components/molecules/FormField";
 import { cn } from "@/lib/cn";
 import { submitEntryAction, type ActionState } from "@/lib/portal/actions";
 import type { UpdateType } from "@/lib/directus/schema";
+import { SUBMISSION_LIMITS } from "@/lib/portal/validation";
 
 const TYPES: { value: UpdateType; label: string; icon: React.ReactNode }[] = [
   { value: "update", label: "Field update", icon: <Newspaper size={15} /> },
@@ -64,6 +65,8 @@ export function SubmissionForm() {
           name="title"
           placeholder={type === "prayer" ? "Pray for…" : "What has happened?"}
           required
+          minLength={SUBMISSION_LIMITS.titleMin}
+          maxLength={SUBMISSION_LIMITS.titleMax}
         />
       </FormField>
 
@@ -72,6 +75,8 @@ export function SubmissionForm() {
           name="body"
           rows={6}
           required
+          minLength={SUBMISSION_LIMITS.bodyMin}
+          maxLength={SUBMISSION_LIMITS.bodyMax}
           placeholder={
             type === "prayer"
               ? "Share what supporters should pray for."
@@ -80,6 +85,17 @@ export function SubmissionForm() {
           className="w-full rounded-md border border-hair bg-card px-[14px] py-[10px] font-body text-base text-body outline-none transition-[border-color,box-shadow] duration-[130ms] placeholder:text-faint focus:border-spark focus:shadow-[0_0_0_3px_var(--color-spark-tint)]"
         />
       </FormField>
+
+      {type === "update" && (
+        <FormField label="Photo" helper="Optional. JPG, PNG, or WebP; maximum 5 MB." className="mb-4">
+          <input
+            type="file"
+            name="image"
+            accept="image/jpeg,image/png,image/webp"
+            className="rounded-md border border-hair bg-sunk p-3 font-ui text-sm text-muted file:mr-3 file:rounded-sm file:border-0 file:bg-primary file:px-3 file:py-1.5 file:text-white"
+          />
+        </FormField>
+      )}
 
       {type === "prayer" && (
         <label className="mb-5 flex cursor-pointer items-start gap-3 rounded-md border border-hair bg-sunk p-4">

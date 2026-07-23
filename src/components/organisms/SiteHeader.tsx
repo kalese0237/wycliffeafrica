@@ -34,10 +34,6 @@ const PRIMARY_NAV: NavItem[] = [
   {
     label: "Missionaries",
     href: "/missionaries",
-    menu: [
-      ["Our Missionaries", "/missionaries"],
-      ["Support Your Missionary", "/missionaries"],
-    ],
   },
   {
     label: "Get Involved",
@@ -223,7 +219,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                       aria-haspopup={item.menu ? "menu" : undefined}
                       className={cn(
                         "relative inline-flex items-center gap-1 whitespace-nowrap rounded-sm px-3 font-ui font-semibold transition-[padding,font-size,color] duration-[300ms]",
-                        scrolled ? "py-1 text-sm" : "py-2.5 text-[15px]",
+                        scrolled ? "py-1 text-sm" : "py-2.5 text-base",
                         onPhoto ? "text-white/90 hover:text-white" : "text-body hover:text-green-700",
                         active && (onPhoto ? "text-white" : "text-green-700"),
                       )}

@@ -52,7 +52,7 @@ export default async function PrayerPage() {
             <h2 className="mb-2 font-display text-xl font-semibold text-strong">
               Pray with us every two weeks
             </h2>
-            <p className="max-w-[58ch] font-body text-[15px] leading-relaxed text-muted">
+            <p className="max-w-[58ch] font-body text-base leading-relaxed text-muted">
               The prayer guide gathers requests from every field into one rhythm of prayer for
               Bible translation across Africa — free to download, updated every two weeks.
             </p>

@@ -87,7 +87,7 @@ export default function InvolvedPage() {
               <WayIcon size={24} />
             </span>
             <h3 className="mb-2 mt-4 font-display text-lg font-semibold text-strong">{title}</h3>
-            <p className="mb-5 flex-1 font-body text-[15px] leading-relaxed text-muted">{body}</p>
+            <p className="mb-5 flex-1 font-body text-base leading-relaxed text-muted">{body}</p>
             <Button
               href={href}
               variant={title === "Give" ? "accent" : "secondary"}

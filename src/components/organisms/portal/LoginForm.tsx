@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { useActionState } from "react";
 import { LogIn, Mail, Lock } from "lucide-react";
 import { Button } from "@/components/atoms/Button";
@@ -42,6 +43,9 @@ export function LoginForm() {
       <Button type="submit" variant="primary" size="lg" disabled={pending} iconRight={<LogIn size={16} />} className="w-full">
         {pending ? "Signing in…" : "Sign in"}
       </Button>
+      <Link href="/portal/forgot-password" className="mt-4 block text-center font-ui text-sm text-link hover:underline">
+        Forgot your password?
+      </Link>
     </form>
   );
 }
