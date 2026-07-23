@@ -1,7 +1,7 @@
 import { PageTemplate } from "@/components/templates";
 import { RequestPasswordResetForm } from "@/components/organisms/portal";
 
-export const metadata = { title: "Reset Portal Password — Wycliffe Africa" };
+export const metadata = { title: "Reset Portal Password | Wycliffe Africa" };
 
 export default function ForgotPasswordPage() {
   return (

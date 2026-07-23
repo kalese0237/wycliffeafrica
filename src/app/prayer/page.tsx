@@ -7,7 +7,7 @@ import { PrayerRequestCard } from "@/components/molecules/PrayerRequestCard";
 import { getMissionaries, getPrayerRequests } from "@/lib/content";
 
 export const metadata = {
-  title: "Prayer Requests — Wycliffe Africa",
+  title: "Prayer Requests | Wycliffe Africa",
 };
 
 /** Re-check Directus for newly published requests every 5 minutes. */

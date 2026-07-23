@@ -13,7 +13,7 @@ const VALUES: { icon: LucideIcon; title: string; body: string }[] = [
 ];
 
 export const metadata = {
-  title: "About Us — Wycliffe Africa",
+  title: "About Us | Wycliffe Africa",
 };
 
 export default function AboutPage() {

@@ -7,7 +7,7 @@ import { MissionaryDirectory } from "@/components/organisms/MissionaryDirectory"
 import { getMissionaries } from "@/lib/content";
 
 export const metadata = {
-  title: "Our Missionaries — Wycliffe Africa",
+  title: "Our Missionaries | Wycliffe Africa",
 };
 
 /** Re-check Directus for profile changes every 5 minutes. */

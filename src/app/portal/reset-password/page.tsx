@@ -1,7 +1,7 @@
 import { PageTemplate } from "@/components/templates";
 import { ResetPasswordForm } from "@/components/organisms/portal";
 
-export const metadata = { title: "Choose a New Password — Wycliffe Africa" };
+export const metadata = { title: "Choose a New Password | Wycliffe Africa" };
 
 export default async function ResetPasswordPage({
   searchParams,
