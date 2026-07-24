@@ -36,7 +36,7 @@ export function MissionaryProfileTemplate({
 
   return (
     <PageTemplate>
-      <section className="mx-auto max-w-[var(--container-max)] px-5 py-16 sm:px-12">
+      <section className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12">
         <Link
           href="/missionaries"
           className="mb-8 inline-flex items-center gap-1.5 font-ui text-sm font-semibold text-link"
@@ -46,9 +46,9 @@ export function MissionaryProfileTemplate({
 
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-14">
           {/* Portrait + support rail */}
-          <div className="lg:sticky lg:top-[calc(var(--site-header-stack-height,116px)+24px)]">
+          <div className="lg:sticky lg:top-[calc(var(--site-header-stack-height,116px)+24px)] lg:transition-[top] lg:duration-300">
             {m.image ? (
-              <div className="relative aspect-[4/5] overflow-hidden rounded-lg border border-hair bg-sunk shadow-md">
+              <div className="relative aspect-4/5 overflow-hidden rounded-lg border border-hair bg-sunk shadow-md">
                 <Image src={`/media/${m.image}`} alt={`${m.name} portrait`} fill sizes="(min-width: 1024px) 35vw, 100vw" className="object-cover" priority />
               </div>
             ) : (
@@ -96,7 +96,7 @@ export function MissionaryProfileTemplate({
 
       {prayerRequests.length > 0 && (
         <section className="border-t border-hair bg-sunk">
-          <div className="mx-auto max-w-[var(--container-max)] px-5 py-16 sm:px-12">
+          <div className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12">
             <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
               <div>
                 <h2 className="mb-1.5 font-display text-2xl font-semibold text-strong">
@@ -121,7 +121,7 @@ export function MissionaryProfileTemplate({
 
       {fieldUpdates.length > 0 && (
         <section className="border-t border-hair">
-          <div className="mx-auto max-w-[var(--container-max)] px-5 py-16 sm:px-12">
+          <div className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12">
             <h2 className="mb-8 font-display text-2xl font-semibold text-strong">
               Updates from the field
             </h2>

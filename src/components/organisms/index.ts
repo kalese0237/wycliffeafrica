@@ -3,6 +3,7 @@ export * from "./ImpactStats";
 export * from "./PageHero";
 export * from "./portal";
 export * from "./PageIntro";
+export * from "./ProjectHero";
 export * from "./SiteFooter";
 export * from "./SiteHeader";
 export * from "./StickySideNav";

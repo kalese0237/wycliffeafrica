@@ -41,7 +41,7 @@ export function MissionaryDirectory({ missionaries }: MissionaryDirectoryProps) 
               aria-pressed={active === country}
               onClick={() => setActive(country)}
               className={cn(
-                "cursor-pointer rounded-pill border px-4 py-1.5 font-ui text-sm font-semibold transition-colors duration-[130ms]",
+                "cursor-pointer rounded-pill border px-4 py-1.5 font-ui text-sm font-semibold transition-colors duration-130",
                 active === country
                   ? "border-primary bg-primary text-on-primary"
                   : "border-hair bg-card text-muted hover:border-primary-border hover:text-strong",

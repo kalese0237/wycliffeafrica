@@ -47,16 +47,16 @@ const PRIMARY_NAV: NavItem[] = [
     ],
   },
   {
+    label: "Projects",
+    href: "/projects",
+    menu: [
+      ["Internship Program", "/projects/internship-program"],
+      ["SunRise Africa Centre", "/projects/sunrise-africa-centre"],
+    ],
+  },
+  {
     label: "News",
     href: "/news",
-    menu: [
-      ["All News", "/news"],
-      ["Stories & Media", "/news?type=story"],
-      ["Missionary Updates", "/news?type=update"],
-      ["Project Updates", "/news?type=project"],
-      ["Prayer Requests", "/prayer"],
-      ["Prayer Guide", "/prayer-guide.pdf"],
-    ],
   },
   {
     label: "Resources",
@@ -119,35 +119,46 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = React.useState(false);
   const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const scrolledRef = React.useRef(false);
 
   React.useEffect(() => {
-    const setHeaderVars = (isScrolled: boolean) => {
-      const topbarHeight = isScrolled ? 0 : TOP_BAR_HEIGHT;
-      const mainHeaderHeight = isScrolled ? COMPACT_MAIN_HEADER_HEIGHT : MAIN_HEADER_HEIGHT;
-
-      document.documentElement.style.setProperty("--site-topbar-height", `${topbarHeight}px`);
-      document.documentElement.style.setProperty("--site-main-header-height", `${mainHeaderHeight}px`);
-      document.documentElement.style.setProperty("--site-header-height", `${mainHeaderHeight}px`);
-      document.documentElement.style.setProperty(
-        "--site-header-stack-height",
-        `${topbarHeight + mainHeaderHeight}px`,
-      );
-    };
+    let frame = 0;
     const onScroll = () => {
-      const isScrolled = window.scrollY > 4;
-      setScrolled(isScrolled);
-      setHeaderVars(isScrolled);
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        // Separate collapse/expand thresholds prevent chattering when the
+        // changing header height affects scroll anchoring near the page top.
+        const nextScrolled = scrolledRef.current ? window.scrollY > 12 : window.scrollY > 56;
+        if (nextScrolled === scrolledRef.current) return;
+        scrolledRef.current = nextScrolled;
+        setScrolled(nextScrolled);
+      });
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", onScroll);
+      window.cancelAnimationFrame(frame);
       document.documentElement.style.removeProperty("--site-topbar-height");
       document.documentElement.style.removeProperty("--site-main-header-height");
       document.documentElement.style.removeProperty("--site-header-height");
       document.documentElement.style.removeProperty("--site-header-stack-height");
     };
   }, []);
+
+  React.useEffect(() => {
+    const topbarHeight = scrolled ? 0 : TOP_BAR_HEIGHT;
+    const mainHeaderHeight = scrolled ? COMPACT_MAIN_HEADER_HEIGHT : MAIN_HEADER_HEIGHT;
+
+    document.documentElement.style.setProperty("--site-topbar-height", `${topbarHeight}px`);
+    document.documentElement.style.setProperty("--site-main-header-height", `${mainHeaderHeight}px`);
+    document.documentElement.style.setProperty("--site-header-height", `${mainHeaderHeight}px`);
+    document.documentElement.style.setProperty(
+      "--site-header-stack-height",
+      `${topbarHeight + mainHeaderHeight}px`,
+    );
+  }, [scrolled]);
 
   React.useEffect(() => {
     document.body.style.overflow = drawerOpen ? "hidden" : "";
@@ -177,7 +188,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
             minHeight: "var(--site-topbar-height)",
             maxHeight: "var(--site-topbar-height)",
           }}
-          className="overflow-hidden transition-[height,min-height,max-height] duration-[300ms]"
+          className="overflow-hidden transition-[height,min-height,max-height] duration-300"
         >
           <TopBar />
         </div>
@@ -189,7 +200,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
             maxHeight: "var(--site-main-header-height)",
           }}
           className={cn(
-            "relative flex items-center px-5 transition-[height,min-height,max-height,background-color,border-color,box-shadow] duration-[300ms] sm:px-12",
+            "relative flex items-center px-5 transition-[height,min-height,max-height,background-color,border-color,box-shadow] duration-300 sm:px-12",
             scrolled && "shadow-sm",
             onPhoto ? "border-b border-white/15 bg-transparent" : "border-b border-hair bg-card/95 backdrop-blur",
           )}
@@ -203,7 +214,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
               the pl guard keeps the nav clear of the absolute logo until the container edge passes it (~1420px). */}
           <div
             className={cn(
-              "mx-auto flex w-full max-w-[calc(var(--container-max)_-_6rem)] items-center transition-[gap,padding] duration-[300ms] lg:max-[1419px]:pl-[118px]",
+              "mx-auto flex w-full max-w-[calc(var(--container-max)-6rem)] items-center transition-[gap,padding] duration-300 lg:max-[1419px]:pl-[118px]",
               scrolled ? "gap-3" : "gap-6",
             )}
           >
@@ -219,7 +230,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                       aria-current={active ? "page" : undefined}
                       aria-haspopup={item.menu ? "menu" : undefined}
                       className={cn(
-                        "relative inline-flex items-center gap-1 whitespace-nowrap rounded-sm px-3 font-ui font-semibold transition-[padding,font-size,color] duration-[300ms]",
+                        "relative inline-flex items-center gap-1 whitespace-nowrap rounded-sm px-3 font-ui font-semibold transition-[padding,font-size,color] duration-300",
                         scrolled ? "py-1 text-sm" : "py-2.5 text-base",
                         onPhoto ? "text-white/90 hover:text-white" : "text-body hover:text-green-700",
                         active && (onPhoto ? "text-white" : "text-green-700"),
@@ -256,7 +267,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
             type="button"
             aria-label="Search"
             className={cn(
-              "hidden flex-none items-center justify-center rounded-full border transition-[height,width,color,background-color,border-color] duration-[300ms] sm:inline-flex",
+              "hidden flex-none items-center justify-center rounded-full border transition-[height,width,color,background-color,border-color] duration-300 sm:inline-flex",
               scrolled ? "h-8 w-8" : "h-10 w-10",
               onPhoto ? "border-white/35 text-white" : "border-hair text-body hover:bg-sunk",
             )}
@@ -281,7 +292,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
             aria-expanded={drawerOpen}
             onClick={() => setDrawerOpen(true)}
             className={cn(
-              "inline-flex h-10 w-10 flex-none items-center justify-center rounded-full bg-transparent transition-[color,background-color] duration-[180ms]",
+              "inline-flex h-10 w-10 flex-none items-center justify-center rounded-full bg-transparent transition-[color,background-color] duration-180",
               onPhoto ? "text-white hover:bg-white/10" : "text-body hover:bg-sunk",
             )}
           >
@@ -295,7 +306,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
         aria-hidden={!drawerOpen}
         onClick={() => setDrawerOpen(false)}
         className={cn(
-          "fixed inset-0 z-[70] bg-black/55 backdrop-blur-[5px] transition-opacity duration-300",
+          "fixed inset-0 z-70 bg-black/55 backdrop-blur-[5px] transition-opacity duration-300",
           drawerOpen ? "opacity-100" : "pointer-events-none opacity-0",
         )}
       />
@@ -304,7 +315,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
         aria-label="Site menu"
         aria-hidden={!drawerOpen}
         className={cn(
-          "fixed inset-y-0 right-0 z-[71] flex w-[min(720px,92vw)] flex-col overflow-y-auto bg-card shadow-lg transition-transform duration-[420ms] ease-[cubic-bezier(0,0,0.2,1)]",
+          "fixed inset-y-0 right-0 z-71 flex w-[min(720px,92vw)] flex-col overflow-y-auto bg-card shadow-lg transition-transform duration-420 ease-[cubic-bezier(0,0,0.2,1)]",
           drawerOpen ? "translate-x-0" : "translate-x-full",
         )}
       >
@@ -335,7 +346,8 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                 href={item.href}
                 onClick={() => setDrawerOpen(false)}
                 className={cn(
-                  "mb-6 block max-w-[12ch] font-display text-[34px] font-semibold leading-[1.15] text-body transition-colors hover:text-green-700",
+                  "block max-w-[12ch] font-display text-[34px] font-semibold leading-[1.15] text-body transition-colors hover:text-green-700",
+                  item.menu && "mb-6",
                   isActivePath(pathname, item.href) && "text-green-700",
                 )}
               >

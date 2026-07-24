@@ -27,12 +27,12 @@ const CARDS: { icon: LucideIcon; title: string; href: string; body: string }[] =
 export function ServeGiveCards() {
   return (
     <section className="border-y border-hair bg-sunk">
-      <div className="mx-auto grid max-w-[var(--container-max)] grid-cols-1 gap-6 px-5 py-16 sm:px-12 md:grid-cols-3">
+      <div className="mx-auto grid max-w-(--container-max) grid-cols-1 gap-6 px-5 py-16 sm:px-12 md:grid-cols-3">
         {CARDS.map(({ icon: CardIcon, title, href, body }) => (
           <div key={title} className="flex flex-col overflow-hidden rounded-lg border border-hair bg-card shadow-sm">
             <PhotoPlaceholder caption={title} aspect="16/9" className="rounded-none border-none shadow-none" />
             <div className="flex flex-1 flex-col p-5">
-              <span className="-mt-[46px] inline-flex h-[46px] w-[46px] items-center justify-center rounded-[10px] border-[3px] border-card bg-primary-tint text-green-700 shadow-sm">
+              <span className="mt-[-46px] inline-flex h-[46px] w-[46px] items-center justify-center rounded-[10px] border-[3px] border-card bg-primary-tint text-green-700 shadow-sm">
                 <CardIcon size={22} />
               </span>
               <h3 className="mb-2 mt-3.5 font-display text-lg font-semibold text-strong">{title}</h3>

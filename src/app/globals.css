@@ -2,33 +2,34 @@
 
 /* =====================================================================
    Wycliffe Africa — design tokens
-   Ported from the Wycliffe Africa design system tokens.
+   Warm cream/terracotta "sunrise" palette; green accent is unchanged.
    Values are final brand values — do not hand-pick new ones; re-theme by
    repointing the semantic aliases only.
    ===================================================================== */
 
 @theme {
   /* -------------------------------------------------------------
-     COLOR — neutrals (warm-adjacent, navy-tinted)
+     COLOR — neutrals (warm cream ramp)
   ------------------------------------------------------------- */
+  --color-cream: #fdfbf8;
   --color-paper-0: #ffffff;
-  --color-paper-1: #f6f7fa;
-  --color-paper-2: #eef0f5;
-  --color-paper-3: #dce0e9;
-  --color-ink-0: #030308;
-  --color-ink-1: #23263f;
-  --color-ink-2: #565b70;
-  --color-ink-3: #878ca0;
+  --color-paper-1: #fdf7ec;
+  --color-paper-2: #f3e9d6;
+  --color-paper-3: #eadfcf;
+  --color-ink-0: #17140f;
+  --color-ink-1: #3a332b;
+  --color-ink-2: #6c5847;
+  --color-ink-3: #9e8470;
 
-  /* Navy — primary brand ramp */
-  --color-navy-900: #030308;
-  --color-navy-800: #08090f;
-  --color-navy-700: #0e1020;
-  --color-navy-600: #2f3468;
-  --color-navy-500: #454b82;
-  --color-navy-300: #9a9fc0;
-  --color-navy-100: #e2e4ef;
-  --color-navy-050: #eff0f7;
+  /* Terra — primary brand ramp */
+  --color-terra-900: #2a140a;
+  --color-terra-800: #42200e;
+  --color-terra-700: #8c3313;
+  --color-terra-600: #a23d16;
+  --color-terra-500: #b5471b;
+  --color-terra-300: #d98a5c;
+  --color-terra-100: #f3d9c4;
+  --color-terra-050: #fbeee3;
 
   /* Green — accent / action ramp (logo color) */
   --color-green-700: #1e7d08;
@@ -60,7 +61,7 @@
   --color-info: #0f6f7d;
 
   /* Semantic aliases — what components should reference */
-  --color-page: var(--color-paper-0);
+  --color-page: var(--color-cream);
   --color-card: var(--color-paper-0);
   --color-sunk: var(--color-paper-1);
 
@@ -74,12 +75,12 @@
   --color-hair: var(--color-paper-3);
   --color-line-strong: var(--color-ink-3);
 
-  /* Primary (navy) — headers, primary actions, text */
-  --color-primary: var(--color-navy-900);
-  --color-primary-hover: var(--color-navy-700);
-  --color-primary-active: #060714;
-  --color-primary-tint: var(--color-navy-050);
-  --color-primary-border: var(--color-navy-100);
+  /* Primary (terra) — headers, primary actions, text */
+  --color-primary: var(--color-terra-500);
+  --color-primary-hover: var(--color-terra-700);
+  --color-primary-active: var(--color-terra-800);
+  --color-primary-tint: var(--color-terra-050);
+  --color-primary-border: var(--color-terra-100);
 
   /* Accent (green) — action, growth, translation progress */
   --color-accent: var(--color-green-500);
@@ -96,14 +97,16 @@
   --color-focus-ring: var(--color-green-400);
 
   /* -------------------------------------------------------------
-     TYPE SCALE — a restrained, readable scale anchored at 16px.
-     The previous major-third scale jumped from 16px to 20px to 25px,
-     which made adjacent hierarchy levels feel disconnected.
+     TYPE SCALE — a restrained, readable scale anchored at 18px.
+     Base and md are set larger than a plain 16px scale would suggest:
+     EB Garamond's x-height reads noticeably smaller than Karla's at the
+     same nominal size, so body copy needs the extra size to feel the
+     same weight it did on the sans body font.
   ------------------------------------------------------------- */
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-md: 1.125rem;
+  --text-base: 1.25rem;
+  --text-md: 1.25rem;
   --text-lg: 1.375rem;
   --text-xl: 1.75rem;
   --text-2xl: 2.25rem;
@@ -125,16 +128,18 @@
   ------------------------------------------------------------- */
   --radius-sm: 3px;
   --radius-md: 6px;
-  --radius-lg: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-2xl: 26px;
   --radius-pill: 999px;
 
   /* -------------------------------------------------------------
      SHADOW — soft, warm, low ("paper lifting off a desk")
   ------------------------------------------------------------- */
-  --shadow-sm: 0 1px 2px rgba(11, 12, 38, 0.07);
-  --shadow-md: 0 3px 12px rgba(11, 12, 38, 0.1);
-  --shadow-lg: 0 12px 34px rgba(11, 12, 38, 0.15);
-  --shadow-inset: inset 0 1px 2px rgba(11, 12, 38, 0.1);
+  --shadow-sm: 0 1px 2px rgba(60, 35, 10, 0.07);
+  --shadow-md: 0 3px 12px rgba(60, 35, 10, 0.1);
+  --shadow-lg: 0 12px 34px rgba(60, 35, 10, 0.15);
+  --shadow-inset: inset 0 1px 2px rgba(60, 35, 10, 0.1);
 
   --animate-fade-in: fade-in var(--dur-slow, 380ms) var(--ease-out, ease-out);
 }
@@ -153,15 +158,15 @@
 /* Font families are bound in the RootLayout via next/font, which sets these
    CSS vars on <html>; `inline` because they reference those runtime vars. */
 @theme inline {
-  --font-display: var(--font-cormorant);
-  --font-body: var(--font-karla);
+  --font-display: var(--font-eb-garamond);
+  --font-body: var(--font-eb-garamond);
   --font-ui: var(--font-karla);
   --font-mono: var(--font-jbmono);
 }
 
 /* -------------------------------------------------------------
    Non-utility tokens — referenced directly as CSS vars (e.g.
-   max-w-[var(--container-max)]), not generated into utility classes.
+   max-w-(--container-max)), not generated into utility classes.
    -------------------------------------------------------------
    Spacing note: the brand's 4px-base scale (space-1..space-9 = 4/8/12/16/
    24/32/48/64/96px) maps exactly onto Tailwind's default spacing scale
@@ -187,10 +192,25 @@
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--site-header-stack-height) + 24px);
+}
+
+[id] {
+  scroll-margin-top: calc(var(--site-header-stack-height) + 24px);
+}
+
 body {
   background: var(--color-page);
   color: var(--color-body);
   font-family: var(--font-body);
   font-size: var(--text-base);
   line-height: var(--leading-body);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

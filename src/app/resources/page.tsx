@@ -12,7 +12,7 @@ export default async function ResourcesPage() {
 
   return (
     <PageTemplate heroTitle="Resources">
-      <section className="mx-auto max-w-[var(--container-max)] px-5 py-16 sm:px-12">
+      <section className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {resources.map((r) => (
             <ResourceCard key={r.id} type={r.type} title={r.title} meta={r.meta} />

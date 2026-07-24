@@ -12,22 +12,22 @@ export const revalidate = 1209600;
 // Mirrors the semantic colors in src/app/globals.css (@theme) so the PDF
 // reads as the same brand as the website.
 
-const INK_0 = "#030308"; // --color-strong
-const INK_1 = "#23263f"; // --color-body
-const INK_2 = "#565b70"; // --color-muted
-const INK_3 = "#878ca0"; // --color-faint
-const HAIR = "#dce0e9"; // --color-hair
+const INK_0 = "#17140f"; // --color-strong
+const INK_1 = "#3a332b"; // --color-body
+const INK_2 = "#6c5847"; // --color-muted
+const INK_3 = "#9e8470"; // --color-faint
+const HAIR = "#eadfcf"; // --color-hair
 const GREEN_500 = "#33b00f"; // --color-accent
 const TAG_PRAY = "#4a4fa0"; // --color-tag-pray
 
 // Fonts: self-hosted @fontsource copies of the same Google Fonts the site
-// uses (Cormorant Garamond for display, Karla for body/UI — see
+// uses (EB Garamond for display, Karla for body/UI — see
 // src/app/layout.tsx). pdfkit needs real font files, not CSS font names.
 const FONT_DIR = path.join(process.cwd(), "node_modules/@fontsource");
 const font = (pkg: string, file: string) => fs.readFileSync(path.join(FONT_DIR, pkg, "files", file));
 
-const CORMORANT_BOLD = font("cormorant-garamond", "cormorant-garamond-latin-700-normal.woff");
-const CORMORANT_SEMIBOLD = font("cormorant-garamond", "cormorant-garamond-latin-600-normal.woff");
+const EB_GARAMOND_BOLD = font("eb-garamond", "eb-garamond-latin-700-normal.woff");
+const EB_GARAMOND_SEMIBOLD = font("eb-garamond", "eb-garamond-latin-600-normal.woff");
 const KARLA_REGULAR = font("karla", "karla-latin-400-normal.woff");
 const KARLA_MEDIUM = font("karla", "karla-latin-500-normal.woff");
 const KARLA_ITALIC = font("karla", "karla-latin-400-italic.woff");
@@ -35,7 +35,7 @@ const KARLA_ITALIC = font("karla", "karla-latin-400-italic.woff");
 const LOGO = fs.readFileSync(path.join(process.cwd(), "public/brand/logo-wycliffe-africa.png"));
 const LOGO_ASPECT = 304 / 801; // height / width, from the source PNG
 
-// Karla/Cormorant apply an "fi" ligature by default; pdfkit's ToUnicode map
+// Karla/EB Garamond apply an "fi" ligature by default; pdfkit's ToUnicode map
 // for the merged glyph drops a character, so copy-pasted or searched text
 // comes out missing letters ("fiscal" → "fscal"). Disabling ligature
 // substitution keeps every glyph mapped to its own character. The @types
@@ -76,8 +76,8 @@ function renderPdf(
   doc.on("data", (chunk) => chunks.push(chunk));
   const done = new Promise<Buffer>((resolve) => doc.on("end", () => resolve(Buffer.concat(chunks))));
 
-  doc.registerFont("Cormorant-Bold", CORMORANT_BOLD);
-  doc.registerFont("Cormorant-SemiBold", CORMORANT_SEMIBOLD);
+  doc.registerFont("EBGaramond-Bold", EB_GARAMOND_BOLD);
+  doc.registerFont("EBGaramond-SemiBold", EB_GARAMOND_SEMIBOLD);
   doc.registerFont("Karla", KARLA_REGULAR);
   doc.registerFont("Karla-Medium", KARLA_MEDIUM);
   doc.registerFont("Karla-Italic", KARLA_ITALIC);
@@ -96,7 +96,7 @@ function renderPdf(
   doc.moveTo(ruleX, doc.y).lineTo(ruleX + ruleWidth, doc.y).lineWidth(2).strokeColor(GREEN_500).stroke();
   doc.y += 18;
 
-  doc.font("Cormorant-Bold").fontSize(30).fillColor(INK_0).text("Prayer Guide", left, doc.y, { width, align: "center", ...NO_LIGA });
+  doc.font("EBGaramond-Bold").fontSize(30).fillColor(INK_0).text("Prayer Guide", left, doc.y, { width, align: "center", ...NO_LIGA });
   doc.moveDown(0.35);
   doc
     .font("Karla-Medium")
@@ -141,7 +141,7 @@ function renderPdf(
       ? `A Wycliffe Africa worker · ${regionOf(missionary?.place)} · ${request.date}`
       : `${missionary?.name ?? "Wycliffe Africa"} · ${missionary?.place ?? "Africa"} · ${request.date}`;
 
-    doc.font("Cormorant-SemiBold").fontSize(15.5);
+    doc.font("EBGaramond-SemiBold").fontSize(15.5);
     const titleHeight = doc.heightOfString(request.title, { width: textWidth, ...NO_LIGA });
     doc.font("Karla").fontSize(10.6);
     const bodyHeight = doc.heightOfString(request.body, { width: textWidth, lineGap: 2.2, ...NO_LIGA });
@@ -156,7 +156,7 @@ function renderPdf(
 
     const startY = doc.y;
     doc
-      .font("Cormorant-SemiBold")
+      .font("EBGaramond-SemiBold")
       .fontSize(15.5)
       .fillColor(INK_0)
       .text(request.title, textX, doc.y, { width: textWidth, ...NO_LIGA });

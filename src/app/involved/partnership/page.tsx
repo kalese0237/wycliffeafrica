@@ -11,7 +11,7 @@ export const metadata = {
 export default function ChurchPartnershipPage() {
   return (
     <PageTemplate heroTitle="Church Partnership">
-      <section className="mx-auto grid max-w-[var(--container-max)] grid-cols-1 items-center gap-10 px-5 py-16 sm:px-12 lg:grid-cols-2 lg:gap-16">
+      <section className="mx-auto grid max-w-(--container-max) grid-cols-1 items-center gap-10 px-5 py-16 sm:px-12 lg:grid-cols-2 lg:gap-16">
         <PhotoPlaceholder caption="A church congregation in worship" aspect="4/3" />
         <div>
           <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">Get involved</div>

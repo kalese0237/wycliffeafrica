@@ -29,7 +29,7 @@ export default async function PortalDashboardPage() {
 
   return (
     <PageTemplate heroTitle="Missionary Portal">
-      <section className="mx-auto max-w-[var(--container-max)] px-5 py-16 sm:px-12">
+      <section className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12">
         <div className="mb-10 flex flex-wrap items-start justify-between gap-4 border-b border-hair pb-8">
           <div>
             <h2 className="mb-1 font-display text-2xl font-semibold text-strong">

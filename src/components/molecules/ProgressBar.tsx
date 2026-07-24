@@ -41,7 +41,7 @@ export function ProgressBar({
       <div className="overflow-hidden rounded-pill bg-sunk" style={{ height }}>
         <div
           className={cn(
-            "h-full rounded-pill transition-[width] duration-[380ms] ease-[cubic-bezier(0,0,0.2,1)]",
+            "h-full rounded-pill transition-[width] duration-380 ease-[cubic-bezier(0,0,0.2,1)]",
             fillClasses[tone],
           )}
           style={{ width: `${pct}%` }}

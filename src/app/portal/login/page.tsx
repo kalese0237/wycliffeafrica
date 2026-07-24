@@ -32,7 +32,7 @@ export default async function PortalLoginPage() {
 
   return (
     <PageTemplate heroTitle="Missionary Portal">
-      <section className="mx-auto max-w-[var(--container-max)] px-5 py-16 sm:px-12">
+      <section className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12">
         <div className="mx-auto grid max-w-[960px] grid-cols-1 items-start gap-10 lg:grid-cols-[1.1fr_1fr]">
           <div>
             <h2 className="mb-3 font-display text-2xl font-semibold leading-tight text-strong">

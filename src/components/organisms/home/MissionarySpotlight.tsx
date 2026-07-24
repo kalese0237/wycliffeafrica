@@ -15,9 +15,9 @@ export async function MissionarySpotlight() {
 
   return (
     <section className="border-y border-hair bg-sunk">
-      <div className="mx-auto grid max-w-[var(--container-max)] grid-cols-1 items-center gap-10 px-5 py-20 sm:px-12 lg:grid-cols-2 lg:gap-16">
+      <div className="mx-auto grid max-w-(--container-max) grid-cols-1 items-center gap-10 px-5 py-20 sm:px-12 lg:grid-cols-2 lg:gap-16">
         {missionary.image ? (
-          <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-hair bg-card shadow-md">
+          <div className="relative aspect-4/3 overflow-hidden rounded-lg border border-hair bg-card shadow-md">
             <Image src={`/media/${missionary.image}`} alt={`${missionary.name} portrait`} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
           </div>
         ) : (

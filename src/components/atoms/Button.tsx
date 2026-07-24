@@ -31,7 +31,7 @@ function buttonClassName({
   className?: string;
 }) {
   return cn(
-    "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md border font-ui font-semibold tracking-[0.01em] shadow-sm transition-[background-color,box-shadow] duration-[130ms] ease-[cubic-bezier(0.4,0,0.2,1)] active:shadow-inset",
+    "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-pill border font-ui font-semibold tracking-[0.01em] shadow-sm transition-[background-color,box-shadow] duration-130 ease-[cubic-bezier(0.4,0,0.2,1)] active:shadow-inset",
     variantClasses[variant],
     sizeClasses[size],
     disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer",

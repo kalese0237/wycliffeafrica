@@ -8,7 +8,7 @@ const LOGO_ASPECT = 3204 / 1216;
 export interface WordmarkProps {
   height?: number;
   className?: string;
-  /** Uses the white-and-green variant — for navy/dark grounds. */
+  /** Uses the white-and-green variant — for terra/dark grounds. */
   onDark?: boolean;
 }
 

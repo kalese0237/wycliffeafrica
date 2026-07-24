@@ -22,7 +22,7 @@ export function MissionaryCard({ missionary: m, className }: MissionaryCardProps
     >
       <div className="absolute inset-x-0 top-0 z-10 h-1 bg-accent" aria-hidden />
       {m.image ? (
-        <div className="relative aspect-[16/10] overflow-hidden bg-sunk">
+        <div className="relative aspect-16/10 overflow-hidden bg-sunk">
           <Image src={`/media/${m.image}`} alt={`${m.name} portrait`} fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="object-cover" />
         </div>
       ) : (

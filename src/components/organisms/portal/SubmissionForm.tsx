@@ -39,7 +39,7 @@ export function SubmissionForm() {
             <label
               key={t.value}
               className={cn(
-                "inline-flex cursor-pointer items-center gap-1.5 rounded-pill border px-4 py-2 font-ui text-sm font-semibold transition-colors duration-[130ms]",
+                "inline-flex cursor-pointer items-center gap-1.5 rounded-pill border px-4 py-2 font-ui text-sm font-semibold transition-colors duration-130",
                 type === t.value
                   ? "border-primary bg-primary-tint text-primary"
                   : "border-hair bg-card text-muted hover:bg-sunk",
@@ -82,7 +82,7 @@ export function SubmissionForm() {
               ? "Share what supporters should pray for."
               : "Share the news from your field of service."
           }
-          className="w-full rounded-md border border-hair bg-card px-[14px] py-[10px] font-body text-base text-body outline-none transition-[border-color,box-shadow] duration-[130ms] placeholder:text-faint focus:border-spark focus:shadow-[0_0_0_3px_var(--color-spark-tint)]"
+          className="w-full rounded-md border border-hair bg-card px-[14px] py-[10px] font-body text-base text-body outline-none transition-[border-color,box-shadow] duration-130 placeholder:text-faint focus:border-spark focus:shadow-[0_0_0_3px_var(--color-spark-tint)]"
         />
       </FormField>
 
@@ -99,7 +99,7 @@ export function SubmissionForm() {
 
       {type === "prayer" && (
         <label className="mb-5 flex cursor-pointer items-start gap-3 rounded-md border border-hair bg-sunk p-4">
-          <input type="checkbox" name="sensitive" className="mt-0.5 h-4 w-4 accent-[var(--color-primary)]" />
+          <input type="checkbox" name="sensitive" className="mt-0.5 h-4 w-4 accent-(--color-primary)" />
           <span className="font-body text-sm leading-relaxed text-muted">
             <span className="mb-0.5 flex items-center gap-1.5 font-ui text-sm font-semibold text-body">
               <ShieldAlert size={15} /> Security-sensitive

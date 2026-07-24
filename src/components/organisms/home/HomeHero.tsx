@@ -96,7 +96,7 @@ function useCountUp(target: number, durationMs = 1200) {
 function HeroStatTile({ icon: StatIcon, value, suffix, label }: HeroStat) {
   const count = useCountUp(value);
   return (
-    <div className="flex items-end gap-4 rounded-lg border border-white/10 bg-white/[0.06] px-5 py-4 backdrop-blur-sm">
+    <div className="flex items-end gap-4 rounded-lg border border-white/10 bg-white/6 px-5 py-4 backdrop-blur-sm">
       <span className="inline-flex h-[46px] w-[46px] flex-none items-center justify-center rounded-[14px] border border-green-300/25 bg-green-500/15">
         <StatIcon size={22} className="text-green-300" />
       </span>
@@ -124,7 +124,7 @@ export function HomeHero() {
 
   return (
     <section
-      className="relative min-h-[88vh] overflow-hidden bg-navy-900"
+      className="relative min-h-[88vh] overflow-hidden bg-terra-900"
       style={{
         marginTop: "calc(var(--site-main-header-height) * -1)",
         paddingTop: "var(--site-main-header-height)",
@@ -135,10 +135,10 @@ export function HomeHero() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(1200px 700px at 12% -10%, rgba(36,42,94,.55), transparent 55%), radial-gradient(900px 600px at 100% 110%, rgba(51,176,15,.28), transparent 55%), linear-gradient(160deg, rgba(16,18,51,.86), rgba(11,12,38,.92))",
+            "radial-gradient(1200px 700px at 12% -10%, rgba(140,51,19,.55), transparent 55%), radial-gradient(900px 600px at 100% 110%, rgba(51,176,15,.28), transparent 55%), linear-gradient(160deg, rgba(74,20,10,.86), rgba(42,14,8,.92))",
         }}
       />
-      <div className="relative mx-auto flex min-h-[88vh] max-w-[var(--container-max)] flex-col justify-center px-5 pb-40 pt-52 sm:px-12">
+      <div className="relative mx-auto flex min-h-[88vh] max-w-(--container-max) flex-col justify-center px-5 pb-40 pt-52 sm:px-12">
         {/* All slides share one grid cell so the hero always sizes to the tallest slide. */}
         <div className="grid">
           {SLIDES.map((slide, i) => (
@@ -146,7 +146,7 @@ export function HomeHero() {
               key={slide.eyebrow}
               aria-hidden={i !== index}
               className={cn(
-                "col-start-1 row-start-1 transition-opacity duration-[1200ms] ease-[cubic-bezier(0,0,0.2,1)]",
+                "col-start-1 row-start-1 transition-opacity duration-1200 ease-[cubic-bezier(0,0,0.2,1)]",
                 i === index ? "opacity-100" : "pointer-events-none opacity-0",
               )}
             >
@@ -202,7 +202,7 @@ export function HomeHero() {
       </button>
 
       <div className="absolute inset-x-0 bottom-0 z-10 px-5 pb-11 sm:px-12">
-        <div className="mx-auto grid max-w-[var(--container-max)] grid-cols-1 gap-3.5 sm:grid-cols-3">
+        <div className="mx-auto grid max-w-(--container-max) grid-cols-1 gap-3.5 sm:grid-cols-3">
           {HERO_STATS.map((s) => (
             <HeroStatTile key={s.label} {...s} />
           ))}

@@ -26,7 +26,7 @@ export default function AboutPage() {
         subtitle="Wycliffe Africa is an African-led movement raising missionaries for Bible translation across the continent."
       />
 
-      <section className="mx-auto grid max-w-[var(--container-max)] grid-cols-1 items-center gap-10 px-5 py-14 sm:px-12 lg:grid-cols-2 lg:gap-16">
+      <section className="mx-auto grid max-w-(--container-max) grid-cols-1 items-center gap-10 px-5 py-14 sm:px-12 lg:grid-cols-2 lg:gap-16">
         <PhotoPlaceholder caption="Our story" aspect="4/3" />
         <div>
           <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">Why Bible translation</div>
@@ -44,7 +44,7 @@ export default function AboutPage() {
       </section>
 
       <section className="border-y border-hair bg-sunk">
-        <div className="mx-auto max-w-[var(--container-max)] px-5 py-16 sm:px-12">
+        <div className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12">
           <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">
             What we believe · Our core values
           </div>
@@ -54,7 +54,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             {VALUES.map(({ icon: ValueIcon, title, body }) => (
               <div key={title} className="flex gap-4 rounded-lg border border-hair bg-card p-5 shadow-sm">
-                <span className="inline-flex h-[44px] w-[44px] flex-none items-center justify-center rounded-[10px] bg-navy-050 text-primary">
+                <span className="inline-flex h-[44px] w-[44px] flex-none items-center justify-center rounded-[10px] bg-terra-050 text-primary">
                   <ValueIcon size={22} />
                 </span>
                 <div>
