@@ -7,7 +7,7 @@ export interface PageTemplateProps {
   children: React.ReactNode;
   /** Home's photo hero needs a transparent-over-photo header; every other page is opaque. */
   transparentHeader?: boolean;
-  /** Renders the shared navy pageHero band with this title above `children`. Omit on Home. */
+  /** Renders the shared terra pageHero band with this title above `children`. Omit on Home. */
   heroTitle?: string;
 }
 

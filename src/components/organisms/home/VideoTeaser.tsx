@@ -3,8 +3,8 @@ import { Play } from "lucide-react";
 
 export function VideoTeaser() {
   return (
-    <section className="relative overflow-hidden bg-navy-800">
-      <div className="relative mx-auto flex max-w-[var(--container-max)] flex-col items-center gap-6 px-5 py-24 text-center sm:px-12">
+    <section className="relative overflow-hidden bg-terra-800">
+      <div className="relative mx-auto flex max-w-(--container-max) flex-col items-center gap-6 px-5 py-24 text-center sm:px-12">
         <button
           type="button"
           aria-label="Play video"

@@ -19,7 +19,7 @@ export default async function PrayerPage() {
 
   return (
     <PageTemplate heroTitle="Prayer Requests">
-      <section className="mx-auto max-w-[var(--container-max)] px-5 py-16 sm:px-12">
+      <section className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12">
         <div className="mx-auto mb-12 max-w-[720px] text-center">
           <Divider variant="accent" width={56} className="mx-auto mb-5" />
           <h2 className="mb-4 font-display text-2xl font-semibold leading-tight text-strong">
@@ -47,7 +47,7 @@ export default async function PrayerPage() {
       </section>
 
       <section className="border-t border-hair bg-sunk">
-        <div className="mx-auto flex max-w-[var(--container-max)] flex-col items-start justify-between gap-6 px-5 py-14 sm:px-12 lg:flex-row lg:items-center">
+        <div className="mx-auto flex max-w-(--container-max) flex-col items-start justify-between gap-6 px-5 py-14 sm:px-12 lg:flex-row lg:items-center">
           <div>
             <h2 className="mb-2 font-display text-xl font-semibold text-strong">
               Pray with us every two weeks

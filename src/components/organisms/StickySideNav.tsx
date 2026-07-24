@@ -16,7 +16,12 @@ export interface StickySideNavProps {
 /** Sticky in-page nav for Get Involved sub-pages (Serve / Give / Motivate your Church / ...). */
 export function StickySideNav({ items, activeHref, className }: StickySideNavProps) {
   return (
-    <aside className={cn("sticky top-[98px] flex flex-col gap-1.5", className)}>
+    <aside
+      className={cn(
+        "sticky top-[calc(var(--site-header-stack-height,116px)+24px)] flex flex-col gap-1.5 transition-[top] duration-300",
+        className,
+      )}
+    >
       {items.map((item) => {
         const active = item.href === activeHref;
         return (

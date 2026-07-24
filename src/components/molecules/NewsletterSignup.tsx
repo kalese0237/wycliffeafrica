@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { Mail } from "lucide-react";
-import { Button } from "@/components/atoms/Button";
-import { Input } from "@/components/atoms/Input";
+import { Button, type ButtonSize } from "@/components/atoms/Button";
+import { Input, type InputSize } from "@/components/atoms/Input";
 import { cn } from "@/lib/cn";
 
 export interface NewsletterSignupProps {
@@ -14,6 +14,8 @@ export interface NewsletterSignupProps {
   /** Stacks the compact form's input above the button instead of side-by-side. */
   stacked?: boolean;
   variant?: "primary" | "accent";
+  /** Sizes the compact form's input and button. Ignored outside `compact`. */
+  size?: InputSize & ButtonSize;
   className?: string;
 }
 
@@ -25,6 +27,7 @@ export function NewsletterSignup({
   compact = false,
   stacked = false,
   variant = "primary",
+  size = "md",
   className,
 }: NewsletterSignupProps) {
   if (compact) {
@@ -33,8 +36,18 @@ export function NewsletterSignup({
         className={cn("flex gap-2", stacked ? "flex-col" : "flex-row", className)}
         onSubmit={(e) => e.preventDefault()}
       >
-        <Input type="email" placeholder="Email address" required wrapperClassName="flex-1" />
-        <Button variant={variant} className={stacked ? "justify-center" : undefined}>
+        <Input
+          type="email"
+          placeholder="Email address"
+          required
+          size={size}
+          wrapperClassName="flex-1"
+        />
+        <Button
+          variant={variant}
+          size={size}
+          className={stacked ? "justify-center" : undefined}
+        >
           {cta}
         </Button>
       </form>

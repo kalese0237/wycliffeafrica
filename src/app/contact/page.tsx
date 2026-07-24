@@ -17,7 +17,7 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <PageTemplate heroTitle="Contact us">
-      <section className="mx-auto grid max-w-[var(--container-max)] grid-cols-1 items-start gap-10 px-5 py-16 sm:px-12 lg:grid-cols-[1fr_0.8fr]">
+      <section className="mx-auto grid max-w-(--container-max) grid-cols-1 items-start gap-10 px-5 py-16 sm:px-12 lg:grid-cols-[1fr_0.8fr]">
         <ContactForm />
         <div className="flex flex-col gap-4">
           {DETAILS.map(({ icon: DetailIcon, label, value }) => (

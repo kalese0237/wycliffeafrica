@@ -28,7 +28,7 @@ export function ResourceCard({ type = "pdf", title, meta = "", action = "Downloa
   return (
     <div
       className={cn(
-        "flex items-center gap-4 rounded-md border border-hair bg-card p-4 shadow-sm transition-shadow duration-[220ms] ease-[cubic-bezier(0.4,0,0.2,1)] hover:shadow-md",
+        "flex items-center gap-4 rounded-md border border-hair bg-card p-4 shadow-sm transition-shadow duration-220 ease-[cubic-bezier(0.4,0,0.2,1)] hover:shadow-md",
         className,
       )}
     >

@@ -10,6 +10,7 @@ const involvedLinks: [string, string][] = [
   ["Serve part-time", "/involved"],
   ["Support a missionary", "/missionaries"],
   ["Church partnership", "/involved/partnership"],
+  ["Projects", "/projects"],
   ["Give now", "/give"],
   ["Missionary portal", "/portal/login"],
 ];
@@ -22,11 +23,11 @@ const contactRows: { icon: LucideIcon; text: string }[] = [
   { icon: Clock, text: "Mon to Fri – 8:00am to 5:00pm" },
 ];
 
-/** Deep navy footer — wordmark, link columns, newsletter signup, fine print. */
+/** Deep terra footer — wordmark, link columns, newsletter signup, fine print. */
 export function SiteFooter() {
   return (
-    <footer className="border-t-[3px] border-accent bg-navy-900 text-on-primary">
-      <div className="mx-auto grid max-w-[var(--container-max)] grid-cols-1 gap-10 px-5 py-16 sm:grid-cols-2 sm:px-12 lg:grid-cols-4">
+    <footer className="border-t-[3px] border-accent bg-terra-900 text-on-primary">
+      <div className="mx-auto grid max-w-(--container-max) grid-cols-1 gap-10 px-5 py-16 sm:grid-cols-2 sm:px-12 lg:grid-cols-4">
         <div>
           <Wordmark height={42} onDark />
           <p className="mt-5 max-w-[34ch] font-body text-sm leading-relaxed text-white/72">
@@ -67,7 +68,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-white/12">
-        <div className="mx-auto flex max-w-[var(--container-max)] flex-wrap items-center justify-between gap-3 px-5 py-4 font-ui text-xs text-white/60 sm:px-12">
+        <div className="mx-auto flex max-w-(--container-max) flex-wrap items-center justify-between gap-3 px-5 py-4 font-ui text-xs text-white/60 sm:px-12">
           <span>Copyright © 2026 Wycliffe Africa. All rights reserved.</span>
           <span className="flex items-center gap-5">
             <Link href="/faqs">Privacy</Link>

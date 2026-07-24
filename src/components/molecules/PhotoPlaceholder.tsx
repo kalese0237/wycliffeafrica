@@ -25,7 +25,7 @@ export function PhotoPlaceholder({ caption, className, aspect = "4/5" }: PhotoPl
       )}
       style={{ aspectRatio: aspect }}
     >
-      <span className="m-3 rounded-sm bg-[rgba(3,3,8,0.55)] px-2 py-1 font-mono text-xs text-white">{caption}</span>
+      <span className="m-3 rounded-sm bg-[rgba(23,20,15,0.55)] px-2 py-1 font-mono text-xs text-white">{caption}</span>
     </div>
   );
 }

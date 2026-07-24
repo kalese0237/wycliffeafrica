@@ -9,7 +9,7 @@ export async function UpdatesFeed() {
   const nameById = new Map(missionaries.map((m) => [m.id, m.name]));
 
   return (
-    <section className="mx-auto max-w-[var(--container-max)] px-5 py-20 sm:px-12">
+    <section className="mx-auto max-w-(--container-max) px-5 py-20 sm:px-12">
       <div className="mb-10 flex flex-wrap items-end justify-between gap-5">
         <div>
           <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">From the field</div>

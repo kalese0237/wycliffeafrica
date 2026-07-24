@@ -28,7 +28,7 @@ export function ContactForm() {
           rows={6}
           required
           placeholder="How can we help?"
-          className="w-full rounded-md border border-hair bg-card px-[14px] py-[10px] font-body text-base text-body outline-none transition-[border-color,box-shadow] duration-[130ms] placeholder:text-faint focus:border-spark focus:shadow-[0_0_0_3px_var(--color-spark-tint)]"
+          className="w-full rounded-md border border-hair bg-card px-[14px] py-[10px] font-body text-base text-body outline-none transition-[border-color,box-shadow] duration-130 placeholder:text-faint focus:border-spark focus:shadow-[0_0_0_3px_var(--color-spark-tint)]"
         />
       </FormField>
       <Button variant="accent" size="lg" iconRight={<Send size={16} />}>

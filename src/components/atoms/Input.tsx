@@ -29,7 +29,7 @@ export function Input({
   return (
     <div
       className={cn(
-        "flex items-center gap-2 rounded-md border bg-card transition-[border-color,box-shadow] duration-[130ms] ease-[cubic-bezier(0.4,0,0.2,1)]",
+        "flex items-center gap-2 rounded-md border bg-card transition-[border-color,box-shadow] duration-130 ease-[cubic-bezier(0.4,0,0.2,1)]",
         "focus-within:border-spark focus-within:shadow-[0_0_0_3px_var(--color-spark-tint)]",
         invalid ? "border-danger" : "border-hair",
         disabled && "opacity-55",

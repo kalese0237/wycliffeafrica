@@ -10,7 +10,7 @@ export interface DonationCTAProps {
   primaryHref?: string;
   secondaryCta?: string;
   secondaryHref?: string;
-  /** `dark` sits on brand navy; the alternative is a green-tinted surface. */
+  /** `dark` sits on brand terra; the alternative is a green-tinted surface. */
   dark?: boolean;
 }
 
@@ -26,7 +26,7 @@ export function DonationCTA({
   dark = true,
 }: DonationCTAProps) {
   return (
-    <section className={cn("relative overflow-hidden", dark ? "bg-navy-900" : "bg-accent-tint")}>
+    <section className={cn("relative overflow-hidden", dark ? "bg-terra-900" : "bg-accent-tint")}>
       <div
         aria-hidden
         className={cn(
@@ -36,7 +36,7 @@ export function DonationCTA({
       >
         give
       </div>
-      <div className="relative mx-auto flex max-w-[var(--container-max)] flex-wrap items-center justify-between gap-7 px-5 py-16 sm:px-12">
+      <div className="relative mx-auto flex max-w-(--container-max) flex-wrap items-center justify-between gap-7 px-5 py-16 sm:px-12">
         <div className="max-w-[56ch]">
           <div
             className={cn(
@@ -49,7 +49,7 @@ export function DonationCTA({
           <h2 className={cn("mb-3 font-display text-2xl font-semibold leading-snug", dark ? "text-white" : "text-strong")}>
             {title}
           </h2>
-          <p className={cn("font-body text-md leading-[1.5]", dark ? "text-white/82" : "text-muted")}>{blurb}</p>
+          <p className={cn("font-body text-md leading-normal", dark ? "text-white/82" : "text-muted")}>{blurb}</p>
         </div>
         <div className="flex flex-col gap-3">
           <Button href={primaryHref} variant="spark" size="lg">

@@ -32,7 +32,7 @@ export default function MotivateYourChurchPage() {
     <PageTemplate>
       <PageIntro journey="churches" eyebrowLabel="Get Involved" title="Motivate your church" />
 
-      <section className="mx-auto grid max-w-[var(--container-max)] grid-cols-1 gap-10 px-5 pb-20 sm:px-12 lg:grid-cols-[260px_1fr]">
+      <section className="mx-auto grid max-w-(--container-max) grid-cols-1 gap-10 px-5 pb-20 sm:px-12 lg:grid-cols-[260px_1fr]">
         <StickySideNav items={SIDE_NAV} activeHref="/involved/motivate-your-church" className="hidden lg:flex" />
 
         <div>

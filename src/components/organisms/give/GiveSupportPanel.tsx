@@ -31,7 +31,7 @@ export function GiveSupportPanel() {
         ))}
       </div>
 
-      <div className="relative overflow-hidden rounded-lg bg-navy-900 p-5 text-white">
+      <div className="relative overflow-hidden rounded-lg bg-terra-900 p-5 text-white">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Karla, JetBrains_Mono } from "next/font/google";
+import { EB_Garamond, Karla, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+const ebGaramond = EB_Garamond({
+  variable: "--font-eb-garamond",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cormorant.variable} ${karla.variable} ${jbMono.variable} antialiased`}
+        className={`${ebGaramond.variable} ${karla.variable} ${jbMono.variable} antialiased`}
       >
         {children}
       </body>

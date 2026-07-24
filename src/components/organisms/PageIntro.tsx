@@ -8,10 +8,10 @@ export interface PageIntroProps {
   subtitle?: string;
 }
 
-/** Tag + serif H1 + subtitle intro band used by About/Give/Get Involved-family pages (no navy pageHero). */
+/** Tag + serif H1 + subtitle intro band used by About/Give/Get Involved-family pages (no terra pageHero). */
 export function PageIntro({ journey, eyebrowLabel, title, subtitle }: PageIntroProps) {
   return (
-    <section className="mx-auto max-w-[var(--container-max)] px-5 pb-8 pt-16 sm:px-12">
+    <section className="mx-auto max-w-(--container-max) px-5 pb-8 pt-16 sm:px-12">
       <Tag journey={journey} dot={false}>
         {eyebrowLabel}
       </Tag>

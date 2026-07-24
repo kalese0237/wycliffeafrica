@@ -80,7 +80,7 @@ export default function InvolvedPage() {
         subtitle="Some people move to the field. Most serve from where they are — praying, giving, or bringing their church along."
       />
 
-      <section className="mx-auto grid max-w-[var(--container-max)] grid-cols-1 gap-6 px-5 pb-20 pt-4 sm:grid-cols-2 sm:px-12 lg:grid-cols-3">
+      <section className="mx-auto grid max-w-(--container-max) grid-cols-1 gap-6 px-5 pb-20 pt-4 sm:grid-cols-2 sm:px-12 lg:grid-cols-3">
         {WAYS.map(({ icon: WayIcon, title, body, href }) => (
           <div key={title} className="flex flex-col rounded-lg border border-hair bg-card p-6 shadow-sm">
             <span className="inline-flex h-[52px] w-[52px] items-center justify-center rounded-xl bg-green-100 text-green-700">

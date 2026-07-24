@@ -19,7 +19,7 @@ export interface StatItemProps {
   className?: string;
 }
 
-/** A single impact figure: large Cormorant number with a small-caps label. */
+/** A single impact figure: large EB Garamond number with a small-caps label. */
 export function StatItem({ value, label, sub, align = "center", tone = "primary", className }: StatItemProps) {
   return (
     <div
