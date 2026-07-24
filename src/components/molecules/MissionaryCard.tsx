@@ -4,10 +4,10 @@ import { ArrowRight, Heart, MapPin } from "lucide-react";
 import { Button } from "@/components/atoms/Button";
 import { PhotoPlaceholder } from "@/components/molecules/PhotoPlaceholder";
 import { cn } from "@/lib/cn";
-import type { MissionaryRecord } from "@/lib/directus/schema";
+import type { PublicMissionaryRecord } from "@/lib/directus/schema";
 
 export interface MissionaryCardProps {
-  missionary: MissionaryRecord;
+  missionary: PublicMissionaryRecord;
   className?: string;
 }
 

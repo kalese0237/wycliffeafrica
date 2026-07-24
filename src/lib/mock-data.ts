@@ -1,4 +1,4 @@
-import type { StoryRecord, FieldUpdateRecord, MissionaryRecord, ResourceRecord, FaqRecord } from "@/lib/directus/schema";
+import type { NewsRecord, FieldUpdateRecord, MissionaryRecord, ResourceRecord, FaqRecord } from "@/lib/directus/schema";
 
 /**
  * Local fixtures shaped identically to the Directus schema (src/lib/directus/schema.ts).
@@ -115,10 +115,11 @@ const MISSIONARIES: MissionaryRecord[] = [
   },
 ];
 
-const STORIES: StoryRecord[] = [
+const NEWS: NewsRecord[] = [
   {
     id: "why",
     slug: "why",
+    category: "story",
     journey: "give",
     tagLabel: "Why translation",
     title: "2,000+ languages still wait for Scripture",
@@ -131,10 +132,12 @@ const STORIES: StoryRecord[] = [
     author: "Wycliffe Africa",
     place: "Continental",
     date: "2026",
+    status: "published",
   },
   {
     id: "member",
     slug: "member",
+    category: "story",
     journey: "serve",
     tagLabel: "Serve",
     title: "Becoming a member: your first step into the work",
@@ -146,10 +149,12 @@ const STORIES: StoryRecord[] = [
     author: "Membership Team",
     place: "Nairobi, Kenya",
     date: "2026",
+    status: "published",
   },
   {
     id: "church",
     slug: "church",
+    category: "story",
     journey: "churches",
     tagLabel: "Church partnership",
     title: "Partnering churches into the Great Commission",
@@ -161,19 +166,53 @@ const STORIES: StoryRecord[] = [
     author: "Partnership Team",
     place: "Kenya",
     date: "2026",
+    status: "published",
   },
-];
-
-const UPDATES: FieldUpdateRecord[] = [
   {
     id: "u1",
-    type: "update",
+    slug: "new-testament-draft-reaches-turkana-churches",
+    category: "update",
     missionaryId: "otieno",
     title: "New Testament draft reaches Turkana churches",
-    body: "After three years of drafting and community checking, the Gospels are now being read aloud in Sunday services across six Turkana congregations.",
+    excerpt:
+      "After three years of drafting and community checking, the Gospels are now being read aloud in Sunday services across six Turkana congregations.",
+    body: [
+      "After three years of drafting and community checking, the Gospels are now being read aloud in Sunday services across six Turkana congregations.",
+    ],
     date: "June 2026",
     status: "published",
   },
+  {
+    id: "u3",
+    slug: "first-recorded-scripture-songs-released",
+    category: "update",
+    missionaryId: "mwangi",
+    title: "First recorded Scripture songs released",
+    excerpt:
+      "A local choir has recorded the first Scripture songs in their language — already spreading through phones and radio in the community.",
+    body: [
+      "A local choir has recorded the first Scripture songs in their language — already spreading through phones and radio in the community.",
+    ],
+    date: "May 2026",
+    status: "published",
+  },
+  {
+    id: "u5",
+    slug: "language-survey-completed-in-three-new-communities",
+    category: "update",
+    missionaryId: "achieng",
+    title: "Language survey completed in three new communities",
+    excerpt:
+      "Esther's team has finished surveying three previously undocumented language communities — the first step toward future translation work.",
+    body: [
+      "Esther's team has finished surveying three previously undocumented language communities — the first step toward future translation work.",
+    ],
+    date: "April 2026",
+    status: "published",
+  },
+];
+
+const PRAYERS: FieldUpdateRecord[] = [
   {
     id: "u2",
     type: "prayer",
@@ -184,30 +223,12 @@ const UPDATES: FieldUpdateRecord[] = [
     status: "published",
   },
   {
-    id: "u3",
-    type: "update",
-    missionaryId: "mwangi",
-    title: "First recorded Scripture songs released",
-    body: "A local choir has recorded the first Scripture songs in their language — already spreading through phones and radio in the community.",
-    date: "May 2026",
-    status: "published",
-  },
-  {
     id: "u4",
     type: "prayer",
     missionaryId: "njoroge",
     title: "Pray for Peter & Hannah's consultant check",
     body: "An outside consultant arrives this month to check the drafted books. Pray for clarity, patience, and unity with the translation team.",
     date: "May 2026",
-    status: "published",
-  },
-  {
-    id: "u5",
-    type: "update",
-    missionaryId: "achieng",
-    title: "Language survey completed in three new communities",
-    body: "Esther's team has finished surveying three previously undocumented language communities — the first step toward future translation work.",
-    date: "April 2026",
     status: "published",
   },
   {
@@ -267,12 +288,12 @@ const FAQS: FaqRecord[] = [
   },
 ];
 
-export async function getStories(): Promise<StoryRecord[]> {
-  return STORIES;
+export async function getNews(): Promise<NewsRecord[]> {
+  return NEWS.filter((n) => n.status === "published");
 }
 
-export async function getStoryBySlug(slug: string): Promise<StoryRecord | undefined> {
-  return STORIES.find((s) => s.slug === slug);
+export async function getNewsBySlug(slug: string): Promise<NewsRecord | undefined> {
+  return NEWS.find((n) => n.slug === slug && n.status === "published");
 }
 
 export async function getMissionaries(): Promise<MissionaryRecord[]> {
@@ -283,16 +304,22 @@ export async function getMissionaryBySlug(slug: string): Promise<MissionaryRecor
   return MISSIONARIES.find((m) => m.slug === slug);
 }
 
-export async function getUpdates(): Promise<FieldUpdateRecord[]> {
-  return UPDATES.filter((u) => u.status === "published");
-}
-
-export async function getUpdatesForMissionary(missionaryId: string): Promise<FieldUpdateRecord[]> {
-  return UPDATES.filter((u) => u.missionaryId === missionaryId && u.status === "published");
+export async function getUpdatesForMissionary(missionaryId: string): Promise<NewsRecord[]> {
+  return NEWS.filter((n) => n.category === "update" && n.missionaryId === missionaryId && n.status === "published");
 }
 
 export async function getPrayerRequests(): Promise<FieldUpdateRecord[]> {
-  return UPDATES.filter((u) => u.type === "prayer" && u.status === "published");
+  return PRAYERS.filter((u) => u.status === "published");
+}
+
+/**
+ * Scoped to a missionary's own profile page — excludes `sensitive` requests,
+ * which only ever appear anonymized on `/prayer`, never tied to a name here.
+ */
+export async function getPrayerRequestsForMissionary(missionaryId: string): Promise<FieldUpdateRecord[]> {
+  return PRAYERS.filter(
+    (u) => u.missionaryId === missionaryId && u.status === "published" && !u.sensitive,
+  );
 }
 
 export async function getResources(): Promise<ResourceRecord[]> {

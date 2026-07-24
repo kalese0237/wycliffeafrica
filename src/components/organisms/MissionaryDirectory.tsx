@@ -3,14 +3,14 @@
 import * as React from "react";
 import { MissionaryCard } from "@/components/molecules/MissionaryCard";
 import { cn } from "@/lib/cn";
-import type { MissionaryRecord } from "@/lib/directus/schema";
+import type { PublicMissionaryRecord } from "@/lib/directus/schema";
 
 export interface MissionaryDirectoryProps {
-  missionaries: MissionaryRecord[];
+  missionaries: PublicMissionaryRecord[];
 }
 
 /** The country is the segment after the last comma of `place` ("Turkana, Kenya" → "Kenya"). */
-function countryOf(m: MissionaryRecord): string {
+function countryOf(m: PublicMissionaryRecord): string {
   const parts = m.place.split(",");
   return parts[parts.length - 1].trim();
 }

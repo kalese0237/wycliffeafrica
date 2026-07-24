@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import type { FieldUpdateRecord, MissionaryRecord } from "@/lib/directus/schema";
+import type { FieldUpdateRecord, MissionaryRecord, NewsRecord, PublishStatus, UpdateType } from "@/lib/directus/schema";
 import { submissionImageValue } from "./validation";
 
 /**
@@ -8,7 +8,7 @@ import { submissionImageValue } from "./validation";
  * missionary names on sensitive items never reach the client.
  */
 
-const DIRECTUS_URL = process.env.DIRECTUS_URL;
+const DIRECTUS_URL = process.env.DIRECTUS_INTERNAL_URL ?? process.env.DIRECTUS_URL;
 const DIRECTUS_TOKEN = process.env.DIRECTUS_TOKEN;
 
 export const ACCESS_COOKIE = "wa_portal_access";
@@ -41,6 +41,7 @@ async function directusFetch<T>(path: string, init: RequestInit = {}, token?: st
   if (!DIRECTUS_URL) throw new Error("DIRECTUS_URL is not configured");
   const res = await fetch(`${DIRECTUS_URL}${path}`, {
     ...init,
+    signal: init.signal ?? AbortSignal.timeout(15_000),
     headers: {
       "Content-Type": "application/json",
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
@@ -111,7 +112,7 @@ export async function getPortalUser(): Promise<PortalUser | null> {
       token,
     );
     const missionaries = await directusFetch<MissionaryRecord[]>(
-      `/items/missionaries?filter[user][_eq]=${encodeURIComponent(me.id)}&limit=1`,
+      `/items/missionaries?filter[user][_eq]=${encodeURIComponent(me.id)}&fields=id,slug,name,place,roles,intro,bio,user,image&limit=1`,
       {},
       token,
     );
@@ -126,15 +127,79 @@ export async function getPortalUser(): Promise<PortalUser | null> {
   }
 }
 
+/**
+ * Portal-facing view of a submission, normalized across the two collections
+ * "update" and "prayer" submissions now live in (`news` and `field_updates`
+ * respectively) — `body` flattens to a single string for the edit form.
+ */
+export interface MySubmission {
+  id: string;
+  type: UpdateType;
+  title: string;
+  body: string;
+  date: string;
+  status: PublishStatus;
+  sensitive?: boolean;
+  reviewNotes?: string;
+  date_created?: string;
+}
+
 /** All of the missionary's own submissions, drafts included, newest first. */
-export async function getMySubmissions(missionaryId: string): Promise<FieldUpdateRecord[]> {
+export async function getMySubmissions(missionaryId: string): Promise<MySubmission[]> {
   const token = await getAccessToken();
   if (!token) return [];
-  const params = new URLSearchParams({
+  const newsParams = new URLSearchParams({
     "filter[missionaryId][_eq]": missionaryId,
+    "filter[category][_eq]": "update",
+    fields: "id,status,category,title,excerpt,body,date,reviewNotes,date_created",
     sort: "-date_created",
   });
-  return directusFetch<FieldUpdateRecord[]>(`/items/field_updates?${params}`, {}, token);
+  const prayerParams = new URLSearchParams({
+    "filter[missionaryId][_eq]": missionaryId,
+    "filter[type][_eq]": "prayer",
+    fields: "id,status,type,title,body,date,sensitive,reviewNotes,date_created",
+    sort: "-date_created",
+  });
+  const [news, prayers] = await Promise.all([
+    directusFetch<NewsRecord[]>(`/items/news?${newsParams}`, {}, token),
+    directusFetch<FieldUpdateRecord[]>(`/items/field_updates?${prayerParams}`, {}, token),
+  ]);
+  const fromNews: MySubmission[] = news.map((n) => ({
+    id: n.id,
+    type: "update",
+    title: n.title,
+    body: n.body?.join("\n\n") ?? n.excerpt,
+    date: n.date,
+    status: n.status,
+    reviewNotes: n.reviewNotes ?? undefined,
+    date_created: n.date_created ?? undefined,
+  }));
+  const fromPrayers: MySubmission[] = prayers.map((p) => ({
+    id: p.id,
+    type: p.type,
+    title: p.title,
+    body: p.body,
+    date: p.date,
+    status: p.status,
+    sensitive: p.sensitive ?? undefined,
+    reviewNotes: p.reviewNotes ?? undefined,
+    date_created: p.date_created ?? undefined,
+  }));
+  return [...fromNews, ...fromPrayers].sort((a, b) =>
+    (b.date_created ?? "").localeCompare(a.date_created ?? ""),
+  );
+}
+
+function slugify(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "")
+    .slice(0, 60);
+}
+
+function collectionFor(type: UpdateType): "news" | "field_updates" {
+  return type === "update" ? "news" : "field_updates";
 }
 
 export interface NewSubmission {
@@ -166,6 +231,7 @@ export async function uploadPortalImage(file: FormDataEntryValue | null): Promis
     headers: { Authorization: `Bearer ${DIRECTUS_TOKEN}` },
     body: form,
     cache: "no-store",
+    signal: AbortSignal.timeout(20_000),
   });
   if (!response.ok) throw new Error("The image could not be uploaded.");
   const result = await response.json();
@@ -180,22 +246,47 @@ export async function deletePortalImage(id: string | undefined): Promise<void> {
 /** Create a submission as the logged-in user. Always lands as a draft for review. */
 export async function createSubmission(input: NewSubmission): Promise<void> {
   if (!DIRECTUS_TOKEN) throw new Error("The portal service is not configured.");
-  const { image, ...content } = input;
-  const safeImage = submissionImageValue(input.type, image);
-  await directusFetch("/items/field_updates", {
-    method: "POST",
-    body: JSON.stringify({
-      ...content,
-      ...(safeImage ? { image: safeImage } : {}),
-    }),
-  }, DIRECTUS_TOKEN);
+  const { image, type, ...content } = input;
+  const safeImage = submissionImageValue(type, image);
+  if (type === "update") {
+    await directusFetch("/items/news", {
+      method: "POST",
+      body: JSON.stringify({
+        category: "update",
+        slug: `${slugify(content.title)}-${Date.now().toString(36)}`,
+        title: content.title,
+        excerpt: content.body,
+        body: [content.body],
+        missionaryId: content.missionaryId,
+        date: content.date,
+        ...(safeImage ? { image: safeImage } : {}),
+      }),
+    }, DIRECTUS_TOKEN);
+  } else {
+    await directusFetch("/items/field_updates", {
+      method: "POST",
+      body: JSON.stringify({
+        type,
+        ...content,
+        ...(safeImage ? { image: safeImage } : {}),
+      }),
+    }, DIRECTUS_TOKEN);
+  }
   await notifyPortalReviewers(input).catch(() => undefined);
 }
 
 async function notifyPortalReviewers(input: NewSubmission): Promise<void> {
   if (!DIRECTUS_TOKEN) return;
+  const params = new URLSearchParams({
+    "filter[_or][0][role][name][_eq]": "Portal Reviewer",
+    "filter[_or][1][policies][policy][name][_eq]": "Portal review",
+    "filter[_or][2][role][policies][policy][name][_eq]": "Portal review",
+    "filter[status][_eq]": "active",
+    fields: "id",
+    limit: "-1",
+  });
   const reviewers = await directusFetch<Array<{ id: string }>>(
-    "/users?filter[role][name][_eq]=Portal%20Reviewer&filter[status][_eq]=active&fields=id&limit=-1",
+    `/users?${params}`,
     {},
     DIRECTUS_TOKEN,
   );
@@ -207,16 +298,16 @@ async function notifyPortalReviewers(input: NewSubmission): Promise<void> {
           recipient: reviewer.id,
           subject: `New missionary ${input.type === "prayer" ? "prayer request" : "field update"}`,
           message: `${input.title} is ready for review.`,
-          collection: "field_updates",
+          collection: collectionFor(input.type),
         }),
       }, DIRECTUS_TOKEN),
     ),
   );
 }
 
-async function getOwnSubmission(id: string, missionaryId: string, token: string) {
-  const item = await directusFetch<Pick<FieldUpdateRecord, "id" | "missionaryId" | "image">>(
-    `/items/field_updates/${encodeURIComponent(id)}?fields=id,missionaryId,image`,
+async function getOwnSubmission(id: string, missionaryId: string, type: UpdateType, token: string) {
+  const item = await directusFetch<{ id: string; missionaryId: string; image?: string }>(
+    `/items/${collectionFor(type)}/${encodeURIComponent(id)}?fields=id,missionaryId,image`,
     {},
     token,
   );
@@ -224,7 +315,11 @@ async function getOwnSubmission(id: string, missionaryId: string, token: string)
   return item;
 }
 
-/** Update an owned submission. Directus additionally restricts this to drafts. */
+/**
+ * Update an owned submission. Directus additionally restricts this to drafts.
+ * The submission's type is fixed at creation — it cannot be changed here,
+ * since "update" and "prayer" now live in different collections.
+ */
 export async function updateSubmission(
   id: string,
   missionaryId: string,
@@ -233,15 +328,18 @@ export async function updateSubmission(
   const token = await getAccessToken();
   if (!token) throw new Error("Your session has expired — please sign in again.");
   if (!DIRECTUS_TOKEN) throw new Error("The portal service is not configured.");
-  const previous = await getOwnSubmission(id, missionaryId, token);
-  const { image, ...content } = input;
-  const nextImage = submissionImageValue(input.type, image);
-  await directusFetch(`/items/field_updates/${encodeURIComponent(id)}`, {
+  const { type, image, title, body, sensitive } = input;
+  const previous = await getOwnSubmission(id, missionaryId, type, token);
+  const nextImage = submissionImageValue(type, image);
+  const payload =
+    type === "update"
+      ? { title, excerpt: body, body: [body], status: "draft" }
+      : { title, body, sensitive, status: "draft" };
+  await directusFetch(`/items/${collectionFor(type)}/${encodeURIComponent(id)}`, {
     method: "PATCH",
     body: JSON.stringify({
-      ...content,
+      ...payload,
       ...(nextImage !== undefined ? { image: nextImage } : {}),
-      status: "draft",
     }),
   }, DIRECTUS_TOKEN);
   if (previous.image && nextImage !== undefined && nextImage !== previous.image) {
@@ -250,12 +348,12 @@ export async function updateSubmission(
 }
 
 /** Permanently remove an owned draft. Published and reviewed entries are protected by policy. */
-export async function deleteSubmission(id: string, missionaryId: string): Promise<void> {
+export async function deleteSubmission(id: string, missionaryId: string, type: UpdateType): Promise<void> {
   const token = await getAccessToken();
   if (!token) throw new Error("Your session has expired — please sign in again.");
   if (!DIRECTUS_TOKEN) throw new Error("The portal service is not configured.");
-  const submission = await getOwnSubmission(id, missionaryId, token);
-  await directusFetch(`/items/field_updates/${encodeURIComponent(id)}`, {
+  const submission = await getOwnSubmission(id, missionaryId, type, token);
+  await directusFetch(`/items/${collectionFor(type)}/${encodeURIComponent(id)}`, {
     method: "DELETE",
   }, DIRECTUS_TOKEN);
   await deletePortalImage(submission.image).catch(() => undefined);

@@ -2,26 +2,58 @@ import type { Journey } from "@/components/atoms/Tag";
 
 export type { Journey };
 
-export interface StoryRecord {
-  id: string;
-  slug: string;
-  journey: Journey;
-  tagLabel: string;
-  title: string;
-  excerpt: string;
-  /** Body paragraphs for the story detail page. */
-  body?: string[];
-  author: string;
-  place: string;
-  date: string;
-  image?: string;
-}
-
-export type UpdateType = "update" | "prayer";
-
 /** Directus-style workflow status. Public queries only ever read `published`. */
 export type PublishStatus = "draft" | "published" | "rejected" | "archived";
 
+export type NewsCategory = "story" | "update" | "project";
+
+/**
+ * Unified content collection behind the public "News" section: staff-written
+ * stories, missionary field updates, and project updates all live here,
+ * distinguished by `category`. Prayer requests are deliberately not part of
+ * this collection — see `FieldUpdateRecord` — since they need anonymization
+ * and never get a public detail page.
+ */
+export interface NewsRecord {
+  id: string;
+  slug: string;
+  category: NewsCategory;
+  title: string;
+  excerpt: string;
+  /** Body paragraphs for the detail page. */
+  body?: string[] | null;
+  /** Staff byline — set for `story` and `project` posts. */
+  author?: string | null;
+  /** Links to the authoring missionary — set for `update` posts. */
+  missionaryId?: string | null;
+  place?: string | null;
+  journey?: Journey | null;
+  tagLabel?: string | null;
+  date: string;
+  image?: string | null;
+  /** Missionary-submitted updates land as `draft`; an admin publishes them. */
+  status: PublishStatus;
+  /** Private feedback from the office; never included in public content queries. */
+  reviewNotes?: string | null;
+  reviewedAt?: string | null;
+  reviewedBy?: string | null;
+  date_created?: string | null;
+  date_updated?: string | null;
+}
+
+export type PublicNewsRecord = Omit<
+  NewsRecord,
+  "reviewNotes" | "reviewedAt" | "reviewedBy" | "date_created" | "date_updated"
+>;
+
+export type UpdateType = "update" | "prayer";
+
+/**
+ * Prayer requests only, going forward — missionary field updates now live in
+ * `NewsRecord`/`news` instead. `type` stays a union rather than narrowing to
+ * `"prayer"` so historical `"update"`-tagged rows stay typeable during
+ * migration.
+ */
 export interface FieldUpdateRecord {
   id: string;
   type: UpdateType;
@@ -29,21 +61,25 @@ export interface FieldUpdateRecord {
   title: string;
   body: string;
   date: string;
-  image?: string;
-  /** Missionary submissions land as `draft`; an admin publishes them. */
+  image?: string | null;
   status: PublishStatus;
   /**
-   * Prayer requests only: render anonymized on public pages (no name or
-   * portrait, region instead of place) for workers in security-restricted areas.
+   * Render anonymized on public pages (no name or portrait, region instead
+   * of place) for workers in security-restricted areas.
    */
-  sensitive?: boolean;
+  sensitive?: boolean | null;
   /** Private feedback from the office; never included in public content queries. */
-  reviewNotes?: string;
-  reviewedAt?: string;
-  reviewedBy?: string;
-  date_created?: string;
-  date_updated?: string;
+  reviewNotes?: string | null;
+  reviewedAt?: string | null;
+  reviewedBy?: string | null;
+  date_created?: string | null;
+  date_updated?: string | null;
 }
+
+export type PublicFieldUpdateRecord = Omit<
+  FieldUpdateRecord,
+  "reviewNotes" | "reviewedAt" | "reviewedBy" | "date_created" | "date_updated"
+>;
 
 export interface MissionaryRecord {
   id: string;
@@ -53,11 +89,13 @@ export interface MissionaryRecord {
   roles: string;
   intro: string;
   /** Longer profile paragraphs for the missionary profile page. */
-  bio?: string[];
+  bio?: string[] | null;
   /** Directus user id owning this profile — links portal logins to the record. */
-  user?: string;
-  image?: string;
+  user?: string | null;
+  image?: string | null;
 }
+
+export type PublicMissionaryRecord = Omit<MissionaryRecord, "user">;
 
 export type ResourceKind = "pdf" | "video" | "guide" | "report" | "audio";
 
@@ -78,7 +116,7 @@ export interface FaqRecord {
 
 /** Collection map matching the PID's content model — used to type the Directus client. */
 export interface DirectusSchema {
-  stories: StoryRecord[];
+  news: NewsRecord[];
   field_updates: FieldUpdateRecord[];
   missionaries: MissionaryRecord[];
   resources: ResourceRecord[];

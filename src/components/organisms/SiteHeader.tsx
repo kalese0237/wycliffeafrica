@@ -47,11 +47,13 @@ const PRIMARY_NAV: NavItem[] = [
     ],
   },
   {
-    label: "Updates",
-    href: "/updates",
+    label: "News",
+    href: "/news",
     menu: [
-      ["All Updates", "/updates"],
-      ["Missionary Updates", "/updates?type=update"],
+      ["All News", "/news"],
+      ["Stories & Media", "/news?type=story"],
+      ["Missionary Updates", "/news?type=update"],
+      ["Project Updates", "/news?type=project"],
       ["Prayer Requests", "/prayer"],
       ["Prayer Guide", "/prayer-guide.pdf"],
     ],
@@ -73,7 +75,6 @@ const SECONDARY_NAV: NavGroup[] = [
   {
     label: "More",
     links: [
-      ["Stories & Media", "/stories"],
       ["FAQs", "/faqs"],
       ["Contact", "/contact"],
     ],

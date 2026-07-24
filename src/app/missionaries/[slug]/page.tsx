@@ -1,7 +1,12 @@
 import * as React from "react";
 import { notFound } from "next/navigation";
 import { MissionaryProfileTemplate } from "@/components/templates";
-import { getMissionaries, getMissionaryBySlug, getUpdatesForMissionary } from "@/lib/content";
+import {
+  getMissionaries,
+  getMissionaryBySlug,
+  getUpdatesForMissionary,
+  getPrayerRequestsForMissionary,
+} from "@/lib/content";
 
 /** Re-check Directus for newly published updates every 5 minutes. */
 export const revalidate = 300;
@@ -15,7 +20,12 @@ export default async function MissionaryDetailPage({ params }: { params: Promise
   const { slug } = await params;
   const missionary = await getMissionaryBySlug(slug);
   if (!missionary) notFound();
-  const updates = await getUpdatesForMissionary(missionary.id);
+  const [updates, prayerRequests] = await Promise.all([
+    getUpdatesForMissionary(missionary.id),
+    getPrayerRequestsForMissionary(missionary.id),
+  ]);
 
-  return <MissionaryProfileTemplate missionary={missionary} updates={updates} />;
+  return (
+    <MissionaryProfileTemplate missionary={missionary} updates={updates} prayerRequests={prayerRequests} />
+  );
 }

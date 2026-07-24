@@ -106,14 +106,13 @@ async function ensureAccess(role, policy) {
   if (!current) await api("/access", { method: "POST", body: { role, policy } });
 }
 
-async function ensureReviewPreset(role) {
-  const bookmark = "Missionary submissions awaiting review";
+async function ensureReviewPreset(role, collection, bookmark) {
   const current = await findOne(
-    `/presets?filter[role][_eq]=${role}&filter[collection][_eq]=field_updates&filter[bookmark][_eq]=${encodeURIComponent(bookmark)}`,
+    `/presets?filter[role][_eq]=${role}&filter[collection][_eq]=${collection}&filter[bookmark][_eq]=${encodeURIComponent(bookmark)}`,
   );
   const body = {
     role,
-    collection: "field_updates",
+    collection,
     bookmark,
     layout: "tabular",
     filter: { status: { _eq: "draft" } },
@@ -176,6 +175,16 @@ async function main() {
     },
   });
   await ensureField("field_updates", {
+    field: "type",
+    type: "string",
+    schema: { default_value: "prayer" },
+    meta: {
+      interface: "select-dropdown",
+      options: { choices: [{ text: "Prayer request", value: "prayer" }] },
+      note: "Prayer requests only; field updates are stored in news",
+    },
+  });
+  await ensureField("field_updates", {
     field: "image",
     type: "uuid",
     schema: {},
@@ -187,12 +196,39 @@ async function main() {
     schema: {},
     meta: { interface: "file-image", note: "Missionary profile photo" },
   });
+  await ensureField("news", {
+    field: "missionaryId",
+    type: "string",
+    schema: {},
+    meta: { interface: "select-dropdown-m2o", note: "Missionary who submitted this update" },
+  });
+  await ensureField("news", {
+    field: "image",
+    type: "uuid",
+    schema: {},
+    meta: { interface: "file-image", note: "Optional news image" },
+  });
+  await ensureField("news", {
+    field: "reviewedBy",
+    type: "uuid",
+    schema: {},
+    meta: { interface: "select-dropdown-m2o", readonly: true },
+  });
+  await ensureField("news", {
+    field: "reviewedAt",
+    type: "timestamp",
+    schema: {},
+    meta: { interface: "datetime", readonly: true },
+  });
 
   await ensureRelation("missionaries", "user", "directus_users");
   await ensureRelation("field_updates", "missionaryId", "missionaries", "RESTRICT");
   await ensureRelation("field_updates", "reviewedBy", "directus_users");
   await ensureRelation("field_updates", "image", "directus_files");
   await ensureRelation("missionaries", "image", "directus_files");
+  await ensureRelation("news", "missionaryId", "missionaries", "RESTRICT");
+  await ensureRelation("news", "reviewedBy", "directus_users");
+  await ensureRelation("news", "image", "directus_files");
 
   const missionaryPolicy = await ensurePolicy("Missionary portal", {
     icon: "person",
@@ -207,6 +243,16 @@ async function main() {
   await removePermission(missionaryPolicy, "field_updates", "create");
   await removePermission(missionaryPolicy, "field_updates", "update");
   await removePermission(missionaryPolicy, "field_updates", "delete");
+  await ensurePermission(missionaryPolicy, "news", "read", {
+    fields: [
+      "id", "status", "category", "slug", "title", "excerpt", "body", "missionaryId",
+      "date", "image", "reviewNotes", "reviewedAt", "date_created", "date_updated",
+    ],
+    permissions: ownsProfile,
+  });
+  await removePermission(missionaryPolicy, "news", "create");
+  await removePermission(missionaryPolicy, "news", "update");
+  await removePermission(missionaryPolicy, "news", "delete");
 
   const sitePolicy = await ensurePolicy("Site (read-only)", {
     icon: "public",
@@ -215,13 +261,24 @@ async function main() {
   });
   await ensurePermission(sitePolicy, "field_updates", "read", {
     fields: ["id", "status", "type", "missionaryId", "title", "body", "date", "sensitive", "image", "date_created"],
-    permissions: { status: { _eq: "published" } },
+    permissions: {
+      _and: [
+        { status: { _eq: "published" } },
+        { type: { _eq: "prayer" } },
+      ],
+    },
   });
-  const editable = { status: { _in: ["draft", "rejected"] } };
+  const fieldUpdateTypeFilter = { type: { _eq: "prayer" } };
+  const editable = {
+    _and: [
+      fieldUpdateTypeFilter,
+      { status: { _in: ["draft", "rejected"] } },
+    ],
+  };
   await ensurePermission(sitePolicy, "field_updates", "create", {
     fields: ["type", "title", "body", "sensitive", "missionaryId", "date", "image"],
-    validation: null,
-    presets: { status: "draft" },
+    validation: fieldUpdateTypeFilter,
+    presets: { type: "prayer", status: "draft" },
   });
   await ensurePermission(sitePolicy, "field_updates", "update", {
     fields: ["type", "title", "body", "sensitive", "image", "status"],
@@ -231,6 +288,34 @@ async function main() {
   await ensurePermission(sitePolicy, "field_updates", "delete", {
     fields: ["id"],
     permissions: editable,
+  });
+  const publicNewsFields = [
+    "id", "status", "category", "slug", "title", "excerpt", "body", "author",
+    "missionaryId", "place", "journey", "tagLabel", "date", "image",
+  ];
+  const editableNews = {
+    _and: [
+      { category: { _eq: "update" } },
+      { status: { _in: ["draft", "rejected"] } },
+    ],
+  };
+  await ensurePermission(sitePolicy, "news", "read", {
+    fields: publicNewsFields,
+    permissions: { status: { _eq: "published" } },
+  });
+  await ensurePermission(sitePolicy, "news", "create", {
+    fields: ["category", "slug", "title", "excerpt", "body", "missionaryId", "date", "image"],
+    validation: { category: { _eq: "update" } },
+    presets: { category: "update", status: "draft" },
+  });
+  await ensurePermission(sitePolicy, "news", "update", {
+    fields: ["title", "excerpt", "body", "image", "status"],
+    permissions: editableNews,
+    validation: { status: { _eq: "draft" } },
+  });
+  await ensurePermission(sitePolicy, "news", "delete", {
+    fields: ["id"],
+    permissions: editableNews,
   });
   await ensurePermission(sitePolicy, "directus_files", "create", {
     fields: ["*"],
@@ -252,7 +337,13 @@ async function main() {
   });
   await ensurePermission(sitePolicy, "directus_users", "read", {
     fields: ["id"],
-    permissions: { role: { name: { _eq: "Portal Reviewer" } } },
+    permissions: {
+      _or: [
+        { role: { name: { _eq: "Portal Reviewer" } } },
+        { policies: { policy: { name: { _eq: "Portal review" } } } },
+        { role: { policies: { policy: { name: { _eq: "Portal review" } } } } },
+      ],
+    },
   });
   await ensurePermission(sitePolicy, "directus_notifications", "create", {
     fields: ["recipient", "subject", "message", "collection", "item"],
@@ -268,11 +359,24 @@ async function main() {
   });
   const reviewerRole = await ensureRole("Portal Reviewer", { icon: "fact_check" });
   await ensureAccess(reviewerRole, reviewerPolicy);
-  await ensureReviewPreset(reviewerRole);
-  await ensurePermission(reviewerPolicy, "field_updates", "read", { fields: ["*"], permissions: {} });
+  await ensureReviewPreset(reviewerRole, "field_updates", "Missionary prayer requests awaiting review");
+  await ensureReviewPreset(reviewerRole, "news", "Missionary news updates awaiting review");
+  await ensurePermission(reviewerPolicy, "field_updates", "read", {
+    fields: ["*"],
+    permissions: fieldUpdateTypeFilter,
+  });
   await ensurePermission(reviewerPolicy, "field_updates", "update", {
     fields: ["status", "type", "title", "body", "date", "sensitive", "image", "reviewNotes"],
-    permissions: {},
+    permissions: fieldUpdateTypeFilter,
+    presets: { reviewedBy: "$CURRENT_USER", reviewedAt: "$NOW" },
+  });
+  await ensurePermission(reviewerPolicy, "news", "read", {
+    fields: ["*"],
+    permissions: { category: { _eq: "update" } },
+  });
+  await ensurePermission(reviewerPolicy, "news", "update", {
+    fields: ["status", "title", "excerpt", "body", "date", "image", "reviewNotes"],
+    permissions: { category: { _eq: "update" } },
     presets: { reviewedBy: "$CURRENT_USER", reviewedAt: "$NOW" },
   });
   await ensurePermission(reviewerPolicy, "missionaries", "read", { fields: ["*"], permissions: {} });

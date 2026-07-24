@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const ACCESS_COOKIE = "wa_portal_access";
 const REFRESH_COOKIE = "wa_portal_refresh";
-const DIRECTUS_URL = process.env.DIRECTUS_URL;
+const DIRECTUS_URL = process.env.DIRECTUS_INTERNAL_URL ?? process.env.DIRECTUS_URL;
 
 interface AuthTokens {
   access_token: string;
@@ -25,6 +25,7 @@ export async function proxy(request: NextRequest) {
     const check = await fetch(`${DIRECTUS_URL}/users/me?fields=id`, {
       headers: { Authorization: `Bearer ${access}` },
       cache: "no-store",
+      signal: AbortSignal.timeout(5_000),
     }).catch(() => null);
     if (!check) return NextResponse.next();
     if (check?.ok) return NextResponse.next();
@@ -37,6 +38,7 @@ export async function proxy(request: NextRequest) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ refresh_token: refresh, mode: "json" }),
     cache: "no-store",
+    signal: AbortSignal.timeout(10_000),
   }).catch(() => null);
 
   if (!refreshed?.ok) {

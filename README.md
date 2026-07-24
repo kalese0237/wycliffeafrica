@@ -85,10 +85,24 @@ DIRECTUS_URL=... DIRECTUS_ADMIN_TOKEN=... pnpm portal:provision-reviewer -- \
   --last-name Reviewer
 ```
 
+Provisioning is composable: when the email already belongs to an administrator,
+missionary, or another Directus user, the existing primary role is preserved and
+the required portal policy is attached directly to that account. The same user
+can therefore administer Directus, review submissions, and own a missionary
+profile.
+
 Run the live, self-cleaning authorization and upload check:
 
 ```bash
 DIRECTUS_URL=... DIRECTUS_ADMIN_TOKEN=... DIRECTUS_TOKEN=... pnpm portal:verify
+```
+
+Refresh the checked-in last-known-good public content snapshot after publishing
+significant CMS changes. The snapshot is used only when a new build or cold
+server process cannot reach Directus:
+
+```bash
+DIRECTUS_URL=... DIRECTUS_TOKEN=... pnpm content:snapshot
 ```
 
 Password recovery additionally requires Directus email delivery and
