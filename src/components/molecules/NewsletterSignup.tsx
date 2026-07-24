@@ -17,7 +17,7 @@ export interface NewsletterSignupProps {
   className?: string;
 }
 
-/** Inline email capture (prayer/updates). Compact single-row variant for footers. */
+/** Inline email capture (prayer/news). Compact single-row variant for footers. */
 export function NewsletterSignup({
   title = "Stay in the story",
   blurb = "Prayer points and field updates, once a month.",

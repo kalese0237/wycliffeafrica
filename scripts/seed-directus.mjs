@@ -1,7 +1,7 @@
 /**
  * One-time Directus bootstrap for the Wycliffe Africa site.
  *
- * Creates the content collections (missionaries, field_updates, stories,
+ * Creates the content collections (missionaries, field_updates, news,
  * resources, faqs), a read-only "Site" role for the Next.js server, a
  * "Missionary" role for portal logins (create drafts + read own items),
  * a site API user with a static token, a demo missionary account, and
@@ -140,16 +140,7 @@ const MISSIONARIES = [
   },
 ];
 
-const UPDATES = [
-  {
-    type: "update",
-    missionaryId: "otieno",
-    title: "New Testament draft reaches Turkana churches",
-    body: "After three years of drafting and community checking, the Gospels are now being read aloud in Sunday services across six Turkana congregations.",
-    date: "June 2026",
-    status: "published",
-    sensitive: false,
-  },
+const PRAYERS = [
   {
     type: "prayer",
     missionaryId: "wanjiru",
@@ -160,29 +151,11 @@ const UPDATES = [
     sensitive: false,
   },
   {
-    type: "update",
-    missionaryId: "mwangi",
-    title: "First recorded Scripture songs released",
-    body: "A local choir has recorded the first Scripture songs in their language — already spreading through phones and radio in the community.",
-    date: "May 2026",
-    status: "published",
-    sensitive: false,
-  },
-  {
     type: "prayer",
     missionaryId: "njoroge",
     title: "Pray for Peter & Hannah's consultant check",
     body: "An outside consultant arrives this month to check the drafted books. Pray for clarity, patience, and unity with the translation team.",
     date: "May 2026",
-    status: "published",
-    sensitive: false,
-  },
-  {
-    type: "update",
-    missionaryId: "achieng",
-    title: "Language survey completed in three new communities",
-    body: "Esther's team has finished surveying three previously undocumented language communities — the first step toward future translation work.",
-    date: "April 2026",
     status: "published",
     sensitive: false,
   },
@@ -206,9 +179,10 @@ const UPDATES = [
   },
 ];
 
-const STORIES = [
+const NEWS = [
   {
-    id: "why",
+    category: "story",
+    status: "published",
     slug: "why",
     journey: "give",
     tagLabel: "Why translation",
@@ -224,7 +198,8 @@ const STORIES = [
     date: "2026",
   },
   {
-    id: "member",
+    category: "story",
+    status: "published",
     slug: "member",
     journey: "serve",
     tagLabel: "Serve",
@@ -239,7 +214,8 @@ const STORIES = [
     date: "2026",
   },
   {
-    id: "church",
+    category: "story",
+    status: "published",
     slug: "church",
     journey: "churches",
     tagLabel: "Church partnership",
@@ -252,6 +228,36 @@ const STORIES = [
     author: "Partnership Team",
     place: "Kenya",
     date: "2026",
+  },
+  {
+    category: "update",
+    status: "published",
+    slug: "new-testament-draft-reaches-turkana-churches",
+    title: "New Testament draft reaches Turkana churches",
+    excerpt: "After three years of drafting and community checking, the Gospels are now being read aloud in Sunday services across six Turkana congregations.",
+    body: ["After three years of drafting and community checking, the Gospels are now being read aloud in Sunday services across six Turkana congregations."],
+    missionaryId: "otieno",
+    date: "June 2026",
+  },
+  {
+    category: "update",
+    status: "published",
+    slug: "first-recorded-scripture-songs-released",
+    title: "First recorded Scripture songs released",
+    excerpt: "A local choir has recorded the first Scripture songs in their language — already spreading through phones and radio in the community.",
+    body: ["A local choir has recorded the first Scripture songs in their language — already spreading through phones and radio in the community."],
+    missionaryId: "mwangi",
+    date: "May 2026",
+  },
+  {
+    category: "update",
+    status: "published",
+    slug: "language-survey-completed-in-three-new-communities",
+    title: "Language survey completed in three new communities",
+    excerpt: "Esther's team has finished surveying three previously undocumented language communities — the first step toward future translation work.",
+    body: ["Esther's team has finished surveying three previously undocumented language communities — the first step toward future translation work."],
+    missionaryId: "achieng",
+    date: "April 2026",
   },
 ];
 
@@ -318,7 +324,7 @@ const COLLECTIONS = [
   },
   {
     collection: "field_updates",
-    meta: { icon: "campaign", note: "Field updates and prayer requests, drafted via the missionary portal", archive_field: "status", archive_value: "archived", unarchive_value: "draft" },
+    meta: { icon: "volunteer_activism", note: "Prayer requests drafted via the missionary portal", archive_field: "status", archive_value: "archived", unarchive_value: "draft" },
     fields: [
       uuidPk,
       { field: "status", type: "string", schema: { default_value: "draft" }, meta: { interface: "select-dropdown", options: { choices: [
@@ -326,8 +332,7 @@ const COLLECTIONS = [
         { text: "Published", value: "published" },
         { text: "Archived", value: "archived" },
       ] } } },
-      { field: "type", type: "string", schema: { default_value: "update" }, meta: { interface: "select-dropdown", options: { choices: [
-        { text: "Field update", value: "update" },
+      { field: "type", type: "string", schema: { default_value: "prayer" }, meta: { interface: "select-dropdown", options: { choices: [
         { text: "Prayer request", value: "prayer" },
       ] } } },
       str("missionaryId"),
@@ -341,9 +346,39 @@ const COLLECTIONS = [
     ],
   },
   {
-    collection: "stories",
-    meta: { icon: "auto_stories" },
-    fields: [stringPk, str("slug"), str("journey"), str("tagLabel"), str("title"), text("excerpt"), json("body"), str("author"), str("place"), str("date"), str("image")],
+    collection: "news",
+    meta: { icon: "newspaper", note: "Unified public feed: stories, missionary updates, and project updates", archive_field: "status", archive_value: "archived", unarchive_value: "draft" },
+    fields: [
+      uuidPk,
+      { field: "status", type: "string", schema: { default_value: "draft" }, meta: { interface: "select-dropdown", options: { choices: [
+        { text: "Draft (in review)", value: "draft" },
+        { text: "Published", value: "published" },
+        { text: "Changes requested", value: "rejected" },
+        { text: "Archived", value: "archived" },
+      ] } } },
+      { field: "category", type: "string", schema: { default_value: "story" }, meta: { interface: "select-dropdown", options: { choices: [
+        { text: "Story", value: "story" },
+        { text: "Missionary update", value: "update" },
+        { text: "Project update", value: "project" },
+      ] } } },
+      str("slug"),
+      str("title"),
+      text("excerpt"),
+      json("body"),
+      str("author"),
+      str("missionaryId"),
+      str("place"),
+      str("journey"),
+      str("tagLabel"),
+      str("date"),
+      str("image"),
+      text("reviewNotes"),
+      str("reviewedAt"),
+      str("reviewedBy"),
+      { field: "user_created", type: "uuid", schema: {}, meta: { special: ["user-created"], hidden: true } },
+      { field: "date_created", type: "timestamp", schema: {}, meta: { special: ["date-created"], hidden: true } },
+      { field: "date_updated", type: "timestamp", schema: {}, meta: { special: ["date-updated"], hidden: true } },
+    ],
   },
   {
     collection: "resources",
@@ -379,8 +414,8 @@ async function main() {
   const sitePolicy = await api("/policies", { method: "POST", body: { name: "Site (read-only)", icon: "public", admin_access: false, app_access: false } });
   await api("/permissions", { method: "POST", body: [
     { policy: sitePolicy.id, collection: "missionaries", action: "read", fields: ["*"], permissions: {} },
-    { policy: sitePolicy.id, collection: "field_updates", action: "read", fields: ["*"], permissions: { status: { _eq: "published" } } },
-    { policy: sitePolicy.id, collection: "stories", action: "read", fields: ["*"], permissions: {} },
+    { policy: sitePolicy.id, collection: "field_updates", action: "read", fields: ["id", "status", "type", "missionaryId", "title", "body", "date", "sensitive", "image", "date_created"], permissions: { _and: [{ status: { _eq: "published" } }, { type: { _eq: "prayer" } }] } },
+    { policy: sitePolicy.id, collection: "news", action: "read", fields: ["id", "status", "category", "slug", "title", "excerpt", "body", "author", "missionaryId", "place", "journey", "tagLabel", "date", "image"], permissions: { status: { _eq: "published" } } },
     { policy: sitePolicy.id, collection: "resources", action: "read", fields: ["*"], permissions: {} },
     { policy: sitePolicy.id, collection: "faqs", action: "read", fields: ["*"], permissions: {} },
   ] });
@@ -396,8 +431,8 @@ async function main() {
       collection: "field_updates",
       action: "create",
       fields: ["type", "title", "body", "sensitive", "missionaryId", "date", "status"],
-      validation: { status: { _eq: "draft" } },
-      presets: { status: "draft" },
+      validation: { _and: [{ status: { _eq: "draft" } }, { type: { _eq: "prayer" } }] },
+      presets: { type: "prayer", status: "draft" },
     },
     { policy: missionaryPolicy.id, collection: "field_updates", action: "read", fields: ["*"], permissions: { user_created: { _eq: "$CURRENT_USER" } } },
     { policy: missionaryPolicy.id, collection: "missionaries", action: "read", fields: ["*"], permissions: { user: { _eq: "$CURRENT_USER" } } },
@@ -431,8 +466,8 @@ async function main() {
 
   // --- Content ---
   await api("/items/missionaries", { method: "POST", body: MISSIONARIES.map((m) => m.id === "otieno" ? { ...m, user: demoUser.id } : m) });
-  await api("/items/field_updates", { method: "POST", body: UPDATES });
-  await api("/items/stories", { method: "POST", body: STORIES });
+  await api("/items/field_updates", { method: "POST", body: PRAYERS });
+  await api("/items/news", { method: "POST", body: NEWS });
   await api("/items/resources", { method: "POST", body: RESOURCES });
   await api("/items/faqs", { method: "POST", body: FAQS });
   console.log("✓ content seeded");

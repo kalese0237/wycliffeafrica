@@ -32,11 +32,15 @@ async function main() {
   const temporaryToken = crypto.randomBytes(32).toString("hex");
   const testTitle = `Portal authorization test ${crypto.randomUUID()}`;
   let draftId;
+  let newsDraftId;
   let mediaDraftId;
   let fileId;
   let reviewerId;
+  let originalMissionaryToken;
 
   try {
+    const missionaryUser = await request(`/users/${linked[0].user}?fields=token`);
+    originalMissionaryToken = missionaryUser.token ?? null;
     await request(`/users/${linked[0].user}`, { method: "PATCH", body: { token: temporaryToken } });
     const visibleProfiles = await request("/items/missionaries?fields=id&limit=-1", { token: temporaryToken });
     if (visibleProfiles.length !== 1 || visibleProfiles[0].id !== linked[0].id) {
@@ -56,8 +60,10 @@ async function main() {
       },
     });
     if (!SITE_TOKEN) throw new Error("DIRECTUS_TOKEN is required for service-token verification.");
-    const reviewerRoles = await request("/roles?filter[name][_eq]=Portal%20Reviewer&limit=1");
-    if (!reviewerRoles.length) throw new Error("Portal Reviewer role is missing.");
+    const missionaryRoles = await request("/roles?filter[name][_eq]=Missionary&limit=1");
+    if (!missionaryRoles.length) throw new Error("Missionary role is missing.");
+    const reviewerPolicies = await request("/policies?filter[name][_eq]=Portal%20review&limit=1");
+    if (!reviewerPolicies.length) throw new Error("Portal review policy is missing.");
     const reviewerToken = crypto.randomBytes(32).toString("hex");
     const reviewer = await request("/users", {
       method: "POST",
@@ -66,17 +72,23 @@ async function main() {
         password: crypto.randomBytes(18).toString("base64url"),
         first_name: "Portal",
         last_name: "Review Test",
-        role: reviewerRoles[0].id,
+        // Deliberately retain a non-reviewer primary role. Reviewer access is
+        // composed through a directly assigned policy.
+        role: missionaryRoles[0].id,
         status: "active",
         token: reviewerToken,
       },
     });
     reviewerId = reviewer.id;
+    await request("/access", {
+      method: "POST",
+      body: { user: reviewer.id, policy: reviewerPolicies[0].id },
+    });
     await request("/items/field_updates", {
       method: "POST",
       token: SITE_TOKEN,
       body: {
-        type: "update",
+        type: "prayer",
         missionaryId: linked[0].id,
         title: testTitle,
         body: "This temporary draft verifies ownership policies and is removed automatically.",
@@ -137,6 +149,76 @@ async function main() {
     await request(`/items/field_updates/${draftId}`, { method: "DELETE" });
     draftId = undefined;
 
+    const newsTitle = `Portal news authorization test ${crypto.randomUUID()}`;
+    await request("/items/news", {
+      method: "POST",
+      token: SITE_TOKEN,
+      body: {
+        category: "update",
+        slug: `portal-news-test-${crypto.randomUUID()}`,
+        missionaryId: linked[0].id,
+        title: newsTitle,
+        excerpt: "Temporary news draft",
+        body: ["Temporary news draft"],
+        date: "Authorization test",
+      },
+    });
+    const [newsDraft] = await request(
+      `/items/news?filter[title][_eq]=${encodeURIComponent(newsTitle)}&fields=id,status&limit=1`,
+    );
+    if (!newsDraft || newsDraft.status !== "draft") {
+      throw new Error("The portal service token did not create a draft news update.");
+    }
+    newsDraftId = newsDraft.id;
+    const ownNews = await request(`/items/news?filter[id][_eq]=${newsDraftId}&fields=id`, {
+      token: temporaryToken,
+    });
+    if (ownNews.length !== 1) throw new Error("The missionary could not read their own news draft.");
+    await request(`/items/news/${newsDraftId}`, {
+      method: "PATCH",
+      token: reviewerToken,
+      body: { status: "rejected", reviewNotes: "Please add one concrete outcome." },
+    });
+    const [reviewedNews] = await request(
+      `/items/news?filter[id][_eq]=${newsDraftId}&fields=id,status,reviewNotes`,
+      { token: temporaryToken },
+    );
+    if (reviewedNews?.status !== "rejected" || !reviewedNews.reviewNotes) {
+      throw new Error("Reviewer feedback was not visible on the missionary's news draft.");
+    }
+    await request(`/items/news/${newsDraftId}`, {
+      method: "PATCH",
+      token: SITE_TOKEN,
+      body: { status: "draft", title: `${newsTitle} revised` },
+    });
+    await request(`/items/news/${newsDraftId}`, {
+      method: "PATCH",
+      token: reviewerToken,
+      body: { status: "published", reviewNotes: null },
+    });
+    const publicNews = await request(
+      `/items/news?filter[id][_eq]=${newsDraftId}&fields=*&limit=1`,
+      { token: SITE_TOKEN },
+    );
+    if (publicNews.length !== 1 || publicNews[0].status !== "published") {
+      throw new Error("Published news was not visible to the public content token.");
+    }
+    const forbiddenPublicFields = ["reviewNotes", "reviewedAt", "reviewedBy", "user_created"];
+    if (forbiddenPublicFields.some((field) => field in publicNews[0])) {
+      throw new Error("Private news workflow fields were exposed to the public content token.");
+    }
+    await request(`/items/news/${newsDraftId}`, {
+      method: "PATCH",
+      token: reviewerToken,
+      body: { status: "archived" },
+    });
+    const archivedNews = await request(`/items/news?filter[id][_eq]=${newsDraftId}&fields=id`, {
+      token: SITE_TOKEN,
+    });
+    if (archivedNews.length) throw new Error("Archived news remained publicly visible.");
+    await request(`/items/news/${newsDraftId}`, { method: "DELETE" });
+    newsDraftId = undefined;
+
     const imageForm = new FormData();
     imageForm.set("title", "Temporary portal upload test");
     imageForm.set(
@@ -162,7 +244,7 @@ async function main() {
       method: "POST",
       token: SITE_TOKEN,
       body: {
-        type: "update",
+        type: "prayer",
         missionaryId: linked[0].id,
         title: mediaTestTitle,
         body: "This temporary image submission verifies that the public proxy follows review status.",
@@ -192,7 +274,7 @@ async function main() {
     await request(`/items/field_updates/${mediaDraftId}`, {
       method: "PATCH",
       token: reviewerToken,
-      body: { type: "prayer", sensitive: true },
+      body: { sensitive: true },
     });
     const sensitiveMedia = await fetch(`${SITE_URL}/media/${fileId}`, { cache: "no-store" });
     if (sensitiveMedia.status !== 404) {
@@ -206,16 +288,22 @@ async function main() {
     console.log("✓ server token can create/update/delete drafts");
     console.log("✓ server-created draft is visible to its owning missionary");
     console.log("✓ reviewer can request changes and return private feedback");
+    console.log("✓ reviewer access composes with a separate primary role");
     console.log("✓ missionary can revise and resubmit rejected content");
+    console.log("✓ news updates follow ownership, review, and public-field boundaries");
     console.log("✓ publish/archive controls public visibility correctly");
     console.log("✓ image upload and authenticated delivery work");
     console.log("✓ public media proxy follows publication and sensitivity status");
   } finally {
     if (draftId) await request(`/items/field_updates/${draftId}`, { method: "DELETE" }).catch(() => undefined);
+    if (newsDraftId) await request(`/items/news/${newsDraftId}`, { method: "DELETE" }).catch(() => undefined);
     if (mediaDraftId) await request(`/items/field_updates/${mediaDraftId}`, { method: "DELETE" }).catch(() => undefined);
     if (fileId) await request(`/files/${fileId}`, { method: "DELETE" }).catch(() => undefined);
     if (reviewerId) await request(`/users/${reviewerId}`, { method: "DELETE" }).catch(() => undefined);
-    await request(`/users/${linked[0].user}`, { method: "PATCH", body: { token: null } }).catch(() => undefined);
+    await request(`/users/${linked[0].user}`, {
+      method: "PATCH",
+      body: { token: originalMissionaryToken ?? null },
+    }).catch(() => undefined);
   }
 }
 

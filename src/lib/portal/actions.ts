@@ -107,7 +107,8 @@ export async function deleteEntryAction(formData: FormData): Promise<void> {
   if (!user) redirect("/portal/login");
   if (!user.missionary) return;
   const id = String(formData.get("id") ?? "");
-  if (id) await deleteSubmission(id, user.missionary.id);
+  const type = formData.get("type") === "prayer" ? "prayer" : "update";
+  if (id) await deleteSubmission(id, user.missionary.id, type);
   revalidatePath("/portal");
 }
 

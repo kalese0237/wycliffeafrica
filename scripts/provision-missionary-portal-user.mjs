@@ -32,6 +32,15 @@ async function api(path, { method = "GET", body, ok404 = false } = {}) {
   return (await response.json()).data;
 }
 
+async function ensureUserPolicy(user, policy) {
+  const current = await api(
+    `/access?filter[user][_eq]=${user}&filter[policy][_eq]=${policy}&limit=1`,
+  );
+  if (!current.length) {
+    await api("/access", { method: "POST", body: { user, policy } });
+  }
+}
+
 async function main() {
   const missionaryId = args.get("--missionary-id");
   const email = args.get("--email")?.toLowerCase();
@@ -46,13 +55,15 @@ async function main() {
   if (!missionary) throw new Error(`Missionary profile '${missionaryId}' does not exist.`);
   const roles = await api("/roles?filter[name][_eq]=Missionary&limit=1");
   if (!roles.length) throw new Error("The Missionary role does not exist. Run setup-missionary-portal.mjs first.");
+  const policies = await api("/policies?filter[name][_eq]=Missionary%20portal&limit=1");
+  if (!policies.length) throw new Error("The Missionary portal policy is missing. Run setup-missionary-portal.mjs first.");
   const existing = await api(`/users?filter[email][_eq]=${encodeURIComponent(email)}&limit=1`);
 
   let user;
   let temporaryPassword;
   if (existing.length) {
     user = existing[0];
-    const patch = { role: roles[0].id, status: "active", first_name: firstName, last_name: lastName };
+    const patch = { status: "active", first_name: firstName, last_name: lastName };
     if (rotatePassword) {
       temporaryPassword = crypto.randomBytes(18).toString("base64url");
       patch.password = temporaryPassword;
@@ -72,6 +83,7 @@ async function main() {
       },
     });
   }
+  await ensureUserPolicy(user.id, policies[0].id);
 
   const conflicts = await api(`/items/missionaries?filter[user][_eq]=${user.id}&filter[id][_neq]=${encodeURIComponent(missionaryId)}&limit=1`);
   if (conflicts.length) throw new Error(`This user is already linked to '${conflicts[0].id}'.`);
@@ -81,6 +93,7 @@ async function main() {
   });
 
   console.log(`✓ ${email} is linked to ${missionary.name}`);
+  if (existing.length) console.log("Existing primary role and its permissions were preserved.");
   if (temporaryPassword) {
     console.log("Temporary password (share through a secure channel; shown once):");
     console.log(temporaryPassword);

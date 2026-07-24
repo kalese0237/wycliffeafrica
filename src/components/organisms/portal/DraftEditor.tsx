@@ -8,11 +8,13 @@ import { Input } from "@/components/atoms/Input";
 import { FormField } from "@/components/molecules/FormField";
 import { deleteEntryAction, updateEntryAction, type ActionState } from "@/lib/portal/actions";
 import { SUBMISSION_LIMITS } from "@/lib/portal/validation";
-import type { FieldUpdateRecord } from "@/lib/directus/schema";
+import type { MySubmission } from "@/lib/portal/auth";
 
-export function DraftEditor({ submission }: { submission: FieldUpdateRecord }) {
+const TYPE_LABEL = { update: "Field update", prayer: "Prayer request" } as const;
+
+export function DraftEditor({ submission }: { submission: MySubmission }) {
   const [state, formAction, pending] = useActionState<ActionState, FormData>(updateEntryAction, {});
-  const [type, setType] = React.useState(submission.type);
+  const type = submission.type;
 
   return (
     <details className="mt-3 border-t border-hair pt-3">
@@ -21,16 +23,9 @@ export function DraftEditor({ submission }: { submission: FieldUpdateRecord }) {
       </summary>
       <form action={formAction} className="mt-4 space-y-4">
         <input type="hidden" name="id" value={submission.id} />
+        <input type="hidden" name="type" value={type} />
         <FormField label="Type">
-          <select
-            name="type"
-            value={type}
-            onChange={(event) => setType(event.target.value as FieldUpdateRecord["type"])}
-            className="w-full rounded-md border border-hair bg-card px-3 py-2 font-body text-base text-body outline-none focus:border-spark"
-          >
-            <option value="update">Field update</option>
-            <option value="prayer">Prayer request</option>
-          </select>
+          <p className="font-body text-base text-muted">{TYPE_LABEL[type]}</p>
         </FormField>
         {type === "update" && (
           <FormField label="Replace photo" helper="Optional. JPG, PNG, or WebP; maximum 5 MB.">
@@ -62,7 +57,7 @@ export function DraftEditor({ submission }: { submission: FieldUpdateRecord }) {
             <input
               type="checkbox"
               name="sensitive"
-              defaultChecked={submission.type === "prayer" && submission.sensitive}
+              defaultChecked={Boolean(submission.sensitive)}
             />
             Publish anonymously if this is a security-sensitive prayer request
           </label>

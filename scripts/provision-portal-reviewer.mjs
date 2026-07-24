@@ -23,6 +23,36 @@ async function api(path, { method = "GET", body } = {}) {
   return (await response.json()).data;
 }
 
+async function ensureUserPolicy(user, policy) {
+  const current = await api(
+    `/access?filter[user][_eq]=${user}&filter[policy][_eq]=${policy}&limit=1`,
+  );
+  if (!current.length) {
+    await api("/access", { method: "POST", body: { user, policy } });
+  }
+}
+
+async function ensureReviewPreset(user) {
+  const bookmark = "Missionary submissions awaiting review";
+  const current = await api(
+    `/presets?filter[user][_eq]=${user}&filter[collection][_eq]=field_updates&filter[bookmark][_eq]=${encodeURIComponent(bookmark)}&limit=1`,
+  );
+  const body = {
+    user,
+    collection: "field_updates",
+    bookmark,
+    layout: "tabular",
+    filter: { status: { _eq: "draft" } },
+    sort: ["-date_created"],
+    limit: 25,
+  };
+  if (current.length) {
+    await api(`/presets/${current[0].id}`, { method: "PATCH", body });
+  } else {
+    await api("/presets", { method: "POST", body });
+  }
+}
+
 async function main() {
   const email = values.get("--email")?.toLowerCase();
   const firstName = values.get("--first-name");
@@ -30,16 +60,20 @@ async function main() {
   if (!email || !firstName) throw new Error("Required: --email and --first-name");
   const roles = await api("/roles?filter[name][_eq]=Portal%20Reviewer&limit=1");
   if (!roles.length) throw new Error("Run portal:setup before provisioning a reviewer.");
+  const policies = await api("/policies?filter[name][_eq]=Portal%20review&limit=1");
+  if (!policies.length) throw new Error("The Portal review policy is missing. Run portal:setup first.");
   const users = await api(`/users?filter[email][_eq]=${encodeURIComponent(email)}&limit=1`);
+  let user;
   let temporaryPassword;
   if (users.length) {
+    user = users[0];
     await api(`/users/${users[0].id}`, {
       method: "PATCH",
-      body: { role: roles[0].id, status: "active", first_name: firstName, last_name: lastName },
+      body: { status: "active", first_name: firstName, last_name: lastName },
     });
   } else {
     temporaryPassword = crypto.randomBytes(18).toString("base64url");
-    await api("/users", {
+    user = await api("/users", {
       method: "POST",
       body: {
         email,
@@ -51,7 +85,10 @@ async function main() {
       },
     });
   }
+  await ensureUserPolicy(user.id, policies[0].id);
+  await ensureReviewPreset(user.id);
   console.log(`✓ ${email} can review portal submissions in Directus`);
+  if (users.length) console.log("Existing primary role and its permissions were preserved.");
   if (temporaryPassword) {
     console.log("Temporary password (share through a secure channel; shown once):");
     console.log(temporaryPassword);

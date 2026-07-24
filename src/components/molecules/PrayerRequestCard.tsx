@@ -2,16 +2,16 @@ import * as React from "react";
 import { HandHeart, MapPin, ShieldCheck } from "lucide-react";
 import { Avatar } from "@/components/atoms/Avatar";
 import { cn } from "@/lib/cn";
-import type { FieldUpdateRecord, MissionaryRecord } from "@/lib/directus/schema";
+import type { PublicFieldUpdateRecord, PublicMissionaryRecord } from "@/lib/directus/schema";
 
 export interface PrayerRequestCardProps {
-  request: FieldUpdateRecord;
-  missionary?: MissionaryRecord;
+  request: PublicFieldUpdateRecord;
+  missionary?: PublicMissionaryRecord;
   className?: string;
 }
 
 /** The region is the segment after the last comma of `place` ("Turkana, Kenya" → "Kenya"). */
-function regionOf(missionary?: MissionaryRecord): string {
+function regionOf(missionary?: PublicMissionaryRecord): string {
   if (!missionary) return "Africa";
   const parts = missionary.place.split(",");
   return parts[parts.length - 1].trim();

@@ -6,25 +6,32 @@ import { PageTemplate } from "@/components/templates/PageTemplate";
 import { Button } from "@/components/atoms/Button";
 import { Divider } from "@/components/atoms/Divider";
 import { PhotoPlaceholder } from "@/components/molecules/PhotoPlaceholder";
+import { NewsCard } from "@/components/molecules/NewsCard";
 import { UpdateCard } from "@/components/molecules/UpdateCard";
-import type { FieldUpdateRecord, MissionaryRecord } from "@/lib/directus/schema";
+import type {
+  PublicFieldUpdateRecord,
+  PublicMissionaryRecord,
+  PublicNewsRecord,
+} from "@/lib/directus/schema";
 
 export interface MissionaryProfileTemplateProps {
-  missionary: MissionaryRecord;
-  /** Published items only; the template splits them into updates and prayer requests. */
-  updates: FieldUpdateRecord[];
+  missionary: PublicMissionaryRecord;
+  /** Published `news` posts (category "update") authored by this missionary. */
+  updates: PublicNewsRecord[];
+  /** Published, non-sensitive prayer requests from this missionary. */
+  prayerRequests: PublicFieldUpdateRecord[];
 }
 
 /**
  * Missionary profile page — portrait + support rail on the left, story on the
  * right, followed by prayer requests and field updates. Composes PageTemplate.
  */
-export function MissionaryProfileTemplate({ missionary: m, updates }: MissionaryProfileTemplateProps) {
+export function MissionaryProfileTemplate({
+  missionary: m,
+  updates: fieldUpdates,
+  prayerRequests,
+}: MissionaryProfileTemplateProps) {
   const firstName = m.name.split(" ")[0];
-  // Sensitive requests appear only on /prayer, anonymized — showing them here
-  // next to the missionary's name would undo that protection.
-  const prayerRequests = updates.filter((u) => u.type === "prayer" && !u.sensitive);
-  const fieldUpdates = updates.filter((u) => u.type === "update");
   const bio = m.bio?.length ? m.bio : [m.intro];
 
   return (
@@ -120,7 +127,7 @@ export function MissionaryProfileTemplate({ missionary: m, updates }: Missionary
             </h2>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
               {fieldUpdates.map((u) => (
-                <UpdateCard key={u.id} update={u} authorName={m.name} />
+                <NewsCard key={u.id} item={u} authorName={m.name} />
               ))}
             </div>
           </div>

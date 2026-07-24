@@ -10,10 +10,11 @@ function directusResponse(data: unknown[]) {
   });
 }
 
-function requestFor(updates: unknown[], missionaries: unknown[] = []) {
+function requestFor(updates: unknown[], missionaries: unknown[] = [], news: unknown[] = []) {
   return vi.fn(async (input: string | URL | Request) => {
     const url = String(input);
     if (url.includes("/items/field_updates")) return directusResponse(updates);
+    if (url.includes("/items/news")) return directusResponse(news);
     if (url.includes("/items/missionaries")) return directusResponse(missionaries);
     if (url.includes("/assets/")) {
       return new Response("image-bytes", {
@@ -67,6 +68,26 @@ describe("portal media authorization", () => {
     expect(response.headers.get("X-Content-Type-Options")).toBe("nosniff");
   });
 
+  it("serves images attached to a published news item (story, update, or project)", async () => {
+    vi.stubEnv("DIRECTUS_URL", "https://directus.example");
+    vi.stubEnv("DIRECTUS_TOKEN", "service-token");
+    vi.stubGlobal("fetch", requestFor([], [], [{ id: "news-1", status: "published" }]));
+
+    expect((await getFile()).status).toBe(200);
+  });
+
+  it("does not serve a draft news item's image", async () => {
+    vi.stubEnv("DIRECTUS_URL", "https://directus.example");
+    vi.stubEnv("DIRECTUS_TOKEN", "service-token");
+    const fetchMock = requestFor([], [], [{ id: "news-1", status: "draft" }]);
+    vi.stubGlobal("fetch", fetchMock);
+
+    const response = await getFile();
+
+    expect(response.status).toBe(404);
+    expect(fetchMock.mock.calls.some(([url]) => String(url).includes("/assets/"))).toBe(false);
+  });
+
   it("continues to serve images attached to public missionary profiles", async () => {
     vi.stubEnv("DIRECTUS_URL", "https://directus.example");
     vi.stubEnv("DIRECTUS_TOKEN", "service-token");
@@ -75,11 +96,11 @@ describe("portal media authorization", () => {
     expect((await getFile()).status).toBe(200);
   });
 
-  it("fails closed when reference authorization cannot be checked", async () => {
+  it("fails closed without exposing an upstream authorization failure", async () => {
     vi.stubEnv("DIRECTUS_URL", "https://directus.example");
     vi.stubEnv("DIRECTUS_TOKEN", "service-token");
     vi.stubGlobal("fetch", vi.fn(async () => new Response(null, { status: 503 })));
 
-    expect((await getFile()).status).toBe(502);
+    expect((await getFile()).status).toBe(404);
   });
 });
