@@ -19,7 +19,7 @@ export default function ChurchPartnershipPage() {
             Mobilise your congregation for Bible translation
           </h2>
           <p className="mb-3.5 font-body text-base leading-relaxed text-muted">
-            In a church partnership, your congregation takes on one language community and stays with it —
+            In a church partnership, your congregation takes on one language community and stays with it,
             praying for the team by name, funding the project, sometimes sending your own people. It is a
             commitment measured in years, not events.
           </p>

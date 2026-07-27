@@ -70,7 +70,7 @@ function renderPdf(
     size: "A4",
     margins: { top: 56, bottom: 56, left: 60, right: 60 },
     bufferPages: true,
-    info: { Title: `Wycliffe Africa Prayer Guide — ${dateLabel}`, Author: "Wycliffe Africa" },
+    info: { Title: `Wycliffe Africa Prayer Guide, ${dateLabel}`, Author: "Wycliffe Africa" },
   });
   const chunks: Buffer[] = [];
   doc.on("data", (chunk) => chunks.push(chunk));

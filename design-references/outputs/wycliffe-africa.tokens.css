@@ -1,0 +1,108 @@
+/* ==========================================================================
+   Wycliffe Africa Design System — Design Tokens
+   Single source of truth. Everything else references these variables.
+   Extracted from the SunRise Africa Centre / Internship Program pages.
+   ========================================================================== */
+
+:root {
+
+  /* --- Brand color scale -------------------------------------------------
+     A warm "sunrise" ramp from cream through amber to terracotta,
+     with a leaf-green as the single cool accent. */
+  --wa-cream:        #FBF6EE;   /* page background */
+  --wa-paper:        #FFFFFF;   /* cards, raised surfaces */
+  --wa-sand:         #FDF7EC;   /* subtle tinted surface */
+  --wa-line:         #EADFCF;   /* hairline borders */
+
+  --wa-amber:        #E8912A;   /* primary brand / mid-sun */
+  --wa-amber-200:    #F6B94E;   /* lighter amber for gradients */
+  --wa-gold:         #C9761A;   /* eyebrow / kicker text */
+  --wa-terra:        #B5471B;   /* primary action, deep sunrise */
+  --wa-terra-700:    #8C3313;   /* pressed / dark terracotta */
+
+  --wa-leaf:         #2F6E63;   /* accent panels, "growth" */
+  --wa-leaf-700:     #234F47;   /* deep leaf gradient stop */
+
+  /* --- Ink / text --------------------------------------------------------- */
+  --wa-ink:          #2A2018;   /* headings, primary text */
+  --wa-ink-soft:     #5B4E42;   /* body copy */
+  --wa-ink-onwarm:   #6B4A24;   /* text on amber/cta surfaces */
+
+  /* --- Text-on-dark (for leaf / terra / ink surfaces) --------------------- */
+  --wa-on-leaf:      #EAF5F1;
+  --wa-on-leaf-soft: #D5EAE3;
+  --wa-on-terra:     #FFEAD2;
+  --wa-cream-100:    #FFF3E0;   /* hero lede text */
+  --wa-cream-200:    #FFE9C4;   /* hero eyebrow */
+  --wa-highlight:    #FFD79A;   /* sub-heads on dark panels */
+
+  /* --- Gradients (the signature of the system) --------------------------- */
+  --wa-grad-sunrise:
+      radial-gradient(120% 90% at 50% 118%,
+        #FFE0A6 0%, #F6A93F 26%, #D9691E 55%, #A5381A 100%);
+  --wa-grad-sunrise-deep:
+      radial-gradient(120% 95% at 50% 118%,
+        #FFE0A6 0%, #F0A544 24%, #C85E22 54%, #7C3417 100%);
+  --wa-grad-leaf:    linear-gradient(135deg, #2F6E63, #234F47);
+  --wa-grad-terra:   linear-gradient(135deg, #B5471B, #8C3313);
+  --wa-grad-cta:     radial-gradient(120% 120% at 50% 0%, #FBE7C4 0%, #F7D69B 100%);
+  --wa-grad-mark:    radial-gradient(circle at 50% 120%, #FFD27A 0%, #E8912A 42%, #B5471B 100%);
+  --wa-grad-dot:     radial-gradient(circle at 40% 30%, #F6B94E, #B5471B);
+
+  /* --- Typography --------------------------------------------------------- */
+  --wa-font-serif: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --wa-font-sans:  "Segoe UI", Helvetica, Arial, sans-serif;
+
+  /* Fluid type scale (clamp: min, preferred, max) */
+  --wa-text-hero:    clamp(2.3rem, 5.4vw, 4rem);
+  --wa-text-h2:      clamp(1.7rem, 3.4vw, 2.5rem);
+  --wa-text-h3:      1.28rem;
+  --wa-text-lede:    clamp(1.05rem, 2.2vw, 1.4rem);
+  --wa-text-lead:    1.2rem;    /* opening paragraph */
+  --wa-text-body:    1.08rem;
+  --wa-text-small:   0.96rem;
+  --wa-text-label:   13px;      /* kickers, stat labels */
+
+  --wa-leading-tight: 1.12;
+  --wa-leading-body:  1.65;
+  --wa-weight-body:   400;
+  --wa-weight-semi:   600;
+  --wa-weight-bold:   700;
+  --wa-tracking-eyebrow: 0.24em;
+  --wa-tracking-kicker:  0.20em;
+
+  /* --- Spacing scale (4px base) ------------------------------------------ */
+  --wa-space-1:  4px;
+  --wa-space-2:  8px;
+  --wa-space-3:  14px;
+  --wa-space-4:  18px;
+  --wa-space-5:  22px;
+  --wa-space-6:  28px;
+  --wa-space-7:  38px;
+  --wa-space-8:  54px;
+  --wa-section-y: 72px;         /* vertical rhythm between sections */
+
+  /* --- Radius ------------------------------------------------------------- */
+  --wa-radius-sm:  8px;
+  --wa-radius-md:  12px;
+  --wa-radius-lg:  16px;
+  --wa-radius-xl:  22px;
+  --wa-radius-2xl: 26px;
+  --wa-radius-pill: 40px;
+
+  /* --- Elevation ---------------------------------------------------------- */
+  --wa-shadow-card:  0 10px 30px -22px rgba(80, 45, 10, .5);
+  --wa-shadow-soft:  0 12px 30px -12px rgba(0, 0, 0, .5);
+  --wa-shadow-panel: 0 18px 50px -24px rgba(60, 35, 10, .45);
+
+  /* --- Layout ------------------------------------------------------------- */
+  --wa-container: 1120px;
+  --wa-gutter:    28px;
+
+  /* --- Motion ------------------------------------------------------------- */
+  --wa-ease:        cubic-bezier(.2, .7, .2, 1);
+  --wa-transition:  0.15s ease;
+
+  /* --- Breakpoints (for reference; use in @media manually) --------------- */
+  /* --wa-bp-md: 900px;  --wa-bp-sm: 820px; */
+}

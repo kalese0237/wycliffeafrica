@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Search, Heart, X } from "lucide-react";
+import { ChevronDown, Search, Heart, Menu, User, X } from "lucide-react";
 import { Wordmark } from "@/components/atoms/Wordmark";
 import { Button } from "@/components/atoms/Button";
 import { TopBar } from "@/components/organisms/TopBar";
@@ -87,22 +87,7 @@ const SECONDARY_NAV: NavGroup[] = [
 
 const TOP_BAR_HEIGHT = 42;
 const MAIN_HEADER_HEIGHT = 74;
-const COMPACT_MAIN_HEADER_HEIGHT = 48;
-
-function MenuIcon({ compact = false }: { compact?: boolean }) {
-  return (
-    <span
-      aria-hidden
-      className={cn(
-        "flex flex-col items-end justify-center",
-        compact ? "w-5 gap-1.5" : "w-6 gap-2",
-      )}
-    >
-      <span className="h-[2px] w-full rounded-pill bg-current" />
-      <span className="h-[2px] w-2/3 rounded-pill bg-current" />
-    </span>
-  );
-}
+const COMPACT_MAIN_HEADER_HEIGHT = 60;
 
 function isActivePath(pathname: string, href: string) {
   const targetPath = href.split(/[?#]/, 1)[0];
@@ -129,7 +114,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
         frame = 0;
         // Separate collapse/expand thresholds prevent chattering when the
         // changing header height affects scroll anchoring near the page top.
-        const nextScrolled = scrolledRef.current ? window.scrollY > 12 : window.scrollY > 56;
+        const nextScrolled = scrolledRef.current ? window.scrollY > 8 : window.scrollY > 48;
         if (nextScrolled === scrolledRef.current) return;
         scrolledRef.current = nextScrolled;
         setScrolled(nextScrolled);
@@ -140,8 +125,6 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.cancelAnimationFrame(frame);
-      document.documentElement.style.removeProperty("--site-topbar-height");
-      document.documentElement.style.removeProperty("--site-main-header-height");
       document.documentElement.style.removeProperty("--site-header-height");
       document.documentElement.style.removeProperty("--site-header-stack-height");
     };
@@ -151,8 +134,6 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
     const topbarHeight = scrolled ? 0 : TOP_BAR_HEIGHT;
     const mainHeaderHeight = scrolled ? COMPACT_MAIN_HEADER_HEIGHT : MAIN_HEADER_HEIGHT;
 
-    document.documentElement.style.setProperty("--site-topbar-height", `${topbarHeight}px`);
-    document.documentElement.style.setProperty("--site-main-header-height", `${mainHeaderHeight}px`);
     document.documentElement.style.setProperty("--site-header-height", `${mainHeaderHeight}px`);
     document.documentElement.style.setProperty(
       "--site-header-stack-height",
@@ -181,46 +162,65 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
 
   return (
     <>
-      <div className="sticky top-0 z-50">
+      <div className="fixed inset-x-0 top-0 z-50">
         <div
           style={{
-            height: "var(--site-topbar-height)",
-            minHeight: "var(--site-topbar-height)",
-            maxHeight: "var(--site-topbar-height)",
+            height: scrolled ? 0 : TOP_BAR_HEIGHT,
           }}
-          className="overflow-hidden transition-[height,min-height,max-height] duration-300"
+          className="overflow-hidden transition-[height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
         >
           <TopBar />
         </div>
 
         <header
           style={{
-            height: "var(--site-main-header-height)",
-            minHeight: "var(--site-main-header-height)",
-            maxHeight: "var(--site-main-header-height)",
+            height: scrolled ? COMPACT_MAIN_HEADER_HEIGHT : MAIN_HEADER_HEIGHT,
           }}
           className={cn(
-            "relative flex items-center px-5 transition-[height,min-height,max-height,background-color,border-color,box-shadow] duration-300 sm:px-12",
+            "relative flex items-center px-5 transition-[height,background-color,border-color,box-shadow,backdrop-filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none sm:px-12",
             scrolled && "shadow-sm",
             onPhoto ? "border-b border-white/15 bg-transparent" : "border-b border-hair bg-card/95 backdrop-blur",
           )}
         >
-          {/* The logo stays anchored to the viewport edge, outside the centered container. */}
-          <Link href="/" className="absolute left-5 top-1/2 -translate-y-1/2 sm:left-12">
-            <Wordmark height={scrolled ? 24 : 40} onDark={onPhoto} />
+          {/* Align the wordmark with the responsive start edge used by page content. */}
+          <Link
+            href="/"
+            aria-label="Wycliffe Africa home"
+            className={cn(
+              "absolute left-5 top-1/2 h-[50px] w-[132px] origin-left -translate-y-1/2 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none sm:left-[max(3rem,calc((100vw-var(--container-max))/2+3rem))]",
+              scrolled && "scale-[0.82]",
+            )}
+          >
+            <Wordmark
+              height={50}
+              className={cn(
+                "absolute inset-0 transition-opacity duration-500 ease-out motion-reduce:transition-none",
+                onPhoto ? "opacity-0" : "opacity-100",
+              )}
+            />
+            <span aria-hidden className="absolute inset-0">
+              <Wordmark
+                height={50}
+                onDark
+                className={cn(
+                  "absolute inset-0 transition-opacity duration-500 ease-out motion-reduce:transition-none",
+                  onPhoto ? "opacity-100" : "opacity-0",
+                )}
+              />
+            </span>
           </Link>
 
           {/* Sized so its left edge matches the body content edge (container minus its 3rem side paddings);
               the pl guard keeps the nav clear of the absolute logo until the container edge passes it (~1420px). */}
           <div
             className={cn(
-              "mx-auto flex w-full max-w-[calc(var(--container-max)-6rem)] items-center transition-[gap,padding] duration-300 lg:max-[1419px]:pl-[118px]",
-              scrolled ? "gap-3" : "gap-6",
+              "mx-auto flex w-full max-w-[calc(var(--container-max)-6rem)] items-center transition-[gap,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none lg:pl-[145px]",
+              scrolled ? "gap-4" : "gap-6",
             )}
           >
             <div className="flex-1" />
 
-            <nav className="-ml-3 hidden flex-none items-center gap-0.5 lg:flex">
+            <nav className="-ml-3 hidden flex-none items-center gap-0.5 xl:flex">
               {PRIMARY_NAV.map((item) => {
                 const active = isActivePath(pathname, item.href);
                 return (
@@ -230,8 +230,8 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                       aria-current={active ? "page" : undefined}
                       aria-haspopup={item.menu ? "menu" : undefined}
                       className={cn(
-                        "relative inline-flex items-center gap-1 whitespace-nowrap rounded-sm px-3 font-ui font-semibold transition-[padding,font-size,color] duration-300",
-                        scrolled ? "py-1 text-sm" : "py-2.5 text-base",
+                        "relative inline-flex items-center gap-1 whitespace-nowrap rounded-sm px-3 font-ui text-sm font-semibold transition-[padding,color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+                        scrolled ? "py-1.5" : "py-2.5",
                         onPhoto ? "text-white/90 hover:text-white" : "text-body hover:text-green-700",
                         active && (onPhoto ? "text-white" : "text-green-700"),
                       )}
@@ -267,20 +267,32 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
             type="button"
             aria-label="Search"
             className={cn(
-              "hidden flex-none items-center justify-center rounded-full border transition-[height,width,color,background-color,border-color] duration-300 sm:inline-flex",
-              scrolled ? "h-8 w-8" : "h-10 w-10",
-              onPhoto ? "border-white/35 text-white" : "border-hair text-body hover:bg-sunk",
+              "hidden flex-none items-center justify-center rounded-full transition-[height,width,color,background-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none sm:inline-flex",
+              scrolled ? "h-9 w-9" : "h-10 w-10",
+              onPhoto ? "text-white hover:bg-white/10" : "text-body hover:bg-sunk",
             )}
           >
-            <Search size={scrolled ? 16 : 18} />
+            <Search size={18} />
           </button>
+
+          <Link
+            href="/portal/login"
+            aria-label="Missionary portal sign in"
+            className={cn(
+              "hidden flex-none items-center justify-center rounded-full transition-[height,width,color,background-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none sm:inline-flex",
+              scrolled ? "h-9 w-9" : "h-10 w-10",
+              onPhoto ? "bg-white/90 text-ink-1 hover:bg-white" : "bg-sunk text-body hover:bg-hair",
+            )}
+          >
+            <User size={18} />
+          </Link>
 
           <Button
             href="/give"
             variant="accent"
-            size={scrolled ? "sm" : "md"}
+            size="md"
             iconLeft={<Heart size={16} />}
-            className="hidden sm:inline-flex"
+            className="hidden rounded-lg sm:inline-flex"
           >
             Give now
           </Button>
@@ -296,11 +308,12 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
               onPhoto ? "text-white hover:bg-white/10" : "text-body hover:bg-sunk",
             )}
           >
-            <MenuIcon compact={scrolled} />
+            <Menu size={22} strokeWidth={2.2} />
           </button>
           </div>
         </header>
       </div>
+      <div aria-hidden style={{ height: TOP_BAR_HEIGHT + MAIN_HEADER_HEIGHT }} />
 
       <div
         aria-hidden={!drawerOpen}

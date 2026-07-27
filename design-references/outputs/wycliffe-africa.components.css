@@ -1,0 +1,164 @@
+/* ==========================================================================
+   Wycliffe Africa Design System — Component Primitives
+   Requires: wycliffe-africa.tokens.css (loaded first)
+   Plain, framework-agnostic classes. Prefix: .wa-
+   ========================================================================== */
+
+/* --- Base ---------------------------------------------------------------- */
+.wa-body {
+  font-family: var(--wa-font-serif);
+  color: var(--wa-ink);
+  background: var(--wa-cream);
+  line-height: var(--wa-leading-body);
+  -webkit-font-smoothing: antialiased;
+}
+.wa-container { max-width: var(--wa-container); margin: 0 auto; padding: 0 var(--wa-gutter); }
+.wa-section   { padding: var(--wa-section-y) 0; }
+.wa-sans      { font-family: var(--wa-font-sans); }
+
+/* --- Typography ---------------------------------------------------------- */
+.wa-eyebrow {
+  font-family: var(--wa-font-sans);
+  font-size: var(--wa-text-label);
+  letter-spacing: var(--wa-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--wa-cream-200);
+}
+.wa-kicker {
+  font-family: var(--wa-font-sans);
+  font-size: var(--wa-text-label);
+  letter-spacing: var(--wa-tracking-kicker);
+  text-transform: uppercase;
+  color: var(--wa-gold);
+  margin-bottom: var(--wa-space-3);
+}
+.wa-h2 {
+  font-size: var(--wa-text-h2);
+  line-height: 1.15;
+  font-weight: var(--wa-weight-semi);
+  color: var(--wa-ink);
+  margin-bottom: var(--wa-space-5);
+}
+.wa-h3 {
+  font-size: var(--wa-text-h3);
+  font-weight: var(--wa-weight-semi);
+  color: var(--wa-terra);
+  margin-bottom: 10px;
+}
+.wa-p    { margin-bottom: var(--wa-space-4); color: var(--wa-ink-soft); font-size: var(--wa-text-body); }
+.wa-lead { font-size: var(--wa-text-lead); color: var(--wa-ink); }
+
+/* --- Brand mark ---------------------------------------------------------- */
+.wa-mark {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--wa-grad-mark);
+  box-shadow: 0 0 0 4px rgba(232, 145, 42, .15);
+}
+
+/* --- Buttons ------------------------------------------------------------- */
+.wa-btn {
+  font-family: var(--wa-font-sans);
+  font-weight: var(--wa-weight-semi);
+  font-size: 15px;
+  padding: var(--wa-space-3) var(--wa-space-6);
+  border-radius: var(--wa-radius-pill);
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  transition: transform var(--wa-transition), box-shadow var(--wa-transition);
+}
+.wa-btn:hover { transform: translateY(-2px); }
+.wa-btn--primary { background: var(--wa-terra); color: #fff; box-shadow: var(--wa-shadow-soft); }
+.wa-btn--onlight { background: #fff; color: var(--wa-terra); box-shadow: var(--wa-shadow-soft); }
+.wa-btn--ghost   { background: rgba(255,255,255,.12); color: #fff; border: 1.5px solid rgba(255,255,255,.55); }
+
+/* --- Hero ---------------------------------------------------------------- */
+.wa-hero {
+  position: relative; overflow: hidden;
+  background: var(--wa-grad-sunrise);
+  color: #fff; text-align: center;
+  padding: 120px var(--wa-gutter) 150px;
+}
+.wa-hero--deep { background: var(--wa-grad-sunrise-deep); }
+.wa-hero__sun {
+  position: absolute; left: 50%; bottom: -190px; transform: translateX(-50%);
+  width: 420px; height: 420px; border-radius: 50%;
+  background: radial-gradient(circle, #FFF4D6 0%, #FFDE96 45%, rgba(255,222,150,0) 70%);
+  opacity: .85; pointer-events: none;
+}
+.wa-hero__content { position: relative; z-index: 2; max-width: 840px; margin: 0 auto; }
+.wa-hero__title {
+  font-size: var(--wa-text-hero); line-height: var(--wa-leading-tight);
+  font-weight: var(--wa-weight-semi); margin-bottom: var(--wa-space-5);
+  text-shadow: 0 2px 18px rgba(120,40,0,.25);
+}
+.wa-hero__lede {
+  font-size: var(--wa-text-lede); max-width: 680px; margin: 0 auto var(--wa-space-7);
+  color: var(--wa-cream-100);
+}
+/* SVG divider that sits under the hero; fill with var(--wa-cream) */
+.wa-wave { display: block; width: 100%; height: 70px; margin-top: -2px; }
+
+/* --- Card ---------------------------------------------------------------- */
+.wa-card {
+  background: var(--wa-paper);
+  border: 1px solid var(--wa-line);
+  border-radius: var(--wa-radius-lg);
+  padding: var(--wa-space-6);
+  box-shadow: var(--wa-shadow-card);
+  transition: transform .18s var(--wa-ease);
+}
+.wa-card:hover { transform: translateY(-4px); }
+
+/* --- Panel (dark accent block) ------------------------------------------- */
+.wa-panel {
+  border-radius: var(--wa-radius-xl);
+  padding: 48px 46px;
+  box-shadow: var(--wa-shadow-panel);
+  color: var(--wa-on-leaf);
+}
+.wa-panel--leaf  { background: var(--wa-grad-leaf); }
+.wa-panel--terra { background: var(--wa-grad-terra); }
+.wa-panel .wa-h2 { color: #fff; }
+.wa-panel .wa-p  { color: var(--wa-on-leaf-soft); }
+
+/* --- Stat band ----------------------------------------------------------- */
+.wa-stats {
+  background: linear-gradient(180deg, #fff, var(--wa-sand));
+  border: 1px solid var(--wa-line);
+  border-radius: var(--wa-radius-xl);
+  box-shadow: var(--wa-shadow-panel);
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  padding: var(--wa-space-7) 30px;
+}
+.wa-stat { text-align: center; padding: var(--wa-space-2) 10px; }
+.wa-stat__num {
+  font-family: var(--wa-font-sans); font-weight: var(--wa-weight-bold);
+  font-size: 2.5rem; line-height: 1; color: var(--wa-terra);
+}
+.wa-stat__lab { font-family: var(--wa-font-sans); font-size: var(--wa-text-label); color: var(--wa-ink-soft); margin-top: var(--wa-space-2); }
+
+/* --- Bullet list --------------------------------------------------------- */
+.wa-list { list-style: none; margin: 6px 0 var(--wa-space-4); padding: 0; }
+.wa-list li { position: relative; padding-left: 30px; margin-bottom: var(--wa-space-3); color: var(--wa-ink-soft); font-size: var(--wa-text-body); }
+.wa-list li::before {
+  content: ""; position: absolute; left: 0; top: 9px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--wa-grad-dot);
+}
+
+/* --- CTA block ----------------------------------------------------------- */
+.wa-cta {
+  text-align: center;
+  background: var(--wa-grad-cta);
+  border: 1px solid #F0CE93;
+  border-radius: var(--wa-radius-2xl);
+  padding: 64px 30px;
+}
+.wa-cta .wa-p { color: var(--wa-ink-onwarm); }
+
+/* --- Responsive ---------------------------------------------------------- */
+@media (max-width: 820px) {
+  .wa-stats { grid-template-columns: repeat(2, 1fr); }
+  .wa-section { padding: 52px 0; }
+}

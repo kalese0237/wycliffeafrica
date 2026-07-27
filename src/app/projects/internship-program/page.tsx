@@ -1,14 +1,12 @@
 import * as React from "react";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
-import { PageTemplate } from "@/components/templates";
-import { ProjectHero, ImpactStats } from "@/components/organisms";
+import { ProjectPageTemplate } from "@/components/templates";
 import { Button } from "@/components/atoms/Button";
 
 const STEPS = [
   {
     title: "Recruit",
-    body: "Drawn from Christian unions, theological colleges, churches, and partner organisations — by direct application or recommendation, each with a letter from their home church.",
+    body: "Drawn from Christian unions, theological colleges, churches, and partner organisations, by direct application or recommendation, each with a letter from their home church.",
   },
   {
     title: "Fundraise",
@@ -48,7 +46,7 @@ const OUTCOMES = [
   { title: "USD 18,000 raised", body: "Interns raise at least USD 18,000, held to train those who choose to serve in translation organisations." },
   { title: "250 partners in prayer", body: "With 25 supporters each, ten interns bring around 250 people to pray for and give to Wycliffe Africa." },
   { title: "Three sent onward", body: "At least three alumni are retained for further training and placement in translation work across Africa." },
-  { title: "A pipeline that lasts", body: "The program becomes self-sustaining — a steady way to nurture future missionaries year after year." },
+  { title: "A pipeline that lasts", body: "The program becomes self-sustaining, a steady way to nurture future missionaries year after year." },
 ];
 
 export const metadata = {
@@ -57,39 +55,39 @@ export const metadata = {
 
 export default function InternshipProgramPage() {
   return (
-    <PageTemplate transparentHeader>
-      <ProjectHero
-        eyebrow="The Internship Program"
-        title="Raising the next generation of African missionaries"
-        lede="A one-year program that recruits young people into Bible translation, places them beside working missionaries, and mentors them toward a lifetime of ministry."
-        image="/photos/pexels-mbaraga-bernard-2158456013-35388499.jpg"
-        imagePosition="50% 38%"
-        primaryCta={{ label: "Fund an intake", href: "/give" }}
-        secondaryCta={{ label: "See the intern's year", href: "#journey" }}
-      />
+    <ProjectPageTemplate
+      hero={{
+        eyebrow: "The Internship Program",
+        title: "Raising the next generation of African missionaries",
+        titleLines: ["Raising the next generation of", "African missionaries"],
+        titleMaxWidth: "32ch",
+        lede: "A one-year program that recruits young people into Bible translation, places them beside working missionaries, and mentors them toward a lifetime of ministry.",
+        image: "/Internship/internship-induction-sunday.webp",
+        imagePosition: "50% 45%",
+        deep: true,
+        primaryCta: { label: "Fund an intake", href: "/give" },
+        secondaryCta: { label: "See the intern's year", href: "#journey" },
+      }}
+      stats={[
+        { value: "30", label: "Interns over three years" },
+        { value: "30", label: "Churches commissioning them" },
+        { value: "900", label: "People brought into the work" },
+        { value: "7", label: "Countries for field placement" },
+      ]}
+    >
 
-      <ImpactStats
-        overlap
-        stats={[
-          { value: "30", label: "Interns over three years" },
-          { value: "30", label: "Churches commissioning them" },
-          { value: "900", label: "People brought into the work" },
-          { value: "7", label: "Countries for field placement" },
-        ]}
-      />
-
-      <section className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12">
-        <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">The need</div>
+      <section id="story" className="mx-auto max-w-[1120px] px-5 py-[72px] sm:px-7">
+        <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#C9761A]">The need</div>
         <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
           Twenty-one years in, the harvest still outruns the hands
         </h2>
-        <p className="mb-3.5 font-body text-base leading-relaxed text-muted">
+        <p className="mb-3.5 max-w-[68ch] font-body text-md leading-relaxed text-body">
           Wycliffe Africa was formed in 2004 by John Bendor Samuel to recruit, train, and send missionaries from
           African countries that had no Wycliffe organisation of their own. Since then it has helped start Wycliffe
           Benin, Wycliffe Ethiopia, and Wycliffe Togo, and now has 27 members working in Madagascar, South Africa,
           Nigeria, Uganda, Kenya, Cameroon, and South Sudan.
         </p>
-        <p className="font-body text-base leading-relaxed text-muted">
+        <p className="max-w-[68ch] font-body text-md leading-relaxed text-body">
           Plenty of ground remains. Many African languages still have no Bible, and the way to close that gap is to
           bring more people into the work. The problem has been the front door: without a program to receive and
           prepare newcomers, recruitment is slow, and those who feel the call often drift away before they ever
@@ -97,10 +95,10 @@ export default function InternshipProgramPage() {
         </p>
       </section>
 
-      <section className="border-t border-hair bg-sunk">
-        <div className="mx-auto grid max-w-(--container-max) grid-cols-1 items-center gap-10 px-5 py-16 sm:px-12 lg:grid-cols-2 lg:gap-16">
+      <section>
+        <div className="mx-auto grid max-w-[1120px] grid-cols-1 items-center gap-10 px-5 py-[72px] sm:px-7 lg:grid-cols-[1.1fr_0.9fr] lg:gap-[54px]">
           <div>
-            <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">Why an internship</div>
+            <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#C9761A]">Why an internship</div>
             <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
               Good internships are how organisations renew themselves
             </h2>
@@ -116,8 +114,8 @@ export default function InternshipProgramPage() {
               whole way through.
             </p>
           </div>
-          <div className="flex h-[80%] flex-col justify-center rounded-xl bg-green-700 p-6 text-white">
-            <div className="font-ui text-sm font-bold uppercase tracking-caps text-green-200">The main objective</div>
+          <div className="flex flex-col justify-center rounded-xl bg-[linear-gradient(135deg,#2F6E63,#234F47)] p-8 text-white shadow-lg sm:p-12">
+            <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#9FD8C8]">The main objective</div>
             <p className="mt-3 font-display text-xl italic leading-normal">
               Recruit and train interns who are drawn to Bible translation, and walk with them until they know
               whether God is calling them into it for good.
@@ -130,8 +128,8 @@ export default function InternshipProgramPage() {
         </div>
       </section>
 
-      <section id="journey" className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12">
-        <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">The intern&rsquo;s year</div>
+      <section id="journey" className="mx-auto max-w-[1120px] px-5 py-[72px] sm:px-7">
+        <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#C9761A]">The intern&rsquo;s year</div>
         <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
           Five steps from applicant to missionary
         </h2>
@@ -142,38 +140,38 @@ export default function InternshipProgramPage() {
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-5">
           {STEPS.map((step, i) => (
             <div key={step.title} className="rounded-lg border border-hair bg-card p-5 shadow-sm">
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary font-ui text-sm font-bold text-on-primary">
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[radial-gradient(circle_at_40%_30%,#F6B94E,#B5471B)] font-ui text-sm font-bold text-white">
                 {i + 1}
               </span>
-              <h3 className="mb-1.5 mt-3 font-display text-lg font-semibold text-strong">{step.title}</h3>
-              <p className="font-body text-base leading-relaxed text-muted">{step.body}</p>
+              <h3 className="mb-1.5 mt-3 font-display text-lg font-semibold text-primary">{step.title}</h3>
+              <p className="font-body text-sm leading-relaxed text-muted">{step.body}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="border-t border-hair bg-sunk">
-        <div className="mx-auto grid max-w-(--container-max) grid-cols-1 items-start gap-10 px-5 py-16 sm:px-12 lg:grid-cols-2 lg:gap-16">
-          <div className="rounded-xl bg-terra-900 p-6 text-white">
-            <div className="font-ui text-xs font-bold uppercase tracking-caps text-terra-300">Mentored in four areas</div>
+      <section id="mentor">
+        <div className="mx-auto grid max-w-[1120px] grid-cols-1 items-center gap-10 px-5 py-[72px] sm:px-7 lg:grid-cols-[0.9fr_1.1fr] lg:gap-[54px]">
+          <div className="rounded-xl bg-[linear-gradient(135deg,#B5471B,#8C3313)] p-8 text-white shadow-lg sm:p-12">
+            <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#FFD79A]">Mentored in four areas</div>
             <div className="mt-4 flex flex-col gap-3">
               {MENTOR_AREAS.map((area) => (
                 <div key={area.title} className="flex items-start gap-2.5">
-                  <ChevronRight size={16} className="mt-1 flex-none text-green-400" />
+                  <span className="mt-2.5 h-3 w-3 flex-none rounded-full bg-[radial-gradient(circle_at_40%_30%,#F6B94E,#B5471B)]" />
                   <span className="font-body text-base leading-relaxed text-white/85">
-                    <strong className="text-white">{area.title}</strong> — {area.body}
+                    <strong className="text-white">{area.title}</strong>: {area.body}
                   </span>
                 </div>
               ))}
             </div>
           </div>
           <div>
-            <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">Placement &amp; care</div>
+            <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#C9761A]">Placement &amp; care</div>
             <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
               Learning the work where the work is done
             </h2>
             <p className="mb-3.5 font-body text-base leading-relaxed text-muted">
-              Interns are placed in the countries where Wycliffe Africa already has missionaries — Madagascar,
+              Interns are placed in the countries where Wycliffe Africa already has missionaries: Madagascar,
               Cameroon, Uganda, Nigeria, Kenya, South Sudan, and South Africa. They do not sit in a classroom
               imagining translation; they stand next to someone doing it.
             </p>
@@ -186,72 +184,80 @@ export default function InternshipProgramPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12">
-        <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">The three-year model</div>
-        <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
-          Ten interns a year, a widening circle behind each one
-        </h2>
-        <p className="mb-8 max-w-[68ch] font-body text-base leading-relaxed text-muted">
-          Every intern arrives connected to a church and roughly thirty supporters who pray and give. Multiply that
-          across three intakes and the program does more than train missionaries — it draws hundreds of new people
-          into the Wycliffe Africa family.
-        </p>
-        <div className="mx-auto flex max-w-[520px] flex-col gap-3">
-          {FUNNEL.map((rung) => (
-            <div
-              key={rung.label}
-              className="flex items-center gap-4 rounded-md border border-hair bg-sunk px-5 py-3.5"
-            >
-              <span className="font-display text-xl font-semibold text-primary">{rung.value}</span>
-              <span className="font-body text-sm text-body">{rung.label}</span>
+      <section id="model" className="mx-auto max-w-[1120px] px-5 py-[72px] sm:px-7">
+        <div className="rounded-xl bg-[linear-gradient(135deg,#2F6E63,#1F463F)] p-8 text-white shadow-lg sm:p-12">
+          <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#9FD8C8]">The three-year model</div>
+          <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-white">
+            Ten interns a year, a widening circle behind each one
+          </h2>
+          <p className="mb-8 max-w-[680px] font-body text-base leading-relaxed text-[#D5EAE3]">
+            Every intern arrives connected to a church and roughly thirty supporters who pray and give. Multiply
+            that across three intakes and the program does more than train missionaries. It draws hundreds of new
+            people into the Wycliffe Africa family.
+          </p>
+          <div className="mx-auto flex max-w-[640px] flex-col items-center gap-2.5">
+            {FUNNEL.map((rung, i) => (
+              <div
+                key={rung.label}
+                className="rounded-md px-5 py-3 text-center font-ui text-white shadow-sm"
+                style={{
+                  width: `${[60, 74, 86, 96][i]}%`,
+                  background: ["#166B5E", "#2F7D5A", "#6F8F2F", "#C9761A"][i],
+                }}
+              >
+                <strong className="mr-2 text-xl">{rung.value}</strong>
+                <span className="text-sm">{rung.label}</span>
+              </div>
+            ))}
+            <div className="w-full rounded-md bg-primary px-5 py-4 text-center font-ui text-sm font-semibold text-white">
+              A sustainable missionary pipeline
             </div>
-          ))}
-          <div className="rounded-md bg-primary px-5 py-3.5 text-center font-ui text-sm font-semibold text-on-primary">
-            A sustainable missionary pipeline
           </div>
         </div>
       </section>
 
-      <section className="border-t border-hair bg-sunk">
-        <div className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12">
-          <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">What one intake delivers</div>
+      <section>
+        <div className="mx-auto max-w-[1120px] px-5 py-[72px] sm:px-7">
+          <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#C9761A]">What one intake delivers</div>
           <h2 className="mb-8 mt-3 font-display text-2xl font-semibold text-strong">The outcomes we are aiming for</h2>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             {OUTCOMES.map((o) => (
               <div key={o.title} className="rounded-lg border border-hair bg-card p-6 shadow-sm">
-                <h3 className="mb-1.5 font-display text-lg font-semibold text-strong">{o.title}</h3>
-                <p className="font-body text-sm leading-relaxed text-muted">{o.body}</p>
+                <h3 className="mb-1.5 font-display text-lg font-semibold text-primary">{o.title}</h3>
+                <p className="font-body text-base leading-relaxed text-muted">{o.body}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12">
-        <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">Partner with us</div>
-        <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
-          Seed one intake and start the pipeline
-        </h2>
-        <p className="mb-6 max-w-[68ch] font-body text-base leading-relaxed text-muted">
-          Partner funding gets the first interns off the ground; from there their own fundraising and their
-          churches carry more of the weight each year. Your support now decides how quickly the next generation of
-          translators reaches the field.
-        </p>
-        <Button href="/give" variant="accent">
-          Fund the Internship Program
-        </Button>
-        <p className="mt-6 font-ui text-sm text-muted">
-          Talk with us — Joseph Namutala{" "}
-          <a href="mailto:joseph_namutala@wycliffeafrica.org" className="font-semibold text-link hover:underline">
-            joseph_namutala@wycliffeafrica.org
-          </a>{" "}
-          · Edwyn Kiptinness{" "}
-          <a href="mailto:edwyn_kiptinness@wycliffeafrica.org" className="font-semibold text-link hover:underline">
-            edwyn_kiptinness@wycliffeafrica.org
-          </a>
-          <br />
-          Administered from the Nairobi office · July 2025 – June 2026
-        </p>
+      <section id="give" className="mx-auto max-w-[1120px] px-5 pb-[90px] pt-5 sm:px-7">
+        <div className="rounded-2xl border border-[#F0CE93] bg-[radial-gradient(120%_120%_at_50%_0%,#FBE7C4_0%,#F7D69B_100%)] px-6 py-16 text-center">
+          <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#C9761A]">Partner with us</div>
+          <h2 className="mx-auto mb-4 mt-3 max-w-[660px] font-display text-2xl font-semibold leading-tight text-strong">
+            Seed one intake and start the pipeline
+          </h2>
+          <p className="mx-auto mb-7 max-w-[580px] font-body text-base leading-relaxed text-[#6B4A24]">
+            Partner funding gets the first interns off the ground; from there their own fundraising and their
+            churches carry more of the weight each year. Your support now decides how quickly the next generation
+            of translators reaches the field.
+          </p>
+          <Button href="/give" variant="primary" size="lg">
+            Fund the Internship Program
+          </Button>
+          <p className="mt-6 font-ui text-sm text-[#7A5522]">
+            Talk with us: Joseph Namutala{" "}
+            <a href="mailto:joseph_namutala@wycliffeafrica.org" className="font-semibold text-primary hover:underline">
+              joseph_namutala@wycliffeafrica.org
+            </a>{" "}
+            · Edwyn Kiptinness{" "}
+            <a href="mailto:edwyn_kiptinness@wycliffeafrica.org" className="font-semibold text-primary hover:underline">
+              edwyn_kiptinness@wycliffeafrica.org
+            </a>
+            <br />
+            Administered from the Nairobi office · July 2025 – June 2026
+          </p>
+        </div>
         <p className="mt-8 border-t border-hair pt-6 font-ui text-sm text-muted">
           Read next:{" "}
           <Link href="/projects/sunrise-africa-centre" className="font-semibold text-link hover:underline">
@@ -259,6 +265,6 @@ export default function InternshipProgramPage() {
           </Link>
         </p>
       </section>
-    </PageTemplate>
+    </ProjectPageTemplate>
   );
 }

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Field Stories &amp; Updates — Wycliffe Africa</title>
+<style>
+  :root{
+    --cream:#FBF6EE; --paper:#FFFFFF; --sand:#FDF7EC; --line:#EADFCF;
+    --amber:#E8912A; --amber2:#F6B94E; --gold:#C9761A; --terra:#B5471B; --terra7:#8C3313;
+    --leaf:#2F6E63; --leaf7:#234F47; --ink:#2A2018; --ink-soft:#5B4E42;
+    --grad-sunrise:radial-gradient(120% 95% at 50% 118%, #FFE0A6 0%, #F0A544 24%, #C85E22 54%, #7C3417 100%);
+    --grad-mark:radial-gradient(circle at 50% 120%, #FFD27A 0%, #E8912A 42%, #B5471B 100%);
+    --shadow-card:0 10px 30px -22px rgba(80,45,10,.5);
+    --shadow-panel:0 18px 50px -24px rgba(60,35,10,.45);
+    --serif:"Iowan Old Style","Palatino Linotype",Georgia,serif;
+    --sans:"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--serif);color:var(--ink);background:var(--cream);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(251,246,238,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-inner{max-width:1120px;margin:0 auto;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .brand{display:flex;align-items:center;gap:12px;font-family:var(--sans);font-weight:700;letter-spacing:.02em}
+  .brand .mark{width:34px;height:34px;border-radius:50%;background:var(--grad-mark);box-shadow:0 0 0 4px rgba(232,145,42,.15)}
+  .brand small{display:block;font-weight:400;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+  .nav-links{display:flex;gap:26px;font-family:var(--sans);font-size:14px}
+  .nav-links a{text-decoration:none;color:var(--ink-soft);padding-bottom:3px;border-bottom:2px solid transparent}
+  .nav-links a:hover{color:var(--terra);border-color:var(--amber)}
+  .nav-links a.active{color:var(--ink);border-color:var(--terra)}
+
+  .hero{position:relative;overflow:hidden;color:#fff;text-align:center;padding:96px 24px 120px;background:var(--grad-sunrise)}
+  .hero .sun{position:absolute;left:50%;bottom:-180px;transform:translateX(-50%);width:400px;height:400px;border-radius:50%;
+    background:radial-gradient(circle,#FFF4D6 0%,#FFDE96 45%,rgba(255,222,150,0) 70%);opacity:.8}
+  .hero-content{position:relative;z-index:2;max-width:760px;margin:0 auto}
+  .eyebrow{font-family:var(--sans);font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:#FFE9C4;margin-bottom:20px}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);line-height:1.1;font-weight:600;margin-bottom:20px;text-shadow:0 2px 18px rgba(120,40,0,.25)}
+  .hero p{font-size:clamp(1.05rem,2.2vw,1.35rem);color:#FFF3E0;max-width:600px;margin:0 auto}
+  .wave{display:block;width:100%;height:70px;margin-top:-2px}
+
+  main{max-width:1120px;margin:0 auto;padding:0 28px}
+  .filter-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:40px 0 34px}
+  .chip{font-family:var(--sans);font-size:14px;padding:9px 20px;border-radius:30px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink-soft);cursor:pointer;transition:transform .12s}
+  .chip:hover{transform:translateY(-2px)}
+  .chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;padding-bottom:20px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow-card);display:flex;flex-direction:column;transition:transform .18s ease}
+  .card:hover{transform:translateY(-5px)}
+  .card .pic{aspect-ratio:16/10;background:var(--sand);position:relative}
+  .card .pic svg,.card .pic img{display:block;width:100%;height:100%;object-fit:cover}
+  .card .pic .badge{position:absolute;top:14px;left:14px}
+  .badge{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:5px 12px;border-radius:30px;color:#fff}
+  .badge.story{background:var(--terra)}
+  .badge.update{background:var(--leaf)}
+  .card .body{padding:22px 24px 26px;display:flex;flex-direction:column;flex:1}
+  .card .meta{font-family:var(--sans);font-size:12.5px;color:var(--gold);letter-spacing:.04em;text-transform:uppercase;margin-bottom:9px}
+  .card h3{font-size:1.28rem;line-height:1.25;font-weight:600;margin-bottom:10px}
+  .card p{color:var(--ink-soft);font-size:1.02rem;margin-bottom:14px}
+  .card .cap{font-family:var(--sans);font-size:12px;color:var(--ink-soft);font-style:italic;border-top:1px solid var(--line);padding-top:12px;margin-top:auto}
+  .card .more{font-family:var(--sans);font-size:13.5px;font-weight:600;color:var(--terra);text-decoration:none;margin-top:14px}
+
+  /* template section */
+  .tmpl{background:linear-gradient(135deg,#2F6E63,#234F47);color:#EAF5F1;border-radius:24px;padding:52px 48px;margin:70px 0 40px;box-shadow:var(--shadow-panel)}
+  .tmpl .eyebrow{color:#9FD8C8;margin-bottom:12px;text-align:left}
+  .tmpl h2{font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:600;color:#fff;margin-bottom:12px;max-width:640px}
+  .tmpl>p{color:#D5EAE3;max-width:640px;margin-bottom:30px}
+  .tmpl-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+  .steps li{list-style:none;position:relative;padding-left:40px;margin-bottom:20px}
+  .steps li::before{counter-increment:st;content:counter(st);position:absolute;left:0;top:-2px;width:28px;height:28px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:700;font-size:13px;color:#234F47;background:#FFD79A}
+  .steps{counter-reset:st}
+  .steps b{color:#fff;font-family:var(--sans);font-size:15px}
+  .steps span{display:block;color:#CDE7DF;font-size:.98rem;margin-top:2px}
+  .tmpl-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:26px}
+  .tmpl-card h4{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#9FD8C8;margin-bottom:16px}
+  .tmpl-line{font-family:var(--sans);font-size:14px;margin-bottom:16px}
+  .tmpl-line b{color:#FFD79A;display:block;margin-bottom:3px}
+  .tmpl-line span{color:#D5EAE3}
+  .tmpl-note{font-family:var(--sans);font-size:12.5px;color:#9FD8C8;margin-top:6px}
+
+  footer{background:var(--ink);color:#CDBBA6;padding:50px 28px;margin-top:20px}
+  .foot-inner{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;font-family:var(--sans);font-size:14px}
+  footer a{color:#F3B963;text-decoration:none}
+  footer .brand small{color:#B98A4a}
+
+  @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.tmpl-grid{grid-template-columns:1fr}}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}.nav-links{display:none}.tmpl{padding:38px 26px}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand"><span class="mark"></span><span>Wycliffe Africa<small>Bible Translation Movement</small></span></div>
+    <nav class="nav-links">
+      <a href="sunrise-africa-centre.html">SunRise Centre</a>
+      <a href="internship-program.html">Internship</a>
+      <a href="#stories" class="active">Field stories</a>
+      <a href="#give">Partner</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <span class="sun"></span>
+  <div class="hero-content">
+    <div class="eyebrow">From the field</div>
+    <h1>Stories and updates from our missionaries</h1>
+    <p>News, moments, and progress sent straight from the stations where our people serve. Fresh from the field, in their own words.</p>
+  </div>
+</section>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,40 C240,75 480,10 720,35 C960,60 1200,15 1440,42 L1440,70 L0,70 Z" fill="#FBF6EE"/></svg>
+
+<main id="stories">
+  <div class="filter-row" id="filters"></div>
+  <div class="grid" id="grid"></div>
+
+  <!-- Template / guidance for missionaries and site editors -->
+  <section class="tmpl">
+    <div class="eyebrow">Template</div>
+    <h2>How to write a field story or update</h2>
+    <p>A good entry is short, specific, and built around one moment or one number. Use this as the shape for anything posted to the site.</p>
+    <div class="tmpl-grid">
+      <ul class="steps">
+        <li><b>One headline</b><span>Name the moment, not the topic. "A grandmother reads Luke," not "Literacy news."</span></li>
+        <li><b>Where and when</b><span>Town and country, and the date. It grounds the reader in a real place.</span></li>
+        <li><b>80–150 words</b><span>One scene or one figure. Enough to picture it; short enough to finish.</span></li>
+        <li><b>One photo, if you have it</b><span>Landscape, well lit, showing people or the work. Optional — never hold a story back for lack of one.</span></li>
+        <li><b>A caption</b><span>One line naming who or what is in the picture.</span></li>
+      </ul>
+      <div class="tmpl-card">
+        <h4>Copy this shape</h4>
+        <div class="tmpl-line"><b>Type</b><span>Story or Field update</span></div>
+        <div class="tmpl-line"><b>Headline</b><span>A short, specific line about one moment.</span></div>
+        <div class="tmpl-line"><b>Location · Date</b><span>Town, Country · 18 July 2026</span></div>
+        <div class="tmpl-line"><b>Body (80–150 words)</b><span>Open on the scene. Say what happened and why it mattered. End on the person or the need.</span></div>
+        <div class="tmpl-line" style="margin-bottom:4px"><b>Photo + caption</b><span>Attach one landscape image and a one-line caption.</span></div>
+        <div class="tmpl-note">Missionaries post these through the Field Portal; editors publish them here.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <div class="brand" style="color:#F3D9B4"><span class="mark"></span><span>Wycliffe Africa<small>Every language. Every heart.</small></span></div>
+    <div style="max-width:420px">
+      These stories come from missionaries serving across the continent.
+      <br><br>Read next: <a href="sunrise-africa-centre.html">The SunRise Africa Centre &rarr;</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Sample entries — replace with real posts from the Field Portal.
+   `img` is a placeholder scene name; a published post uses a real photo URL instead. */
+var posts = [
+  { type:"story", title:"A grandmother reads Luke for the first time", loc:"Antananarivo, Madagascar", date:"18 Jul 2026",
+    img:"read", cap:"Voahangy reads the opening of Luke to her grandchildren.",
+    body:"Voahangy is 74. This week she held the Gospel of Luke in her own language and read the first verses aloud to her grandchildren. She had waited her whole life to read Scripture in the words she thinks in." },
+  { type:"update", title:"Literacy enrolment climbs to 40 learners", loc:"Antananarivo, Madagascar", date:"11 Jul 2026",
+    img:"class", cap:"The Tuesday literacy class, now 40 strong.",
+    body:"Our Tuesday and Thursday classes have grown from 22 learners to 40 in a month. Word is spreading between neighbours. We are looking for a second facilitator to keep the groups small." },
+  { type:"story", title:"The day the Acts draft came back marked in red", loc:"Fianarantsoa, Madagascar", date:"2 Jul 2026",
+    img:"harvest", cap:"Reviewers working through the Acts draft, line by line.",
+    body:"Six mother-tongue reviewers spent a week reading the Acts draft aloud and arguing over single words. Red ink everywhere. That mess is the sound of a translation getting truer to how people actually speak." },
+  { type:"update", title:"New recording booth finished in Kampala", loc:"Kampala, Uganda", date:"24 Jun 2026",
+    img:"class", cap:"The finished audio booth, ready for its first session.",
+    body:"After three months, the audio recording booth is done. The first oral Scripture sessions begin next week, so communities who don't yet read can still hear the text in their own language." },
+  { type:"story", title:"A boda-boda rider carries Scripture to the hills", loc:"Mbale, Uganda", date:"15 Jun 2026",
+    img:"travel", cap:"Delivering printed portions to a village church.",
+    body:"Isaac rides a motorbike two hours each Sunday to bring printed Scripture portions to a church in the hills. The road is bad and the fuel is dear, but the congregation now reads together every week." },
+  { type:"update", title:"Translation of Ruth complete and approved", loc:"Yaoundé, Cameroon", date:"6 Jun 2026",
+    img:"harvest", cap:"The completed book of Ruth, ready to print.",
+    body:"The book of Ruth has cleared its final review and is approved for printing. It is the third book finished in this language this year. The team is moving on to the Gospel of Mark." }
+];
+
+var LABEL = { story:"Story", update:"Field update" };
+var filter="all";
+
+function sceneSVG(name){
+  var scenes = {
+    read:'<rect width="400" height="250" fill="#F3D9A8"/><circle cx="320" cy="66" r="38" fill="#F6B94E"/>'+
+         '<path d="M0 180 Q100 135 200 168 T400 158 V250 H0Z" fill="#C9761A"/>'+
+         '<path d="M0 208 Q120 180 240 200 T400 192 V250 H0Z" fill="#8C3313"/>'+
+         '<path d="M150 170 L200 152 L200 228 L150 240Z" fill="#fff" opacity=".92"/><path d="M250 170 L200 152 L200 228 L250 240Z" fill="#FBF6EE"/><path d="M200 152 V228" stroke="#B5471B" stroke-width="2"/>',
+    class:'<rect width="400" height="250" fill="#E7EFEC"/><rect x="40" y="34" width="210" height="120" rx="6" fill="#234F47"/>'+
+         '<path d="M62 66 H210 M62 90 H186 M62 114 H150" stroke="#9FD8C8" stroke-width="4" stroke-linecap="round"/>'+
+         '<circle cx="310" cy="130" r="24" fill="#F6B94E"/><rect x="286" y="164" width="48" height="52" rx="12" fill="#C9761A"/>'+
+         '<path d="M0 220 H400" stroke="#2F6E63" stroke-width="9"/>',
+    travel:'<rect width="400" height="250" fill="#FBE7C4"/><circle cx="72" cy="66" r="32" fill="#F6B94E"/>'+
+         '<path d="M0 170 Q110 105 220 158 T400 138 V250 H0Z" fill="#2F6E63"/>'+
+         '<path d="M0 198 Q120 160 260 190 T400 182 V250 H0Z" fill="#234F47"/>'+
+         '<path d="M160 250 L200 168 L240 250Z" fill="#FBF6EE" opacity=".85"/><path d="M200 168 L200 250" stroke="#B5471B" stroke-width="3" stroke-dasharray="9 9"/>',
+    harvest:'<rect width="400" height="250" fill="#F3E2B0"/><circle cx="330" cy="60" r="34" fill="#F0A544"/>'+
+         '<path d="M0 185 Q100 168 200 185 T400 180 V250 H0Z" fill="#C9761A"/>'+
+         '<g stroke="#8C3313" stroke-width="3">'+
+         '<path d="M70 190 V132 M92 190 V132 M114 190 V132 M156 190 V126 M178 190 V126 M200 190 V126 M250 190 V134 M272 190 V134 M294 190 V134"/></g>'
+  };
+  return '<svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">'+
+         (scenes[name]||scenes.read)+
+         '<text x="16" y="238" font-family="Segoe UI,sans-serif" font-size="11" fill="#7C3417" opacity=".75">sample image · replace with a field photo</text></svg>';
+}
+
+function renderFilters(){
+  var opts=[['all','All'],['story','Stories'],['update','Updates']];
+  document.getElementById('filters').innerHTML = opts.map(function(o){
+    return '<button class="chip '+(filter===o[0]?'on':'')+'" onclick="filter=\''+o[0]+'\';render()">'+o[1]+'</button>';
+  }).join('');
+}
+function render(){
+  renderFilters();
+  var list = posts.filter(function(p){return filter==='all'||p.type===filter;});
+  document.getElementById('grid').innerHTML = list.map(function(p){
+    return '<article class="card">'+
+      '<div class="pic"><span class="badge '+p.type+'">'+LABEL[p.type]+'</span>'+sceneSVG(p.img)+'</div>'+
+      '<div class="body">'+
+        '<div class="meta">'+p.loc+' · '+p.date+'</div>'+
+        '<h3>'+p.title+'</h3>'+
+        '<p>'+p.body+'</p>'+
+        '<div class="cap">'+p.cap+'</div>'+
+        '<a class="more" href="#">Read the full '+(p.type==='story'?'story':'update')+' &rarr;</a>'+
+      '</div>'+
+    '</article>';
+  }).join('');
+}
+render();
+</script>
+</body>
+</html>

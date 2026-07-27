@@ -142,16 +142,26 @@ export interface MySubmission {
   sensitive?: boolean;
   reviewNotes?: string;
   date_created?: string;
+  image?: string;
+  pullQuote?: string;
+  inlineImage?: string;
+  inlineImageCaption?: string;
 }
 
 /** All of the missionary's own submissions, drafts included, newest first. */
-export async function getMySubmissions(missionaryId: string): Promise<MySubmission[]> {
+export async function getMySubmissions(
+  missionaryId: string,
+  includeRichFields = false,
+): Promise<MySubmission[]> {
   const token = await getAccessToken();
   if (!token) return [];
   const newsParams = new URLSearchParams({
     "filter[missionaryId][_eq]": missionaryId,
     "filter[category][_eq]": "update",
-    fields: "id,status,category,title,excerpt,body,date,reviewNotes,date_created",
+    fields: [
+      "id,status,category,title,excerpt,body,date,image,reviewNotes,date_created",
+      includeRichFields ? "pullQuote,inlineImage,inlineImageCaption" : "",
+    ].filter(Boolean).join(","),
     sort: "-date_created",
   });
   const prayerParams = new URLSearchParams({
@@ -173,6 +183,10 @@ export async function getMySubmissions(missionaryId: string): Promise<MySubmissi
     status: n.status,
     reviewNotes: n.reviewNotes ?? undefined,
     date_created: n.date_created ?? undefined,
+    image: n.image ?? undefined,
+    pullQuote: n.pullQuote ?? undefined,
+    inlineImage: n.inlineImage ?? undefined,
+    inlineImageCaption: n.inlineImageCaption ?? undefined,
   }));
   const fromPrayers: MySubmission[] = prayers.map((p) => ({
     id: p.id,
@@ -210,6 +224,10 @@ export interface NewSubmission {
   missionaryId: string;
   date: string;
   image?: string;
+  /** Update-only extras (ignored for prayer requests). */
+  pullQuote?: string;
+  inlineImage?: string;
+  inlineImageCaption?: string;
 }
 
 const ALLOWED_IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
@@ -246,7 +264,7 @@ export async function deletePortalImage(id: string | undefined): Promise<void> {
 /** Create a submission as the logged-in user. Always lands as a draft for review. */
 export async function createSubmission(input: NewSubmission): Promise<void> {
   if (!DIRECTUS_TOKEN) throw new Error("The portal service is not configured.");
-  const { image, type, ...content } = input;
+  const { image, inlineImage, pullQuote, inlineImageCaption, type, ...content } = input;
   const safeImage = submissionImageValue(type, image);
   if (type === "update") {
     await directusFetch("/items/news", {
@@ -260,6 +278,9 @@ export async function createSubmission(input: NewSubmission): Promise<void> {
         missionaryId: content.missionaryId,
         date: content.date,
         ...(safeImage ? { image: safeImage } : {}),
+        ...(pullQuote ? { pullQuote } : {}),
+        ...(inlineImage ? { inlineImage } : {}),
+        ...(inlineImageCaption ? { inlineImageCaption } : {}),
       }),
     }, DIRECTUS_TOKEN);
   } else {
@@ -305,13 +326,42 @@ async function notifyPortalReviewers(input: NewSubmission): Promise<void> {
   );
 }
 
+interface OwnedSubmission {
+  id: string;
+  missionaryId: string;
+  status: PublishStatus;
+  image?: string;
+  inlineImage?: string;
+}
+
 async function getOwnSubmission(id: string, missionaryId: string, type: UpdateType, token: string) {
-  const item = await directusFetch<{ id: string; missionaryId: string; image?: string }>(
-    `/items/${collectionFor(type)}/${encodeURIComponent(id)}?fields=id,missionaryId,image`,
-    {},
-    token,
-  );
+  const path = `/items/${collectionFor(type)}/${encodeURIComponent(id)}`;
+  let item: OwnedSubmission;
+  try {
+    item = await directusFetch<OwnedSubmission>(
+      `${path}?fields=id,missionaryId,status,image${type === "update" ? ",inlineImage" : ""}`,
+      {},
+      token,
+    );
+  } catch (error) {
+    if (
+      type !== "update" ||
+      !(error instanceof DirectusRequestError) ||
+      error.status !== 403 ||
+      !error.message.includes("inlineImage")
+    ) {
+      throw error;
+    }
+    item = await directusFetch<OwnedSubmission>(
+      `${path}?fields=id,missionaryId,status,image`,
+      {},
+      token,
+    );
+  }
   if (item.missionaryId !== missionaryId) throw new Error("This submission does not belong to your profile.");
+  if (item.status !== "draft" && item.status !== "rejected") {
+    throw new Error("Only drafts and submissions returned for changes can be edited.");
+  }
   return item;
 }
 
@@ -323,17 +373,46 @@ async function getOwnSubmission(id: string, missionaryId: string, type: UpdateTy
 export async function updateSubmission(
   id: string,
   missionaryId: string,
-  input: Pick<NewSubmission, "type" | "title" | "body" | "sensitive"> & { image?: string },
+  input: Pick<NewSubmission, "type" | "title" | "body" | "sensitive" | "pullQuote" | "inlineImageCaption"> & {
+    image?: string;
+    inlineImage?: string;
+    richFieldsSupported?: boolean;
+    removeInlineImage?: boolean;
+  },
 ): Promise<void> {
   const token = await getAccessToken();
-  if (!token) throw new Error("Your session has expired — please sign in again.");
+  if (!token) throw new Error("Your session has expired. Please sign in again.");
   if (!DIRECTUS_TOKEN) throw new Error("The portal service is not configured.");
-  const { type, image, title, body, sensitive } = input;
+  const {
+    type,
+    image,
+    inlineImage,
+    pullQuote,
+    inlineImageCaption,
+    richFieldsSupported,
+    removeInlineImage,
+    title,
+    body,
+    sensitive,
+  } = input;
   const previous = await getOwnSubmission(id, missionaryId, type, token);
   const nextImage = submissionImageValue(type, image);
+  const nextInlineImage = removeInlineImage ? null : inlineImage;
   const payload =
     type === "update"
-      ? { title, excerpt: body, body: [body], status: "draft" }
+      ? {
+          title,
+          excerpt: body,
+          body: [body],
+          status: "draft",
+          ...(richFieldsSupported
+            ? {
+                pullQuote: pullQuote ?? null,
+                inlineImageCaption: removeInlineImage ? null : inlineImageCaption ?? null,
+                ...(nextInlineImage !== undefined ? { inlineImage: nextInlineImage } : {}),
+              }
+            : {}),
+        }
       : { title, body, sensitive, status: "draft" };
   await directusFetch(`/items/${collectionFor(type)}/${encodeURIComponent(id)}`, {
     method: "PATCH",
@@ -345,18 +424,26 @@ export async function updateSubmission(
   if (previous.image && nextImage !== undefined && nextImage !== previous.image) {
     await deletePortalImage(previous.image).catch(() => undefined);
   }
+  if (
+    previous.inlineImage &&
+    nextInlineImage !== undefined &&
+    nextInlineImage !== previous.inlineImage
+  ) {
+    await deletePortalImage(previous.inlineImage).catch(() => undefined);
+  }
 }
 
 /** Permanently remove an owned draft. Published and reviewed entries are protected by policy. */
 export async function deleteSubmission(id: string, missionaryId: string, type: UpdateType): Promise<void> {
   const token = await getAccessToken();
-  if (!token) throw new Error("Your session has expired — please sign in again.");
+  if (!token) throw new Error("Your session has expired. Please sign in again.");
   if (!DIRECTUS_TOKEN) throw new Error("The portal service is not configured.");
   const submission = await getOwnSubmission(id, missionaryId, type, token);
   await directusFetch(`/items/${collectionFor(type)}/${encodeURIComponent(id)}`, {
     method: "DELETE",
   }, DIRECTUS_TOKEN);
   await deletePortalImage(submission.image).catch(() => undefined);
+  await deletePortalImage(submission.inlineImage).catch(() => undefined);
 }
 
 export async function requestPasswordReset(email: string, resetUrl: string): Promise<void> {

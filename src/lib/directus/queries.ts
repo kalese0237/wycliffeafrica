@@ -9,7 +9,7 @@ import type { PublicFieldUpdateRecord, PublicMissionaryRecord, PublicNewsRecord 
  */
 
 const PUBLISHED = { status: { _eq: "published" } } as const;
-const NEWS_PUBLIC_FIELDS = [
+const NEWS_CORE_PUBLIC_FIELDS = [
   "id",
   "status",
   "category",
@@ -25,6 +25,12 @@ const NEWS_PUBLIC_FIELDS = [
   "date",
   "image",
 ] as const;
+const NEWS_RICH_PUBLIC_FIELDS = [
+  ...NEWS_CORE_PUBLIC_FIELDS,
+  "pullQuote",
+  "inlineImage",
+  "inlineImageCaption",
+] as const;
 const MISSIONARY_PUBLIC_FIELDS = ["id", "slug", "name", "place", "roles", "intro", "bio", "image"] as const;
 const PRAYER_PUBLIC_FIELDS = [
   "id",
@@ -38,19 +44,93 @@ const PRAYER_PUBLIC_FIELDS = [
   "image",
 ] as const;
 
+let richNewsFieldsSupported: boolean | undefined;
+
+function isUnsupportedRichNewsFields(error: unknown): boolean {
+  if (!error || typeof error !== "object") return false;
+  const message = "message" in error && typeof error.message === "string" ? error.message : "";
+  const response = "response" in error ? error.response : undefined;
+  const status =
+    response && typeof response === "object" && "status" in response && typeof response.status === "number"
+      ? response.status
+      : undefined;
+  return (
+    status === 403 &&
+    ["pullQuote", "inlineImage", "inlineImageCaption"].some((field) => message.includes(field))
+  );
+}
+
+/**
+ * Rich story fields were added after the original news collection. Some
+ * deployments can briefly run the newer frontend before their Directus schema
+ * and read policy are upgraded. Fall back to the original public field set
+ * instead of turning that rollout mismatch into a page-level server error.
+ */
+async function withCompatibleNewsFields<T>(
+  richRequest: () => Promise<T>,
+  coreRequest: () => Promise<T>,
+): Promise<T> {
+  if (richNewsFieldsSupported === false) return coreRequest();
+  try {
+    const result = await richRequest();
+    richNewsFieldsSupported = true;
+    return result;
+  } catch (error) {
+    if (!isUnsupportedRichNewsFields(error)) throw error;
+    richNewsFieldsSupported = false;
+    return coreRequest();
+  }
+}
+
+/** Whether the configured server-side Directus identity can read rich story fields. */
+export async function supportsRichNewsFields(): Promise<boolean> {
+  if (richNewsFieldsSupported !== undefined) return richNewsFieldsSupported;
+  try {
+    await directus.request(
+      readItems("news", {
+        fields: ["id", "pullQuote", "inlineImage", "inlineImageCaption"],
+        limit: 1,
+      }),
+    );
+    richNewsFieldsSupported = true;
+    return true;
+  } catch (error) {
+    if (isUnsupportedRichNewsFields(error)) richNewsFieldsSupported = false;
+    return false;
+  }
+}
+
 export async function getNews(): Promise<PublicNewsRecord[]> {
-  return directus.request(
-    readItems("news", { fields: [...NEWS_PUBLIC_FIELDS], filter: PUBLISHED, sort: ["-date"] }),
+  return withCompatibleNewsFields(
+    () =>
+      directus.request(
+        readItems("news", { fields: [...NEWS_RICH_PUBLIC_FIELDS], filter: PUBLISHED, sort: ["-date"] }),
+      ),
+    () =>
+      directus.request(
+        readItems("news", { fields: [...NEWS_CORE_PUBLIC_FIELDS], filter: PUBLISHED, sort: ["-date"] }),
+      ),
   );
 }
 
 export async function getNewsBySlug(slug: string): Promise<PublicNewsRecord | undefined> {
-  const results = await directus.request(
-    readItems("news", {
-      fields: [...NEWS_PUBLIC_FIELDS],
-      filter: { _and: [PUBLISHED, { slug: { _eq: slug } }] },
-      limit: 1,
-    }),
+  const results = await withCompatibleNewsFields(
+    () =>
+      directus.request(
+        readItems("news", {
+          fields: [...NEWS_RICH_PUBLIC_FIELDS],
+          filter: { _and: [PUBLISHED, { slug: { _eq: slug } }] },
+          limit: 1,
+        }),
+      ),
+    () =>
+      directus.request(
+        readItems("news", {
+          fields: [...NEWS_CORE_PUBLIC_FIELDS],
+          filter: { _and: [PUBLISHED, { slug: { _eq: slug } }] },
+          limit: 1,
+        }),
+      ),
   );
   return results[0];
 }
@@ -84,12 +164,27 @@ export async function getMissionaryById(id: string): Promise<PublicMissionaryRec
 }
 
 export async function getUpdatesForMissionary(missionaryId: string): Promise<PublicNewsRecord[]> {
-  return directus.request(
-    readItems("news", {
-      fields: [...NEWS_PUBLIC_FIELDS],
-      filter: { _and: [PUBLISHED, { category: { _eq: "update" } }, { missionaryId: { _eq: missionaryId } }] },
-      sort: ["-date"],
-    }),
+  return withCompatibleNewsFields(
+    () =>
+      directus.request(
+        readItems("news", {
+          fields: [...NEWS_RICH_PUBLIC_FIELDS],
+          filter: {
+            _and: [PUBLISHED, { category: { _eq: "update" } }, { missionaryId: { _eq: missionaryId } }],
+          },
+          sort: ["-date"],
+        }),
+      ),
+    () =>
+      directus.request(
+        readItems("news", {
+          fields: [...NEWS_CORE_PUBLIC_FIELDS],
+          filter: {
+            _and: [PUBLISHED, { category: { _eq: "update" } }, { missionaryId: { _eq: missionaryId } }],
+          },
+          sort: ["-date"],
+        }),
+      ),
   );
 }
 

@@ -17,6 +17,7 @@ import {
   uploadPortalImage,
 } from "./auth";
 import { parseSubmission } from "./validation";
+import { supportsRichNewsFields } from "@/lib/directus/queries";
 
 export interface ActionState {
   error?: string;
@@ -54,15 +55,32 @@ export async function submitEntryAction(_prev: ActionState, formData: FormData):
 
   const parsed = parseSubmission(formData);
   if ("error" in parsed) return { error: parsed.error };
-  const { type, title, body, sensitive } = parsed.value;
+  const { type, title, body, sensitive, pullQuote, inlineImageCaption } = parsed.value;
+  const richFieldsSupported = type === "update" && (await supportsRichNewsFields());
 
   const date = new Date().toLocaleString("en-GB", { month: "long", year: "numeric" });
   let image: string | undefined;
+  let inlineImage: string | undefined;
   try {
-    image = type === "update" ? await uploadPortalImage(formData.get("image")) : undefined;
-    await createSubmission({ type, title, body, sensitive, missionaryId: user.missionary.id, date, image });
+    if (type === "update") {
+      image = await uploadPortalImage(formData.get("image"));
+      if (richFieldsSupported) inlineImage = await uploadPortalImage(formData.get("inlineImage"));
+    }
+    await createSubmission({
+      type,
+      title,
+      body,
+      sensitive,
+      missionaryId: user.missionary.id,
+      date,
+      image,
+      pullQuote: richFieldsSupported ? pullQuote : undefined,
+      inlineImage: richFieldsSupported ? inlineImage : undefined,
+      inlineImageCaption: richFieldsSupported ? inlineImageCaption : undefined,
+    });
   } catch (error) {
     await deletePortalImage(image).catch(() => undefined);
+    await deletePortalImage(inlineImage).catch(() => undefined);
     if (error instanceof PortalInputError) return { error: error.message };
     console.error("Missionary portal submission error", error);
     return { error: "Your submission could not be saved. Please try again shortly." };
@@ -87,14 +105,27 @@ export async function updateEntryAction(_prev: ActionState, formData: FormData):
   if ("error" in parsed) return { error: parsed.error };
 
   let image: string | undefined;
+  let inlineImage: string | undefined;
+  const richFieldsSupported =
+    parsed.value.type === "update" && (await supportsRichNewsFields());
   try {
-    image =
-      parsed.value.type === "update"
-        ? await uploadPortalImage(formData.get("image"))
-        : undefined;
-    await updateSubmission(id, missionaryId, { ...parsed.value, ...(image ? { image } : {}) });
+    if (parsed.value.type === "update") {
+      image = await uploadPortalImage(formData.get("image"));
+      if (richFieldsSupported) inlineImage = await uploadPortalImage(formData.get("inlineImage"));
+    }
+    await updateSubmission(id, missionaryId, {
+      ...parsed.value,
+      richFieldsSupported,
+      // A newly uploaded photo wins if both controls were selected; otherwise
+      // the uploaded file would be detached immediately and left orphaned.
+      removeInlineImage:
+        richFieldsSupported && !inlineImage && formData.get("removeInlineImage") === "on",
+      ...(image ? { image } : {}),
+      ...(inlineImage ? { inlineImage } : {}),
+    });
   } catch (error) {
     await deletePortalImage(image).catch(() => undefined);
+    await deletePortalImage(inlineImage).catch(() => undefined);
     console.error("Missionary portal draft update error", error);
     return { error: "This draft could not be updated. It may already be under review or published." };
   }

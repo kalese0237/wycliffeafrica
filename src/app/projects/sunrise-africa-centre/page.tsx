@@ -1,8 +1,7 @@
 import * as React from "react";
 import Link from "next/link";
-import { Building2, Users, Sprout, ChevronRight, type LucideIcon } from "lucide-react";
-import { PageTemplate } from "@/components/templates";
-import { ProjectHero, ImpactStats } from "@/components/organisms";
+import { Building2, Users, Sprout, type LucideIcon } from "lucide-react";
+import { ProjectPageTemplate } from "@/components/templates";
 import { Button } from "@/components/atoms/Button";
 
 const FEATURES: { icon: LucideIcon; title: string; body: string }[] = [
@@ -37,71 +36,70 @@ export const metadata = {
 
 export default function SunriseAfricaCentrePage() {
   return (
-    <PageTemplate transparentHeader>
-      <ProjectHero
-        eyebrow="SunRise Africa Centre"
-        title="A permanent home for Africa's Bible translation movement"
-        lede="Wycliffe Africa is raising USD 1.2 million to build a training and sending base that will carry Scripture to communities still waiting to read it in their own language."
-        image="/photos/pexels-speakmediauganda-37826398.jpg"
-        imagePosition="50% 35%"
-        primaryCta={{ label: "Become a partner", href: "/give" }}
-        secondaryCta={{ label: "See what we're building", href: "#centre" }}
-      />
+    <ProjectPageTemplate
+      hero={{
+        eyebrow: "SunRise Africa Centre",
+        title: "A permanent home for Africa's Bible translation movement",
+        titleLines: ["A permanent home for Africa's", "Bible translation movement"],
+        titleMaxWidth: "32ch",
+        lede: "Wycliffe Africa is raising USD 1.2 million to build a training and sending base that will carry Scripture to communities still waiting to read it in their own language.",
+        image: "/Sunrise-africa/african-sunrise.webp",
+        imagePosition: "50% 48%",
+        primaryCta: { label: "Become a partner", href: "/give" },
+        secondaryCta: { label: "See what we're building", href: "#centre" },
+      }}
+      stats={[
+        { value: "33", label: "Missionaries serving today" },
+        { value: "100", label: "Members within five years" },
+        { value: "8+", label: "Countries with our people" },
+        { value: "3", label: "National organisations launched" },
+      ]}
+    >
 
-      <ImpactStats
-        overlap
-        stats={[
-          { value: "33", label: "Missionaries serving today" },
-          { value: "100", label: "Members within five years" },
-          { value: "8+", label: "Countries with our people" },
-          { value: "3", label: "National organisations launched" },
-        ]}
-      />
-
-      <section className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12">
-        <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">The vision</div>
+      <section id="vision" className="mx-auto max-w-[1120px] px-5 py-[72px] sm:px-7">
+        <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#C9761A]">The vision</div>
         <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
           One place to recruit, train, and send the next generation
         </h2>
-        <p className="mb-3.5 max-w-[68ch] font-body text-base leading-relaxed text-muted">
+        <p className="mb-3.5 font-body text-md leading-relaxed text-body">
           For more than twenty years, Wycliffe Africa has sent missionaries into Bible translation across the
           continent, and helped Wycliffe Togo, Wycliffe Benin, and Wycliffe Ethiopia get off the ground. That work
           has outgrown the borrowed rooms and short-term arrangements it has always run on.
         </p>
-        <p className="max-w-[68ch] font-body text-base leading-relaxed text-muted">
+        <p className="font-body text-md leading-relaxed text-body">
           SunRise Africa is our answer: a single site near Nairobi built to hold the whole journey of a missionary,
           from the first application to the day they leave for the field. It gathers what is now scattered into one
           home the movement can call its own.
         </p>
       </section>
 
-      <section id="centre" className="border-t border-hair bg-sunk">
-        <div className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12">
-          <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">The centre</div>
+      <section id="centre">
+        <div className="mx-auto max-w-[1120px] px-5 py-[72px] sm:px-7">
+          <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#C9761A]">The centre</div>
           <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
             What SunRise Africa will hold
           </h2>
-          <p className="mb-8 max-w-[68ch] font-body text-base leading-relaxed text-muted">
+          <p className="mb-8 font-body text-base leading-relaxed text-muted">
             The Centre is planned as a working campus, not a monument. Alongside offices and training rooms it will
             house the people it trains and grow some of the food that feeds them.
           </p>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
             {FEATURES.map(({ icon: FeatureIcon, title, body }) => (
               <div key={title} className="rounded-lg border border-hair bg-card p-6 shadow-sm">
-                <span className="inline-flex h-[52px] w-[52px] items-center justify-center rounded-xl bg-primary-tint text-primary">
+                <span className="inline-flex h-[52px] w-[52px] items-center justify-center rounded-full bg-[radial-gradient(circle_at_40%_30%,#FFE0A6,#E8912A)] text-primary shadow-sm">
                   <FeatureIcon size={24} />
                 </span>
-                <h3 className="mb-1.5 mt-4 font-display text-lg font-semibold text-strong">{title}</h3>
-                <p className="font-body text-sm leading-relaxed text-muted">{body}</p>
+                <h3 className="mb-1.5 mt-4 font-display text-lg font-semibold text-primary">{title}</h3>
+                <p className="font-body text-base leading-relaxed text-muted">{body}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-(--container-max) grid-cols-1 items-center gap-10 px-5 py-16 sm:px-12 lg:grid-cols-2 lg:gap-16">
+      <section id="why" className="mx-auto grid max-w-[1120px] grid-cols-1 items-center gap-10 px-5 py-[72px] sm:px-7 lg:grid-cols-[1.1fr_0.9fr] lg:gap-[54px]">
         <div>
-          <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">Why now</div>
+          <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#C9761A]">Why now</div>
           <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
             The work has grown faster than its foundations
           </h2>
@@ -116,8 +114,8 @@ export default function SunriseAfricaCentrePage() {
             one year to the next.
           </p>
         </div>
-        <div className="rounded-xl bg-terra-900 p-6 text-white">
-          <div className="font-ui text-xs font-bold uppercase tracking-caps text-terra-300">Built to sustain itself</div>
+        <div className="rounded-xl bg-[linear-gradient(135deg,#2F6E63,#234F47)] p-8 text-white shadow-lg sm:p-12">
+          <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#9FD8C8]">Built to sustain itself</div>
           <p className="mt-3 font-display text-lg italic leading-snug">
             SunRise Africa is meant to be more than a headquarters. The farm and guest facilities are designed to
             generate income, building a reserve that funds missionary development long after the buildings go up.
@@ -129,40 +127,40 @@ export default function SunriseAfricaCentrePage() {
         </div>
       </section>
 
-      <section className="border-t border-hair bg-terra-900 text-white">
-        <div className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12">
-          <div className="font-ui text-xs font-bold uppercase tracking-caps text-terra-300">The goal</div>
+      <section className="mx-auto max-w-[1120px] px-5 py-[72px] sm:px-7">
+        <div className="rounded-xl bg-[linear-gradient(135deg,#2F6E63,#234F47)] p-8 text-white shadow-lg sm:p-12">
+          <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#9FD8C8]">The goal</div>
           <h2 className="mb-8 mt-3 font-display text-2xl font-semibold">
             Establish SunRise Africa as the hub of the movement
           </h2>
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
             {GOALS.map((goal) => (
               <div key={goal.title}>
-                <h3 className="mb-1.5 font-display text-md font-semibold text-white">{goal.title}</h3>
-                <p className="font-body text-sm leading-relaxed text-white/75">{goal.body}</p>
+                <h3 className="mb-1.5 font-display text-md font-semibold text-[#9FD8C8]">{goal.title}</h3>
+                <p className="font-body text-base leading-relaxed text-[#D5EAE3]">{goal.body}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-(--container-max) grid-cols-1 items-start gap-10 px-5 py-16 sm:px-12 lg:grid-cols-2 lg:gap-16">
-        <div className="rounded-xl bg-terra-900 p-6 text-white">
-          <div className="font-ui text-xs font-bold uppercase tracking-caps text-terra-300">Where our people serve</div>
+      <section className="mx-auto grid max-w-[1120px] grid-cols-1 items-center gap-10 px-5 py-[72px] sm:px-7 lg:grid-cols-[0.9fr_1.1fr] lg:gap-[54px]">
+        <div className="rounded-xl bg-[linear-gradient(135deg,#B5471B,#8C3313)] p-8 text-white shadow-lg sm:p-12">
+          <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#FFD79A]">Where our people serve</div>
           <p className="mt-3 font-body text-base text-white/85">
             Wycliffe Africa missionaries work in more than eight countries, inside Africa and beyond it.
           </p>
           <div className="mt-4 flex flex-col gap-2.5">
             {WHERE_WE_SERVE.map((place) => (
               <div key={place} className="flex items-start gap-2.5">
-                <ChevronRight size={16} className="mt-1 flex-none text-green-400" />
+                <span className="mt-2.5 h-3 w-3 flex-none rounded-full bg-[radial-gradient(circle_at_40%_30%,#F6B94E,#B5471B)]" />
                 <span className="font-body text-base text-white/85">{place}</span>
               </div>
             ))}
           </div>
         </div>
         <div>
-          <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">The bigger picture</div>
+          <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#C9761A]">The bigger picture</div>
           <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
             The church of the Global South is stepping into missions
           </h2>
@@ -178,40 +176,40 @@ export default function SunriseAfricaCentrePage() {
         </div>
       </section>
 
-      <section className="border-t border-hair bg-sunk">
-        <div className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12">
-          <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">Partner with us</div>
-          <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
+      <section id="give" className="mx-auto max-w-[1120px] px-5 pb-[90px] pt-5 sm:px-7">
+        <div className="rounded-2xl border border-[#F0CE93] bg-[radial-gradient(120%_120%_at_50%_0%,#FBE7C4_0%,#F7D69B_100%)] px-6 py-16 text-center">
+          <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#C9761A]">Partner with us</div>
+          <h2 className="mx-auto mb-4 mt-3 max-w-[660px] font-display text-2xl font-semibold leading-tight text-strong">
             Help us reach USD 1.2 million and lay the foundation
           </h2>
-          <p className="mb-6 max-w-[68ch] font-body text-base leading-relaxed text-muted">
+          <p className="mx-auto mb-7 max-w-[580px] font-body text-base leading-relaxed text-[#6B4A24]">
             Every gift toward SunRise Africa builds something that outlasts it: a base that trains, houses, and
             sends African missionaries for decades to come. Partners, churches, and individuals all have a place in
             this.
           </p>
-          <Button href="/give" variant="accent">
+          <Button href="/give" variant="primary" size="lg">
             Give toward the Centre
           </Button>
-          <p className="mt-6 font-ui text-sm text-muted">
-            Talk with us — Joseph Namutala{" "}
-            <a href="mailto:joseph_namutala@wycliffeafrica.org" className="font-semibold text-link hover:underline">
+          <p className="mt-6 font-ui text-sm text-[#7A5522]">
+            Talk with us: Joseph Namutala{" "}
+            <a href="mailto:joseph_namutala@wycliffeafrica.org" className="font-semibold text-primary hover:underline">
               joseph_namutala@wycliffeafrica.org
             </a>{" "}
             · Edwyn Kiptinness{" "}
-            <a href="mailto:edwyn_kiptinness@wycliffeafrica.org" className="font-semibold text-link hover:underline">
+            <a href="mailto:edwyn_kiptinness@wycliffeafrica.org" className="font-semibold text-primary hover:underline">
               edwyn_kiptinness@wycliffeafrica.org
             </a>
             <br />
             Headquartered in Nairobi, Kenya
           </p>
-          <p className="mt-8 border-t border-hair pt-6 font-ui text-sm text-muted">
+        </div>
+        <p className="mt-8 border-t border-hair pt-6 font-ui text-sm text-muted">
             Read next:{" "}
             <Link href="/projects/internship-program" className="font-semibold text-link hover:underline">
               The Internship Program →
             </Link>
-          </p>
-        </div>
+        </p>
       </section>
-    </PageTemplate>
+    </ProjectPageTemplate>
   );
 }

@@ -5,6 +5,8 @@ export const SUBMISSION_LIMITS = {
   titleMax: 120,
   bodyMin: 30,
   bodyMax: 5000,
+  pullQuoteMax: 220,
+  captionMax: 140,
 } as const;
 
 export interface SubmissionFields {
@@ -12,6 +14,10 @@ export interface SubmissionFields {
   title: string;
   body: string;
   sensitive: boolean;
+  /** Update-only: a highlighted quote shown between body paragraphs. */
+  pullQuote?: string;
+  /** Update-only: caption for the optional inline image. */
+  inlineImageCaption?: string;
 }
 
 /**
@@ -46,5 +52,19 @@ export function parseSubmission(formData: FormData):
     return { error: `The message must be ${SUBMISSION_LIMITS.bodyMax} characters or fewer.` };
   }
 
-  return { value: { type, title, body, sensitive } };
+  // Pull quote and inline-image caption apply to field updates only.
+  const pullQuoteRaw = String(formData.get("pullQuote") ?? "").trim();
+  const captionRaw = String(formData.get("inlineImageCaption") ?? "").trim();
+  if (type === "update") {
+    if (pullQuoteRaw.length > SUBMISSION_LIMITS.pullQuoteMax) {
+      return { error: `The pull quote must be ${SUBMISSION_LIMITS.pullQuoteMax} characters or fewer.` };
+    }
+    if (captionRaw.length > SUBMISSION_LIMITS.captionMax) {
+      return { error: `The photo caption must be ${SUBMISSION_LIMITS.captionMax} characters or fewer.` };
+    }
+  }
+  const pullQuote = type === "update" && pullQuoteRaw ? pullQuoteRaw : undefined;
+  const inlineImageCaption = type === "update" && captionRaw ? captionRaw : undefined;
+
+  return { value: { type, title, body, sensitive, pullQuote, inlineImageCaption } };
 }

@@ -1,4 +1,4 @@
-import type { Journey } from "@/components/atoms/Tag";
+import type { Journey } from "@/lib/content-types";
 
 export type { Journey };
 
@@ -31,6 +31,12 @@ export interface NewsRecord {
   tagLabel?: string | null;
   date: string;
   image?: string | null;
+  /** Optional highlighted quote drawn from the body, shown between paragraphs. */
+  pullQuote?: string | null;
+  /** Optional second image placed within the article body (Directus file id). */
+  inlineImage?: string | null;
+  /** One-line caption for the inline image. */
+  inlineImageCaption?: string | null;
   /** Missionary-submitted updates land as `draft`; an admin publishes them. */
   status: PublishStatus;
   /** Private feedback from the office; never included in public content queries. */

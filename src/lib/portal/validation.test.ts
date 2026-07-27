@@ -37,6 +37,36 @@ describe("parseSubmission", () => {
     expect(parseSubmission(submission({ title: "x".repeat(SUBMISSION_LIMITS.titleMax + 1) }))).toHaveProperty("error");
     expect(parseSubmission(submission({ body: "x".repeat(SUBMISSION_LIMITS.bodyMax + 1) }))).toHaveProperty("error");
   });
+
+  it("normalizes and limits update-only editorial fields", () => {
+    const form = submission();
+    form.set("pullQuote", "  A quote from the field.  ");
+    form.set("inlineImageCaption", "  Interns learning together.  ");
+    expect(parseSubmission(form)).toMatchObject({
+      value: {
+        pullQuote: "A quote from the field.",
+        inlineImageCaption: "Interns learning together.",
+      },
+    });
+
+    form.set("pullQuote", "x".repeat(SUBMISSION_LIMITS.pullQuoteMax + 1));
+    expect(parseSubmission(form)).toHaveProperty("error");
+  });
+
+  it("does not retain editorial fields on prayer requests", () => {
+    const form = submission({ type: "prayer" });
+    form.set("pullQuote", "x".repeat(SUBMISSION_LIMITS.pullQuoteMax + 20));
+    form.set("inlineImageCaption", "Not applicable");
+
+    expect(parseSubmission(form)).toEqual({
+      value: {
+        type: "prayer",
+        title: "A meaningful field update",
+        body: "A sufficiently detailed message from the field for supporters.",
+        sensitive: false,
+      },
+    });
+  });
 });
 
 describe("submissionImageValue", () => {

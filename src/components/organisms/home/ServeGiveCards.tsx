@@ -14,7 +14,7 @@ const CARDS: { icon: LucideIcon; title: string; href: string; body: string }[] =
     icon: Compass,
     title: "Serve",
     href: "/involved",
-    body: "Field assignments run from a few months to a career — and not only for linguists.",
+    body: "Field assignments run from a few months to a career, and not only for linguists.",
   },
   {
     icon: Gift,

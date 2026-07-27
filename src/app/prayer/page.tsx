@@ -27,7 +27,7 @@ export default async function PrayerPage() {
           </h2>
           <p className="font-body text-md leading-relaxed text-muted">
             Before a verse is drafted, someone prays. These are the current requests from our
-            missionaries across Africa — some shared anonymously to protect workers in
+            missionaries across Africa, some shared anonymously to protect workers in
             security-restricted areas. Take one with you this week.
           </p>
         </div>
@@ -54,7 +54,7 @@ export default async function PrayerPage() {
             </h2>
             <p className="max-w-[58ch] font-body text-base leading-relaxed text-muted">
               The prayer guide gathers requests from every field into one rhythm of prayer for
-              Bible translation across Africa — free to download, updated every two weeks.
+              Bible translation across Africa. Free to download, updated every two weeks.
             </p>
           </div>
           <div className="flex flex-none flex-wrap gap-2.5">

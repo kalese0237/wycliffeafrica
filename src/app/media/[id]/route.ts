@@ -51,18 +51,27 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
     fields: "id,status",
     limit: "-1",
   });
+  const inlineNewsParams = new URLSearchParams({
+    "filter[inlineImage][_eq]": id,
+    fields: "id,status",
+    limit: "-1",
+  });
   const missionaryParams = new URLSearchParams({
     "filter[image][_eq]": id,
     fields: "id",
     limit: "1",
   });
-  const [updates, news, missionaries] = await Promise.all([
+  const [updates, news, inlineNews, missionaries] = await Promise.all([
     getJson<DirectusList<UpdateReference>>(
       `${directusUrl}/items/field_updates?${updateParams}`,
       token,
     ),
     getJson<DirectusList<NewsReference>>(
       `${directusUrl}/items/news?${newsParams}`,
+      token,
+    ),
+    getJson<DirectusList<NewsReference>>(
+      `${directusUrl}/items/news?${inlineNewsParams}`,
       token,
     ),
     getJson<DirectusList<{ id: string }>>(
@@ -80,7 +89,14 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
     (update) => update.status === "published" && !update.sensitive,
   ) ?? false;
   const belongsToPublicNews = news?.data.some((item) => item.status === "published") ?? false;
-  if (!belongsToPublicProfile && !belongsToPublicUpdate && !belongsToPublicNews) {
+  const belongsToPublicInlineNews =
+    inlineNews?.data.some((item) => item.status === "published") ?? false;
+  if (
+    !belongsToPublicProfile &&
+    !belongsToPublicUpdate &&
+    !belongsToPublicNews &&
+    !belongsToPublicInlineNews
+  ) {
     return new NextResponse(null, { status: 404 });
   }
 

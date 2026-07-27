@@ -18,9 +18,9 @@ export const CONTENT_SNAPSHOT = {
       "category": "update",
       "slug": "first-recorded-scripture-songs-released",
       "title": "First recorded Scripture songs released",
-      "excerpt": "A local choir has recorded the first Scripture songs in their language — already spreading through phones and radio in the community.",
+      "excerpt": "A local choir has recorded the first Scripture songs in their language, already spreading through phones and radio in the community.",
       "body": [
-        "A local choir has recorded the first Scripture songs in their language — already spreading through phones and radio in the community."
+        "A local choir has recorded the first Scripture songs in their language, already spreading through phones and radio in the community."
       ],
       "author": null,
       "missionaryId": "mwangi",
@@ -54,9 +54,9 @@ export const CONTENT_SNAPSHOT = {
       "category": "update",
       "slug": "language-survey-completed-in-three-new-communities",
       "title": "Language survey completed in three new communities",
-      "excerpt": "Esther's team has finished surveying three previously undocumented language communities — the first step toward future translation work.",
+      "excerpt": "Esther's team has finished surveying three previously undocumented language communities, the first step toward future translation work.",
       "body": [
-        "Esther's team has finished surveying three previously undocumented language communities — the first step toward future translation work."
+        "Esther's team has finished surveying three previously undocumented language communities, the first step toward future translation work."
       ],
       "author": null,
       "missionaryId": "achieng",
@@ -72,9 +72,9 @@ export const CONTENT_SNAPSHOT = {
       "category": "story",
       "slug": "church",
       "title": "Partnering churches into the Great Commission",
-      "excerpt": "We walk with congregations to adopt language communities in prayer, giving and people — until every group has the Word.",
+      "excerpt": "We walk with congregations to adopt language communities in prayer, giving and people, until every group has the Word.",
       "body": [
-        "We walk with congregations to adopt language communities in prayer, giving and people — until every group has the Word."
+        "We walk with congregations to adopt language communities in prayer, giving and people, until every group has the Word."
       ],
       "author": "Partnership Team",
       "missionaryId": null,
@@ -90,9 +90,9 @@ export const CONTENT_SNAPSHOT = {
       "category": "story",
       "slug": "member",
       "title": "Becoming a member: your first step into the work",
-      "excerpt": "From linguists to teachers, accountants to pilots — every calling has a place in Bible translation. Discover how to join.",
+      "excerpt": "From linguists to teachers, accountants to pilots. Every calling has a place in Bible translation. Discover how to join.",
       "body": [
-        "From linguists to teachers, accountants to pilots — every calling has a place in Bible translation. Discover how to join."
+        "From linguists to teachers, accountants to pilots. Every calling has a place in Bible translation. Discover how to join."
       ],
       "author": "Membership Team",
       "missionaryId": null,
@@ -111,7 +111,7 @@ export const CONTENT_SNAPSHOT = {
       "excerpt": "Across Africa, millions have never read a single verse in the language they think, pray and dream in. Bible translation closes that gap. ",
       "body": [
         "Across Africa, millions have never read a single verse in the language they think, pray and dream in. Bible translation closes that gap.",
-        "For years, prayers, songs and Sunday readings came in a language learned at school — never the one spoken at home. That distance is what Bible translation closes: not merely swapping words, but letting the living Word be heard in the tongue of the heart."
+        "For years, prayers, songs and Sunday readings came in a language learned at school, never the one spoken at home. That distance is what Bible translation closes: not merely swapping words, but letting the living Word be heard in the tongue of the heart."
       ],
       "author": "Wycliffe Africa",
       "missionaryId": null,
@@ -129,10 +129,10 @@ export const CONTENT_SNAPSHOT = {
       "name": "David Mwangi",
       "place": "South Sudan",
       "roles": "Scripture Engagement",
-      "intro": "David helps churches put translated Scripture to use in worship, discipleship and daily life — through song, audio and Bible study.",
+      "intro": "David helps churches put translated Scripture to use in worship, discipleship and daily life, through song, audio and Bible study.",
       "bio": [
         "David's conviction is simple: translation is finished not when the books are printed, but when people meet God in them. He serves churches in South Sudan as a Scripture engagement facilitator.",
-        "His weeks are spent helping congregations weave newly translated Scripture into worship — recording Scripture songs with local choirs, distributing audio Bibles for listening groups, and training pastors to preach from the mother-tongue text."
+        "His weeks are spent helping congregations weave newly translated Scripture into worship: recording Scripture songs with local choirs, distributing audio Bibles for listening groups, and training pastors to preach from the mother-tongue text."
       ],
       "image": null
     },
@@ -144,7 +144,7 @@ export const CONTENT_SNAPSHOT = {
       "roles": "Language Survey Specialist",
       "intro": "Esther travels across language areas gathering the data that guides where translation work is needed most.",
       "bio": [
-        "Before a single verse can be drafted, someone has to listen. Esther leads survey trips across Uganda's language areas — recording word lists, testing comprehension between dialects, and sitting with elders to understand how communities actually speak.",
+        "Before a single verse can be drafted, someone has to listen. Esther leads survey trips across Uganda's language areas: recording word lists, testing comprehension between dialects, and sitting with elders to understand how communities actually speak.",
         "Her reports guide where the movement begins its next translation projects, making her work the first chapter of every future Scripture launch."
       ],
       "image": null
@@ -171,7 +171,7 @@ export const CONTENT_SNAPSHOT = {
       "roles": "Finance & Administration",
       "intro": "Joseph stewards the funds entrusted to the movement, ensuring every gift is accounted for and directed to the field.",
       "bio": [
-        "Every translation project runs on trust — of language communities, of churches, and of the givers who fund the work. Joseph keeps that trust: he manages the movement's accounts from Nairobi, ensuring every gift is tracked from donor to field.",
+        "Every translation project runs on the trust of language communities, churches, and the givers who fund the work. Joseph keeps that trust: he manages the movement's accounts from Nairobi, ensuring every gift is tracked from donor to field.",
         "A certified accountant, he left corporate practice in 2018 because he wanted his ledgers to count for something eternal."
       ],
       "image": null
@@ -185,7 +185,7 @@ export const CONTENT_SNAPSHOT = {
       "intro": "Lydia champions language-inclusive education and Scripture engagement across Uganda, helping refugee and host communities access learning and God’s Word in the languages they understand best.",
       "bio": [
         "Lydia Teera is a Ugandan mission leader and Programme Manager serving with the Learning & Development team at SIL Africa while seconded from Wycliffe Africa. With more than two decades of missionary service, Lydia is passionate about helping communities access education and Scripture in languages they understand best. Her work focuses on advocacy, alliance building, and strengthening partnerships that promote language-inclusive education and meaningful Scripture engagement across African communities.",
-        "In her current role, Lydia contributes to initiatives that address language barriers in education, particularly among refugee and host communities in Uganda. She has co-led evidence-based programs that equip educators with multilingual classroom strategies and practical approaches that governments and institutions can adopt in their education systems. Her work brings together research, training, and community engagement to ensure that language becomes a bridge—rather than a barrier—to learning, faith formation, and community transformation.",
+        "In her current role, Lydia contributes to initiatives that address language barriers in education, particularly among refugee and host communities in Uganda. She has co-led evidence-based programs that equip educators with multilingual classroom strategies and practical approaches that governments and institutions can adopt in their education systems. Her work brings together research, training, and community engagement to ensure that language becomes a bridge, rather than a barrier, to learning, faith formation, and community transformation.",
         "Lydia’s calling to missionary service began more than 20 years ago when she made the courageous decision to dedicate her life to advancing God’s mission through Bible translation and language development. Known for her strengths in advocacy, communication, and partnership building, she is also a co-author of a bridging program that supports refugee learners transitioning into Ugandan schools. Beyond her professional work, Lydia enjoys meaningful conversations around Scripture and the role of language in shaping identity and faith. She also loves sharing stories that highlight the impact of Bible translation and education initiatives, and when she is at home, she enjoys spending time in her garden.",
         "Among the many language communities she has worked with, Lydia holds a special place in her heart for the Pokot, a marginalised tribe in northeastern Uganda facing low literacy, limited access to basic resources, and an undiscipled church shaped by language barriers and remote geography. She has dedicated significant time to supporting their language development. She is also a key contributor to Wycliffe Africa’s partnership with other mission organisations to recruit and send African missionaries into Bible translation work worldwide, having helped recruit several missionaries serving in Uganda."
       ],
@@ -200,7 +200,7 @@ export const CONTENT_SNAPSHOT = {
       "intro": "Miriam develops reading primers and adult literacy programmes so that when Scripture arrives, communities can read it for themselves.",
       "bio": [
         "A translated Bible no one can read stays closed. Miriam joined the movement after a decade teaching primary school, convinced that literacy is the bridge between a finished translation and a transformed community.",
-        "From Nairobi she designs reading primers, trains volunteer literacy teachers, and runs adult reading groups in partner language areas — most recently in the Kakuma refugee settlement."
+        "From Nairobi she designs reading primers, trains volunteer literacy teachers, and runs adult reading groups in partner language areas, most recently in the Kakuma refugee settlement."
       ],
       "image": null
     },
@@ -212,7 +212,7 @@ export const CONTENT_SNAPSHOT = {
       "roles": "Bible Translation Advisors",
       "intro": "Peter and Hannah serve a cluster of related languages, training local translators and checking drafts with consultants.",
       "bio": [
-        "Peter and Hannah moved to Cameroon in 2019 to serve a cluster of four related languages in the Northwest. Rather than translating themselves, they train and mentor local translation teams — one team per language, sharing tools, terminology and checked drafts across the cluster.",
+        "Peter and Hannah moved to Cameroon in 2019 to serve a cluster of four related languages in the Northwest. Rather than translating themselves, they train and mentor local translation teams, one team per language, sharing tools, terminology and checked drafts across the cluster.",
         "Their joy is watching a community leader read a freshly checked chapter aloud and hearing the room answer back in recognition."
       ],
       "image": null
@@ -271,7 +271,7 @@ export const CONTENT_SNAPSHOT = {
       "type": "prayer",
       "missionaryId": "kamau",
       "title": "Pray for provision as we close the fiscal year",
-      "body": "Joseph asks for prayer as the team finalises this year's accounts — for wisdom in stewardship and provision for next year's projects.",
+      "body": "Joseph asks for prayer as the team finalises this year's accounts: for wisdom in stewardship and provision for next year's projects.",
       "date": "April 2026",
       "sensitive": false,
       "image": null
@@ -302,7 +302,7 @@ export const CONTENT_SNAPSHOT = {
     {
       "id": "r4",
       "type": "video",
-      "title": "Vision 2025 — Field Film",
+      "title": "Vision 2025: Field Film",
       "meta": "6 min",
       "href": "#"
     },
@@ -330,7 +330,7 @@ export const CONTENT_SNAPSHOT = {
     {
       "id": "f2",
       "question": "Can I support a specific missionary?",
-      "answer": "Yes — each missionary raises support relationship by relationship. Visit Our Missionaries to read profiles and start a monthly partnership."
+      "answer": "Yes. Each missionary raises support relationship by relationship. Visit Our Missionaries to read profiles and start a monthly partnership."
     },
     {
       "id": "f3",
@@ -340,7 +340,7 @@ export const CONTENT_SNAPSHOT = {
     {
       "id": "f4",
       "question": "How do I apply to serve with Wycliffe Africa?",
-      "answer": "Start with the preliminary questionnaire — it takes about ten minutes and helps our team understand where your skills might fit the work."
+      "answer": "Start with the preliminary questionnaire. It takes about ten minutes and helps our team understand where your skills might fit the work."
     }
   ]
 } satisfies {

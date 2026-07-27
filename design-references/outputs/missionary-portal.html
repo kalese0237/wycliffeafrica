@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Field Portal — Wycliffe Africa</title>
+<style>
+  :root{
+    --cream:#FBF6EE; --paper:#FFFFFF; --sand:#FDF7EC; --line:#EADFCF;
+    --amber:#E8912A; --amber2:#F6B94E; --gold:#C9761A; --terra:#B5471B; --terra7:#8C3313;
+    --leaf:#2F6E63; --leaf7:#234F47; --ink:#2A2018; --ink-soft:#5B4E42; --highlight:#FFD79A;
+    --grad-sunrise:radial-gradient(120% 95% at 50% 118%, #FFE0A6 0%, #F0A544 24%, #C85E22 54%, #7C3417 100%);
+    --grad-leaf:linear-gradient(135deg,#2F6E63,#234F47);
+    --grad-mark:radial-gradient(circle at 50% 120%, #FFD27A 0%, #E8912A 42%, #B5471B 100%);
+    --grad-dot:radial-gradient(circle at 40% 30%, #F6B94E, #B5471B);
+    --shadow-card:0 10px 30px -22px rgba(80,45,10,.5);
+    --shadow-soft:0 12px 30px -12px rgba(0,0,0,.4);
+    --shadow-panel:0 18px 50px -24px rgba(60,35,10,.45);
+    --serif:"Iowan Old Style","Palatino Linotype",Georgia,serif;
+    --sans:"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--serif);color:var(--ink);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .sans{font-family:var(--sans)}
+  button{font-family:var(--sans);cursor:pointer}
+  input,textarea,select{font-family:var(--sans)}
+  .hide{display:none !important}
+
+  /* ---------- shared bits ---------- */
+  .mark{width:34px;height:34px;border-radius:50%;background:var(--grad-mark);box-shadow:0 0 0 4px rgba(232,145,42,.15);flex:none}
+  .mark.lg{width:52px;height:52px}
+  .brand{display:flex;align-items:center;gap:12px;font-family:var(--sans);font-weight:700;letter-spacing:.02em}
+  .brand small{display:block;font-weight:400;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+  .kicker{font-family:var(--sans);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+  .btn{font-family:var(--sans);font-weight:600;font-size:14px;padding:12px 22px;border:none;border-radius:40px;transition:transform .15s ease, box-shadow .15s ease}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:var(--terra);color:#fff;box-shadow:var(--shadow-soft)}
+  .btn-ghost{background:transparent;color:var(--terra);border:1.5px solid var(--terra)}
+  .btn-white{background:#fff;color:var(--terra)}
+  .btn-sm{padding:8px 16px;font-size:13px}
+
+  /* ---------- LOGIN ---------- */
+  #login{min-height:100vh;display:grid;grid-template-columns:1.05fr .95fr}
+  .login-art{position:relative;overflow:hidden;background:var(--grad-sunrise);color:#fff;padding:56px 60px;display:flex;flex-direction:column;justify-content:space-between}
+  .login-art .sun{position:absolute;right:-140px;top:-120px;width:420px;height:420px;border-radius:50%;
+    background:radial-gradient(circle,#FFF4D6 0%,#FFDE96 45%,rgba(255,222,150,0) 70%);opacity:.7}
+  .login-art .top{position:relative;z-index:2}
+  .login-art .mid{position:relative;z-index:2;max-width:440px}
+  .login-art h1{font-size:2.6rem;line-height:1.12;font-weight:600;margin:0 0 18px;text-shadow:0 2px 18px rgba(120,40,0,.25)}
+  .login-art p{color:#FFF3E0;font-size:1.1rem}
+  .login-art .verse{position:relative;z-index:2;font-style:italic;color:#FFE9C4;border-left:3px solid rgba(255,255,255,.5);padding-left:16px;max-width:420px}
+  .login-form-wrap{display:flex;align-items:center;justify-content:center;padding:40px}
+  .login-card{width:100%;max-width:400px}
+  .login-card .kicker{margin-bottom:6px}
+  .login-card h2{font-size:1.9rem;font-weight:600;margin-bottom:8px}
+  .login-card .sub{color:var(--ink-soft);margin-bottom:28px}
+  .field{margin-bottom:18px}
+  .field label{display:block;font-family:var(--sans);font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px}
+  .field input, .field textarea, .field select{
+    width:100%;padding:13px 15px;font-size:15px;color:var(--ink);background:var(--paper);
+    border:1.5px solid var(--line);border-radius:12px;outline:none;transition:border-color .15s, box-shadow .15s}
+  .field input:focus, .field textarea:focus, .field select:focus{border-color:var(--amber);box-shadow:0 0 0 3px rgba(232,145,42,.18)}
+  .field textarea{resize:vertical;min-height:120px;line-height:1.55}
+  .row-between{display:flex;justify-content:space-between;align-items:center}
+  .link{font-family:var(--sans);font-size:13px;color:var(--terra);text-decoration:none;font-weight:600}
+  .link:hover{text-decoration:underline}
+  .err{background:#FCE9E2;border:1px solid #EBB9A6;color:#8C3313;font-family:var(--sans);font-size:13px;padding:11px 14px;border-radius:10px;margin-bottom:18px}
+  .demo-hint{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);background:var(--sand);border:1px dashed var(--line);border-radius:10px;padding:11px 14px;margin-top:20px}
+  .demo-hint b{color:var(--terra)}
+
+  /* ---------- APP SHELL ---------- */
+  #app{min-height:100vh;display:grid;grid-template-columns:250px 1fr}
+  .side{background:var(--ink);color:#CDBBA6;padding:26px 20px;display:flex;flex-direction:column;gap:8px;position:sticky;top:0;height:100vh}
+  .side .brand{color:#F3D9B4;margin-bottom:26px;padding:0 8px}
+  .side .brand small{color:#B98A4a}
+  .nav-item{display:flex;align-items:center;gap:12px;font-family:var(--sans);font-size:14.5px;color:#CDBBA6;
+    padding:12px 14px;border-radius:12px;border:none;background:transparent;width:100%;text-align:left}
+  .nav-item svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.8;flex:none}
+  .nav-item:hover{background:rgba(255,255,255,.06);color:#fff}
+  .nav-item.active{background:var(--terra);color:#fff}
+  .side .spacer{flex:1}
+  .side .who{font-family:var(--sans);font-size:13px;color:#B98A4a;padding:14px 8px 6px;border-top:1px solid rgba(255,255,255,.08)}
+  .side .who b{display:block;color:#F3D9B4;font-size:14px}
+
+  .main{padding:34px 44px 60px;max-width:1000px}
+  .page-head{margin-bottom:26px}
+  .page-head h1{font-size:2rem;font-weight:600;margin-bottom:6px}
+  .page-head p{color:var(--ink-soft)}
+
+  .grid-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:30px}
+  .stat-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px 24px;box-shadow:var(--shadow-card)}
+  .stat-card .n{font-family:var(--sans);font-weight:700;font-size:2rem;color:var(--terra);line-height:1}
+  .stat-card .l{font-family:var(--sans);font-size:13px;color:var(--ink-soft);margin-top:8px}
+
+  .quick{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:34px}
+  .quick button{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px;text-align:left;box-shadow:var(--shadow-card);transition:transform .16s ease}
+  .quick button:hover{transform:translateY(-3px)}
+  .quick .ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(140deg,#FCE3B8,#F3AD52);margin-bottom:14px}
+  .quick .ic svg{width:22px;height:22px;stroke:var(--terra);fill:none;stroke-width:1.8}
+  .quick h3{font-size:1.1rem;color:var(--terra);margin-bottom:5px}
+  .quick p{font-family:var(--sans);font-size:13px;color:var(--ink-soft)}
+
+  .section-title{font-family:var(--sans);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:6px 0 16px}
+
+  /* submission list */
+  .sub-item{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:14px;box-shadow:var(--shadow-card)}
+  .sub-item .top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .badge{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:30px}
+  .badge.update{background:#E7F0ED;color:#2F6E63}
+  .badge.story{background:#FBE7C4;color:#9a5a12}
+  .badge.prayer{background:#F6E0D7;color:#B5471B}
+  .badge.status{background:var(--sand);color:var(--ink-soft);border:1px solid var(--line)}
+  .sub-item h3{font-size:1.18rem;margin-bottom:4px}
+  .sub-item .meta{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft)}
+  .sub-item .body{margin-top:8px;color:var(--ink-soft);font-size:1.02rem}
+  .empty{background:var(--sand);border:1px dashed var(--line);border-radius:14px;padding:40px;text-align:center;color:var(--ink-soft);font-family:var(--sans)}
+
+  /* photo in submission cards */
+  .sub-pic{margin:12px 0 6px;border-radius:12px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/9;background:var(--sand)}
+  .sub-pic img,.sub-pic svg{display:block;width:100%;height:100%;object-fit:cover}
+  .sub-cap{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);font-style:italic;margin:0 0 4px}
+  /* photo upload in composer */
+  .field .opt{font-weight:400;color:var(--ink-soft);font-style:italic}
+  .photo-drop{border:1.5px dashed var(--line);border-radius:12px;background:var(--sand);padding:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;min-height:64px}
+  .photo-pick{background:var(--paper);border:1.5px solid var(--terra);color:var(--terra);font-weight:600;font-size:13.5px;padding:10px 18px;border-radius:30px}
+  .photo-pick:hover{background:var(--terra);color:#fff}
+  .photo-note{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft)}
+  .photo-has{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .photo-preview{width:150px;height:96px;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+  .photo-remove{background:transparent;border:none;color:var(--terra);font-weight:600;font-size:13px;text-decoration:underline}
+
+  /* composer */
+  .composer{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:30px 32px;box-shadow:var(--shadow-panel);max-width:680px}
+  .seg{display:inline-flex;background:var(--sand);border:1px solid var(--line);border-radius:40px;padding:5px;margin-bottom:26px;gap:4px;flex-wrap:wrap}
+  .seg button{border:none;background:transparent;font-family:var(--sans);font-size:13.5px;font-weight:600;color:var(--ink-soft);padding:9px 18px;border-radius:30px}
+  .seg button.on{background:var(--terra);color:#fff;box-shadow:var(--shadow-soft)}
+  .composer .hint{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);margin-top:-8px;margin-bottom:18px}
+  .form-actions{display:flex;gap:12px;align-items:center;margin-top:8px}
+  .saved-flash{font-family:var(--sans);font-size:13px;color:var(--leaf);font-weight:600;opacity:0;transition:opacity .3s}
+  .saved-flash.show{opacity:1}
+
+  .filter-row{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+  .chip{font-family:var(--sans);font-size:13px;padding:8px 16px;border-radius:30px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink-soft)}
+  .chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+  .topbar{display:none}
+  @media(max-width:860px){
+    #login{grid-template-columns:1fr}
+    .login-art{display:none}
+    #app{grid-template-columns:1fr}
+    .side{position:fixed;left:-260px;transition:left .2s;z-index:40;width:250px}
+    .side.open{left:0}
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--ink);color:#F3D9B4;position:sticky;top:0;z-index:30}
+    .topbar button{background:transparent;border:none;color:#F3D9B4;font-size:22px}
+    .main{padding:24px 20px 50px}
+    .grid-stats,.quick{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<div id="login">
+  <div class="login-art">
+    <div class="top brand" style="color:#fff">
+      <span class="mark"></span>
+      <span>Wycliffe Africa<small style="color:#FFE9C4">Field Portal</small></span>
+    </div>
+    <div class="mid">
+      <h1>Send word home from the field.</h1>
+      <p>Share your updates, stories, and prayer requests with the team and the partners standing with you.</p>
+    </div>
+    <div class="verse">"How beautiful are the feet of those who bring good news." — Romans 10:15</div>
+  </div>
+
+  <div class="login-form-wrap">
+    <form class="login-card" id="loginForm" autocomplete="off">
+      <div class="kicker">Missionary sign-in</div>
+      <h2>Welcome back</h2>
+      <p class="sub">Sign in to post from your station.</p>
+
+      <div class="err hide" id="loginErr">We didn't recognise that email or password. Try again.</div>
+
+      <div class="field">
+        <label for="email">Email address</label>
+        <input type="email" id="email" placeholder="you@wycliffeafrica.org" value="joseph_namutala@wycliffeafrica.org">
+      </div>
+      <div class="field">
+        <label for="pass">Password</label>
+        <input type="password" id="pass" placeholder="Your password" value="fieldnotes">
+      </div>
+      <div class="row-between" style="margin-bottom:22px">
+        <label class="sans" style="font-size:13px;color:var(--ink-soft);display:flex;align-items:center;gap:7px"><input type="checkbox" checked style="width:auto"> Keep me signed in</label>
+        <a href="#" class="link" onclick="return false">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width:100%">Sign in</button>
+
+      <div class="demo-hint">
+        <b>Demo:</b> credentials are pre-filled — just press <b>Sign in</b>. (Any email + password <b>fieldnotes</b> works.)
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============ APP ============ -->
+<div id="app" class="hide">
+  <aside class="side" id="side">
+    <div class="brand">
+      <span class="mark"></span>
+      <span>Wycliffe Africa<small>Field Portal</small></span>
+    </div>
+    <button class="nav-item active" data-view="dash" onclick="go('dash')">
+      <svg viewBox="0 0 24 24"><path d="M3 12l9-9 9 9M5 10v10h5v-6h4v6h5V10"/></svg> Dashboard
+    </button>
+    <button class="nav-item" data-view="compose" onclick="go('compose')">
+      <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg> New submission
+    </button>
+    <button class="nav-item" data-view="history" onclick="go('history')">
+      <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg> My submissions
+    </button>
+    <div class="spacer"></div>
+    <div class="who">
+      Signed in as
+      <b id="whoName">Joseph Namutala</b>
+      <span id="whoStation">Madagascar station</span>
+    </div>
+    <button class="nav-item" onclick="logout()">
+      <svg viewBox="0 0 24 24"><path d="M16 17l5-5-5-5M21 12H9M12 19H5V5h7"/></svg> Sign out
+    </button>
+  </aside>
+
+  <div>
+    <div class="topbar">
+      <button onclick="document.getElementById('side').classList.toggle('open')">&#9776;</button>
+      <div class="brand" style="color:#F3D9B4;font-size:15px"><span class="mark" style="width:26px;height:26px"></span> Field Portal</div>
+      <span style="width:24px"></span>
+    </div>
+    <main class="main" id="main"><!-- views injected here --></main>
+  </div>
+</div>
+
+<script>
+/* ---------------- state ---------------- */
+var USER = { name:"Joseph Namutala", station:"Madagascar station", first:"Joseph" };
+var TYPES = {
+  update:  { label:"Field update",   badge:"update", blurb:"What's happening in the work right now." },
+  story:   { label:"Story",          badge:"story",  blurb:"A moment worth telling from the field." },
+  prayer:  { label:"Prayer request", badge:"prayer", blurb:"Ask the team and partners to pray with you." }
+};
+var subs = [
+  { type:"story",  title:"A grandmother reads Luke for the first time",
+    location:"Antananarivo, Madagascar", date:"2026-07-18", status:"Submitted",
+    img:"read", caption:"Voahangy reads the opening of Luke aloud to her grandchildren.",
+    body:"Voahangy is 74. This week she held the Gospel of Luke in her own language and read the opening verses aloud to her grandchildren. The room went quiet." },
+  { type:"update", title:"Literacy class enrolment up to 40",
+    location:"Antananarivo, Madagascar", date:"2026-07-11", status:"Submitted",
+    img:"class", caption:"The Tuesday literacy class, now 40 learners strong.",
+    body:"Our Tuesday and Thursday literacy classes have grown from 22 to 40 learners this month. We need a second facilitator." },
+  { type:"prayer", title:"Safe travel for the translation review week",
+    location:"Antananarivo, Madagascar", date:"2026-07-04", status:"Submitted", urgency:"This week",
+    body:"Six of us travel south next week for a review of the Acts draft. Roads are rough after the rains. Please pray for safety and clear minds." }
+];
+var composeType = "update";
+
+/* ---------------- login ---------------- */
+document.getElementById('loginForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var pass = document.getElementById('pass').value;
+  var email = document.getElementById('email').value.trim();
+  if(pass === "fieldnotes" && email.length){
+    document.getElementById('loginErr').classList.add('hide');
+    document.getElementById('login').classList.add('hide');
+    document.getElementById('app').classList.remove('hide');
+    go('dash');
+  } else {
+    document.getElementById('loginErr').classList.remove('hide');
+  }
+});
+function logout(){
+  document.getElementById('app').classList.add('hide');
+  document.getElementById('login').classList.remove('hide');
+  document.getElementById('pass').value = "fieldnotes";
+}
+
+/* ---------------- routing ---------------- */
+function go(view){
+  document.querySelectorAll('.nav-item[data-view]').forEach(function(b){
+    b.classList.toggle('active', b.dataset.view===view);
+  });
+  document.getElementById('side').classList.remove('open');
+  if(view==='dash') renderDash();
+  if(view==='compose') renderCompose();
+  if(view==='history') renderHistory();
+  window.scrollTo(0,0);
+}
+
+function esc(s){ return (s||"").replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+function fmtDate(d){ var p=d.split('-'); var m=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]; return p[2]*1+" "+m[p[1]-1]+" "+p[0]; }
+function count(t){ return subs.filter(function(s){return s.type===t;}).length; }
+
+/* ---------------- dashboard ---------------- */
+function renderDash(){
+  var recent = subs.slice(0,3).map(subCard).join('') || emptyMsg();
+  document.getElementById('main').innerHTML =
+    '<div class="page-head"><div class="kicker">Dashboard</div>'+
+      '<h1>Good to see you, '+esc(USER.first)+'.</h1>'+
+      '<p>You have posted '+subs.length+' items from your station.</p></div>'+
+    '<div class="grid-stats">'+
+      statCard(count('update'),'Field updates')+
+      statCard(count('story'),'Stories')+
+      statCard(count('prayer'),'Prayer requests')+
+    '</div>'+
+    '<div class="section-title">Post something new</div>'+
+    '<div class="quick">'+
+      quickBtn('update','M4 19V5h16v14zM8 9h8M8 13h6','Field update','Share news from the work.')+
+      quickBtn('story','M4 4h16v13H8l-4 4z','Story','Tell a moment from the field.')+
+      quickBtn('prayer','M12 3c2 4 6 4 6 9a6 6 0 0 1-12 0c0-5 4-5 6-9z','Prayer request','Ask others to pray.')+
+    '</div>'+
+    '<div class="section-title">Recent submissions</div>'+ recent;
+}
+function statCard(n,l){ return '<div class="stat-card"><div class="n">'+n+'</div><div class="l">'+l+'</div></div>'; }
+function quickBtn(type,path,title,p){
+  return '<button onclick="openCompose(\''+type+'\')"><div class="ic"><svg viewBox="0 0 24 24"><path d="'+path+'"/></svg></div>'+
+    '<h3>'+title+'</h3><p>'+p+'</p></button>';
+}
+function openCompose(type){ composeType=type; pendingImage=null; go('compose'); }
+
+/* ---------------- composer ---------------- */
+var pendingImage=null; // data URL of a photo attached in this session
+function renderCompose(){
+  var seg = Object.keys(TYPES).map(function(k){
+    return '<button class="'+(k===composeType?'on':'')+'" onclick="composeType=\''+k+'\';renderCompose()">'+TYPES[k].label+'</button>';
+  }).join('');
+  var prayerField = composeType==='prayer'
+    ? '<div class="field"><label for="urg">How soon?</label><select id="urg"><option>Whenever you can</option><option>This week</option><option selected>This month</option><option>Ongoing</option></select></div>'
+    : '';
+  var canPhoto = (composeType==='update'||composeType==='story');
+  var photoField = canPhoto
+    ? '<div class="field"><label>Photo <span class="opt">— optional, add one if you have it</span></label>'+
+        '<div class="photo-drop" id="photoDrop">'+ photoInner() +'</div>'+
+        '<input type="file" id="photo" accept="image/*" onchange="onPhoto(event)" hidden>'+
+      '</div>'+
+      '<div class="field capfield'+(pendingImage?'':' hide')+'" id="capField"><label for="cap">Photo caption</label>'+
+        '<input id="cap" placeholder="A line describing the photo"></div>'
+    : '';
+  document.getElementById('main').innerHTML =
+    '<div class="page-head"><div class="kicker">New submission</div>'+
+      '<h1>Share from your station</h1><p>'+TYPES[composeType].blurb+'</p></div>'+
+    '<div class="composer">'+
+      '<div class="seg">'+seg+'</div>'+
+      '<div class="field"><label for="ttl">Title</label><input id="ttl" placeholder="Give it a short headline"></div>'+
+      '<div class="field"><label for="loc">Location</label><input id="loc" placeholder="Town, country" value="'+esc(USER.station.replace(" station",""))+'"></div>'+
+      prayerField+
+      '<div class="field"><label for="bdy">'+(composeType==='prayer'?'What should we pray for?':'Your message')+'</label>'+
+        '<textarea id="bdy" placeholder="Write in your own words..."></textarea></div>'+
+      photoField+
+      '<div class="form-actions">'+
+        '<button class="btn btn-primary" onclick="submitSub(\'Submitted\')">Post to the team</button>'+
+        '<button class="btn btn-ghost" onclick="submitSub(\'Draft\')">Save as draft</button>'+
+        '<span class="saved-flash" id="flash">Saved.</span>'+
+      '</div>'+
+    '</div>';
+}
+function photoInner(){
+  return pendingImage
+    ? '<div class="photo-has"><img class="photo-preview" src="'+pendingImage+'" alt=""><button type="button" class="photo-remove" onclick="clearPhoto()">Remove</button></div>'
+    : '<button type="button" class="photo-pick" onclick="document.getElementById(\'photo\').click()">＋ Add a photo</button>'+
+      '<span class="photo-note">JPG or PNG · landscape looks best on the site</span>';
+}
+function onPhoto(e){
+  var f=e.target.files && e.target.files[0]; if(!f) return;
+  var r=new FileReader();
+  r.onload=function(){ pendingImage=r.result; paintPhoto(); };
+  r.readAsDataURL(f);
+}
+function clearPhoto(){ pendingImage=null; var p=document.getElementById('photo'); if(p) p.value=''; paintPhoto(); }
+function paintPhoto(){
+  var d=document.getElementById('photoDrop'); if(d) d.innerHTML=photoInner();
+  var c=document.getElementById('capField'); if(c) c.classList.toggle('hide', !pendingImage);
+}
+function submitSub(status){
+  var t=document.getElementById('ttl').value.trim();
+  var b=document.getElementById('bdy').value.trim();
+  var loc=document.getElementById('loc').value.trim();
+  if(!t || !b){
+    var f=document.getElementById('flash'); f.textContent="Add a title and a message first."; f.style.color="var(--terra)"; f.classList.add('show');
+    setTimeout(function(){f.classList.remove('show');},2200); return;
+  }
+  var item={ type:composeType, title:t, location:loc||USER.station, body:b,
+    date:new Date().toISOString().slice(0,10), status:status };
+  if(composeType==='prayer'){ var u=document.getElementById('urg'); if(u) item.urgency=u.value; }
+  if(pendingImage){ item.img=pendingImage; var cap=document.getElementById('cap'); if(cap && cap.value.trim()) item.caption=cap.value.trim(); }
+  subs.unshift(item);
+  pendingImage=null;
+  var f=document.getElementById('flash'); f.textContent=(status==='Draft'?'Saved as draft.':'Posted to the team.'); f.style.color="var(--leaf)"; f.classList.add('show');
+  setTimeout(function(){ go('history'); },700);
+}
+
+/* ---------------- history ---------------- */
+var histFilter="all";
+function renderHistory(){
+  var chips = [['all','All'],['update','Updates'],['story','Stories'],['prayer','Prayer']].map(function(c){
+    return '<button class="chip '+(histFilter===c[0]?'on':'')+'" onclick="histFilter=\''+c[0]+'\';renderHistory()">'+c[1]+'</button>';
+  }).join('');
+  var list = subs.filter(function(s){return histFilter==='all'||s.type===histFilter;});
+  var body = list.length ? list.map(subCard).join('') : emptyMsg();
+  document.getElementById('main').innerHTML =
+    '<div class="page-head"><div class="kicker">My submissions</div>'+
+      '<h1>Everything you\'ve posted</h1><p>'+subs.length+' items from '+esc(USER.station)+'.</p></div>'+
+    '<div class="filter-row">'+chips+'</div>'+ body;
+}
+
+/* ---------------- shared render ---------------- */
+function subCard(s){
+  var extra = s.urgency ? '<span class="badge status">Pray: '+esc(s.urgency)+'</span>' : '';
+  var pic = '';
+  if(s.img){
+    var inner = (s.img.slice(0,5)==='data:') ? '<img src="'+s.img+'" alt="">' : sceneSVG(s.img);
+    var cap = s.caption ? '<div class="sub-cap">'+esc(s.caption)+'</div>' : '';
+    pic = '<div class="sub-pic">'+inner+'</div>'+cap;
+  }
+  return '<div class="sub-item">'+
+    '<div class="top"><span class="badge '+TYPES[s.type].badge+'">'+TYPES[s.type].label+'</span>'+
+      '<span class="badge status">'+esc(s.status)+'</span>'+extra+'</div>'+
+    '<h3>'+esc(s.title)+'</h3>'+
+    '<div class="meta">'+esc(s.location)+' &nbsp;·&nbsp; '+fmtDate(s.date)+'</div>'+
+    pic+
+    '<div class="body">'+esc(s.body)+'</div></div>';
+}
+function emptyMsg(){ return '<div class="empty">Nothing here yet. Use <b>New submission</b> to post your first update.</div>'; }
+
+/* Placeholder field illustrations — stand in until a real photo is attached */
+function sceneSVG(name){
+  var scenes = {
+    read:'<rect width="400" height="220" fill="#F3D9A8"/><circle cx="320" cy="60" r="34" fill="#F6B94E"/>'+
+         '<path d="M0 160 Q100 120 200 150 T400 140 V220 H0Z" fill="#C9761A"/>'+
+         '<path d="M0 185 Q120 160 240 180 T400 172 V220 H0Z" fill="#8C3313"/>'+
+         '<path d="M150 150 L200 135 L200 200 L150 210Z" fill="#fff" opacity=".9"/><path d="M250 150 L200 135 L200 200 L250 210Z" fill="#FBF6EE" opacity=".95"/><path d="M200 135 V200" stroke="#B5471B" stroke-width="2"/>',
+    class:'<rect width="400" height="220" fill="#E7EFEC"/><rect x="40" y="30" width="200" height="110" rx="6" fill="#234F47"/>'+
+         '<path d="M60 60 H200 M60 82 H180 M60 104 H150" stroke="#9FD8C8" stroke-width="4" stroke-linecap="round"/>'+
+         '<circle cx="300" cy="120" r="22" fill="#F6B94E"/><rect x="278" y="150" width="44" height="46" rx="10" fill="#C9761A"/>'+
+         '<path d="M0 196 H400" stroke="#2F6E63" stroke-width="8"/>',
+    travel:'<rect width="400" height="220" fill="#FBE7C4"/><circle cx="70" cy="60" r="30" fill="#F6B94E"/>'+
+         '<path d="M0 150 Q110 90 220 140 T400 120 V220 H0Z" fill="#2F6E63"/>'+
+         '<path d="M0 175 Q120 140 260 168 T400 160 V220 H0Z" fill="#234F47"/>'+
+         '<path d="M160 220 L200 150 L240 220Z" fill="#FBF6EE" opacity=".85"/><path d="M200 150 L200 220" stroke="#B5471B" stroke-width="3" stroke-dasharray="8 8"/>',
+    harvest:'<rect width="400" height="220" fill="#F3E2B0"/><circle cx="330" cy="55" r="30" fill="#F0A544"/>'+
+         '<path d="M0 165 Q100 150 200 165 T400 160 V220 H0Z" fill="#C9761A"/>'+
+         '<g stroke="#8C3313" stroke-width="3">'+
+         '<path d="M70 170 V120 M90 170 V120 M110 170 V120 M150 170 V115 M170 170 V115 M190 170 V115 M240 170 V122 M260 170 V122 M280 170 V122"/></g>'
+  };
+  return '<svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">'+
+         (scenes[name]||scenes.read)+
+         '<text x="16" y="208" font-family="Segoe UI,sans-serif" font-size="11" fill="#7C3417" opacity=".8">sample image · replace with a field photo</text></svg>';
+}
+</script>
+</body>
+</html>
