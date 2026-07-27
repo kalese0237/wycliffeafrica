@@ -12,7 +12,13 @@ import type { MySubmission } from "@/lib/portal/auth";
 
 const TYPE_LABEL = { update: "Field update", prayer: "Prayer request" } as const;
 
-export function DraftEditor({ submission }: { submission: MySubmission }) {
+export function DraftEditor({
+  submission,
+  richFieldsSupported = false,
+}: {
+  submission: MySubmission;
+  richFieldsSupported?: boolean;
+}) {
   const [state, formAction, pending] = useActionState<ActionState, FormData>(updateEntryAction, {});
   const type = submission.type;
 
@@ -25,12 +31,54 @@ export function DraftEditor({ submission }: { submission: MySubmission }) {
         <input type="hidden" name="id" value={submission.id} />
         <input type="hidden" name="type" value={type} />
         <FormField label="Type">
-          <p className="font-body text-base text-muted">{TYPE_LABEL[type]}</p>
+          <p className="font-body text-base text-body">{TYPE_LABEL[type]}</p>
         </FormField>
         {type === "update" && (
-          <FormField label="Replace photo" helper="Optional. JPG, PNG, or WebP; maximum 5 MB.">
-            <input type="file" name="image" accept="image/jpeg,image/png,image/webp" className="w-full font-ui text-sm text-muted" />
-          </FormField>
+          <>
+            <FormField label="Replace cover photo" helper="Optional. JPG, PNG, or WebP; maximum 5 MB.">
+              <input
+                type="file"
+                name="image"
+                accept="image/jpeg,image/png,image/webp"
+                className="w-full font-ui text-sm text-body"
+              />
+            </FormField>
+            {richFieldsSupported && (
+              <>
+                <FormField label="Pull quote">
+                  <Input
+                    name="pullQuote"
+                    defaultValue={submission.pullQuote}
+                    maxLength={SUBMISSION_LIMITS.pullQuoteMax}
+                  />
+                </FormField>
+                <FormField
+                  label={submission.inlineImage ? "Replace second photo" : "Second photo"}
+                  helper="Optional. JPG, PNG, or WebP; maximum 5 MB."
+                >
+                  <input
+                    type="file"
+                    name="inlineImage"
+                    accept="image/jpeg,image/png,image/webp"
+                    className="w-full font-ui text-sm text-body"
+                  />
+                </FormField>
+                {submission.inlineImage && (
+                  <label className="flex items-center gap-2 font-body text-sm text-body">
+                    <input type="checkbox" name="removeInlineImage" />
+                    Remove the current second photo
+                  </label>
+                )}
+                <FormField label="Second photo caption">
+                  <Input
+                    name="inlineImageCaption"
+                    defaultValue={submission.inlineImageCaption}
+                    maxLength={SUBMISSION_LIMITS.captionMax}
+                  />
+                </FormField>
+              </>
+            )}
+          </>
         )}
         <FormField label="Title" required>
           <Input
@@ -49,11 +97,11 @@ export function DraftEditor({ submission }: { submission: MySubmission }) {
             minLength={SUBMISSION_LIMITS.bodyMin}
             maxLength={SUBMISSION_LIMITS.bodyMax}
             required
-            className="w-full rounded-md border border-hair bg-card px-3 py-2 font-body text-base text-body outline-none focus:border-spark"
+            className="w-full rounded-md border-[1.5px] border-hair bg-card px-3 py-2 font-body text-base text-body outline-none focus:border-primary"
           />
         </FormField>
         {type === "prayer" && (
-          <label className="flex items-center gap-2 font-body text-sm text-muted">
+          <label className="flex items-center gap-2 font-body text-sm text-body">
             <input
               type="checkbox"
               name="sensitive"
@@ -69,7 +117,14 @@ export function DraftEditor({ submission }: { submission: MySubmission }) {
           </p>
         )}
         <div className="flex flex-wrap gap-2">
-          <Button type="submit" size="sm" variant="primary" disabled={pending} iconLeft={<Save size={14} />}>
+          <Button
+            type="submit"
+            size="sm"
+            variant="primary"
+            disabled={pending}
+            iconLeft={<Save size={14} />}
+            className="rounded-md"
+          >
             {pending ? "Saving…" : submission.status === "rejected" ? "Resubmit for review" : "Save draft"}
           </Button>
           <Button
@@ -78,6 +133,7 @@ export function DraftEditor({ submission }: { submission: MySubmission }) {
             variant="ghost"
             formAction={deleteEntryAction}
             iconLeft={<Trash2 size={14} />}
+            className="rounded-md"
             onClick={(event) => {
               if (!window.confirm("Delete this draft permanently?")) event.preventDefault();
             }}

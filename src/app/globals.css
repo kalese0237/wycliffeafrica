@@ -18,7 +18,7 @@
   --color-paper-3: #eadfcf;
   --color-ink-0: #17140f;
   --color-ink-1: #3a332b;
-  --color-ink-2: #6c5847;
+  --color-ink-2: #514940;
   --color-ink-3: #9e8470;
 
   /* Terra — primary brand ramp */
@@ -32,6 +32,7 @@
   --color-terra-050: #fbeee3;
 
   /* Green — accent / action ramp (logo color) */
+  --color-green-900: #001e09;
   --color-green-700: #1e7d08;
   --color-green-600: #269a0b;
   --color-green-500: #33b00f;

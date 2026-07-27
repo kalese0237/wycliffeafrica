@@ -8,7 +8,7 @@ const FILTER_LABEL: Record<"all" | NewsCategory, string> = {
   all: "Latest news",
   story: "Stories",
   update: "Missionary updates",
-  project: "Project updates",
+  project: "Projects",
 };
 
 export interface NewsGridProps {
@@ -24,6 +24,7 @@ export function NewsGrid({ items, authorNames }: NewsGridProps) {
     requestedType === "story" || requestedType === "update" || requestedType === "project"
       ? requestedType
       : "all";
+
   const visible = filter === "all" ? items : items.filter((item) => item.category === filter);
 
   return (

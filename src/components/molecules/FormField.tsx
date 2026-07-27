@@ -7,12 +7,22 @@ export interface FormFieldProps {
   required?: boolean;
   error?: string;
   helper?: string;
+  helperClassName?: string;
   children: React.ReactNode;
   className?: string;
 }
 
 /** Label + control wrapper with optional helper/error text and a required marker. */
-export function FormField({ label, htmlFor, required = false, error, helper, children, className }: FormFieldProps) {
+export function FormField({
+  label,
+  htmlFor,
+  required = false,
+  error,
+  helper,
+  helperClassName,
+  children,
+  className,
+}: FormFieldProps) {
   return (
     <div className={cn("flex flex-col gap-2", className)}>
       {label && (
@@ -23,7 +33,9 @@ export function FormField({ label, htmlFor, required = false, error, helper, chi
       )}
       {children}
       {(error || helper) && (
-        <span className={cn("font-body text-xs", error ? "text-danger" : "text-faint")}>{error || helper}</span>
+        <span className={cn("font-body text-xs", error ? "text-danger" : "text-faint", !error && helperClassName)}>
+          {error || helper}
+        </span>
       )}
     </div>
   );

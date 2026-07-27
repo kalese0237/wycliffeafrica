@@ -17,15 +17,15 @@ export function HomeIntro() {
           </p>
           <p>
             Evangelism, teaching and worship are all hampered when people don&apos;t have a Bible in a language
-            they understand well. Hundreds of African language groups still have no Scripture at all — millions
-            of people, cut off from God&apos;s Word.
+            they understand well. Hundreds of African language groups still have no Scripture at all. Millions
+            of people remain cut off from God&apos;s Word.
           </p>
           <p>
             How do Scriptures become available where they are still needed? Only through a broad, skilled team:
             linguists, translators, literacy teachers, ethnomusicologists, computer specialists, administrators.
           </p>
           <p>
-            Perhaps someone like you. If this is work you could see yourself in, contact us — the ways to get
+            Perhaps someone like you. If this is work you could see yourself in, contact us. The ways to get
             involved are below.
           </p>
         </div>

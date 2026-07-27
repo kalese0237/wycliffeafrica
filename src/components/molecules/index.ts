@@ -1,4 +1,5 @@
 export * from "./FormField";
+export * from "./EditorialImage";
 export * from "./MissionaryCard";
 export * from "./NewsCard";
 export * from "./PrayerRequestCard";

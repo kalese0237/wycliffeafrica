@@ -1,7 +1,8 @@
 import * as React from "react";
 import { cn } from "@/lib/cn";
+import type { Journey } from "@/lib/content-types";
 
-export type Journey = "give" | "serve" | "churches" | "pray" | "stories" | "resources";
+export type { Journey } from "@/lib/content-types";
 
 const journeys: Record<Journey, { text: string; tint: string; dot: string; label: string }> = {
   give: { text: "text-tag-give", tint: "bg-tag-give-tint", dot: "bg-tag-give", label: "Give" },

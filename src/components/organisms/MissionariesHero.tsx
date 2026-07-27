@@ -20,7 +20,7 @@ export function MissionariesHero({ missionaryCount, countryCount }: Missionaries
           Our Missionaries
         </h1>
         <p className="mx-auto max-w-[65ch] font-body text-base leading-relaxed text-muted sm:text-md">
-          Every translation project is carried by people — translators, literacy teachers, surveyors,
+          Every translation project is carried by people: translators, literacy teachers, surveyors,
           administrators. None of them draw a salary; each serves on the prayers and monthly gifts of their
           supporters.
         </p>

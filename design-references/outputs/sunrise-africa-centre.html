@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SunRise Africa Centre — Wycliffe Africa</title>
+<style>
+  :root{
+    --cream:#FBF6EE;
+    --paper:#FFFFFF;
+    --ink:#2A2018;
+    --ink-soft:#5B4E42;
+    --amber:#E8912A;
+    --gold:#C9761A;
+    --terra:#B5471B;
+    --leaf:#2F6E63;
+    --line:#EADFCF;
+    --shadow:0 18px 50px -24px rgba(60,35,10,.45);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .sans{font-family:"Segoe UI",Helvetica,Arial,sans-serif}
+  a{color:inherit}
+  img{max-width:100%}
+
+  /* ---- top nav ---- */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(251,246,238,.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1120px;margin:0 auto;padding:16px 28px;
+    display:flex;align-items:center;justify-content:space-between;gap:20px;
+  }
+  .brand{display:flex;align-items:center;gap:12px;font-family:"Segoe UI",sans-serif;font-weight:700;letter-spacing:.02em}
+  .brand .mark{
+    width:34px;height:34px;border-radius:50%;
+    background:radial-gradient(circle at 50% 120%, #FFD27A 0%, var(--amber) 42%, var(--terra) 100%);
+    box-shadow:0 0 0 4px rgba(232,145,42,.15);
+  }
+  .brand small{display:block;font-weight:400;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+  .nav-links{display:flex;gap:26px;font-family:"Segoe UI",sans-serif;font-size:14px}
+  .nav-links a{text-decoration:none;color:var(--ink-soft);padding-bottom:3px;border-bottom:2px solid transparent}
+  .nav-links a:hover{color:var(--terra);border-color:var(--amber)}
+  .nav-links a.active{color:var(--ink);border-color:var(--terra)}
+
+  /* ---- hero ---- */
+  .hero{
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(120% 90% at 50% 118%, #FFE0A6 0%, #F6A93F 26%, #D9691E 55%, #A5381A 100%);
+    color:#fff;text-align:center;
+    padding:120px 24px 150px;
+  }
+  .hero .sun{
+    position:absolute;left:50%;bottom:-190px;transform:translateX(-50%);
+    width:420px;height:420px;border-radius:50%;
+    background:radial-gradient(circle, #FFF4D6 0%, #FFDE96 45%, rgba(255,222,150,0) 70%);
+    opacity:.85;
+  }
+  .hero-content{position:relative;z-index:2;max-width:820px;margin:0 auto}
+  .eyebrow{
+    font-family:"Segoe UI",sans-serif;font-size:13px;letter-spacing:.24em;text-transform:uppercase;
+    color:#FFE9C4;margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(2.3rem,5.4vw,4rem);line-height:1.08;font-weight:600;margin-bottom:24px;
+    text-shadow:0 2px 18px rgba(120,40,0,.25);
+  }
+  .hero p.lede{font-size:clamp(1.05rem,2.2vw,1.4rem);max-width:640px;margin:0 auto 34px;color:#FFF3E0}
+  .btn-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    font-family:"Segoe UI",sans-serif;font-weight:600;font-size:15px;
+    padding:14px 28px;border-radius:40px;text-decoration:none;display:inline-block;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn-solid{background:#fff;color:var(--terra);box-shadow:0 12px 30px -12px rgba(0,0,0,.5)}
+  .btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.55)}
+
+  .wave{display:block;width:100%;height:70px;margin-top:-2px}
+
+  /* ---- layout ---- */
+  main{max-width:1120px;margin:0 auto;padding:0 28px}
+  section{padding:72px 0}
+  .kicker{
+    font-family:"Segoe UI",sans-serif;font-size:13px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;
+  }
+  h2{font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1.15;font-weight:600;margin-bottom:22px;color:var(--ink)}
+  h3{font-size:1.28rem;font-weight:600;margin-bottom:10px;color:var(--terra)}
+  p{margin-bottom:18px;color:var(--ink-soft);font-size:1.08rem}
+  p strong{color:var(--ink)}
+  .lead p{font-size:1.2rem;color:var(--ink)}
+
+  /* stat band */
+  .stats{
+    background:linear-gradient(180deg,#fff,#FDF7EC);
+    border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);
+    display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+    padding:38px 30px;margin-top:-70px;position:relative;z-index:5;
+  }
+  .stat{text-align:center;padding:8px 10px}
+  .stat .num{font-size:2.5rem;font-weight:700;color:var(--terra);line-height:1;font-family:"Segoe UI",sans-serif}
+  .stat .lab{font-family:"Segoe UI",sans-serif;font-size:13px;color:var(--ink-soft);margin-top:8px;letter-spacing:.02em}
+
+  .split{display:grid;grid-template-columns:1.15fr .85fr;gap:54px;align-items:center}
+  .split.rev{grid-template-columns:.85fr 1.15fr}
+
+  /* feature cards */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:14px}
+  .card{
+    background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:28px 26px;
+    box-shadow:0 10px 30px -22px rgba(80,45,10,.5);transition:transform .18s ease;
+  }
+  .card:hover{transform:translateY(-4px)}
+  .card .ic{
+    width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(140deg,#FCE3B8,#F3AD52);margin-bottom:16px;
+  }
+  .card .ic svg{width:24px;height:24px;stroke:var(--terra);fill:none;stroke-width:1.8}
+  .card p{font-size:1rem;margin-bottom:0}
+
+  /* panel */
+  .panel{
+    background:linear-gradient(135deg,#2F6E63,#234f47);color:#EAF5F1;
+    border-radius:22px;padding:48px 46px;box-shadow:var(--shadow);
+  }
+  .panel .kicker{color:#9FD8C8}
+  .panel h2{color:#fff}
+  .panel p{color:#D5EAE3}
+  .panel .goals{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:12px}
+  .panel .goals h3{color:#FFD79A;font-size:1.1rem}
+  .panel .goals p{font-size:1rem;margin-bottom:0}
+
+  ul.plain{list-style:none;margin:6px 0 18px}
+  ul.plain li{position:relative;padding-left:30px;margin-bottom:14px;color:var(--ink-soft);font-size:1.06rem}
+  ul.plain li::before{
+    content:"";position:absolute;left:0;top:9px;width:12px;height:12px;border-radius:50%;
+    background:radial-gradient(circle at 40% 30%, #F6B94E, var(--terra));
+  }
+
+  /* CTA */
+  .cta{
+    text-align:center;margin:20px 0 90px;
+    background:radial-gradient(120% 120% at 50% 0%, #FBE7C4 0%, #F7D69B 100%);
+    border-radius:26px;padding:64px 30px;border:1px solid #F0CE93;
+  }
+  .cta h2{max-width:640px;margin:0 auto 18px}
+  .cta p{max-width:560px;margin:0 auto 28px;color:#6b4a24}
+  .contact{font-family:"Segoe UI",sans-serif;font-size:14px;color:#7a5522;margin-top:22px}
+  .contact a{color:var(--terra);text-decoration:none;font-weight:600}
+
+  footer{background:var(--ink);color:#CDBBA6;padding:50px 28px}
+  .foot-inner{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;font-family:"Segoe UI",sans-serif;font-size:14px}
+  footer a{color:#F3B963;text-decoration:none}
+  footer .brand small{color:#B98A4a}
+
+  @media(max-width:820px){
+    .nav-links{display:none}
+    .split,.split.rev{grid-template-columns:1fr;gap:30px}
+    .cards{grid-template-columns:1fr}
+    .panel .goals{grid-template-columns:1fr}
+    .stats{grid-template-columns:repeat(2,1fr);margin-top:-40px}
+    section{padding:52px 0}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <span class="mark"></span>
+      <span>Wycliffe Africa<small>Bible Translation Movement</small></span>
+    </div>
+    <nav class="nav-links">
+      <a href="#vision">The vision</a>
+      <a href="#centre">The centre</a>
+      <a href="#why">Why now</a>
+      <a href="internship-program.html">Internship</a>
+      <a href="#give" class="active">Partner</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <span class="sun"></span>
+  <div class="hero-content">
+    <div class="eyebrow">SunRise Africa Centre</div>
+    <h1>A permanent home for Africa's Bible translation movement</h1>
+    <p class="lede">Wycliffe Africa is raising USD 1.2 million to build a training and sending base that will carry Scripture to communities still waiting to read it in their own language.</p>
+    <div class="btn-row">
+      <a href="#give" class="btn btn-solid">Become a partner</a>
+      <a href="#centre" class="btn btn-ghost">See what we're building</a>
+    </div>
+  </div>
+</section>
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,40 C240,75 480,10 720,35 C960,60 1200,15 1440,42 L1440,70 L0,70 Z" fill="#FBF6EE"/></svg>
+
+<main>
+  <div class="stats">
+    <div class="stat"><div class="num">33</div><div class="lab">missionaries serving today</div></div>
+    <div class="stat"><div class="num">100</div><div class="lab">members within five years</div></div>
+    <div class="stat"><div class="num">8+</div><div class="lab">countries with our people</div></div>
+    <div class="stat"><div class="num">3</div><div class="lab">national organisations launched</div></div>
+  </div>
+
+  <section id="vision" class="lead">
+    <div class="kicker">The vision</div>
+    <h2>One place to recruit, train, and send the next generation</h2>
+    <p>For more than twenty years, Wycliffe Africa has sent missionaries into Bible translation across the continent, and helped Wycliffe Togo, Wycliffe Benin, and Wycliffe Ethiopia get off the ground. That work has outgrown the borrowed rooms and short-term arrangements it has always run on.</p>
+    <p>SunRise Africa is our answer: a single site near Nairobi built to hold the whole journey of a missionary, from the first application to the day they leave for the field. It gathers what is now scattered into one home the movement can call its own.</p>
+  </section>
+
+  <section id="centre">
+    <div class="kicker">The centre</div>
+    <h2>What SunRise Africa will hold</h2>
+    <p>The Centre is planned as a working campus, not a monument. Alongside offices and training rooms it will house the people it trains and grow some of the food that feeds them.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-5h6v5"/></svg></div>
+        <h3>Offices &amp; training rooms</h3>
+        <p>A base for the staff who run recruitment and a set of rooms built for teaching translation, literacy, and field skills.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Conference &amp; accommodation</h3>
+        <p>Space to gather partners and churches, and beds for missionaries in training, on furlough, or passing through between assignments.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 22c5-3 8-7 8-12a8 8 0 0 0-16 0c0 5 3 9 8 12zM12 10v0"/><path d="M12 22c0-5 2-9 6-11M12 22c0-5-2-9-6-11"/></svg></div>
+        <h3>Land for farming</h3>
+        <p>Areas set aside for agriculture, so the Centre can feed its residents and earn income that does not depend on the next donation arriving.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="split">
+      <div>
+        <div class="kicker">Why now</div>
+        <h2>The work has grown faster than its foundations</h2>
+        <p>Our mission operations have expanded, but recruitment keeps hitting the same wall: there is no permanent base to bring people into, and much of the budget still rides on donations that arrive unpredictably. When funding dips, training and care are the first things to stall.</p>
+        <p>A Centre we own changes that arithmetic. It gives missionaries a stable place to be formed and cared for, and it lets hospitality and farming carry part of the running costs, so the work is steadier from one year to the next.</p>
+      </div>
+      <div class="panel">
+        <div class="kicker">Built to sustain itself</div>
+        <p style="font-size:1.15rem;color:#EAF5F1">SunRise Africa is meant to be more than a headquarters. The farm and guest facilities are designed to generate income, building a reserve that funds missionary development long after the buildings go up.</p>
+        <p style="margin-bottom:0">That is the difference between a project that needs rescuing every year and one that pays part of its own way.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="panel">
+      <div class="kicker">The goal</div>
+      <h2>Establish SunRise Africa as the hub of the movement</h2>
+      <div class="goals">
+        <div>
+          <h3>Operate the base</h3>
+          <p>Stand up SunRise Africa as a working training base for missionaries in Bible translation.</p>
+        </div>
+        <div>
+          <h3>Strengthen training &amp; care</h3>
+          <p>Deepen the programmes that prepare missionaries and look after them once they are in the field.</p>
+        </div>
+        <div>
+          <h3>Build a reserve</h3>
+          <p>Create a sustainability fund that keeps missionary development going for the long haul.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="split rev">
+      <div class="panel" style="background:linear-gradient(135deg,#B5471B,#8c3313)">
+        <div class="kicker" style="color:#FFD79A">Where our people serve</div>
+        <p style="font-size:1.15rem;color:#FFE9CE">Wycliffe Africa missionaries work in more than eight countries, inside Africa and beyond it.</p>
+        <ul class="plain" style="margin-bottom:0">
+          <li style="color:#FFEAD2">Madagascar, Tanzania &amp; South Africa</li>
+          <li style="color:#FFEAD2">Uganda, Cameroon &amp; Kenya</li>
+          <li style="color:#FFEAD2">Ghana, Nigeria &amp; The Gambia</li>
+        </ul>
+      </div>
+      <div>
+        <div class="kicker">The bigger picture</div>
+        <h2>The church of the Global South is stepping into missions</h2>
+        <p>Across Africa, more believers are being sent than at any point in Wycliffe Africa's history. Local churches raise support, commission their members, and pray them into the field. What has been missing is the capacity to receive and equip everyone who is ready to go.</p>
+        <p>SunRise Africa is how Wycliffe Africa keeps pace with that momentum, turning willing people into prepared ones and sending them to communities still waiting for Scripture in their heart language.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="give">
+    <div class="cta">
+      <div class="kicker">Partner with us</div>
+      <h2>Help us reach USD 1.2 million and lay the foundation</h2>
+      <p>Every gift toward SunRise Africa builds something that outlasts it: a base that trains, houses, and sends African missionaries for decades to come. Partners, churches, and individuals all have a place in this.</p>
+      <a href="#" class="btn btn-solid" style="color:#fff;background:var(--terra)">Give toward the Centre</a>
+      <div class="contact">
+        Talk with us — Joseph Namutala <a href="mailto:joseph_namutala@wycliffeafrica.org">joseph_namutala@wycliffeafrica.org</a>
+        &nbsp;·&nbsp; Edwyn Kiptinness <a href="mailto:edwyn_kiptinness@wycliffeafrica.org">edwyn_kiptinness@wycliffeafrica.org</a><br>
+        Headquartered in Nairobi, Kenya
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <div class="brand" style="color:#F3D9B4">
+      <span class="mark"></span>
+      <span>Wycliffe Africa<small>Every language. Every heart.</small></span>
+    </div>
+    <div style="max-width:420px">
+      Wycliffe Africa recruits, trains, and sends missionaries so that every language group can read the Bible in the language they think and pray in.
+      <br><br>
+      Read next: <a href="internship-program.html">The Internship Program &rarr;</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -9,7 +9,7 @@ import type { PublicNewsRecord } from "@/lib/directus/schema";
 const CATEGORY_LABEL: Record<PublicNewsRecord["category"], string> = {
   story: "Story",
   update: "Missionary update",
-  project: "Project update",
+  project: "Project",
 };
 
 export interface NewsCardProps {

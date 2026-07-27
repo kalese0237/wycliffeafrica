@@ -209,6 +209,24 @@ async function main() {
     meta: { interface: "file-image", note: "Optional news image" },
   });
   await ensureField("news", {
+    field: "pullQuote",
+    type: "text",
+    schema: {},
+    meta: { interface: "input", note: "Optional highlighted quote shown between paragraphs" },
+  });
+  await ensureField("news", {
+    field: "inlineImage",
+    type: "uuid",
+    schema: {},
+    meta: { interface: "file-image", note: "Optional second image within the article body" },
+  });
+  await ensureField("news", {
+    field: "inlineImageCaption",
+    type: "string",
+    schema: {},
+    meta: { interface: "input", note: "Caption for the inline image" },
+  });
+  await ensureField("news", {
     field: "reviewedBy",
     type: "uuid",
     schema: {},
@@ -229,6 +247,7 @@ async function main() {
   await ensureRelation("news", "missionaryId", "missionaries", "RESTRICT");
   await ensureRelation("news", "reviewedBy", "directus_users");
   await ensureRelation("news", "image", "directus_files");
+  await ensureRelation("news", "inlineImage", "directus_files");
 
   const missionaryPolicy = await ensurePolicy("Missionary portal", {
     icon: "person",
@@ -246,7 +265,8 @@ async function main() {
   await ensurePermission(missionaryPolicy, "news", "read", {
     fields: [
       "id", "status", "category", "slug", "title", "excerpt", "body", "missionaryId",
-      "date", "image", "reviewNotes", "reviewedAt", "date_created", "date_updated",
+      "date", "image", "pullQuote", "inlineImage", "inlineImageCaption",
+      "reviewNotes", "reviewedAt", "date_created", "date_updated",
     ],
     permissions: ownsProfile,
   });
@@ -292,6 +312,7 @@ async function main() {
   const publicNewsFields = [
     "id", "status", "category", "slug", "title", "excerpt", "body", "author",
     "missionaryId", "place", "journey", "tagLabel", "date", "image",
+    "pullQuote", "inlineImage", "inlineImageCaption",
   ];
   const editableNews = {
     _and: [
@@ -304,12 +325,15 @@ async function main() {
     permissions: { status: { _eq: "published" } },
   });
   await ensurePermission(sitePolicy, "news", "create", {
-    fields: ["category", "slug", "title", "excerpt", "body", "missionaryId", "date", "image"],
+    fields: [
+      "category", "slug", "title", "excerpt", "body", "missionaryId", "date", "image",
+      "pullQuote", "inlineImage", "inlineImageCaption",
+    ],
     validation: { category: { _eq: "update" } },
     presets: { category: "update", status: "draft" },
   });
   await ensurePermission(sitePolicy, "news", "update", {
-    fields: ["title", "excerpt", "body", "image", "status"],
+    fields: ["title", "excerpt", "body", "image", "pullQuote", "inlineImage", "inlineImageCaption", "status"],
     permissions: editableNews,
     validation: { status: { _eq: "draft" } },
   });
@@ -375,7 +399,10 @@ async function main() {
     permissions: { category: { _eq: "update" } },
   });
   await ensurePermission(reviewerPolicy, "news", "update", {
-    fields: ["status", "title", "excerpt", "body", "date", "image", "reviewNotes"],
+    fields: [
+      "status", "title", "excerpt", "body", "date", "image",
+      "pullQuote", "inlineImage", "inlineImageCaption", "reviewNotes",
+    ],
     permissions: { category: { _eq: "update" } },
     presets: { reviewedBy: "$CURRENT_USER", reviewedAt: "$NOW" },
   });

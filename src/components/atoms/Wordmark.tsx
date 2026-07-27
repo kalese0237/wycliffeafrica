@@ -22,7 +22,7 @@ export function Wordmark({ height = 44, className, onDark = false }: WordmarkPro
     <span className={cn("inline-flex items-center", className)}>
       <Image
         src={onDark ? "/brand/wycliffe-africa-white-green.svg" : "/brand/wycliffe-africa-original.svg"}
-        alt="Wycliffe Africa — Partners in Bible Translation"
+        alt="Wycliffe Africa, Partners in Bible Translation"
         width={Math.round(height * LOGO_ASPECT)}
         height={height}
         style={{ height, width: "auto" }}

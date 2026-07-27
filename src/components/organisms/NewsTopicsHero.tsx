@@ -39,7 +39,7 @@ const TOPICS: NewsTopic[] = [
   },
   {
     value: "project",
-    label: "Project updates",
+    label: "Projects",
     href: "/news?type=project",
     image: "/photos/pexels-kureng-workx-2546437-7878646.jpg",
     imagePosition: "78% 50%",

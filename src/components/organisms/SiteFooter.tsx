@@ -26,11 +26,11 @@ const contactRows: { icon: LucideIcon; text: string }[] = [
 /** Deep terra footer — wordmark, link columns, newsletter signup, fine print. */
 export function SiteFooter() {
   return (
-    <footer className="border-t-[3px] border-accent bg-terra-900 text-on-primary">
+    <footer className="bg-green-900 text-on-primary">
       <div className="mx-auto grid max-w-(--container-max) grid-cols-1 gap-10 px-5 py-16 sm:grid-cols-2 sm:px-12 lg:grid-cols-4">
         <div>
           <Wordmark height={42} onDark />
-          <p className="mt-5 max-w-[34ch] font-body text-sm leading-relaxed text-white/72">
+          <p className="mt-5 max-w-[34ch] font-ui text-base leading-relaxed text-white/72">
             We work so that speakers of every language can read Scripture in the language they know best.
           </p>
         </div>
@@ -41,7 +41,7 @@ export function SiteFooter() {
               <Link
                 key={label}
                 href={href}
-                className="flex items-center gap-1.5 py-1.5 font-ui text-sm text-white/72 hover:text-white"
+                className="flex items-center gap-1.5 py-1.5 font-ui text-base text-white/72 hover:text-white"
               >
                 <ChevronRight size={14} className="flex-none text-green-300" /> {label}
               </Link>
@@ -52,7 +52,7 @@ export function SiteFooter() {
           <div className="mb-3 font-ui text-xs font-bold uppercase tracking-caps text-green-300">Get in touch</div>
           <div className="flex flex-col">
             {contactRows.map(({ icon: RowIcon, text }) => (
-              <div key={text} className="flex items-start gap-2.5 py-1.5 font-ui text-sm text-white/72">
+              <div key={text} className="flex items-start gap-2.5 py-1.5 font-ui text-base text-white/72">
                 <RowIcon size={15} className="mt-0.5 flex-none text-green-300" />
                 <span>{text}</span>
               </div>
@@ -61,7 +61,7 @@ export function SiteFooter() {
         </div>
         <div>
           <div className="mb-3 font-ui text-xs font-bold uppercase tracking-caps text-green-300">Stay updated</div>
-          <p className="mb-4 font-body text-sm text-white/72">
+          <p className="mb-4 font-ui text-base text-white/72">
             Field updates and prayer requests, straight to your inbox.
           </p>
           <NewsletterSignup compact stacked variant="accent" cta="Subscribe" />

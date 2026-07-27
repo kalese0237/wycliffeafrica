@@ -41,3 +41,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local, full-resolution design/reference photography. Optimized web assets live in public/.
+/design-references/source-images/
+# Ignore DOS 8.3 aliases supplied alongside the canonical reference files.
+/design-references/outputs/*~*

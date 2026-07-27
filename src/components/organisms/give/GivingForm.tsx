@@ -19,14 +19,14 @@ export function GivingForm() {
       onSubmit={(e) => e.preventDefault()}
       className="rounded-lg border border-t-[3px] border-hair border-t-accent bg-card p-6 shadow-sm sm:p-8"
     >
-      <div className="mb-6 flex w-fit rounded-pill bg-sunk p-1">
+      <div className="mb-6 flex w-fit rounded-md bg-sunk p-1">
         {(["monthly", "once"] as const).map((f) => (
           <button
             key={f}
             type="button"
             onClick={() => setFrequency(f)}
             className={cn(
-              "rounded-pill px-6 py-2 font-ui text-sm font-semibold capitalize transition-colors",
+              "rounded-sm px-6 py-2 font-ui text-sm font-semibold capitalize transition-colors",
               frequency === f ? "bg-primary text-on-primary" : "text-muted",
             )}
           >

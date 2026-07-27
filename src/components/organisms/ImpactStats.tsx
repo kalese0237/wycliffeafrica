@@ -14,6 +14,8 @@ export interface ImpactStatsProps {
   tone?: StatTone;
   /** Floats the stats as a shadowed card pulled up over the section above it (e.g. a photo hero). */
   overlap?: boolean;
+  /** Sentence-case, undivided stats card used by the supplied project-page designs. */
+  variant?: "default" | "sunrise";
 }
 
 const defaultStats: ImpactStat[] = [
@@ -24,7 +26,39 @@ const defaultStats: ImpactStat[] = [
 ];
 
 /** A band of impact figures on sunk paper, separated by hairline rules. */
-export function ImpactStats({ heading, stats = defaultStats, tone = "primary", overlap = false }: ImpactStatsProps) {
+export function ImpactStats({
+  heading,
+  stats = defaultStats,
+  tone = "primary",
+  overlap = false,
+  variant = "default",
+}: ImpactStatsProps) {
+  if (variant === "sunrise") {
+    return (
+      <div className="relative z-10 mx-auto -mt-16 max-w-[1160px] px-5 sm:px-7">
+        <div className="grid grid-cols-2 rounded-xl border border-hair bg-card px-5 py-9 shadow-[0_18px_50px_-24px_rgba(60,35,10,.45)] sm:px-8 lg:grid-cols-4">
+          {stats.map((stat, i) => (
+            <div
+              key={`${stat.label}-${i}`}
+              className={[
+                "px-3 py-2 text-center sm:px-5",
+                i % 2 !== 0 ? "border-l border-hair" : "",
+                i >= 2 ? "border-t border-hair pt-6 lg:border-t-0 lg:pt-2" : "",
+                i > 0 ? "lg:border-l lg:border-hair" : "lg:border-l-0",
+              ].join(" ")}
+            >
+              <div className="font-display text-[2.75rem] font-semibold leading-none text-primary">{stat.value}</div>
+              <div className="mt-3 font-ui text-xs font-bold uppercase leading-snug tracking-[0.16em] text-muted">
+                {stat.label}
+              </div>
+              {stat.sub && <div className="mt-1 font-body text-sm text-faint">{stat.sub}</div>}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   const grid = (
     <div className="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-flow-col lg:auto-cols-fr">
       {stats.map((s, i) => (

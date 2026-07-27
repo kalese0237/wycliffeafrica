@@ -17,7 +17,7 @@ export default function GivePage() {
         journey="give"
         eyebrowLabel="Give"
         title="Every gift moves a translation forward."
-        subtitle="Give once or monthly — toward a missionary's support, a specific project, or wherever the need is greatest."
+        subtitle="Give once or monthly, toward a missionary's support, a specific project, or wherever the need is greatest."
       />
 
       <section className="mx-auto grid max-w-(--container-max) grid-cols-1 items-start gap-7 px-5 pb-16 sm:px-12 lg:grid-cols-[1.1fr_0.9fr]">
@@ -35,11 +35,11 @@ export default function GivePage() {
             <p className="mb-3.5 font-body text-base leading-relaxed text-muted">
               Bible translation is not a profit-making venture, so there is no income from which to pay salaries.
               Our staff meet their needs through churches and individuals who support them regularly. Each member
-              has a team of donors and prayer partners, and each month receives what that team sends in — the
+              has a team of donors and prayer partners, and each month receives what that team sends in. The
               donations collectively make up the member&rsquo;s monthly income.
             </p>
             <p className="mb-6 font-body text-base leading-relaxed text-muted">
-              Missionaries from your church depend on a monthly amount sent from your church — a two-way
+              Missionaries from your church depend on a monthly amount sent from your church, a two-way
               relationship in which your church is blessed as it helps provide the Bible for a people group that
               needs it. The rewards are eternal.
             </p>
@@ -65,7 +65,7 @@ export default function GivePage() {
           </h2>
           <p className="mb-3 font-body text-base leading-relaxed text-muted">
             Translation projects across the continent need prayer and encouragement, funding, short-term workers,
-            and advocates. Projects thrive when people stand behind them — and can sputter without that support.
+            and advocates. Projects thrive when people stand behind them, and can sputter without that support.
           </p>
           <p className="mb-5 font-body text-base leading-relaxed text-muted">
             When a church focuses its energy on a specific project, both benefit: churches feel more connected,

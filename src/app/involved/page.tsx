@@ -37,7 +37,7 @@ const WAYS: { icon: LucideIcon; title: string; body: string; href: string }[] = 
   {
     icon: Compass,
     title: "Serve",
-    body: "Join a mission assignment in the field — from a season to a career.",
+    body: "Join a mission assignment in the field, from a season to a career.",
     href: "/involved",
   },
   {
@@ -55,13 +55,13 @@ const WAYS: { icon: LucideIcon; title: string; body: string; href: string }[] = 
   {
     icon: Megaphone,
     title: "Motivate your Church",
-    body: "Inspire your church to care for the Bibleless — with ready-made resources.",
+    body: "Inspire your church to care for the Bibleless, with ready-made resources.",
     href: "/involved/motivate-your-church",
   },
   {
     icon: Gift,
     title: "Give",
-    body: "Fund the work itself — once, or month by month.",
+    body: "Fund the work itself, once or month by month.",
     href: "/give",
   },
 ];
@@ -77,7 +77,7 @@ export default function InvolvedPage() {
         journey="serve"
         eyebrowLabel="Get Involved"
         title="There's a place for you in Bible translation."
-        subtitle="Some people move to the field. Most serve from where they are — praying, giving, or bringing their church along."
+        subtitle="Some people move to the field. Most serve from where they are, praying, giving, or bringing their church along."
       />
 
       <section className="mx-auto grid max-w-(--container-max) grid-cols-1 gap-6 px-5 pb-20 pt-4 sm:grid-cols-2 sm:px-12 lg:grid-cols-3">

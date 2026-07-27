@@ -16,11 +16,11 @@ export function MissionsMovementFeature() {
           <div className="space-y-4 font-body text-base leading-relaxed text-muted">
             <p>
               Africa is the second-largest and second-most-populous continent, home to over 1.3 billion people.
-              It also has more living languages than anywhere else on earth — well over 1,500 of them.
+              It also has more living languages than anywhere else on earth, well over 1,500 of them.
             </p>
             <p>
               Christianity here is not an import. The church was established in North Africa within its first
-              centuries — Tertullian, Perpetua, Clement of Alexandria, Origen and Augustine were all African —
+              centuries (Tertullian, Perpetua, Clement of Alexandria, Origen and Augustine were all African),
               and by the sixth century the faith had reached deep into the continent.
             </p>
           </div>

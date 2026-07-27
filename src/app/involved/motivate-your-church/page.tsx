@@ -50,7 +50,7 @@ export default function MotivateYourChurchPage() {
           </h3>
           <p className="mb-4 font-body text-base leading-relaxed text-muted">
             This guides you through the process of setting up a Sunday at your church where the Bible cannot be
-            used. A Sunday without the Bible helps people feel what they normally take for granted — and notice
+            used. A Sunday without the Bible helps people feel what they normally take for granted, and notice
             those who live without it every week.
           </p>
 

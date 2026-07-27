@@ -28,16 +28,30 @@ function StatusMessage({ state }: { state: ActionState }) {
 export function RequestPasswordResetForm() {
   const [state, action, pending] = useActionState<ActionState, FormData>(requestPasswordResetAction, {});
   return (
-    <form action={action} className="rounded-lg border border-hair bg-card p-6 shadow-sm sm:p-8">
-      <h2 className="font-display text-lg font-semibold text-strong">Reset your password</h2>
-      <p className="mb-6 mt-2 font-body text-sm leading-relaxed text-muted">
+    <form action={action}>
+      <p className="mb-2 font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#C9761A]">Account access</p>
+      <h2 className="font-display text-2xl font-semibold leading-tight text-strong">Reset your password</h2>
+      <p className="mb-7 mt-2 font-body text-base leading-relaxed text-body">
         Enter the email address connected to your missionary profile.
       </p>
       <FormField label="Email" required className="mb-5">
-        <Input name="email" type="email" autoComplete="email" iconLeft={<Mail size={16} />} required />
+        <Input
+          name="email"
+          type="email"
+          autoComplete="email"
+          iconLeft={<Mail size={16} />}
+          size="lg"
+          wrapperClassName="rounded-md border-[1.5px]"
+          required
+        />
       </FormField>
       <StatusMessage state={state} />
-      <Button type="submit" className="mt-4 w-full" disabled={pending} iconLeft={<KeyRound size={16} />}>
+      <Button
+        type="submit"
+        className="mt-4 w-full rounded-md"
+        disabled={pending}
+        iconLeft={<KeyRound size={16} />}
+      >
         {pending ? "Sending…" : "Send reset link"}
       </Button>
       <Link href="/portal/login" className="mt-5 flex items-center justify-center gap-1.5 font-ui text-sm text-link">
@@ -50,23 +64,45 @@ export function RequestPasswordResetForm() {
 export function ResetPasswordForm({ token }: { token: string }) {
   const [state, action, pending] = useActionState<ActionState, FormData>(resetPasswordAction, {});
   return (
-    <form action={action} className="rounded-lg border border-hair bg-card p-6 shadow-sm sm:p-8">
+    <form action={action}>
       <input type="hidden" name="token" value={token} />
-      <h2 className="font-display text-lg font-semibold text-strong">Choose a new password</h2>
-      <p className="mb-6 mt-2 font-body text-sm leading-relaxed text-muted">
+      <p className="mb-2 font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#C9761A]">Account access</p>
+      <h2 className="font-display text-2xl font-semibold leading-tight text-strong">Choose a new password</h2>
+      <p className="mb-7 mt-2 font-body text-base leading-relaxed text-body">
         Use at least 12 characters and avoid a password used on another site.
       </p>
       <FormField label="New password" required className="mb-4">
-        <Input name="password" type="password" minLength={12} autoComplete="new-password" required />
+        <Input
+          name="password"
+          type="password"
+          minLength={12}
+          autoComplete="new-password"
+          size="lg"
+          wrapperClassName="rounded-md border-[1.5px]"
+          required
+        />
       </FormField>
       <FormField label="Confirm password" required className="mb-5">
-        <Input name="confirmation" type="password" minLength={12} autoComplete="new-password" required />
+        <Input
+          name="confirmation"
+          type="password"
+          minLength={12}
+          autoComplete="new-password"
+          size="lg"
+          wrapperClassName="rounded-md border-[1.5px]"
+          required
+        />
       </FormField>
       <StatusMessage state={state} />
       {state.success ? (
-        <Button href="/portal/login" className="mt-4 w-full">Sign in</Button>
+        <Button href="/portal/login" className="mt-4 w-full rounded-md">Sign in</Button>
       ) : (
-        <Button type="submit" className="mt-4 w-full" disabled={pending} iconLeft={<KeyRound size={16} />}>
+        <Button
+          type="submit"
+          className="mt-4 w-full rounded-md"
+          disabled={pending}
+          iconLeft={<KeyRound size={16} />}
+        >
           {pending ? "Updating…" : "Update password"}
         </Button>
       )}

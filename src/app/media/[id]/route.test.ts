@@ -10,11 +10,18 @@ function directusResponse(data: unknown[]) {
   });
 }
 
-function requestFor(updates: unknown[], missionaries: unknown[] = [], news: unknown[] = []) {
+function requestFor(
+  updates: unknown[],
+  missionaries: unknown[] = [],
+  news: unknown[] = [],
+  inlineNews: unknown[] = [],
+) {
   return vi.fn(async (input: string | URL | Request) => {
     const url = String(input);
     if (url.includes("/items/field_updates")) return directusResponse(updates);
-    if (url.includes("/items/news")) return directusResponse(news);
+    if (url.includes("/items/news")) {
+      return directusResponse(url.includes("inlineImage") ? inlineNews : news);
+    }
     if (url.includes("/items/missionaries")) return directusResponse(missionaries);
     if (url.includes("/assets/")) {
       return new Response("image-bytes", {
@@ -86,6 +93,39 @@ describe("portal media authorization", () => {
 
     expect(response.status).toBe(404);
     expect(fetchMock.mock.calls.some(([url]) => String(url).includes("/assets/"))).toBe(false);
+  });
+
+  it("serves an inline image attached to a published news item", async () => {
+    vi.stubEnv("DIRECTUS_URL", "https://directus.example");
+    vi.stubEnv("DIRECTUS_TOKEN", "service-token");
+    vi.stubGlobal("fetch", requestFor([], [], [], [{ id: "news-1", status: "published" }]));
+
+    expect((await getFile()).status).toBe(200);
+  });
+
+  it("still serves a primary news image when the optional inline field is forbidden", async () => {
+    vi.stubEnv("DIRECTUS_URL", "https://directus.example");
+    vi.stubEnv("DIRECTUS_TOKEN", "service-token");
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (input: string | URL | Request) => {
+        const url = String(input);
+        if (url.includes("/items/field_updates")) return directusResponse([]);
+        if (url.includes("/items/news") && url.includes("inlineImage")) {
+          return new Response(null, { status: 403 });
+        }
+        if (url.includes("/items/news")) {
+          return directusResponse([{ id: "news-1", status: "published" }]);
+        }
+        if (url.includes("/items/missionaries")) return directusResponse([]);
+        if (url.includes("/assets/")) {
+          return new Response("image-bytes", { status: 200, headers: { "Content-Type": "image/jpeg" } });
+        }
+        return new Response(null, { status: 404 });
+      }),
+    );
+
+    expect((await getFile()).status).toBe(200);
   });
 
   it("continues to serve images attached to public missionary profiles", async () => {
