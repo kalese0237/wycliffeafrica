@@ -264,6 +264,19 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
             </nav>
 
           <div className="flex flex-none items-center gap-2 sm:gap-2.5">
+            <Button
+              href="/give"
+              variant="accent"
+              size="sm"
+              iconLeft={<Heart size={14} />}
+              className={cn(
+                "hidden rounded-full transition-[height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none sm:inline-flex",
+                scrolled ? "h-9" : "h-10",
+              )}
+            >
+              Give now
+            </Button>
+
             <button
               type="button"
               aria-label="Search"
@@ -287,19 +300,6 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
             >
               <User size={18} />
             </Link>
-
-            <Button
-              href="/give"
-              variant="accent"
-              size="sm"
-              iconLeft={<Heart size={14} />}
-              className={cn(
-                "hidden rounded-full transition-[height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none sm:inline-flex",
-                scrolled ? "h-9" : "h-10",
-              )}
-            >
-              Give now
-            </Button>
 
             <button
               type="button"
