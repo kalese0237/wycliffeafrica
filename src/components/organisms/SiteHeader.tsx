@@ -270,7 +270,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
               size="sm"
               iconLeft={<Heart size={14} />}
               className={cn(
-                "hidden rounded-full transition-[height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none sm:inline-flex",
+                "hidden transition-[height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none sm:inline-flex",
                 scrolled ? "h-9" : "h-10",
               )}
             >
