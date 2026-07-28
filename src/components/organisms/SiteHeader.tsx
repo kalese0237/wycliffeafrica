@@ -263,7 +263,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
               })}
             </nav>
 
-          <div className="flex flex-none items-center gap-2 sm:gap-2.5">
+          <div className="flex flex-none items-center gap-1 sm:gap-1.5">
             <Button
               href="/give"
               variant="accent"
