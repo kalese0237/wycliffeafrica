@@ -49,7 +49,7 @@ export function DonationCTA({
           <h2 className={cn("mb-3 font-display text-2xl font-semibold leading-snug", dark ? "text-white" : "text-strong")}>
             {title}
           </h2>
-          <p className={cn("font-body text-md leading-normal", dark ? "text-white/82" : "text-muted")}>{blurb}</p>
+          <p className={cn("font-body text-md leading-normal", dark ? "text-white/82" : "text-body")}>{blurb}</p>
         </div>
         <div className="flex flex-col gap-3">
           <Button href={primaryHref} variant="spark" size="lg">

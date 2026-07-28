@@ -54,7 +54,7 @@ export function NewsArticleTemplate({
         <h1 className="mb-3.5 mt-4 font-display text-2xl font-semibold leading-tight text-strong sm:text-3xl">
           {item.title}
         </h1>
-        {hasBody && <p className="mb-5 font-body text-lg leading-snug text-muted">{item.excerpt}</p>}
+        {hasBody && <p className="mb-5 font-body text-lg leading-snug text-body">{item.excerpt}</p>}
 
         <div className="mb-6 flex items-center gap-2.5">
           {author && <Avatar src={missionary?.image ?? undefined} name={author} size={36} />}
@@ -118,7 +118,7 @@ export function NewsArticleTemplate({
               <p className="mb-2 font-ui text-xs font-semibold uppercase tracking-wide text-muted">
                 {missionary.roles} · {missionary.place}
               </p>
-              <p className="font-body text-base leading-[1.55] text-muted">{missionary.intro}</p>
+              <p className="font-body text-base leading-[1.55] text-body">{missionary.intro}</p>
               <Link
                 href={`/missionaries/${missionary.slug}`}
                 className="mt-3 inline-flex items-center gap-1.5 font-ui text-sm font-semibold text-link"

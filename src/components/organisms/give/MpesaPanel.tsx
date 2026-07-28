@@ -18,7 +18,7 @@ export function MpesaPanel() {
         <Smartphone size={22} className="text-green-700" />
         <h3 className="font-display text-lg font-semibold text-strong">Give via M-Pesa Paybill</h3>
       </div>
-      <p className="mb-3.5 font-body text-sm text-muted">Go to Lipa na M-Pesa, Paybill option:</p>
+      <p className="mb-3.5 font-body text-sm text-body">Go to Lipa na M-Pesa, Paybill option:</p>
       <div className="flex flex-col gap-2.5">
         {STEPS.map(([label, value], i) => (
           <div key={label} className="flex items-start gap-3">

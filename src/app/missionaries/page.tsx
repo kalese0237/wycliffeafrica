@@ -31,7 +31,7 @@ export default async function MissionariesPage() {
             <h2 className="mb-2 font-display text-xl font-semibold text-strong">
               Serving with Wycliffe Africa?
             </h2>
-            <p className="max-w-[58ch] font-body text-base leading-relaxed text-muted">
+            <p className="max-w-[58ch] font-body text-base leading-relaxed text-body">
               Sign in to the missionary portal to share field updates and prayer requests with your
               supporters. Submissions are reviewed by the office before publishing.
             </p>

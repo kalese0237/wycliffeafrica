@@ -32,13 +32,13 @@ export default function GivePage() {
             <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
               Your giving directly helps people receive God&rsquo;s Word in their own language.
             </h2>
-            <p className="mb-3.5 font-body text-base leading-relaxed text-muted">
+            <p className="mb-3.5 font-body text-base leading-relaxed text-body">
               Bible translation is not a profit-making venture, so there is no income from which to pay salaries.
               Our staff meet their needs through churches and individuals who support them regularly. Each member
               has a team of donors and prayer partners, and each month receives what that team sends in. The
               donations collectively make up the member&rsquo;s monthly income.
             </p>
-            <p className="mb-6 font-body text-base leading-relaxed text-muted">
+            <p className="mb-6 font-body text-base leading-relaxed text-body">
               Missionaries from your church depend on a monthly amount sent from your church, a two-way
               relationship in which your church is blessed as it helps provide the Bible for a people group that
               needs it. The rewards are eternal.
@@ -63,11 +63,11 @@ export default function GivePage() {
           <h2 className="mb-4 mt-3 font-display text-2xl font-semibold text-strong">
             Stand behind a translation project
           </h2>
-          <p className="mb-3 font-body text-base leading-relaxed text-muted">
+          <p className="mb-3 font-body text-base leading-relaxed text-body">
             Translation projects across the continent need prayer and encouragement, funding, short-term workers,
             and advocates. Projects thrive when people stand behind them, and can sputter without that support.
           </p>
-          <p className="mb-5 font-body text-base leading-relaxed text-muted">
+          <p className="mb-5 font-body text-base leading-relaxed text-body">
             When a church focuses its energy on a specific project, both benefit: churches feel more connected,
             form relationships with the missionaries, and see the results of their work. If your church would like
             to adopt a Bible translation project, please contact us.

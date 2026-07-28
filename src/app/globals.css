@@ -67,7 +67,7 @@
   --color-sunk: var(--color-paper-1);
 
   --color-strong: var(--color-ink-0);
-  --color-body: var(--color-ink-1);
+  --color-body: #000000;
   --color-muted: var(--color-ink-2);
   --color-faint: var(--color-ink-3);
   --color-on-primary: #ffffff;

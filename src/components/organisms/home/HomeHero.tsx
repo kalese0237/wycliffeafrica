@@ -172,7 +172,7 @@ export function HomeHero() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(1100px 680px at 8% -10%, rgba(58,18,8,.42), transparent 58%), radial-gradient(900px 600px at 100% 110%, rgba(18,62,13,.2), transparent 58%), linear-gradient(160deg, rgba(24,12,8,.71), rgba(12,9,7,.77))",
+            "radial-gradient(1100px 680px at 8% -10%, rgba(58,18,8,.42), transparent 58%), radial-gradient(900px 600px at 100% 110%, rgba(18,62,13,.2), transparent 58%), linear-gradient(160deg, rgba(24,12,8,.82), rgba(12,9,7,.88))",
         }}
       />
       <div className="relative mx-auto flex h-full min-h-[760px] max-w-(--container-max) flex-col justify-center px-5 pb-40 pt-52 sm:min-h-0 sm:px-12">

@@ -56,7 +56,7 @@ export function NewsletterSignup({
   return (
     <div className={className}>
       <h3 className="mb-2 font-display text-xl font-semibold text-strong">{title}</h3>
-      <p className="mb-4 max-w-[46ch] font-body text-base text-muted">{blurb}</p>
+      <p className="mb-4 max-w-[46ch] font-body text-base text-body">{blurb}</p>
       <form className="flex max-w-[460px] gap-2" onSubmit={(e) => e.preventDefault()}>
         <Input
           type="email"

@@ -41,7 +41,7 @@ export function UpdateCard({ update, authorName, className }: UpdateCardProps) {
           {isPrayer ? "Prayer request" : "Field update"}
         </span>
         <h3 className="font-display text-lg font-semibold leading-snug text-strong">{update.title}</h3>
-        <p className="flex-1 font-body text-base leading-[1.55] text-muted">{update.body}</p>
+        <p className="flex-1 font-body text-base leading-[1.55] text-body">{update.body}</p>
         <div className="mt-1.5 flex items-center gap-2.5 border-t border-hair pt-3">
           {sensitive ? (
             <span className="inline-flex h-8 w-8 flex-none items-center justify-center rounded-full bg-tag-pray-tint text-tag-pray">

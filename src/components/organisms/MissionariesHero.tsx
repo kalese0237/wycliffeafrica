@@ -19,7 +19,7 @@ export function MissionariesHero({ missionaryCount, countryCount }: Missionaries
         <h1 className="mb-4 font-display text-2xl font-semibold leading-tight text-strong sm:text-3xl">
           Our Missionaries
         </h1>
-        <p className="mx-auto max-w-[65ch] font-body text-base leading-relaxed text-muted sm:text-md">
+        <p className="mx-auto max-w-[65ch] font-body text-base leading-relaxed text-body sm:text-md">
           Every translation project is carried by people: translators, literacy teachers, surveyors,
           administrators. None of them draw a salary; each serves on the prayers and monthly gifts of their
           supporters.

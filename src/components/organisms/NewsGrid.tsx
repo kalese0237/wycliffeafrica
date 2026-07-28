@@ -55,7 +55,7 @@ export function NewsGrid({ items, authorNames }: NewsGridProps) {
       ) : (
         <div className="rounded-lg border border-hair bg-sunk px-6 py-16 text-center">
           <p className="font-display text-xl font-semibold text-strong">More news is on the way.</p>
-          <p className="mt-2 font-body text-base text-muted">
+          <p className="mt-2 font-body text-base text-body">
             There are no published articles in this topic yet.
           </p>
         </div>

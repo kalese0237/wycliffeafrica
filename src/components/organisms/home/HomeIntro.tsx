@@ -1,5 +1,5 @@
 import * as React from "react";
-import { PhotoPlaceholder } from "@/components/molecules/PhotoPlaceholder";
+import Image from "next/image";
 
 export function HomeIntro() {
   return (
@@ -9,7 +9,7 @@ export function HomeIntro() {
         <h2 className="mb-5 mt-3 font-display text-2xl font-semibold leading-[1.1] text-strong">
           Changing lives through Bible translation in Africa
         </h2>
-        <div className="space-y-4 font-body text-base leading-relaxed text-muted">
+        <div className="space-y-4 font-body text-base leading-relaxed text-body">
           <p>
             Church planters can&apos;t effectively share the gospel and faithfully disciple new believers without
             God&apos;s written word. Christian radio can&apos;t beam Scripture into remote areas unless it has been
@@ -31,12 +31,26 @@ export function HomeIntro() {
         </div>
       </div>
       <div className="relative pb-8">
-        <PhotoPlaceholder caption="A woman in prayer" aspect="4/3" className="relative z-0" />
-        <PhotoPlaceholder
-          caption="Reading Scripture in a heart language"
-          aspect="4/3"
-          className="relative z-10 -mt-16 ml-12"
-        />
+        <div className="relative z-0 aspect-4/3 overflow-hidden rounded-lg border border-hair shadow-md">
+          <Image
+            src="/photos/pexels-tima-miroshnichenko-6860497.jpg"
+            alt="A woman in prayer"
+            fill
+            sizes="(min-width: 1024px) 25vw, 45vw"
+            className="object-cover"
+            style={{ objectPosition: "50% 35%" }}
+          />
+        </div>
+        <div className="relative z-10 -mt-16 ml-12 aspect-4/3 overflow-hidden rounded-lg border border-hair shadow-md">
+          <Image
+            src="/photos/pexels-olukoya-isreal-ayomikun-2057424626-34221789.jpg"
+            alt="Reading Scripture in a heart language"
+            fill
+            sizes="(min-width: 1024px) 25vw, 45vw"
+            className="object-cover"
+            style={{ objectPosition: "50% 40%" }}
+          />
+        </div>
       </div>
     </section>
   );
