@@ -111,7 +111,7 @@ function useCountUp(target: number, durationMs = 1200) {
 function HeroStatTile({ icon: StatIcon, value, suffix, label }: HeroStat) {
   const count = useCountUp(value);
   return (
-    <div className="flex items-end gap-4 rounded-lg border border-white/8 bg-black/8 px-5 py-4 backdrop-blur-[2px]">
+    <div className="flex items-end gap-4 rounded-lg border border-white/15 bg-black/55 px-5 py-4 backdrop-blur-[6px]">
       <span className="inline-flex h-[46px] w-[46px] flex-none items-center justify-center rounded-[14px] border border-green-300/25 bg-green-500/15">
         <StatIcon size={22} className="text-green-300" />
       </span>
@@ -175,7 +175,7 @@ export function HomeHero() {
             "radial-gradient(1100px 680px at 8% -10%, rgba(58,18,8,.42), transparent 58%), radial-gradient(900px 600px at 100% 110%, rgba(18,62,13,.2), transparent 58%), linear-gradient(160deg, rgba(24,12,8,.82), rgba(12,9,7,.88))",
         }}
       />
-      <div className="relative mx-auto flex h-full min-h-[760px] max-w-(--container-max) flex-col justify-center px-5 pb-40 pt-52 sm:min-h-0 sm:px-12">
+      <div className="relative mx-auto flex h-full max-w-(--container-max) flex-col justify-center px-5 pb-16 pt-52 sm:pb-40 sm:px-12">
         {/* All slides share one grid cell so the hero always sizes to the tallest slide. */}
         <div className="grid">
           {SLIDES.map((slide, i) => (
