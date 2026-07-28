@@ -80,7 +80,7 @@ export function NewsTopicsHero() {
             <h1 className="font-display text-2xl font-semibold leading-tight text-strong sm:text-3xl">
               News
             </h1>
-            <p className="mt-2 max-w-[62ch] font-body text-sm text-muted">
+            <p className="mt-2 max-w-[62ch] font-body text-sm text-body">
               Bible translation-related stories from around the world.
             </p>
           </div>

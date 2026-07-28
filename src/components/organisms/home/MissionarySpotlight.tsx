@@ -36,7 +36,7 @@ export async function MissionarySpotlight() {
             </span>
             <span className="font-ui text-sm text-faint">{missionary.roles}</span>
           </div>
-          <p className="mb-6 font-body text-base leading-relaxed text-muted sm:text-md">{missionary.intro}</p>
+          <p className="mb-6 font-body text-base leading-relaxed text-body sm:text-md">{missionary.intro}</p>
           <div className="flex flex-wrap gap-3">
             <Button
               href={`/missionaries/${missionary.slug}`}

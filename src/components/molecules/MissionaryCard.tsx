@@ -36,7 +36,7 @@ export function MissionaryCard({ missionary: m, className }: MissionaryCardProps
           <h3 className="font-display text-lg font-semibold leading-snug text-strong">{m.name}</h3>
         </div>
         <div className="mt-1 font-ui text-sm font-medium leading-snug text-faint">{m.roles}</div>
-        <p className="mt-4 flex-1 border-t border-hair pt-4 font-body text-base leading-relaxed text-muted">{m.intro}</p>
+        <p className="mt-4 flex-1 border-t border-hair pt-4 font-body text-base leading-relaxed text-body">{m.intro}</p>
         <div className="mt-5 flex flex-wrap gap-2.5">
           <Button href={`/missionaries/${m.slug}`} variant="secondary" size="sm" iconRight={<ArrowRight size={14} />} className="flex-1">
             View profile

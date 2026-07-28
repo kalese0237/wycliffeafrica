@@ -13,7 +13,7 @@ export const revalidate = 1209600;
 // reads as the same brand as the website.
 
 const INK_0 = "#17140f"; // --color-strong
-const INK_1 = "#3a332b"; // --color-body
+const INK_1 = "#000000"; // --color-body
 const INK_2 = "#6c5847"; // --color-muted
 const INK_3 = "#9e8470"; // --color-faint
 const HAIR = "#eadfcf"; // --color-hair

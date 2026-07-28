@@ -38,7 +38,7 @@ export default function MotivateYourChurchPage() {
         <div>
           <PhotoPlaceholder caption="Praying together" aspect="16/9" />
 
-          <p className="mt-6 font-body text-base leading-relaxed text-muted">
+          <p className="mt-6 font-body text-base leading-relaxed text-body">
             Do you sometimes feel like a lonely voice trying to expand awareness in your church about people
             without access to the Bible? Do you need help motivating your church to care about the millions of
             people in the world who have no way to hear about Jesus? Do you want to keep your own vision alive?
@@ -48,14 +48,14 @@ export default function MotivateYourChurchPage() {
           <h3 className="mb-3 mt-8 font-display text-xl font-semibold text-green-700">
             Organize a &ldquo;No Bible Sunday&rdquo;
           </h3>
-          <p className="mb-4 font-body text-base leading-relaxed text-muted">
+          <p className="mb-4 font-body text-base leading-relaxed text-body">
             This guides you through the process of setting up a Sunday at your church where the Bible cannot be
             used. A Sunday without the Bible helps people feel what they normally take for granted, and notice
             those who live without it every week.
           </p>
 
           <h3 className="mb-3 mt-8 font-display text-xl font-semibold text-green-700">Look on the Web</h3>
-          <p className="mb-4 font-body text-base leading-relaxed text-muted">
+          <p className="mb-4 font-body text-base leading-relaxed text-body">
             These sites from around the world are geared to motivate and equip churches for missions. There are
             many good ideas that can be adapted to your church as well.
           </p>
@@ -68,7 +68,7 @@ export default function MotivateYourChurchPage() {
           </div>
 
           <h3 className="mb-3 mt-8 font-display text-xl font-semibold text-green-700">Form a Missions Committee</h3>
-          <p className="mb-4 font-body text-base leading-relaxed text-muted">
+          <p className="mb-4 font-body text-base leading-relaxed text-body">
             If you can find a few like-minded people, form a committee to lead your church&apos;s missions effort.
             A committee keeps missions in front of the congregation, looks after the missionaries the church sends
             out, and gets far more done than one person can alone:

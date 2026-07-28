@@ -102,13 +102,13 @@ export default function InternshipProgramPage() {
             <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
               Good internships are how organisations renew themselves
             </h2>
-            <p className="mb-3.5 font-body text-base leading-relaxed text-muted">
+            <p className="mb-3.5 font-body text-base leading-relaxed text-body">
               Across every field, internship programs are the funnel that carries new people in and gives them room
               to test whether the work is really theirs. Wycliffe Africa has gone without one for years, and it
               shows in how hard recruitment has become. People who might have made fine missionaries settle into
               other careers before anyone can walk with them through the decision.
             </p>
-            <p className="font-body text-base leading-relaxed text-muted">
+            <p className="font-body text-base leading-relaxed text-body">
               This program builds that missing door. It gives a young person a structured year to discover their
               calling, learn the craft of translation up close, and be supported by a mentor and a home church the
               whole way through.
@@ -133,7 +133,7 @@ export default function InternshipProgramPage() {
         <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
           Five steps from applicant to missionary
         </h2>
-        <p className="mb-8 max-w-[68ch] font-body text-base leading-relaxed text-muted">
+        <p className="mb-8 max-w-[68ch] font-body text-base leading-relaxed text-body">
           Each intern moves through the same path over twelve months, backed by their church and a mentor at every
           stage.
         </p>
@@ -144,7 +144,7 @@ export default function InternshipProgramPage() {
                 {i + 1}
               </span>
               <h3 className="mb-1.5 mt-3 font-display text-lg font-semibold text-primary">{step.title}</h3>
-              <p className="font-body text-sm leading-relaxed text-muted">{step.body}</p>
+              <p className="font-body text-sm leading-relaxed text-body">{step.body}</p>
             </div>
           ))}
         </div>
@@ -170,12 +170,12 @@ export default function InternshipProgramPage() {
             <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
               Learning the work where the work is done
             </h2>
-            <p className="mb-3.5 font-body text-base leading-relaxed text-muted">
+            <p className="mb-3.5 font-body text-base leading-relaxed text-body">
               Interns are placed in the countries where Wycliffe Africa already has missionaries: Madagascar,
               Cameroon, Uganda, Nigeria, Kenya, South Sudan, and South Africa. They do not sit in a classroom
               imagining translation; they stand next to someone doing it.
             </p>
-            <p className="font-body text-base leading-relaxed text-muted">
+            <p className="font-body text-base leading-relaxed text-body">
               The program is run from the Nairobi office under an Associate Director, who oversees recruitment,
               placement, fundraising, and the reporting that keeps partners in the loop. Support raised by interns
               is pooled and managed centrally, then held to train those who choose to go further.
@@ -224,7 +224,7 @@ export default function InternshipProgramPage() {
             {OUTCOMES.map((o) => (
               <div key={o.title} className="rounded-lg border border-hair bg-card p-6 shadow-sm">
                 <h3 className="mb-1.5 font-display text-lg font-semibold text-primary">{o.title}</h3>
-                <p className="font-body text-base leading-relaxed text-muted">{o.body}</p>
+                <p className="font-body text-base leading-relaxed text-body">{o.body}</p>
               </div>
             ))}
           </div>

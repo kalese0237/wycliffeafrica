@@ -20,7 +20,7 @@ export default async function FaqsPage() {
                 {faq.question}
                 <Plus size={20} className="flex-none text-green-700 transition-transform group-open:rotate-45" />
               </summary>
-              <p className="mt-3 font-body text-base leading-relaxed text-muted">{faq.answer}</p>
+              <p className="mt-3 font-body text-base leading-relaxed text-body">{faq.answer}</p>
             </details>
           ))}
         </div>

@@ -18,12 +18,12 @@ export default function ChurchPartnershipPage() {
           <h2 className="mb-4 mt-3 font-display text-2xl font-semibold text-strong">
             Mobilise your congregation for Bible translation
           </h2>
-          <p className="mb-3.5 font-body text-base leading-relaxed text-muted">
+          <p className="mb-3.5 font-body text-base leading-relaxed text-body">
             In a church partnership, your congregation takes on one language community and stays with it,
             praying for the team by name, funding the project, sometimes sending your own people. It is a
             commitment measured in years, not events.
           </p>
-          <p className="mb-6 font-body text-base leading-relaxed text-muted">
+          <p className="mb-6 font-body text-base leading-relaxed text-body">
             If that sounds like your church, write to us. The partnerships team will help you work out where to
             begin.
           </p>

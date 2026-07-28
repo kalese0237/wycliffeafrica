@@ -79,7 +79,7 @@ export default function SunriseAfricaCentrePage() {
           <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
             What SunRise Africa will hold
           </h2>
-          <p className="mb-8 font-body text-base leading-relaxed text-muted">
+          <p className="mb-8 font-body text-base leading-relaxed text-body">
             The Centre is planned as a working campus, not a monument. Alongside offices and training rooms it will
             house the people it trains and grow some of the food that feeds them.
           </p>
@@ -90,7 +90,7 @@ export default function SunriseAfricaCentrePage() {
                   <FeatureIcon size={24} />
                 </span>
                 <h3 className="mb-1.5 mt-4 font-display text-lg font-semibold text-primary">{title}</h3>
-                <p className="font-body text-base leading-relaxed text-muted">{body}</p>
+                <p className="font-body text-base leading-relaxed text-body">{body}</p>
               </div>
             ))}
           </div>
@@ -103,12 +103,12 @@ export default function SunriseAfricaCentrePage() {
           <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
             The work has grown faster than its foundations
           </h2>
-          <p className="mb-3.5 font-body text-base leading-relaxed text-muted">
+          <p className="mb-3.5 font-body text-base leading-relaxed text-body">
             Our mission operations have expanded, but recruitment keeps hitting the same wall: there is no
             permanent base to bring people into, and much of the budget still rides on donations that arrive
             unpredictably. When funding dips, training and care are the first things to stall.
           </p>
-          <p className="font-body text-base leading-relaxed text-muted">
+          <p className="font-body text-base leading-relaxed text-body">
             A Centre we own changes that arithmetic. It gives missionaries a stable place to be formed and cared
             for, and it lets hospitality and farming carry part of the running costs, so the work is steadier from
             one year to the next.
@@ -164,12 +164,12 @@ export default function SunriseAfricaCentrePage() {
           <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
             The church of the Global South is stepping into missions
           </h2>
-          <p className="mb-3.5 font-body text-base leading-relaxed text-muted">
+          <p className="mb-3.5 font-body text-base leading-relaxed text-body">
             Across Africa, more believers are being sent than at any point in Wycliffe Africa&rsquo;s history. Local
             churches raise support, commission their members, and pray them into the field. What has been missing
             is the capacity to receive and equip everyone who is ready to go.
           </p>
-          <p className="font-body text-base leading-relaxed text-muted">
+          <p className="font-body text-base leading-relaxed text-body">
             SunRise Africa is how Wycliffe Africa keeps pace with that momentum, turning willing people into
             prepared ones and sending them to communities still waiting for Scripture in their heart language.
           </p>

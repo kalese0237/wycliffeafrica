@@ -25,7 +25,7 @@ export default async function PrayerPage() {
           <h2 className="mb-4 font-display text-2xl font-semibold leading-tight text-strong">
             Prayer carries the work
           </h2>
-          <p className="font-body text-md leading-relaxed text-muted">
+          <p className="font-body text-md leading-relaxed text-body">
             Before a verse is drafted, someone prays. These are the current requests from our
             missionaries across Africa, some shared anonymously to protect workers in
             security-restricted areas. Take one with you this week.
@@ -33,7 +33,7 @@ export default async function PrayerPage() {
         </div>
 
         {requests.length === 0 ? (
-          <p className="mx-auto max-w-[52ch] rounded-lg border border-hair bg-sunk p-6 text-center font-body text-md leading-relaxed text-muted">
+          <p className="mx-auto max-w-[52ch] rounded-lg border border-hair bg-sunk p-6 text-center font-body text-md leading-relaxed text-body">
             No prayer requests are published right now. New requests from the field appear here as
             soon as the office reviews them.
           </p>
@@ -52,7 +52,7 @@ export default async function PrayerPage() {
             <h2 className="mb-2 font-display text-xl font-semibold text-strong">
               Pray with us every two weeks
             </h2>
-            <p className="max-w-[58ch] font-body text-base leading-relaxed text-muted">
+            <p className="max-w-[58ch] font-body text-base leading-relaxed text-body">
               The prayer guide gathers requests from every field into one rhythm of prayer for
               Bible translation across Africa. Free to download, updated every two weeks.
             </p>

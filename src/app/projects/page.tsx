@@ -40,7 +40,7 @@ export default function ProjectsPage() {
               <ProjectIcon size={24} />
             </span>
             <h3 className="mb-2 mt-4 font-display text-lg font-semibold text-strong">{title}</h3>
-            <p className="mb-5 flex-1 font-body text-base leading-relaxed text-muted">{body}</p>
+            <p className="mb-5 flex-1 font-body text-base leading-relaxed text-body">{body}</p>
             <Button href={href} variant="secondary" size="sm" iconRight={<ArrowRight size={15} />} className="w-fit">
               Learn more
             </Button>

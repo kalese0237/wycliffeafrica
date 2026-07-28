@@ -58,7 +58,7 @@ export function MissionaryProfileTemplate({
               <h2 className="mb-1.5 font-display text-md font-semibold text-strong">
                 Partner with {firstName}
               </h2>
-              <p className="mb-4 font-body text-sm leading-relaxed text-muted">
+              <p className="mb-4 font-body text-sm leading-relaxed text-body">
                 Missionaries serve through the monthly support and prayers of partners. Your gift
                 goes directly to this ministry.
               </p>
@@ -85,7 +85,7 @@ export function MissionaryProfileTemplate({
             <Divider variant="accent" width={56} className="mb-6" />
             <div className="max-w-[62ch] space-y-5">
               {bio.map((paragraph, i) => (
-                <p key={i} className="font-body text-md leading-relaxed text-muted">
+                <p key={i} className="font-body text-md leading-relaxed text-body">
                   {paragraph}
                 </p>
               ))}
@@ -102,7 +102,7 @@ export function MissionaryProfileTemplate({
                 <h2 className="mb-1.5 font-display text-2xl font-semibold text-strong">
                   Pray with {firstName}
                 </h2>
-                <p className="font-body text-base text-muted">
+                <p className="font-body text-base text-body">
                   Current prayer requests from the field.
                 </p>
               </div>

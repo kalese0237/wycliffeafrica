@@ -45,7 +45,7 @@ export function NewsCard({ item, authorName, className }: NewsCardProps) {
         </div>
         <div className="flex flex-1 flex-col gap-3 p-5">
           <h3 className="font-display text-lg font-semibold leading-snug text-strong">{item.title}</h3>
-          {item.excerpt && <p className="flex-1 font-body text-base leading-normal text-muted">{item.excerpt}</p>}
+          {item.excerpt && <p className="flex-1 font-body text-base leading-normal text-body">{item.excerpt}</p>}
           {(author || item.place || item.date) && (
             <div className="mt-2 flex items-center gap-3">
               {author && <Avatar name={author} size={30} />}

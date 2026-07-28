@@ -33,11 +33,11 @@ export default function AboutPage() {
           <h2 className="mb-3.5 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
             A borrowed language keeps the gospel at arm&apos;s length.
           </h2>
-          <p className="mb-3.5 font-body text-base leading-relaxed text-muted sm:text-md">
+          <p className="mb-3.5 font-body text-base leading-relaxed text-body sm:text-md">
             People can learn in a second language, but few ever pray in one. When Scripture arrives in the mother
             tongue, churches preach from it, schools teach reading with it, and it stays for generations.
           </p>
-          <p className="font-body text-base leading-relaxed text-muted sm:text-md">
+          <p className="font-body text-base leading-relaxed text-body sm:text-md">
             Yet thousands of languages across Africa still wait. That is the task we exist for.
           </p>
         </div>
@@ -59,7 +59,7 @@ export default function AboutPage() {
                 </span>
                 <div>
                   <h3 className="mb-1 font-display text-md font-semibold text-strong">{title}</h3>
-                  <p className="font-body text-base leading-relaxed text-muted">{body}</p>
+                  <p className="font-body text-base leading-relaxed text-body">{body}</p>
                 </div>
               </div>
             ))}

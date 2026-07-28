@@ -18,7 +18,7 @@ export function PageIntro({ journey, eyebrowLabel, title, subtitle }: PageIntroP
       <h1 className="mb-2.5 mt-4 max-w-[20ch] text-balance font-display text-2xl font-semibold leading-tight text-strong sm:text-3xl">
         {title}
       </h1>
-      {subtitle && <p className="max-w-[62ch] font-body text-md text-muted">{subtitle}</p>}
+      {subtitle && <p className="max-w-[62ch] font-body text-md text-body">{subtitle}</p>}
     </section>
   );
 }
