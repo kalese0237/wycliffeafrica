@@ -295,7 +295,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
               className={cn(
                 "hidden flex-none items-center justify-center rounded-full transition-[height,width,color,background-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none sm:inline-flex",
                 scrolled ? "h-9 w-9" : "h-10 w-10",
-                onPhoto ? "bg-white/90 text-ink-1 hover:bg-white" : "bg-sunk text-body hover:bg-hair",
+                onPhoto ? "text-white hover:bg-white/10" : "text-body hover:bg-sunk",
               )}
             >
               <User size={18} />
