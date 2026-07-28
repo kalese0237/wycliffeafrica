@@ -262,7 +262,7 @@ export function HomeHero() {
         <ChevronRight size={22} />
       </button>
 
-      <div className="absolute inset-x-0 bottom-0 z-10 px-5 pb-11 sm:px-12">
+      <div className="relative z-10 px-5 pb-10 pt-6 sm:absolute sm:inset-x-0 sm:bottom-0 sm:px-12 sm:pb-11 sm:pt-0">
         <div className="mx-auto grid max-w-(--container-max) grid-cols-1 gap-3.5 sm:grid-cols-3">
           {HERO_STATS.map((s) => (
             <HeroStatTile key={s.label} {...s} />
