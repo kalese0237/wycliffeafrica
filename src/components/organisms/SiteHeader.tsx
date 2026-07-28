@@ -286,7 +286,7 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                 onPhoto ? "text-white hover:bg-white/10" : "text-body hover:bg-sunk",
               )}
             >
-              <Search size={18} />
+              <Search size={18} className="-translate-x-px" />
             </button>
 
             <Link
