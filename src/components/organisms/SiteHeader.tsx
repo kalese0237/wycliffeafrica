@@ -263,53 +263,59 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
               })}
             </nav>
 
-          <button
-            type="button"
-            aria-label="Search"
-            className={cn(
-              "hidden flex-none items-center justify-center rounded-full transition-[height,width,color,background-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none sm:inline-flex",
-              scrolled ? "h-9 w-9" : "h-10 w-10",
-              onPhoto ? "text-white hover:bg-white/10" : "text-body hover:bg-sunk",
-            )}
-          >
-            <Search size={18} />
-          </button>
+          <div className="flex flex-none items-center gap-1 sm:gap-1.5">
+            <Button
+              href="/give"
+              variant="accent"
+              size="sm"
+              iconLeft={<Heart size={14} />}
+              className={cn(
+                "hidden transition-[height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none sm:inline-flex",
+                scrolled ? "h-9" : "h-10",
+              )}
+            >
+              Give now
+            </Button>
 
-          <Link
-            href="/portal/login"
-            aria-label="Missionary portal sign in"
-            className={cn(
-              "hidden flex-none items-center justify-center rounded-full transition-[height,width,color,background-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none sm:inline-flex",
-              scrolled ? "h-9 w-9" : "h-10 w-10",
-              onPhoto ? "bg-white/90 text-ink-1 hover:bg-white" : "bg-sunk text-body hover:bg-hair",
-            )}
-          >
-            <User size={18} />
-          </Link>
+            <button
+              type="button"
+              aria-label="Search"
+              className={cn(
+                "hidden flex-none items-center justify-center rounded-full transition-[height,width,color,background-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none sm:inline-flex",
+                scrolled ? "h-9 w-9" : "h-10 w-10",
+                onPhoto ? "text-white hover:bg-white/10" : "text-body hover:bg-sunk",
+              )}
+            >
+              <Search size={18} className="-translate-x-px" />
+            </button>
 
-          <Button
-            href="/give"
-            variant="accent"
-            size="md"
-            iconLeft={<Heart size={16} />}
-            className="hidden rounded-lg sm:inline-flex"
-          >
-            Give now
-          </Button>
+            <Link
+              href="/portal/login"
+              aria-label="Missionary portal sign in"
+              className={cn(
+                "hidden flex-none items-center justify-center rounded-full transition-[height,width,color,background-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none sm:inline-flex",
+                scrolled ? "h-9 w-9" : "h-10 w-10",
+                onPhoto ? "text-white hover:bg-white/10" : "text-body hover:bg-sunk",
+              )}
+            >
+              <User size={18} />
+            </Link>
 
-          <button
-            type="button"
-            aria-label="Open menu"
-            aria-controls="site-menu"
-            aria-expanded={drawerOpen}
-            onClick={() => setDrawerOpen(true)}
-            className={cn(
-              "inline-flex h-10 w-10 flex-none items-center justify-center rounded-full bg-transparent transition-[color,background-color] duration-180",
-              onPhoto ? "text-white hover:bg-white/10" : "text-body hover:bg-sunk",
-            )}
-          >
-            <Menu size={22} strokeWidth={2.2} />
-          </button>
+            <button
+              type="button"
+              aria-label="Open menu"
+              aria-controls="site-menu"
+              aria-expanded={drawerOpen}
+              onClick={() => setDrawerOpen(true)}
+              className={cn(
+                "inline-flex flex-none items-center justify-center rounded-full transition-[height,width,color,background-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+                scrolled ? "h-9 w-9" : "h-10 w-10",
+                onPhoto ? "text-white hover:bg-white/10" : "text-body hover:bg-sunk",
+              )}
+            >
+              <Menu size={20} strokeWidth={2.2} />
+            </button>
+          </div>
           </div>
         </header>
       </div>
