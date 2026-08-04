@@ -31,9 +31,6 @@ export function NewsGrid({ items, authorNames }: NewsGridProps) {
     <>
       <div className="mb-9 flex items-end justify-between gap-4 border-b border-hair pb-5">
         <div>
-          <p className="mb-2 font-ui text-xs font-bold uppercase tracking-caps text-green-700">
-            News from the field
-          </p>
           <h2 className="font-display text-2xl font-semibold leading-tight text-strong">
             {FILTER_LABEL[filter]}
           </h2>

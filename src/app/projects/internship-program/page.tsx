@@ -57,7 +57,6 @@ export default function InternshipProgramPage() {
   return (
     <ProjectPageTemplate
       hero={{
-        eyebrow: "The Internship Program",
         title: "Raising the next generation of African missionaries",
         titleLines: ["Raising the next generation of", "African missionaries"],
         titleMaxWidth: "32ch",
@@ -77,8 +76,7 @@ export default function InternshipProgramPage() {
     >
 
       <section id="story" className="mx-auto max-w-[1120px] px-5 py-[72px] sm:px-7">
-        <div className="font-ui text-xs font-bold uppercase tracking-caps-loose text-[#C9761A]">The need</div>
-        <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
+        <h2 className="mb-4 font-display text-2xl font-semibold leading-tight text-strong">
           Twenty-one years in, the harvest still outruns the hands
         </h2>
         <p className="mb-3.5 max-w-[68ch] font-body text-md leading-relaxed text-body">
@@ -98,8 +96,7 @@ export default function InternshipProgramPage() {
       <section>
         <div className="mx-auto grid max-w-[1120px] grid-cols-1 items-center gap-10 px-5 py-[72px] sm:px-7 lg:grid-cols-[1.1fr_0.9fr] lg:gap-[54px]">
           <div>
-            <div className="font-ui text-xs font-bold uppercase tracking-caps-loose text-[#C9761A]">Why an internship</div>
-            <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
+            <h2 className="mb-4 font-display text-2xl font-semibold leading-tight text-strong">
               Good internships are how organisations renew themselves
             </h2>
             <p className="mb-3.5 font-body text-base leading-relaxed text-body">
@@ -115,7 +112,7 @@ export default function InternshipProgramPage() {
             </p>
           </div>
           <div className="flex flex-col justify-center rounded-xl bg-[linear-gradient(135deg,#2F6E63,#234F47)] p-8 text-white shadow-lg sm:p-12">
-            <div className="font-ui text-xs font-bold uppercase tracking-caps-loose text-[#9FD8C8]">The main objective</div>
+            <h3 className="font-display text-lg font-semibold leading-snug text-[#9FD8C8]">The main objective</h3>
             <p className="mt-3 font-display text-xl italic leading-normal">
               Recruit and train interns who are drawn to Bible translation, and walk with them until they know
               whether God is calling them into it for good.
@@ -129,8 +126,7 @@ export default function InternshipProgramPage() {
       </section>
 
       <section id="journey" className="mx-auto max-w-[1120px] px-5 py-[72px] sm:px-7">
-        <div className="font-ui text-xs font-bold uppercase tracking-caps-loose text-[#C9761A]">The intern&rsquo;s year</div>
-        <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
+        <h2 className="mb-4 font-display text-2xl font-semibold leading-tight text-strong">
           Five steps from applicant to missionary
         </h2>
         <p className="mb-8 max-w-[68ch] font-body text-base leading-relaxed text-body">
@@ -153,7 +149,7 @@ export default function InternshipProgramPage() {
       <section id="mentor">
         <div className="mx-auto grid max-w-[1120px] grid-cols-1 items-center gap-10 px-5 py-[72px] sm:px-7 lg:grid-cols-[0.9fr_1.1fr] lg:gap-[54px]">
           <div className="rounded-xl bg-[linear-gradient(135deg,#B5471B,#8C3313)] p-8 text-white shadow-lg sm:p-12">
-            <div className="font-ui text-xs font-bold uppercase tracking-caps-loose text-[#FFD79A]">Mentored in four areas</div>
+            <h3 className="font-display text-lg font-semibold leading-snug text-[#FFD79A]">Mentored in four areas</h3>
             <div className="mt-4 flex flex-col gap-3">
               {MENTOR_AREAS.map((area) => (
                 <div key={area.title} className="flex items-start gap-2.5">
@@ -166,8 +162,7 @@ export default function InternshipProgramPage() {
             </div>
           </div>
           <div>
-            <div className="font-ui text-xs font-bold uppercase tracking-caps-loose text-[#C9761A]">Placement &amp; care</div>
-            <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
+            <h2 className="mb-4 font-display text-2xl font-semibold leading-tight text-strong">
               Learning the work where the work is done
             </h2>
             <p className="mb-3.5 font-body text-base leading-relaxed text-body">
@@ -186,8 +181,7 @@ export default function InternshipProgramPage() {
 
       <section id="model" className="mx-auto max-w-[1120px] px-5 py-[72px] sm:px-7">
         <div className="rounded-xl bg-[linear-gradient(135deg,#2F6E63,#1F463F)] p-8 text-white shadow-lg sm:p-12">
-          <div className="font-ui text-xs font-bold uppercase tracking-caps-loose text-[#9FD8C8]">The three-year model</div>
-          <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-white">
+          <h2 className="mb-4 font-display text-2xl font-semibold leading-tight text-white">
             Ten interns a year, a widening circle behind each one
           </h2>
           <p className="mb-8 max-w-[680px] font-body text-base leading-relaxed text-[#D5EAE3]">
@@ -218,8 +212,7 @@ export default function InternshipProgramPage() {
 
       <section>
         <div className="mx-auto max-w-[1120px] px-5 py-[72px] sm:px-7">
-          <div className="font-ui text-xs font-bold uppercase tracking-caps-loose text-[#C9761A]">What one intake delivers</div>
-          <h2 className="mb-8 mt-3 font-display text-2xl font-semibold text-strong">The outcomes we are aiming for</h2>
+          <h2 className="mb-8 font-display text-2xl font-semibold text-strong">The outcomes we are aiming for</h2>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             {OUTCOMES.map((o) => (
               <div key={o.title} className="rounded-lg border border-hair bg-card p-6 shadow-sm">
@@ -233,8 +226,7 @@ export default function InternshipProgramPage() {
 
       <section id="give" className="mx-auto max-w-[1120px] px-5 pb-[90px] pt-5 sm:px-7">
         <div className="rounded-2xl border border-[#F0CE93] bg-[radial-gradient(120%_120%_at_50%_0%,#FBE7C4_0%,#F7D69B_100%)] px-6 py-16 text-center">
-          <div className="font-ui text-xs font-bold uppercase tracking-caps-loose text-[#C9761A]">Partner with us</div>
-          <h2 className="mx-auto mb-4 mt-3 max-w-[660px] font-display text-2xl font-semibold leading-tight text-strong">
+          <h2 className="mx-auto mb-4 max-w-[660px] font-display text-2xl font-semibold leading-tight text-strong">
             Seed one intake and start the pipeline
           </h2>
           <p className="mx-auto mb-7 max-w-[580px] font-body text-base leading-relaxed text-[#6B4A24]">

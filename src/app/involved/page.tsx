@@ -74,8 +74,6 @@ export default function InvolvedPage() {
   return (
     <PageTemplate>
       <PageIntro
-        journey="serve"
-        eyebrowLabel="Get Involved"
         title="There's a place for you in Bible translation."
         subtitle="Some people move to the field. Most serve from where they are, praying, giving, or bringing their church along."
       />

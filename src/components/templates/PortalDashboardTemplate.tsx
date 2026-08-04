@@ -1,6 +1,5 @@
 import * as React from "react";
-import Link from "next/link";
-import { HandHeart, LogOut, MapPin, Newspaper } from "lucide-react";
+import { LogOut, MapPin } from "lucide-react";
 import { Badge, type BadgeTone } from "@/components/atoms/Badge";
 import { Button } from "@/components/atoms/Button";
 import {
@@ -9,6 +8,7 @@ import {
   SubmissionForm,
 } from "@/components/organisms/portal";
 import { logoutAction } from "@/lib/portal/actions";
+import { cn } from "@/lib/cn";
 import type { MissionaryRecord, PublishStatus, UpdateType } from "@/lib/directus/schema";
 import type { MySubmission } from "@/lib/portal/auth";
 
@@ -18,21 +18,6 @@ const STATUS_BADGE: Record<PublishStatus, { label: string; tone: BadgeTone }> = 
   archived: { label: "Archived", tone: "neutral" },
   rejected: { label: "Changes requested", tone: "danger" },
 };
-
-const QUICK_ACTIONS = [
-  {
-    type: "update" as const,
-    title: "Field update",
-    body: "Share news and progress from the work.",
-    icon: Newspaper,
-  },
-  {
-    type: "prayer" as const,
-    title: "Prayer request",
-    body: "Invite partners to pray with you.",
-    icon: HandHeart,
-  },
-];
 
 export interface PortalDashboardTemplateProps {
   missionary: MissionaryRecord | null;
@@ -76,52 +61,35 @@ export function PortalDashboardTemplate({
                 </p>
               )}
             </div>
-            <form action={logoutAction} className="lg:hidden">
-              <Button
-                type="submit"
-                variant="secondary"
-                size="sm"
-                iconLeft={<LogOut size={14} />}
-              >
-                Sign out
-              </Button>
-            </form>
+            <div className="flex flex-wrap items-start gap-4">
+              {missionary && (
+                <div className="flex flex-wrap items-center gap-3" aria-label="Submission totals">
+                  {[
+                    { value: updateCount, label: "Field updates" },
+                    { value: prayerCount, label: "Prayer requests" },
+                  ].map((stat) => (
+                    <div key={stat.label} className="flex items-center gap-3 rounded-md border border-hair bg-card px-5 py-4 shadow-sm">
+                      <div className="font-ui text-2xl font-bold leading-none text-primary">{stat.value}</div>
+                      <div className="font-ui text-sm text-body">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              <form action={logoutAction} className="lg:hidden">
+                <Button
+                  type="submit"
+                  variant="secondary"
+                  size="sm"
+                  iconLeft={<LogOut size={14} />}
+                >
+                  Sign out
+                </Button>
+              </form>
+            </div>
           </header>
 
           {missionary ? (
             <>
-              <section className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3" aria-label="Submission totals">
-                {[
-                  { value: submissions.length, label: "Total submissions" },
-                  { value: updateCount, label: "Field updates" },
-                  { value: prayerCount, label: "Prayer requests" },
-                ].map((stat) => (
-                  <div key={stat.label} className="rounded-md border border-hair bg-card px-6 py-5 shadow-sm">
-                    <div className="font-ui text-2xl font-bold leading-none text-primary">{stat.value}</div>
-                    <div className="mt-2 font-ui text-sm text-body">{stat.label}</div>
-                  </div>
-                ))}
-              </section>
-
-              <p className="mb-4 font-ui text-xs font-bold uppercase tracking-caps text-[#C9761A]">
-                Post something new
-              </p>
-              <section className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {QUICK_ACTIONS.map(({ type, title, body, icon: QuickIcon }) => (
-                  <Link
-                    key={type}
-                    href={`/portal?type=${type}#new-submission`}
-                    className="group rounded-md border border-hair bg-card p-5 shadow-sm transition-[transform,box-shadow] hover:-translate-y-0.5 hover:shadow-md"
-                  >
-                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-md bg-[linear-gradient(140deg,#FCE3B8,#F3AD52)] text-primary">
-                      <QuickIcon size={21} />
-                    </span>
-                    <h2 className="mt-3 font-display text-lg font-semibold text-primary">{title}</h2>
-                    <p className="mt-1 font-ui text-sm text-body">{body}</p>
-                  </Link>
-                ))}
-              </section>
-
               <div className="grid grid-cols-1 items-start gap-9 xl:grid-cols-[1.12fr_0.88fr]">
                 <section id="new-submission">
                   <SubmissionForm
@@ -152,13 +120,22 @@ export function PortalDashboardTemplate({
                       {submissions.map((submission) => {
                         const badge = STATUS_BADGE[submission.status] ?? STATUS_BADGE.draft;
                         const isPrayer = submission.type === "prayer";
+                        const isPublished = submission.status === "published";
                         return (
-                          <li key={submission.id} className="rounded-md border border-hair bg-card p-5 shadow-sm">
+                          <li
+                            key={submission.id}
+                            className={cn(
+                              "rounded-md border p-5 shadow-sm",
+                              isPublished ? "border-accent-border bg-accent-tint" : "border-hair bg-card",
+                            )}
+                          >
                             <div className="mb-2 flex flex-wrap items-center gap-2">
                               <Badge tone={isPrayer ? "primary" : "accent"}>
                                 {isPrayer ? "Prayer request" : "Field update"}
                               </Badge>
-                              <Badge tone={badge.tone}>{badge.label}</Badge>
+                              <Badge tone={badge.tone} soft={submission.status !== "published"}>
+                                {badge.label}
+                              </Badge>
                             </div>
                             <h3 className="font-display text-md font-semibold leading-snug text-strong">
                               {submission.title}

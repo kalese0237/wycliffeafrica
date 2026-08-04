@@ -51,12 +51,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${fraunces.variable} ${sourceSans.variable} ${gentium.variable} ${jbMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+    // The next/font variables must land on <html>, not <body>: the @theme
+    // font tokens are declared at :root and substituted there, so a variable
+    // defined only on <body> resolves to nothing and every untagged element
+    // silently falls back to the Tailwind system sans.
+    <html
+      lang="en"
+      className={`${fraunces.variable} ${sourceSans.variable} ${gentium.variable} ${jbMono.variable}`}
+    >
+      <body className="antialiased">{children}</body>
     </html>
   );
 }

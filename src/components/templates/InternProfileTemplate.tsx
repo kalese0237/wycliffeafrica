@@ -90,7 +90,7 @@ export function InternProfileTemplate({ intern: i }: InternProfileTemplateProps)
             </h1>
             <div className="mb-6 font-ui text-sm text-faint">{i.roles}</div>
             <Divider variant="accent" width={56} className="mb-6" />
-            <div className="max-w-[62ch] space-y-5">
+            <div className="space-y-5 pr-5">
               {bio.map((paragraph, idx) => (
                 <p key={idx} className="font-body text-md leading-relaxed text-body">
                   {paragraph}

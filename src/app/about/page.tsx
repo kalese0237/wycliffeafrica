@@ -20,8 +20,6 @@ export default function AboutPage() {
   return (
     <PageTemplate>
       <PageIntro
-        journey="serve"
-        eyebrowLabel="About Us"
         title="Why Bible translation, and who we are"
         subtitle="Wycliffe Africa is an African-led movement raising missionaries for Bible translation across the continent."
       />
@@ -38,8 +36,7 @@ export default function AboutPage() {
           />
         </div>
         <div>
-          <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">Why Bible translation</div>
-          <h2 className="mb-3.5 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
+          <h2 className="mb-3.5 font-display text-2xl font-semibold leading-tight text-strong">
             A borrowed language keeps the gospel at arm&apos;s length.
           </h2>
           <p className="mb-3.5 font-body text-base leading-relaxed text-body sm:text-md">
@@ -54,10 +51,7 @@ export default function AboutPage() {
 
       <section className="border-y border-hair bg-sunk">
         <div className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12">
-          <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">
-            What we believe · Our core values
-          </div>
-          <h2 className="mb-8 mt-3 font-display text-2xl font-semibold text-strong">
+          <h2 className="mb-8 font-display text-2xl font-semibold text-strong">
             The convictions that shape our work
           </h2>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">

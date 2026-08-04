@@ -83,7 +83,7 @@ export function MissionaryProfileTemplate({
             </h1>
             <div className="mb-6 font-ui text-sm text-faint">{m.roles}</div>
             <Divider variant="accent" width={56} className="mb-6" />
-            <div className="max-w-[62ch] space-y-5">
+            <div className="space-y-5 pr-5">
               {bio.map((paragraph, i) => (
                 <p key={i} className="font-body text-md leading-relaxed text-body">
                   {paragraph}

@@ -24,10 +24,7 @@ export async function MissionarySpotlight() {
           <PhotoPlaceholder caption={`${missionary.name} portrait`} person={missionary.name} aspect="4/3" />
         )}
         <div>
-          <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">
-            Missionary Spotlight
-          </div>
-          <h2 className="mb-1.5 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
+          <h2 className="mb-1.5 font-display text-2xl font-semibold leading-tight text-strong">
             {missionary.name}
           </h2>
           <div className="mb-3 flex flex-wrap items-center gap-x-4 gap-y-1">

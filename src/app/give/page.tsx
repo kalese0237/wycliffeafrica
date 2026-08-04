@@ -14,8 +14,6 @@ export default function GivePage() {
   return (
     <PageTemplate>
       <PageIntro
-        journey="give"
-        eyebrowLabel="Give"
         title="Every gift moves a translation forward."
         subtitle="Give once or monthly, toward a missionary's support, a specific project, or wherever the need is greatest."
       />
@@ -28,8 +26,7 @@ export default function GivePage() {
       <section className="border-t border-hair bg-sunk">
         <div className="mx-auto grid max-w-(--container-max) grid-cols-1 items-center gap-10 px-5 py-16 sm:px-12 lg:grid-cols-2 lg:gap-16">
           <div>
-            <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">How giving works</div>
-            <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
+            <h2 className="mb-4 font-display text-2xl font-semibold leading-tight text-strong">
               Your giving directly helps people receive God&rsquo;s Word in their own language.
             </h2>
             <p className="mb-3.5 font-body text-base leading-relaxed text-body">
@@ -68,8 +65,7 @@ export default function GivePage() {
           />
         </div>
         <div>
-          <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">Adopt a project</div>
-          <h2 className="mb-4 mt-3 font-display text-2xl font-semibold text-strong">
+          <h2 className="mb-4 font-display text-2xl font-semibold text-strong">
             Stand behind a translation project
           </h2>
           <p className="mb-3 font-body text-base leading-relaxed text-body">

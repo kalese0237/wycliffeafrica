@@ -22,21 +22,27 @@ import { supportsRichNewsFields } from "@/lib/directus/queries";
 export interface ActionState {
   error?: string;
   success?: string;
+  /**
+   * Echoed back after a failed sign-in only. React resets an uncontrolled form
+   * once its action settles, so without this the address has to be retyped on
+   * every attempt. Never carries the password.
+   */
+  email?: string;
 }
 
 export async function loginAction(_prev: ActionState, formData: FormData): Promise<ActionState> {
   const email = String(formData.get("email") ?? "").trim();
   const password = String(formData.get("password") ?? "");
-  if (!email || !password) return { error: "Please enter your email and password." };
+  if (!email || !password) return { error: "Please enter your email and password.", email };
 
   try {
     await loginWithPassword(email, password);
   } catch (error) {
     if (error instanceof DirectusRequestError && (error.status === 400 || error.status === 401)) {
-      return { error: "Sign-in failed. Check your email and password, or contact the office." };
+      return { error: "Sign-in failed. Check your email and password, or contact the office.", email };
     }
     console.error("Missionary portal login backend error", error);
-    return { error: "The portal is temporarily unavailable. Please try again shortly." };
+    return { error: "The portal is temporarily unavailable. Please try again shortly.", email };
   }
   redirect("/portal");
 }
