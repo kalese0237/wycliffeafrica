@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import type { FieldUpdateRecord, MissionaryRecord, NewsRecord, PublishStatus, UpdateType } from "@/lib/directus/schema";
-import { submissionImageValue } from "./validation";
+import { submissionImageValue, SUBMISSION_LIMITS } from "./validation";
 
 /**
  * Missionary-portal session layer, backed by Directus auth.
@@ -230,8 +230,8 @@ export interface NewSubmission {
   inlineImageCaption?: string;
 }
 
-const ALLOWED_IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
-const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
+const ALLOWED_IMAGE_TYPES = new Set<string>(SUBMISSION_LIMITS.imageTypes);
+const MAX_IMAGE_BYTES = SUBMISSION_LIMITS.imageMaxBytes;
 
 export class PortalInputError extends Error {}
 

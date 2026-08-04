@@ -27,8 +27,6 @@ export default function ProjectsPage() {
   return (
     <PageTemplate>
       <PageIntro
-        journey="serve"
-        eyebrowLabel="Projects"
         title="Initiatives building the next generation of the movement"
         subtitle="Beyond day-to-day giving, these are the specific efforts Wycliffe Africa is raising partners around right now."
       />

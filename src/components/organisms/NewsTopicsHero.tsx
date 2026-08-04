@@ -74,9 +74,6 @@ export function NewsTopicsHero() {
       <div className="mx-auto max-w-(--container-wide) px-5 pb-10 pt-10 sm:px-12 sm:pb-14 sm:pt-14">
         <div className="mb-7 grid items-end gap-6 lg:grid-cols-[1fr_360px] lg:gap-8">
           <div>
-            <p className="mb-2 font-ui text-[11px] font-bold uppercase tracking-caps text-green-700">
-              Staying Informed Together
-            </p>
             <h1 className="font-display text-2xl font-semibold leading-tight text-strong sm:text-3xl">
               News
             </h1>

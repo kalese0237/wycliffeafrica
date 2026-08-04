@@ -27,23 +27,28 @@ export function PortalAuthTemplate({ children }: PortalAuthTemplateProps) {
           </span>
         </Link>
 
-        <div className="relative z-10 max-w-[470px]">
-          <p className="mb-4 font-ui text-xs font-bold uppercase tracking-caps-loose text-[#FFE9C4]">
-            From the field
-          </p>
-          <h1 className="wonk font-display text-[clamp(2.5rem,4.5vw,4rem)] font-semibold leading-[1.06] text-white [text-shadow:0_2px_18px_rgba(120,40,0,.25)]">
-            Send word home from the field.
-          </h1>
-          <p className="mt-5 max-w-[42ch] font-body text-lg leading-relaxed text-[#FFF3E0]">
-            Share your updates, stories, and prayer requests with the team and the partners standing
-            with you.
-          </p>
-        </div>
+        {/* Promise and Scripture are one block, so the panel distributes two
+            elements rather than three — the old three-way `justify-between`
+            opened an arbitrary void between the wordmark and the promise. */}
+        <div className="relative z-10 flex flex-col gap-10">
+          <div className="max-w-[470px]">
+            {/* Deliberately not a heading: this panel is promotional and is
+                absent below `lg`. The page's h1 belongs to the task, in the
+                auth column, where it exists at every width. */}
+            <p className="wonk font-display text-[clamp(2.5rem,4.5vw,4rem)] font-semibold leading-[1.06] text-white [text-shadow:0_2px_18px_rgba(120,40,0,.25)]">
+              Send word home from the field.
+            </p>
+            <p className="mt-5 max-w-[42ch] font-body text-lg leading-relaxed text-[#FFF3E0]">
+              Share your updates, stories, and prayer requests with the team and the partners standing
+              with you.
+            </p>
+          </div>
 
-        <blockquote className="relative z-10 max-w-[440px] border-l-[3px] border-white/50 pl-4 font-scripture text-md italic leading-relaxed text-[#FFE9C4]">
-          “How beautiful are the feet of those who bring good news.”
-          <cite className="mt-1 block font-ui text-sm not-italic text-white/75">Romans 10:15</cite>
-        </blockquote>
+          <blockquote className="max-w-[440px] border-l border-white/50 pl-4 font-scripture text-md italic leading-relaxed text-[#FFE9C4]">
+            “How beautiful are the feet of those who bring good news.”
+            <cite className="mt-1 block font-ui text-sm not-italic text-white/75">Romans 10:15</cite>
+          </blockquote>
+        </div>
       </section>
 
       <section className="flex min-h-svh items-center justify-center px-5 py-12 sm:px-10 lg:px-12">
@@ -54,14 +59,19 @@ export function PortalAuthTemplate({ children }: PortalAuthTemplateProps) {
               Field Portal
             </span>
           </Link>
+
+          {children}
+
+          {/* The way out sits after the task, not before it. Leading with it put
+              an escape hatch first in both reading and tab order, and on narrow
+              widths stacked a second link to "/" directly under the wordmark. */}
           <Link
             href="/"
-            className="mb-7 flex w-fit items-center gap-2 font-ui text-sm font-semibold text-primary transition-colors hover:text-primary-hover"
+            className="mt-10 flex w-fit items-center gap-2 font-ui text-sm text-muted transition-colors hover:text-primary"
           >
-            <ArrowLeft size={16} />
+            <ArrowLeft size={15} />
             Back to main website
           </Link>
-          {children}
         </div>
       </section>
     </main>

@@ -12,8 +12,7 @@ export async function UpdatesFeed() {
     <section className="mx-auto max-w-(--container-max) px-5 py-20 sm:px-12">
       <div className="mb-10 flex flex-wrap items-end justify-between gap-5">
         <div>
-          <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">From the field</div>
-          <h2 className="mt-2.5 font-display text-2xl font-semibold text-strong">Latest news</h2>
+          <h2 className="font-display text-2xl font-semibold text-strong">Latest news</h2>
         </div>
         <Button href="/news" variant="secondary" iconRight={<ArrowRight size={16} />}>
           See all news

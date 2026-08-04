@@ -7,6 +7,9 @@ export const SUBMISSION_LIMITS = {
   bodyMax: 5000,
   pullQuoteMax: 220,
   captionMax: 140,
+  /** Shared with the browser-side picker so the two checks cannot drift apart. */
+  imageMaxBytes: 5 * 1024 * 1024,
+  imageTypes: ["image/jpeg", "image/png", "image/webp"],
 } as const;
 
 export interface SubmissionFields {

@@ -3,7 +3,6 @@ import { Button } from "@/components/atoms/Button";
 import { cn } from "@/lib/cn";
 
 export interface DonationCTAProps {
-  eyebrow?: string;
   title?: string;
   blurb?: string;
   primaryCta?: string;
@@ -16,7 +15,6 @@ export interface DonationCTAProps {
 
 /** Full-width giving band with a faint "give" watermark. */
 export function DonationCTA({
-  eyebrow = "Support the work",
   title = "Put Scripture in reach of one more language.",
   blurb = "The work runs on supported people: the translators who draft, the consultants who check, the teachers who help communities read. Your gift keeps them at it.",
   primaryCta = "Give today",
@@ -38,14 +36,6 @@ export function DonationCTA({
       </div>
       <div className="relative mx-auto flex max-w-(--container-max) flex-wrap items-center justify-between gap-7 px-5 py-16 sm:px-12">
         <div className="max-w-[56ch]">
-          <div
-            className={cn(
-              "mb-3 font-ui text-xs font-bold uppercase tracking-caps",
-              dark ? "text-green-300" : "text-green-700",
-            )}
-          >
-            {eyebrow}
-          </div>
           <h2 className={cn("mb-3 font-display text-2xl font-semibold leading-snug", dark ? "text-white" : "text-strong")}>
             {title}
           </h2>

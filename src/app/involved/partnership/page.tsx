@@ -23,8 +23,7 @@ export default function ChurchPartnershipPage() {
           />
         </div>
         <div>
-          <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">Get involved</div>
-          <h2 className="mb-4 mt-3 font-display text-2xl font-semibold text-strong">
+          <h2 className="mb-4 font-display text-2xl font-semibold text-strong">
             Mobilise your congregation for Bible translation
           </h2>
           <p className="mb-3.5 font-body text-base leading-relaxed text-body">

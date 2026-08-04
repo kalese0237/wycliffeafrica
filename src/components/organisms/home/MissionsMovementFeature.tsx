@@ -18,8 +18,7 @@ export function MissionsMovementFeature() {
           />
         </div>
         <div>
-          <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">Get involved</div>
-          <h2 className="mb-5 mt-3 font-display text-2xl font-semibold leading-[1.08] text-strong">
+          <h2 className="mb-5 font-display text-2xl font-semibold leading-[1.08] text-strong">
             Join the missions movement
           </h2>
           <div className="space-y-4 font-body text-base leading-relaxed text-body">

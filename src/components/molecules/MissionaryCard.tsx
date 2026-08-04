@@ -30,10 +30,12 @@ export function MissionaryCard({ missionary: m, className }: MissionaryCardProps
       )}
       <div className="flex flex-1 flex-col p-5 sm:p-6">
         <div>
-          <div className="mb-2 flex items-center gap-1.5 font-ui text-xs font-bold uppercase tracking-wide text-green-700">
+          {/* Place sits under the name: it is metadata about the person, and
+              above the name it reads as a kicker introducing the heading. */}
+          <h3 className="font-display text-lg font-semibold leading-snug text-strong">{m.name}</h3>
+          <div className="mt-1.5 flex items-center gap-1.5 font-ui text-xs font-bold uppercase tracking-wide text-green-700">
             <MapPin size={13} /> {m.place}
           </div>
-          <h3 className="font-display text-lg font-semibold leading-snug text-strong">{m.name}</h3>
         </div>
         <div className="mt-1 font-ui text-sm font-medium leading-snug text-faint">{m.roles}</div>
         <p className="mt-4 flex-1 border-t border-hair pt-4 font-body text-base leading-relaxed text-body">{m.intro}</p>

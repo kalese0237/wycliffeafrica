@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight, Languages, Hourglass, PenSquare, type Lucide
 import { Button } from "@/components/atoms/Button";
 import { cn } from "@/lib/cn";
 
-/** One line of the heading lockup; `em` is the green-gradient italic segment. */
+/** One line of the heading lockup; `em` is the emphasised green italic segment. */
 interface SlideLine {
   pre?: string;
   em?: string;
@@ -14,7 +14,12 @@ interface SlideLine {
 }
 
 interface Slide {
-  eyebrow: string;
+  /** Stable identity for React keys only; never rendered. */
+  id: string;
+  /** The heading is a designed two-line lockup — keep line two longer than line one. */
+  line1: SlideLine;
+  line2: SlideLine;
+  body: string;
   /**
    * Cap on the body paragraph's width, in ch, targeting 70% of the heading's
    * own rendered width. Headings render ~4x larger than the body text, so
@@ -23,10 +28,6 @@ interface Slide {
    * ratio scaled down to 70%.
    */
   bodyMaxCh: number;
-  /** The heading is a designed two-line lockup — keep line two longer than line one. */
-  line1: SlideLine;
-  line2: SlideLine;
-  body: string;
   ctaA: { label: string; href: string };
   ctaB: { label: string; href: string };
   image?: string;
@@ -37,7 +38,7 @@ interface Slide {
 
 const SLIDES: Slide[] = [
   {
-    eyebrow: "Wycliffe Africa",
+    id: "raising",
     line1: { pre: "Raising missionaries" },
     line2: { pre: "for ", em: "Bible translation" },
     body: "Millions across Africa still wait to hear God speak their language. We raise up African missionaries for the translation work that will change that.",
@@ -48,7 +49,7 @@ const SLIDES: Slide[] = [
     imagePosition: "50% 45%",
   },
   {
-    eyebrow: "Training & sending",
+    id: "equipping",
     line1: { pre: "Equipping ", em: "African" },
     line2: { em: "missionaries", post: " for the field" },
     body: "Translation teams need linguists, but also teachers, accountants and IT specialists. We train Africans and send them to the field, whether for a season or for a lifetime.",
@@ -59,7 +60,7 @@ const SLIDES: Slide[] = [
     imagePosition: "50% 30%",
   },
   {
-    eyebrow: "Church partnership",
+    id: "mobilising",
     line1: { pre: "Mobilising" },
     line2: { em: "churches", post: " across Africa" },
     body: "We help congregations take a language community as their own: praying for it by name, funding its project, sending it people.",
@@ -75,15 +76,18 @@ const SLIDES: Slide[] = [
 
 const SLIDE_DELAY_MS = 18000;
 
+/**
+ * The emphasised segment is a solid tone, not a gradient: emphasis comes from
+ * weight and italic, and a single colour is the only thing that can be checked
+ * against the rotating photos behind it. Measured against the true backdrop,
+ * green-400/500 fall under the 3:1 large-text floor on two of the three slides;
+ * green-300 clears it on all three.
+ */
 function HeadingLine({ line }: { line: SlideLine }) {
   return (
     <span className="block">
       {line.pre}
-      {line.em && (
-        <em className="bg-linear-to-r from-green-300 via-green-500 to-green-400 bg-clip-text font-bold italic text-transparent">
-          {line.em}
-        </em>
-      )}
+      {line.em && <em className="font-bold italic text-green-300">{line.em}</em>}
       {line.post}
     </span>
   );
@@ -161,7 +165,7 @@ export function HomeHero() {
         (slide, i) =>
           slide.image && (
             <div
-              key={slide.eyebrow}
+              key={slide.id}
               aria-hidden
               className={cn(
                 "pointer-events-none absolute inset-0 will-change-[opacity,transform] transition-[opacity,transform] duration-[2000ms] ease-in-out motion-reduce:scale-100 motion-reduce:transition-none",
@@ -195,7 +199,7 @@ export function HomeHero() {
         <div className="grid">
           {SLIDES.map((slide, i) => (
             <div
-              key={slide.eyebrow}
+              key={slide.id}
               aria-hidden={i !== index}
               className={cn(
                 "col-start-1 row-start-1 will-change-[opacity,transform] transition-[opacity,transform] duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:translate-y-0 motion-reduce:transition-none",
@@ -204,11 +208,7 @@ export function HomeHero() {
                   : "pointer-events-none translate-y-2 opacity-0 delay-0",
               )}
             >
-              <div className="flex items-center gap-3.5 font-ui text-sm font-bold uppercase tracking-caps-loose text-green-400">
-                <span className="h-[2px] w-[34px] bg-green-500" />
-                {slide.eyebrow}
-              </div>
-              <h1 className="wonk mt-5 font-display text-[clamp(40px,5.2vw,72px)] font-normal leading-[1.02] text-white">
+              <h1 className="wonk font-display text-[clamp(40px,5.2vw,72px)] font-normal leading-[1.02] text-white">
                 <HeadingLine line={slide.line1} />
                 <HeadingLine line={slide.line2} />
               </h1>

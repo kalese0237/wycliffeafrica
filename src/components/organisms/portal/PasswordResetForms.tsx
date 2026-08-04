@@ -29,8 +29,7 @@ export function RequestPasswordResetForm() {
   const [state, action, pending] = useActionState<ActionState, FormData>(requestPasswordResetAction, {});
   return (
     <form action={action}>
-      <p className="mb-2 font-ui text-xs font-bold uppercase tracking-caps-loose text-[#C9761A]">Account access</p>
-      <h2 className="font-display text-2xl font-semibold leading-tight text-strong">Reset your password</h2>
+      <h1 className="font-display text-2xl font-semibold leading-tight text-strong">Reset your password</h1>
       <p className="mb-7 mt-2 font-body text-base leading-relaxed text-body">
         Enter the email address connected to your missionary profile.
       </p>
@@ -66,8 +65,7 @@ export function ResetPasswordForm({ token }: { token: string }) {
   return (
     <form action={action}>
       <input type="hidden" name="token" value={token} />
-      <p className="mb-2 font-ui text-xs font-bold uppercase tracking-caps-loose text-[#C9761A]">Account access</p>
-      <h2 className="font-display text-2xl font-semibold leading-tight text-strong">Choose a new password</h2>
+      <h1 className="font-display text-2xl font-semibold leading-tight text-strong">Choose a new password</h1>
       <p className="mb-7 mt-2 font-body text-base leading-relaxed text-body">
         Use at least 12 characters and avoid a password used on another site.
       </p>

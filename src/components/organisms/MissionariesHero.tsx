@@ -13,9 +13,6 @@ export function MissionariesHero({ missionaryCount, countryCount }: Missionaries
     <section className="mx-auto max-w-(--container-max) px-5 pb-10 pt-14 text-center sm:px-12 sm:pt-16">
       <div className="mx-auto max-w-[760px]">
         <Divider variant="accent" width={56} className="mx-auto mb-5" />
-        <p className="mb-2 font-ui text-xs font-bold uppercase tracking-caps text-green-700">
-          The people behind the work
-        </p>
         <h1 className="mb-4 font-display text-2xl font-semibold leading-tight text-strong sm:text-3xl">
           Our Missionaries
         </h1>

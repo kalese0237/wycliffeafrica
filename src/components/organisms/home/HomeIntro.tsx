@@ -5,8 +5,7 @@ export function HomeIntro() {
   return (
     <section className="mx-auto grid max-w-(--container-max) grid-cols-1 gap-10 px-5 py-20 sm:px-12 lg:grid-cols-2 lg:gap-16">
       <div>
-        <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">Wycliffe Africa</div>
-        <h2 className="mb-5 mt-3 font-display text-2xl font-semibold leading-[1.1] text-strong">
+        <h2 className="mb-5 font-display text-2xl font-semibold leading-[1.1] text-strong">
           Changing lives through Bible translation in Africa
         </h2>
         <div className="space-y-4 font-body text-base leading-relaxed text-body">
