@@ -1,4 +1,11 @@
-import type { NewsRecord, FieldUpdateRecord, MissionaryRecord, ResourceRecord, FaqRecord } from "@/lib/directus/schema";
+import type {
+  NewsRecord,
+  FieldUpdateRecord,
+  MissionaryRecord,
+  InternRecord,
+  ResourceRecord,
+  FaqRecord,
+} from "@/lib/directus/schema";
 
 /**
  * Local fixtures shaped identically to the Directus schema (src/lib/directus/schema.ts).
@@ -112,6 +119,70 @@ const MISSIONARIES: MissionaryRecord[] = [
       "Peter and Hannah moved to Cameroon in 2019 to serve a cluster of four related languages in the Northwest. Rather than translating themselves, they train and mentor local translation teams, one team per language, sharing tools, terminology and checked drafts across the cluster.",
       "Their joy is watching a community leader read a freshly checked chapter aloud and hearing the room answer back in recognition.",
     ],
+  },
+];
+
+const INTERNS: InternRecord[] = [
+  {
+    id: "tavuyire",
+    slug: "jean-claude-tavuyire",
+    name: "Rev. Jean-Claude Tavuyire",
+    place: "Nairobi, Kenya",
+    roles: "Bible Translation & Mission Ministry",
+    intro:
+      "Jean-Claude is an ordained CBCA pastor serving in Bible translation and mission work, so that many may come to salvation through Scripture they can understand.",
+    bio: [
+      "I am an ordained pastor in the Baptist Church (CBCA), married, and a father of three. Serving God and supporting marginalized people has shaped most of my ministry, and it is what drew me to Wycliffe Africa.",
+      "I believe every person should be able to read the Word of God in their own heart language. That conviction is why I serve in Bible translation and mission work: so that many may come to salvation through Scripture they can actually understand.",
+    ],
+    monthlyGoal: "Gifts of $20, $50, or $100 a month",
+    giveDetails: ["Paybill 400200 | Account No. 1073007"],
+  },
+  {
+    id: "kalese",
+    slug: "yuh-kalese-mnason",
+    name: "Yuh Kalese Mnason",
+    place: "Cameroon",
+    roles: "Language Technologies Intern",
+    intro:
+      "Kalese supports Bible translation teams by training them on language technology tools and connecting new software with real mother-tongue Scripture projects.",
+    bio: [
+      "My name is Yuh Kalese Mnason. I follow Jesus, and I am deeply grateful for the way He saved and changed my life. That encounter convinced me that everyone deserves to hear God's message of hope in their mother tongue, the language that reaches them most powerfully.",
+      "As a Language Technologies Intern, I support Bible translation teams by training them on language technology tools, improving their workflows, and connecting new software with real mother-tongue Scripture projects. Translation is slow, careful work; the right tools can save a team years. I'm glad to use the skills God has given me for people who are still waiting for His Word.",
+    ],
+    contact: "+237 672 190 922",
+    monthlyGoal: "$75/month",
+    giveDetails: ["MTN MoMo 672 190 922", "Ecobank Account No. 31545011672"],
+  },
+  {
+    id: "rasoanantenaina",
+    slug: "lydia-vonitsoa-rasoanantenaina",
+    name: "Lydia Vonitsoa Rasoanantenaina",
+    place: "Madagascar",
+    roles: "Intern, Bible Translation Ministry",
+    intro:
+      "Lydia serves with the Bible translation team in Madagascar, helping communities access God's Word in their own language.",
+    bio: [
+      "My name is Lydia Vonitsoa Rasoanantenaina. My devotion to Jesus Christ and my commitment to spreading the Gospel led me to join Wycliffe Africa's Bible translation ministry. I now serve with the team in Madagascar, helping communities here access God's Word in their own language.",
+      "A verse that carries me in this work is Jeremiah 1:7: \"Don't say, 'I'm too young,' for you must go wherever I send you and say whatever I tell you.\"",
+    ],
+    contact: "+261 37 77 656 18",
+  },
+  {
+    id: "uwimana",
+    slug: "lynn-uwimana",
+    name: "Lynn Uwimana",
+    place: "Kenya",
+    roles: "Mission Mobilizer Intern",
+    intro:
+      "Lynn works with churches to raise awareness of unreached people groups and helps recruit missionaries for Bible translation.",
+    bio: [
+      "My name is Lynn Uwimana. I follow Christ, and my passion is mission mobilization: bringing awareness of unreached people groups and equipping the body of Christ to carry the Gospel to those near and far, unhindered by language or culture. My hope is that all people may call on the name of the Lord and be saved.",
+      "As a Mission Mobilizer intern, I work with churches to raise awareness of the people groups that still have no Scripture in their language, and I help recruit missionaries for Bible translation and the ministries that support it. God has given me experiences and skills for this work, and He keeps growing them in me.",
+    ],
+    contact: "0706 782 088",
+    monthlyGoal: "$75/month",
+    giveDetails: ["Equity Bank, Account No. 1031102422607"],
   },
 ];
 
@@ -336,4 +407,12 @@ export async function getFaqs(): Promise<FaqRecord[]> {
 
 export async function getMissionaryById(id: string): Promise<MissionaryRecord | undefined> {
   return MISSIONARIES.find((m) => m.id === id);
+}
+
+export async function getInterns(): Promise<InternRecord[]> {
+  return INTERNS;
+}
+
+export async function getInternBySlug(slug: string): Promise<InternRecord | undefined> {
+  return INTERNS.find((i) => i.slug === slug);
 }

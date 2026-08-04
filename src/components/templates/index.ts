@@ -4,3 +4,4 @@ export * from "./PortalAuthTemplate";
 export * from "./NewsArticleTemplate";
 export * from "./ProjectPageTemplate";
 export * from "./MissionaryProfileTemplate";
+export * from "./InternProfileTemplate";

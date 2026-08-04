@@ -103,6 +103,31 @@ export interface MissionaryRecord {
 
 export type PublicMissionaryRecord = Omit<MissionaryRecord, "user">;
 
+/**
+ * A person in the year-long Internship Program (see
+ * src/app/projects/internship-program) — not yet a commissioned missionary,
+ * so kept as its own collection rather than a `missionaries` row. Presented
+ * on its own /interns section with a lighter profile page (no field updates
+ * or prayer requests, since interns don't hold portal accounts).
+ */
+export interface InternRecord {
+  id: string;
+  slug: string;
+  name: string;
+  place: string;
+  roles: string;
+  intro: string;
+  /** Longer profile paragraphs for the intern profile page. */
+  bio?: string[] | null;
+  image?: string | null;
+  /** Phone number or other direct contact shown on the profile. */
+  contact?: string | null;
+  /** Monthly support goal, e.g. "$75/month". */
+  monthlyGoal?: string | null;
+  /** Payment channels for direct giving (mobile money, bank account, paybill). */
+  giveDetails?: string[] | null;
+}
+
 export type ResourceKind = "pdf" | "video" | "guide" | "report" | "audio";
 
 export interface ResourceRecord {
@@ -125,6 +150,7 @@ export interface DirectusSchema {
   news: NewsRecord[];
   field_updates: FieldUpdateRecord[];
   missionaries: MissionaryRecord[];
+  interns: InternRecord[];
   resources: ResourceRecord[];
   faqs: FaqRecord[];
 }
