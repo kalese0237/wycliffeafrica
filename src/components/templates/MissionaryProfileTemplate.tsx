@@ -52,7 +52,7 @@ export function MissionaryProfileTemplate({
                 <Image src={`/media/${m.image}`} alt={`${m.name} portrait`} fill sizes="(min-width: 1024px) 35vw, 100vw" className="object-cover" priority />
               </div>
             ) : (
-              <PhotoPlaceholder caption="Portrait" aspect="4/5" />
+              <PhotoPlaceholder caption={`${m.name} portrait`} person={m.name} aspect="4/5" />
             )}
             <div className="mt-5 rounded-lg border border-hair bg-sunk p-5">
               <h2 className="mb-1.5 font-display text-md font-semibold text-strong">

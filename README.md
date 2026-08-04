@@ -12,9 +12,12 @@ Africa design system.
 - **Directus (headless CMS)** — production content, missionary authentication,
   submission review, and file storage. Pages use local fixtures only when
   `DIRECTUS_URL` is absent.
-- **Fonts** — Cormorant Garamond (display), Karla (body/UI), JetBrains Mono
-  (data), loaded via `next/font/google` in `src/app/layout.tsx`. These are
-  stand-ins pending licensed binaries from Wycliffe Africa.
+- **Fonts** — Fraunces (display), Source Sans 3 (body + UI), Gentium Book Plus
+  (Scripture only), JetBrains Mono (codes and reference numbers only), loaded
+  via `next/font/google` in `src/app/layout.tsx`. Gentium is SIL's face for
+  minority-language Latin scripts; keep Scripture on it so extended-Latin
+  diacritics and tone marks stay correct. Display and UI are stand-ins pending
+  licensed binaries from Wycliffe Africa.
 - **Icons** — `lucide-react`, monochrome only.
 
 ## Strict atomic design

@@ -51,6 +51,7 @@ const PRIMARY_NAV: NavItem[] = [
     href: "/projects",
     menu: [
       ["Internship Program", "/projects/internship-program"],
+      ["Meet our Interns", "/interns"],
       ["SunRise Africa Centre", "/projects/sunrise-africa-centre"],
     ],
   },

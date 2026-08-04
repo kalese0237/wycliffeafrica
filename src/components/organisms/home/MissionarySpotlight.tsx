@@ -21,7 +21,7 @@ export async function MissionarySpotlight() {
             <Image src={`/media/${missionary.image}`} alt={`${missionary.name} portrait`} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
           </div>
         ) : (
-          <PhotoPlaceholder caption="Portrait" aspect="4/3" />
+          <PhotoPlaceholder caption={`${missionary.name} portrait`} person={missionary.name} aspect="4/3" />
         )}
         <div>
           <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">

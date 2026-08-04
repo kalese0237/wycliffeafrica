@@ -1,6 +1,7 @@
 import * as React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/cn";
+import { initialsOf } from "@/lib/initials";
 
 export interface AvatarProps {
   src?: string;
@@ -13,13 +14,7 @@ export interface AvatarProps {
 
 /** Circular portrait for team members / story authors. Falls back to initials. */
 export function Avatar({ src, name = "", size = 44, ring = false, className }: AvatarProps) {
-  const initials = name
-    .split(" ")
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((w) => w[0])
-    .join("")
-    .toUpperCase();
+  const initials = initialsOf(name);
 
   return (
     <span

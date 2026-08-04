@@ -20,7 +20,7 @@ export function PortalNavigation({ name, place, compact = false }: PortalNavigat
         </Link>
         <Link
           href="/"
-          className="flex items-center gap-1.5 font-ui text-xs font-bold uppercase tracking-[0.12em] text-[#F3B963] transition-colors hover:text-white"
+          className="flex items-center gap-1.5 font-ui text-xs font-bold uppercase tracking-caps text-[#F3B963] transition-colors hover:text-white"
         >
           <House size={14} />
           Main website
@@ -39,7 +39,7 @@ export function PortalNavigation({ name, place, compact = false }: PortalNavigat
     <aside className="sticky top-0 hidden h-svh w-[250px] flex-col bg-[#2A2018] px-5 py-7 text-[#CDBBA6] lg:flex">
       <Link href="/" className="mb-8 px-2" aria-label="Wycliffe Africa home">
         <Wordmark height={44} onDark />
-        <span className="mt-2 block font-ui text-xs font-bold uppercase tracking-[0.18em] text-[#B98A4A]">
+        <span className="mt-2 block font-ui text-xs font-bold uppercase tracking-caps text-[#B98A4A]">
           Field Portal
         </span>
       </Link>

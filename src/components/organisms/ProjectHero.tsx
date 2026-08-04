@@ -76,11 +76,11 @@ export function ProjectHero({
         }}
       />
       <div className="relative z-10 mx-auto flex min-h-[620px] max-w-(--container-max) flex-col items-center justify-center px-5 pb-20 pt-32 text-center sm:min-h-[708px] sm:px-12 sm:pb-24 sm:pt-40">
-        <div className="mb-5 font-ui text-xs font-bold uppercase tracking-[0.26em] text-[#F4C55A]">
+        <div className="mb-5 font-ui text-xs font-bold uppercase tracking-caps-loose text-[#F4C55A]">
           {eyebrow}
         </div>
         <h1
-          className="text-balance font-display text-[clamp(2.4rem,4.2vw,3.6rem)] font-semibold leading-[1.03] text-white"
+          className="wonk text-balance font-display text-[clamp(2.4rem,4.2vw,3.6rem)] font-semibold leading-[1.03] text-white"
           style={{ maxWidth: titleMaxWidth, textShadow: "0 2px 18px rgba(20,8,2,.4)" }}
         >
           {titleLines?.length

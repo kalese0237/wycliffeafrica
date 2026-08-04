@@ -8,7 +8,6 @@ import {
   UpdatesFeed,
   ScriptureQuoteBand,
   MissionsMovementFeature,
-  VideoTeaser,
   Vision2025,
 } from "@/components/organisms/home";
 
@@ -22,7 +21,6 @@ export default function HomePage() {
       <ServeGiveCards />
       <ScriptureQuoteBand />
       <MissionsMovementFeature />
-      <VideoTeaser />
       <Vision2025 />
       <DonationCTA />
     </PageTemplate>

@@ -21,21 +21,23 @@ const GREEN_500 = "#33b00f"; // --color-accent
 const TAG_PRAY = "#4a4fa0"; // --color-tag-pray
 
 // Fonts: self-hosted @fontsource copies of the same Google Fonts the site
-// uses (EB Garamond for display, Karla for body/UI — see
+// uses (Fraunces for display, Source Sans 3 for body/UI — see
 // src/app/layout.tsx). pdfkit needs real font files, not CSS font names.
+// Static weights here rather than the variable files: pdfkit embeds a single
+// instance, so it cannot reach Fraunces' SOFT/WONK axes anyway.
 const FONT_DIR = path.join(process.cwd(), "node_modules/@fontsource");
 const font = (pkg: string, file: string) => fs.readFileSync(path.join(FONT_DIR, pkg, "files", file));
 
-const EB_GARAMOND_BOLD = font("eb-garamond", "eb-garamond-latin-700-normal.woff");
-const EB_GARAMOND_SEMIBOLD = font("eb-garamond", "eb-garamond-latin-600-normal.woff");
-const KARLA_REGULAR = font("karla", "karla-latin-400-normal.woff");
-const KARLA_MEDIUM = font("karla", "karla-latin-500-normal.woff");
-const KARLA_ITALIC = font("karla", "karla-latin-400-italic.woff");
+const FRAUNCES_BOLD = font("fraunces", "fraunces-latin-700-normal.woff");
+const FRAUNCES_SEMIBOLD = font("fraunces", "fraunces-latin-600-normal.woff");
+const SOURCE_SANS_REGULAR = font("source-sans-3", "source-sans-3-latin-400-normal.woff");
+const SOURCE_SANS_MEDIUM = font("source-sans-3", "source-sans-3-latin-500-normal.woff");
+const SOURCE_SANS_ITALIC = font("source-sans-3", "source-sans-3-latin-400-italic.woff");
 
 const LOGO = fs.readFileSync(path.join(process.cwd(), "public/brand/logo-wycliffe-africa.png"));
 const LOGO_ASPECT = 304 / 801; // height / width, from the source PNG
 
-// Karla/EB Garamond apply an "fi" ligature by default; pdfkit's ToUnicode map
+// Source Sans 3 and Fraunces apply an "fi" ligature by default; pdfkit's ToUnicode map
 // for the merged glyph drops a character, so copy-pasted or searched text
 // comes out missing letters ("fiscal" → "fscal"). Disabling ligature
 // substitution keeps every glyph mapped to its own character. The @types
@@ -76,11 +78,11 @@ function renderPdf(
   doc.on("data", (chunk) => chunks.push(chunk));
   const done = new Promise<Buffer>((resolve) => doc.on("end", () => resolve(Buffer.concat(chunks))));
 
-  doc.registerFont("EBGaramond-Bold", EB_GARAMOND_BOLD);
-  doc.registerFont("EBGaramond-SemiBold", EB_GARAMOND_SEMIBOLD);
-  doc.registerFont("Karla", KARLA_REGULAR);
-  doc.registerFont("Karla-Medium", KARLA_MEDIUM);
-  doc.registerFont("Karla-Italic", KARLA_ITALIC);
+  doc.registerFont("Fraunces-Bold", FRAUNCES_BOLD);
+  doc.registerFont("Fraunces-SemiBold", FRAUNCES_SEMIBOLD);
+  doc.registerFont("SourceSans", SOURCE_SANS_REGULAR);
+  doc.registerFont("SourceSans-Medium", SOURCE_SANS_MEDIUM);
+  doc.registerFont("SourceSans-Italic", SOURCE_SANS_ITALIC);
 
   const { left, right, top, bottom } = doc.page.margins;
   const width = doc.page.width - left - right;
@@ -96,10 +98,10 @@ function renderPdf(
   doc.moveTo(ruleX, doc.y).lineTo(ruleX + ruleWidth, doc.y).lineWidth(2).strokeColor(GREEN_500).stroke();
   doc.y += 18;
 
-  doc.font("EBGaramond-Bold").fontSize(30).fillColor(INK_0).text("Prayer Guide", left, doc.y, { width, align: "center", ...NO_LIGA });
+  doc.font("Fraunces-Bold").fontSize(30).fillColor(INK_0).text("Prayer Guide", left, doc.y, { width, align: "center", ...NO_LIGA });
   doc.moveDown(0.35);
   doc
-    .font("Karla-Medium")
+    .font("SourceSans-Medium")
     .fontSize(11)
     .fillColor(INK_2)
     .text(`Edition of ${dateLabel} · updated every two weeks`, left, doc.y, { width, align: "center", ...NO_LIGA });
@@ -107,7 +109,7 @@ function renderPdf(
 
   const introWidth = 380;
   doc
-    .font("Karla")
+    .font("SourceSans")
     .fontSize(10.5)
     .fillColor(INK_1)
     .text(
@@ -125,7 +127,7 @@ function renderPdf(
   // -------------------------------------------------------------- entries
   if (requests.length === 0) {
     doc
-      .font("Karla-Italic")
+      .font("SourceSans-Italic")
       .fontSize(11.5)
       .fillColor(INK_2)
       .text("No prayer requests are published right now.", left, doc.y, { width, ...NO_LIGA });
@@ -141,11 +143,11 @@ function renderPdf(
       ? `A Wycliffe Africa worker · ${regionOf(missionary?.place)} · ${request.date}`
       : `${missionary?.name ?? "Wycliffe Africa"} · ${missionary?.place ?? "Africa"} · ${request.date}`;
 
-    doc.font("EBGaramond-SemiBold").fontSize(15.5);
+    doc.font("Fraunces-SemiBold").fontSize(15.5);
     const titleHeight = doc.heightOfString(request.title, { width: textWidth, ...NO_LIGA });
-    doc.font("Karla").fontSize(10.6);
+    doc.font("SourceSans").fontSize(10.6);
     const bodyHeight = doc.heightOfString(request.body, { width: textWidth, lineGap: 2.2, ...NO_LIGA });
-    doc.font("Karla-Italic").fontSize(9.3);
+    doc.font("SourceSans-Italic").fontSize(9.3);
     const attrHeight = doc.heightOfString(attribution, { width: textWidth, ...NO_LIGA });
     const entryHeight = titleHeight + bodyHeight + attrHeight + 30;
 
@@ -156,19 +158,19 @@ function renderPdf(
 
     const startY = doc.y;
     doc
-      .font("EBGaramond-SemiBold")
+      .font("Fraunces-SemiBold")
       .fontSize(15.5)
       .fillColor(INK_0)
       .text(request.title, textX, doc.y, { width: textWidth, ...NO_LIGA });
     doc.y += 5;
     doc
-      .font("Karla")
+      .font("SourceSans")
       .fontSize(10.6)
       .fillColor(INK_1)
       .text(request.body, textX, doc.y, { width: textWidth, lineGap: 2.2, ...NO_LIGA });
     doc.y += 6;
     doc
-      .font("Karla-Italic")
+      .font("SourceSans-Italic")
       .fontSize(9.3)
       .fillColor(INK_2)
       .text(attribution, textX, doc.y, { width: textWidth, ...NO_LIGA });
@@ -197,7 +199,7 @@ function renderPdf(
     // would otherwise make pdfkit auto-insert a trailing blank page.
     doc.page.margins.bottom = 0;
     doc
-      .font("Karla")
+      .font("SourceSans")
       .fontSize(8.5)
       .fillColor(INK_3)
       .text("Wycliffe Africa · wycliffeafrica.org", left, doc.page.height - 36, {
@@ -207,7 +209,7 @@ function renderPdf(
         ...NO_LIGA,
       });
     doc
-      .font("Karla")
+      .font("SourceSans")
       .fontSize(8.5)
       .fillColor(INK_3)
       .text(`${i + 1} / ${range.count}`, left, doc.page.height - 36, {

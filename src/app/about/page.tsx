@@ -1,8 +1,8 @@
 import * as React from "react";
+import Image from "next/image";
 import { BookOpen, Users, Heart, Globe, ArrowRight, type LucideIcon } from "lucide-react";
 import { PageTemplate } from "@/components/templates";
 import { PageIntro, DonationCTA } from "@/components/organisms";
-import { PhotoPlaceholder } from "@/components/molecules/PhotoPlaceholder";
 import { Button } from "@/components/atoms/Button";
 
 const VALUES: { icon: LucideIcon; title: string; body: string }[] = [
@@ -27,7 +27,16 @@ export default function AboutPage() {
       />
 
       <section className="mx-auto grid max-w-(--container-max) grid-cols-1 items-center gap-10 px-5 py-14 sm:px-12 lg:grid-cols-2 lg:gap-16">
-        <PhotoPlaceholder caption="Our story" aspect="4/3" />
+        <div className="relative aspect-4/3 overflow-hidden rounded-lg border border-hair shadow-md">
+          <Image
+            src="/Missionaries/wycliffe-africa-team.webp"
+            alt="The Wycliffe Africa team gathered together"
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover"
+            style={{ objectPosition: "50% 40%" }}
+          />
+        </div>
         <div>
           <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">Why Bible translation</div>
           <h2 className="mb-3.5 mt-3 font-display text-2xl font-semibold leading-tight text-strong">

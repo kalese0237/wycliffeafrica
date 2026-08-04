@@ -15,8 +15,8 @@ const variantClasses: Record<ButtonVariant, string> = {
 
 const sizeClasses: Record<ButtonSize, string> = {
   sm: "px-[15px] py-[7px] text-sm",
-  md: "px-[22px] py-[10px] text-base",
-  lg: "px-[30px] py-[14px] text-md",
+  md: "px-[22px] py-[10px] text-[16px]",
+  lg: "px-[30px] py-[14px] text-[18px]",
 };
 
 function buttonClassName({
@@ -31,7 +31,7 @@ function buttonClassName({
   className?: string;
 }) {
   return cn(
-    "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md border font-ui font-semibold tracking-[0.01em] shadow-sm transition-[background-color,box-shadow] duration-130 ease-[cubic-bezier(0.4,0,0.2,1)] active:shadow-inset",
+    "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md border font-ui font-semibold shadow-sm transition-[background-color,box-shadow] duration-130 ease-[cubic-bezier(0.4,0,0.2,1)] active:shadow-inset focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--color-focus-ring)",
     variantClasses[variant],
     sizeClasses[size],
     disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer",

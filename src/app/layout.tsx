@@ -1,23 +1,37 @@
 import type { Metadata } from "next";
-import { EB_Garamond, Karla, JetBrains_Mono } from "next/font/google";
+import { Fraunces, Source_Sans_3, Gentium_Book_Plus, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const ebGaramond = EB_Garamond({
-  variable: "--font-eb-garamond",
+/** Display voice. Variable across wght + opsz; SOFT and WONK are the axes that
+ *  give Fraunces its character — see the `.wonk` utility in globals.css, which
+ *  engages them only at hero sizes. */
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  axes: ["SOFT", "WONK", "opsz"],
   style: ["normal", "italic"],
   display: "swap",
 });
 
-const karla = Karla({
-  variable: "--font-karla",
+/** Text and interface — one face for prose and UI. */
+const sourceSans = Source_Sans_3({
+  variable: "--font-source-sans",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
   style: ["normal", "italic"],
   display: "swap",
 });
 
+/** Scripture only. SIL's Gentium carries the extended-Latin diacritics that
+ *  African orthographies need and the display faces do not. */
+const gentium = Gentium_Book_Plus({
+  variable: "--font-gentium",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+/** Codes and reference numbers only (M-Pesa paybill, transaction refs). */
 const jbMono = JetBrains_Mono({
   variable: "--font-jbmono",
   subsets: ["latin"],
@@ -39,7 +53,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${ebGaramond.variable} ${karla.variable} ${jbMono.variable} antialiased`}
+        className={`${fraunces.variable} ${sourceSans.variable} ${gentium.variable} ${jbMono.variable} antialiased`}
       >
         {children}
       </body>

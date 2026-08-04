@@ -22,16 +22,16 @@ export function PortalAuthTemplate({ children }: PortalAuthTemplateProps) {
         />
         <Link href="/" className="relative z-10 w-fit" aria-label="Wycliffe Africa home">
           <Wordmark height={52} onDark />
-          <span className="mt-2 block font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#FFE9C4]">
+          <span className="mt-2 block font-ui text-xs font-bold uppercase tracking-caps-loose text-[#FFE9C4]">
             Field Portal
           </span>
         </Link>
 
         <div className="relative z-10 max-w-[470px]">
-          <p className="mb-4 font-ui text-xs font-bold uppercase tracking-[0.24em] text-[#FFE9C4]">
+          <p className="mb-4 font-ui text-xs font-bold uppercase tracking-caps-loose text-[#FFE9C4]">
             From the field
           </p>
-          <h1 className="font-display text-[clamp(2.5rem,4.5vw,4rem)] font-semibold leading-[1.06] text-white [text-shadow:0_2px_18px_rgba(120,40,0,.25)]">
+          <h1 className="wonk font-display text-[clamp(2.5rem,4.5vw,4rem)] font-semibold leading-[1.06] text-white [text-shadow:0_2px_18px_rgba(120,40,0,.25)]">
             Send word home from the field.
           </h1>
           <p className="mt-5 max-w-[42ch] font-body text-lg leading-relaxed text-[#FFF3E0]">
@@ -40,7 +40,7 @@ export function PortalAuthTemplate({ children }: PortalAuthTemplateProps) {
           </p>
         </div>
 
-        <blockquote className="relative z-10 max-w-[440px] border-l-[3px] border-white/50 pl-4 font-display text-md italic leading-relaxed text-[#FFE9C4]">
+        <blockquote className="relative z-10 max-w-[440px] border-l-[3px] border-white/50 pl-4 font-scripture text-md italic leading-relaxed text-[#FFE9C4]">
           “How beautiful are the feet of those who bring good news.”
           <cite className="mt-1 block font-ui text-sm not-italic text-white/75">Romans 10:15</cite>
         </blockquote>
@@ -50,7 +50,7 @@ export function PortalAuthTemplate({ children }: PortalAuthTemplateProps) {
         <div className="w-full max-w-[420px]">
           <Link href="/" className="mb-10 inline-block lg:hidden" aria-label="Wycliffe Africa home">
             <Wordmark height={46} />
-            <span className="mt-1 block font-ui text-xs font-bold uppercase tracking-[0.18em] text-primary">
+            <span className="mt-1 block font-ui text-xs font-bold uppercase tracking-caps text-primary">
               Field Portal
             </span>
           </Link>

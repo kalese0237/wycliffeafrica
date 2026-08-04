@@ -48,7 +48,7 @@ export function ImpactStats({
               ].join(" ")}
             >
               <div className="font-display text-[2.75rem] font-semibold leading-none text-primary">{stat.value}</div>
-              <div className="mt-3 font-ui text-xs font-bold uppercase leading-snug tracking-[0.16em] text-muted">
+              <div className="mt-3 font-ui text-xs font-bold uppercase leading-snug tracking-caps text-muted">
                 {stat.label}
               </div>
               {stat.sub && <div className="mt-1 font-body text-sm text-faint">{stat.sub}</div>}

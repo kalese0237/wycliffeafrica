@@ -151,7 +151,7 @@ export function NewsTopicsHero() {
                   )}
                   <span
                     className={cn(
-                      "absolute inset-x-3 bottom-4 text-center font-ui text-sm font-bold uppercase tracking-[0.16em] transition-[color,letter-spacing] duration-220 group-hover:tracking-[0.22em] sm:text-base",
+                      "absolute inset-x-3 bottom-4 text-center font-ui text-sm font-bold uppercase tracking-caps transition-[color,letter-spacing] duration-220 group-hover:tracking-caps-loose sm:text-base",
                       active ? "text-green-300" : "text-white",
                     )}
                   >
