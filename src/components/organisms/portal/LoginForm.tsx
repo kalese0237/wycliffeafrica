@@ -15,7 +15,7 @@ export function LoginForm() {
 
   return (
     <form action={formAction}>
-      <p className="mb-2 font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#C9761A]">
+      <p className="mb-2 font-ui text-xs font-bold uppercase tracking-caps-loose text-[#C9761A]">
         Missionary sign-in
       </p>
       <h2 className="font-display text-2xl font-semibold leading-tight text-strong">Welcome back</h2>

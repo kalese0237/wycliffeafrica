@@ -1,8 +1,8 @@
 import * as React from "react";
 import { ChevronRight } from "lucide-react";
 import { PageTemplate } from "@/components/templates";
+import Image from "next/image";
 import { PageIntro, StickySideNav } from "@/components/organisms";
-import { PhotoPlaceholder } from "@/components/molecules/PhotoPlaceholder";
 import { Button } from "@/components/atoms/Button";
 
 const SIDE_NAV = [
@@ -36,7 +36,16 @@ export default function MotivateYourChurchPage() {
         <StickySideNav items={SIDE_NAV} activeHref="/involved/motivate-your-church" className="hidden lg:flex" />
 
         <div>
-          <PhotoPlaceholder caption="Praying together" aspect="16/9" />
+          <div className="relative aspect-16/9 overflow-hidden rounded-lg border border-hair shadow-md">
+            <Image
+              src="/photos/pexels-kureng-workx-2546437-7878646.jpg"
+              alt="A church leader praying with arms outstretched"
+              fill
+              sizes="(min-width: 1024px) 65vw, 100vw"
+              className="object-cover"
+              style={{ objectPosition: "50% 25%" }}
+            />
+          </div>
 
           <p className="mt-6 font-body text-base leading-relaxed text-body">
             Do you sometimes feel like a lonely voice trying to expand awareness in your church about people

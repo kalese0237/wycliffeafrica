@@ -2,7 +2,7 @@ import * as React from "react";
 import { ArrowRight } from "lucide-react";
 import { PageTemplate } from "@/components/templates";
 import { PageIntro } from "@/components/organisms";
-import { PhotoPlaceholder } from "@/components/molecules/PhotoPlaceholder";
+import Image from "next/image";
 import { Button } from "@/components/atoms/Button";
 import { GivingForm, GiveSupportPanel, MpesaPanel } from "@/components/organisms/give";
 
@@ -57,7 +57,16 @@ export default function GivePage() {
       </section>
 
       <section className="mx-auto grid max-w-(--container-max) grid-cols-1 items-center gap-10 px-5 py-16 sm:px-12 lg:grid-cols-2 lg:gap-16">
-        <PhotoPlaceholder caption="A church congregation" aspect="4/3" />
+        <div className="relative aspect-4/3 overflow-hidden rounded-lg border border-hair shadow-md">
+          <Image
+            src="/photos/pexels-speakmediauganda-37826398.jpg"
+            alt="A congregation in prayer during a worship gathering"
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover"
+            style={{ objectPosition: "50% 35%" }}
+          />
+        </div>
         <div>
           <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">Adopt a project</div>
           <h2 className="mb-4 mt-3 font-display text-2xl font-semibold text-strong">

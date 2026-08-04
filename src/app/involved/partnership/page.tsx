@@ -1,8 +1,8 @@
 import * as React from "react";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { PageTemplate } from "@/components/templates";
 import { Button } from "@/components/atoms/Button";
-import { PhotoPlaceholder } from "@/components/molecules/PhotoPlaceholder";
 
 export const metadata = {
   title: "Church Partnership | Wycliffe Africa",
@@ -12,7 +12,16 @@ export default function ChurchPartnershipPage() {
   return (
     <PageTemplate heroTitle="Church Partnership">
       <section className="mx-auto grid max-w-(--container-max) grid-cols-1 items-center gap-10 px-5 py-16 sm:px-12 lg:grid-cols-2 lg:gap-16">
-        <PhotoPlaceholder caption="A church congregation in worship" aspect="4/3" />
+        <div className="relative aspect-4/3 overflow-hidden rounded-lg border border-hair shadow-md">
+          <Image
+            src="/photos/pexels-mbaraga-bernard-2158456013-35388499.jpg"
+            alt="A congregation in worship inside a church"
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover"
+            style={{ objectPosition: "50% 30%" }}
+          />
+        </div>
         <div>
           <div className="font-ui text-xs font-bold uppercase tracking-caps text-green-700">Get involved</div>
           <h2 className="mb-4 mt-3 font-display text-2xl font-semibold text-strong">

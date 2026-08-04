@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Tag } from "@/components/atoms/Tag";
 import { Avatar } from "@/components/atoms/Avatar";
+import { PhotoPlaceholder } from "@/components/molecules/PhotoPlaceholder";
 import { cn } from "@/lib/cn";
 import type { PublicNewsRecord } from "@/lib/directus/schema";
 
@@ -25,20 +26,26 @@ export function NewsCard({ item, authorName, className }: NewsCardProps) {
   const tagLabel = item.tagLabel ?? CATEGORY_LABEL[item.category];
 
   return (
-    <Link href={`/news/${item.slug}`} className="block h-full">
+    <Link
+      href={`/news/${item.slug}`}
+      className="block h-full rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--color-focus-ring)"
+    >
       <article
         className={cn(
           "flex h-full flex-col overflow-hidden rounded-lg border border-hair bg-card shadow-sm transition-[box-shadow,transform] duration-220 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-0.5 hover:shadow-md",
           className,
         )}
       >
-        <div
-          className={cn(
-            "relative h-[172px]",
-            !item.image && "bg-linear-to-br from-green-200 to-paper-2",
+        <div className="relative h-[172px]">
+          {item.image ? (
+            <Image src={`/media/${item.image}`} alt="" fill className="object-cover" />
+          ) : (
+            <PhotoPlaceholder
+              caption={item.title}
+              aspect="auto"
+              className="absolute inset-0 rounded-none border-none shadow-none"
+            />
           )}
-        >
-          {item.image && <Image src={`/media/${item.image}`} alt="" fill className="object-cover" />}
           <div className="absolute left-4 top-4">
             <Tag journey={item.journey ?? "stories"}>{tagLabel}</Tag>
           </div>

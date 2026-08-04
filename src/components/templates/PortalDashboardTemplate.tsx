@@ -63,7 +63,7 @@ export function PortalDashboardTemplate({
         <div id="dashboard" className="w-full px-5 py-10 sm:px-10 lg:px-11 lg:py-9 xl:px-14">
           <header className="mb-8 flex flex-wrap items-start justify-between gap-5">
             <div>
-              <p className="mb-2 font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#C9761A]">
+              <p className="mb-2 font-ui text-xs font-bold uppercase tracking-caps-loose text-[#C9761A]">
                 Dashboard
               </p>
               <h1 className="font-display text-2xl font-semibold leading-tight text-strong">
@@ -103,7 +103,7 @@ export function PortalDashboardTemplate({
                 ))}
               </section>
 
-              <p className="mb-4 font-ui text-xs font-bold uppercase tracking-[0.16em] text-[#C9761A]">
+              <p className="mb-4 font-ui text-xs font-bold uppercase tracking-caps text-[#C9761A]">
                 Post something new
               </p>
               <section className="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -134,7 +134,7 @@ export function PortalDashboardTemplate({
                 <section id="submissions">
                   <div className="mb-4 flex items-end justify-between gap-3">
                     <div>
-                      <p className="mb-1 font-ui text-xs font-bold uppercase tracking-[0.16em] text-[#C9761A]">
+                      <p className="mb-1 font-ui text-xs font-bold uppercase tracking-caps text-[#C9761A]">
                         History
                       </p>
                       <h2 className="font-display text-xl font-semibold text-strong">Your submissions</h2>

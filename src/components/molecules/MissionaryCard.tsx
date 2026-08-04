@@ -26,7 +26,7 @@ export function MissionaryCard({ missionary: m, className }: MissionaryCardProps
           <Image src={`/media/${m.image}`} alt={`${m.name} portrait`} fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="object-cover" />
         </div>
       ) : (
-        <PhotoPlaceholder caption={`${m.name} portrait`} aspect="16/10" className="rounded-none border-none shadow-none" />
+        <PhotoPlaceholder caption={`${m.name} portrait`} person={m.name} aspect="16/10" className="rounded-none border-none shadow-none" />
       )}
       <div className="flex flex-1 flex-col p-5 sm:p-6">
         <div>

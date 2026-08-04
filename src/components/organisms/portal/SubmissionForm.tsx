@@ -38,7 +38,7 @@ export function SubmissionForm({
       action={formAction}
       className="rounded-md border border-hair bg-card p-6 shadow-[0_18px_50px_-24px_rgba(60,35,10,.45)] sm:p-8"
     >
-      <p className="mb-1 font-ui text-xs font-bold uppercase tracking-[0.16em] text-[#C9761A]">New submission</p>
+      <p className="mb-1 font-ui text-xs font-bold uppercase tracking-caps text-[#C9761A]">New submission</p>
       <h2 className="mb-1.5 font-display text-xl font-semibold text-strong">Share from the field</h2>
       <p className="mb-6 font-body text-sm leading-relaxed text-body">
         Your submission is reviewed by the office before it appears on the website.

@@ -35,7 +35,7 @@ export function ProgressBar({
       {(label || showPercent) && (
         <div className="mb-2 flex items-baseline justify-between">
           <span className="font-ui text-sm font-semibold text-body">{label}</span>
-          {showPercent && <span className="font-mono text-sm text-muted">{pct}%</span>}
+          {showPercent && <span className="font-ui text-sm tabular-nums text-muted">{pct}%</span>}
         </div>
       )}
       <div className="overflow-hidden rounded-pill bg-sunk" style={{ height }}>

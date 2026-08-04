@@ -94,10 +94,12 @@ const HERO_STATS: HeroStat[] = [
 function useCountUp(target: number, durationMs = 1200) {
   const [value, setValue] = React.useState(0);
   React.useEffect(() => {
+    // Jump straight to the final value when the user prefers reduced motion.
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let raf = 0;
     const start = performance.now();
     const tick = (now: number) => {
-      const t = Math.min(1, (now - start) / durationMs);
+      const t = reduceMotion ? 1 : Math.min(1, (now - start) / durationMs);
       const eased = 1 - Math.pow(1 - t, 3);
       setValue(Math.round(target * eased));
       if (t < 1) raf = requestAnimationFrame(tick);
@@ -111,13 +113,13 @@ function useCountUp(target: number, durationMs = 1200) {
 function HeroStatTile({ icon: StatIcon, value, suffix, label }: HeroStat) {
   const count = useCountUp(value);
   return (
-    <div className="flex items-end gap-4 rounded-lg border border-white/15 bg-black/55 px-5 py-4 backdrop-blur-[6px]">
+    <div className="flex items-end gap-4 rounded-lg border border-white/12 bg-[rgba(24,13,8,0.5)] px-5 py-4 backdrop-blur-[8px]">
       <span className="inline-flex h-[46px] w-[46px] flex-none items-center justify-center rounded-[14px] border border-green-300/25 bg-green-500/15">
         <StatIcon size={22} className="text-green-300" />
       </span>
       <div>
-        <div className="font-display text-xl font-semibold leading-none text-white">
-          <span className="font-mono">{count.toLocaleString()}</span>
+        <div className="font-ui text-xl font-semibold leading-none text-white">
+          <span className="tabular-nums">{count.toLocaleString()}</span>
           {suffix && <span className="ml-1 text-md text-green-300">{suffix}</span>}
         </div>
         <div className="mt-1.5 font-ui text-sm text-white">{label}</div>
@@ -172,9 +174,11 @@ export function HomeHero() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(1100px 680px at 8% -10%, rgba(58,18,8,.42), transparent 58%), radial-gradient(900px 600px at 100% 110%, rgba(18,62,13,.2), transparent 58%), linear-gradient(160deg, rgba(24,12,8,.82), rgba(12,9,7,.88))",
+            "linear-gradient(100deg, rgba(26,13,8,.9) 0%, rgba(26,13,8,.74) 36%, rgba(26,13,8,.42) 64%, rgba(30,15,9,.3) 100%), linear-gradient(to top, rgba(16,9,6,.78), rgba(16,9,6,.28) 30%, transparent 48%), radial-gradient(900px 600px at 100% 110%, rgba(18,62,13,.22), transparent 58%)",
         }}
       />
+      {/* Extra uniform scrim on small screens, where copy spans the full photo width. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[rgba(20,11,7,0.4)] sm:hidden" />
       <div className="relative mx-auto flex h-full max-w-(--container-max) flex-col justify-center px-5 pb-16 pt-52 sm:pb-40 sm:px-12">
         {/* All slides share one grid cell so the hero always sizes to the tallest slide. */}
         <div className="grid">
@@ -189,11 +193,11 @@ export function HomeHero() {
                   : "pointer-events-none translate-y-2 opacity-0 delay-0",
               )}
             >
-              <div className="flex items-center gap-3.5 font-ui text-sm font-bold uppercase tracking-[0.24em] text-green-400">
+              <div className="flex items-center gap-3.5 font-ui text-sm font-bold uppercase tracking-caps-loose text-green-400">
                 <span className="h-[2px] w-[34px] bg-green-500" />
                 {slide.eyebrow}
               </div>
-              <h1 className="mt-5 font-display text-[clamp(40px,5.2vw,72px)] font-normal leading-[1.02] text-white">
+              <h1 className="wonk mt-5 font-display text-[clamp(40px,5.2vw,72px)] font-normal leading-[1.02] text-white">
                 <HeadingLine line={slide.line1} />
                 <HeadingLine line={slide.line2} />
               </h1>
@@ -239,7 +243,10 @@ export function HomeHero() {
               type="button"
               aria-label={`Slide ${i + 1}`}
               onClick={() => setIndex(i)}
-              className={cn("h-2 rounded-pill transition-all", i === index ? "w-7 bg-green-400" : "w-2 bg-white/35")}
+              className={cn(
+                "h-2 rounded-pill transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--color-focus-ring)",
+                i === index ? "w-7 bg-green-400" : "w-2 bg-white/35",
+              )}
             />
           ))}
         </div>
@@ -249,7 +256,7 @@ export function HomeHero() {
         type="button"
         aria-label="Previous slide"
         onClick={() => go(-1)}
-        className="absolute left-4 top-1/2 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 text-white hover:bg-white/10 sm:flex"
+        className="absolute left-4 top-1/2 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 text-white hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--color-focus-ring) sm:flex"
       >
         <ChevronLeft size={22} />
       </button>
@@ -257,7 +264,7 @@ export function HomeHero() {
         type="button"
         aria-label="Next slide"
         onClick={() => go(1)}
-        className="absolute right-4 top-1/2 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 text-white hover:bg-white/10 sm:flex"
+        className="absolute right-4 top-1/2 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 text-white hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--color-focus-ring) sm:flex"
       >
         <ChevronRight size={22} />
       </button>

@@ -43,7 +43,7 @@ export function GivingForm() {
             type="button"
             onClick={() => setAmount(a)}
             className={cn(
-              "rounded-md border py-4 text-center font-mono text-xl font-medium transition-colors",
+              "rounded-md border py-4 text-center font-ui text-xl font-semibold tabular-nums transition-colors",
               amount === a
                 ? "border-primary bg-primary text-on-primary"
                 : "border-hair bg-card text-body hover:bg-sunk",

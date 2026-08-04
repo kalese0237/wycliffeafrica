@@ -57,7 +57,7 @@ export default function SunriseAfricaCentrePage() {
     >
 
       <section id="vision" className="mx-auto max-w-[1120px] px-5 py-[72px] sm:px-7">
-        <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#C9761A]">The vision</div>
+        <div className="font-ui text-xs font-bold uppercase tracking-caps-loose text-[#C9761A]">The vision</div>
         <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
           One place to recruit, train, and send the next generation
         </h2>
@@ -75,7 +75,7 @@ export default function SunriseAfricaCentrePage() {
 
       <section id="centre">
         <div className="mx-auto max-w-[1120px] px-5 py-[72px] sm:px-7">
-          <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#C9761A]">The centre</div>
+          <div className="font-ui text-xs font-bold uppercase tracking-caps-loose text-[#C9761A]">The centre</div>
           <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
             What SunRise Africa will hold
           </h2>
@@ -99,7 +99,7 @@ export default function SunriseAfricaCentrePage() {
 
       <section id="why" className="mx-auto grid max-w-[1120px] grid-cols-1 items-center gap-10 px-5 py-[72px] sm:px-7 lg:grid-cols-[1.1fr_0.9fr] lg:gap-[54px]">
         <div>
-          <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#C9761A]">Why now</div>
+          <div className="font-ui text-xs font-bold uppercase tracking-caps-loose text-[#C9761A]">Why now</div>
           <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
             The work has grown faster than its foundations
           </h2>
@@ -115,7 +115,7 @@ export default function SunriseAfricaCentrePage() {
           </p>
         </div>
         <div className="rounded-xl bg-[linear-gradient(135deg,#2F6E63,#234F47)] p-8 text-white shadow-lg sm:p-12">
-          <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#9FD8C8]">Built to sustain itself</div>
+          <div className="font-ui text-xs font-bold uppercase tracking-caps-loose text-[#9FD8C8]">Built to sustain itself</div>
           <p className="mt-3 font-display text-lg italic leading-snug">
             SunRise Africa is meant to be more than a headquarters. The farm and guest facilities are designed to
             generate income, building a reserve that funds missionary development long after the buildings go up.
@@ -129,7 +129,7 @@ export default function SunriseAfricaCentrePage() {
 
       <section className="mx-auto max-w-[1120px] px-5 py-[72px] sm:px-7">
         <div className="rounded-xl bg-[linear-gradient(135deg,#2F6E63,#234F47)] p-8 text-white shadow-lg sm:p-12">
-          <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#9FD8C8]">The goal</div>
+          <div className="font-ui text-xs font-bold uppercase tracking-caps-loose text-[#9FD8C8]">The goal</div>
           <h2 className="mb-8 mt-3 font-display text-2xl font-semibold">
             Establish SunRise Africa as the hub of the movement
           </h2>
@@ -146,7 +146,7 @@ export default function SunriseAfricaCentrePage() {
 
       <section className="mx-auto grid max-w-[1120px] grid-cols-1 items-center gap-10 px-5 py-[72px] sm:px-7 lg:grid-cols-[0.9fr_1.1fr] lg:gap-[54px]">
         <div className="rounded-xl bg-[linear-gradient(135deg,#B5471B,#8C3313)] p-8 text-white shadow-lg sm:p-12">
-          <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#FFD79A]">Where our people serve</div>
+          <div className="font-ui text-xs font-bold uppercase tracking-caps-loose text-[#FFD79A]">Where our people serve</div>
           <p className="mt-3 font-body text-base text-white/85">
             Wycliffe Africa missionaries work in more than eight countries, inside Africa and beyond it.
           </p>
@@ -160,7 +160,7 @@ export default function SunriseAfricaCentrePage() {
           </div>
         </div>
         <div>
-          <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#C9761A]">The bigger picture</div>
+          <div className="font-ui text-xs font-bold uppercase tracking-caps-loose text-[#C9761A]">The bigger picture</div>
           <h2 className="mb-4 mt-3 font-display text-2xl font-semibold leading-tight text-strong">
             The church of the Global South is stepping into missions
           </h2>
@@ -178,7 +178,7 @@ export default function SunriseAfricaCentrePage() {
 
       <section id="give" className="mx-auto max-w-[1120px] px-5 pb-[90px] pt-5 sm:px-7">
         <div className="rounded-2xl border border-[#F0CE93] bg-[radial-gradient(120%_120%_at_50%_0%,#FBE7C4_0%,#F7D69B_100%)] px-6 py-16 text-center">
-          <div className="font-ui text-xs font-bold uppercase tracking-[0.2em] text-[#C9761A]">Partner with us</div>
+          <div className="font-ui text-xs font-bold uppercase tracking-caps-loose text-[#C9761A]">Partner with us</div>
           <h2 className="mx-auto mb-4 mt-3 max-w-[660px] font-display text-2xl font-semibold leading-tight text-strong">
             Help us reach USD 1.2 million and lay the foundation
           </h2>

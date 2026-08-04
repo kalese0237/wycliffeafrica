@@ -5,5 +5,4 @@ export * from "./MissionsMovementFeature";
 export * from "./ScriptureQuoteBand";
 export * from "./ServeGiveCards";
 export * from "./UpdatesFeed";
-export * from "./VideoTeaser";
 export * from "./Vision2025";
