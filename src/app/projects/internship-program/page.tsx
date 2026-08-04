@@ -259,7 +259,11 @@ export default function InternshipProgramPage() {
           </p>
         </div>
         <p className="mt-8 border-t border-hair pt-6 font-ui text-sm text-muted">
-          Read next:{" "}
+          Meet the current interns:{" "}
+          <Link href="/interns" className="font-semibold text-link hover:underline">
+            Our Interns →
+          </Link>
+          {" "}· Read next:{" "}
           <Link href="/projects/sunrise-africa-centre" className="font-semibold text-link hover:underline">
             The SunRise Africa Centre →
           </Link>

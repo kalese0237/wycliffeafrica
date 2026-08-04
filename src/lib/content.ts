@@ -130,3 +130,10 @@ export async function getMissionaryById(id: string): Promise<PublicMissionaryRec
   const missionary = await source.getMissionaryById(id);
   return missionary ?? (id === mock.LYDIA_TEERA.id ? mock.LYDIA_TEERA : undefined);
 }
+
+/**
+ * Interns have no Directus collection yet (see scripts/seed-directus.mjs),
+ * so this always reads the local fixtures, live or not, until that
+ * migration happens.
+ */
+export const { getInterns, getInternBySlug } = mock;
