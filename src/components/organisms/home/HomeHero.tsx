@@ -15,6 +15,14 @@ interface SlideLine {
 
 interface Slide {
   eyebrow: string;
+  /**
+   * Cap on the body paragraph's width, in ch, targeting 70% of the heading's
+   * own rendered width. Headings render ~4x larger than the body text, so
+   * this isn't the paragraph's own character count — it's sized per slide
+   * to (widest heading line length x4 x 0.7), the heading/body font-size
+   * ratio scaled down to 70%.
+   */
+  bodyMaxCh: number;
   /** The heading is a designed two-line lockup — keep line two longer than line one. */
   line1: SlideLine;
   line2: SlideLine;
@@ -31,8 +39,9 @@ const SLIDES: Slide[] = [
   {
     eyebrow: "Wycliffe Africa",
     line1: { pre: "Raising missionaries" },
-    line2: { em: "for Bible translation" },
+    line2: { pre: "for ", em: "Bible translation" },
     body: "Millions across Africa still wait to hear God speak their language. We raise up African missionaries for the translation work that will change that.",
+    bodyMaxCh: 78,
     ctaA: { label: "Why Bible translation", href: "/about" },
     ctaB: { label: "What we believe", href: "/about" },
     image: "/Missionaries/wycliffe-africa-team.webp",
@@ -43,6 +52,7 @@ const SLIDES: Slide[] = [
     line1: { pre: "Equipping ", em: "African" },
     line2: { em: "missionaries", post: " for the field" },
     body: "Translation teams need linguists, but also teachers, accountants and IT specialists. We train Africans and send them to the field, whether for a season or for a lifetime.",
+    bodyMaxCh: 73,
     ctaA: { label: "Meet our missionaries", href: "/missionaries" },
     ctaB: { label: "Become a member", href: "/involved" },
     image: "/Internship/equipping-missionaries.webp",
@@ -53,6 +63,7 @@ const SLIDES: Slide[] = [
     line1: { pre: "Mobilising" },
     line2: { em: "churches", post: " across Africa" },
     body: "We help congregations take a language community as their own: praying for it by name, funding its project, sending it people.",
+    bodyMaxCh: 62,
     ctaA: { label: "Partner your church", href: "/involved/partnership" },
     ctaB: { label: "Give today", href: "/give" },
     image: "/photos/uganda-keliko-church.webp",
@@ -179,7 +190,7 @@ export function HomeHero() {
       />
       {/* Extra uniform scrim on small screens, where copy spans the full photo width. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-[rgba(20,11,7,0.4)] sm:hidden" />
-      <div className="relative mx-auto flex h-full max-w-(--container-max) flex-col justify-center px-5 pb-16 pt-52 sm:pb-40 sm:px-12">
+      <div className="relative mx-auto flex h-full max-w-(--container-max) flex-col justify-end px-5 pb-16 pt-52 sm:pb-40 sm:px-12">
         {/* All slides share one grid cell so the hero always sizes to the tallest slide. */}
         <div className="grid">
           {SLIDES.map((slide, i) => (
@@ -201,7 +212,12 @@ export function HomeHero() {
                 <HeadingLine line={slide.line1} />
                 <HeadingLine line={slide.line2} />
               </h1>
-              <p className="mt-6 max-w-[52ch] font-body text-md leading-relaxed text-white">{slide.body}</p>
+              <p
+                className="mt-6 font-body text-md leading-relaxed text-white"
+                style={{ maxWidth: `${slide.bodyMaxCh}ch` }}
+              >
+                {slide.body}
+              </p>
               <div className="mt-9 flex flex-wrap gap-3.5">
                 <Button href={slide.ctaA.href} variant="accent" iconRight={<ChevronRight size={16} />}>
                   {slide.ctaA.label}
@@ -236,7 +252,7 @@ export function HomeHero() {
           ))}
         </div>
 
-        <div className="mt-10 flex gap-2">
+        <div className="mt-4 flex gap-2">
           {SLIDES.map((_, i) => (
             <button
               key={i}
