@@ -312,7 +312,7 @@ async function main() {
   const publicNewsFields = [
     "id", "status", "category", "slug", "title", "excerpt", "body", "author",
     "missionaryId", "place", "journey", "tagLabel", "date", "image",
-    "pullQuote", "inlineImage", "inlineImageCaption",
+    "pullQuote", "inlineImage", "inlineImageCaption", "date_created",
   ];
   const editableNews = {
     _and: [

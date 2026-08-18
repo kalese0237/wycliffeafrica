@@ -210,6 +210,7 @@ const NEWS: NewsRecord[] = [
     place: "Continental",
     date: "2026",
     status: "published",
+    date_created: daysAgo(60),
   },
   {
     id: "member",
@@ -227,6 +228,7 @@ const NEWS: NewsRecord[] = [
     place: "Nairobi, Kenya",
     date: "2026",
     status: "published",
+    date_created: daysAgo(65),
   },
   {
     id: "church",
@@ -244,6 +246,7 @@ const NEWS: NewsRecord[] = [
     place: "Kenya",
     date: "2026",
     status: "published",
+    date_created: daysAgo(70),
   },
   {
     id: "u1",
@@ -258,6 +261,7 @@ const NEWS: NewsRecord[] = [
     ],
     date: "June 2026",
     status: "published",
+    date_created: daysAgo(5),
   },
   {
     id: "u3",
@@ -276,6 +280,7 @@ const NEWS: NewsRecord[] = [
     inlineImageCaption: "The choir recording in the back room of the church.",
     date: "May 2026",
     status: "published",
+    date_created: daysAgo(15),
   },
   {
     id: "u5",
@@ -290,6 +295,7 @@ const NEWS: NewsRecord[] = [
     ],
     date: "April 2026",
     status: "published",
+    date_created: daysAgo(40),
   },
 ];
 
@@ -374,7 +380,7 @@ const FAQS: FaqRecord[] = [
 ];
 
 export async function getNews(): Promise<NewsRecord[]> {
-  return NEWS.filter((n) => n.status === "published");
+  return NEWS.filter((n) => n.status === "published").sort(byNewestCreated);
 }
 
 export async function getNewsBySlug(slug: string): Promise<NewsRecord | undefined> {
@@ -390,10 +396,12 @@ export async function getMissionaryBySlug(slug: string): Promise<MissionaryRecor
 }
 
 export async function getUpdatesForMissionary(missionaryId: string): Promise<NewsRecord[]> {
-  return NEWS.filter((n) => n.category === "update" && n.missionaryId === missionaryId && n.status === "published");
+  return NEWS.filter(
+    (n) => n.category === "update" && n.missionaryId === missionaryId && n.status === "published",
+  ).sort(byNewestCreated);
 }
 
-function byNewestCreated(a: PrayerRequestRecord, b: PrayerRequestRecord): number {
+function byNewestCreated(a: { date_created?: string | null }, b: { date_created?: string | null }): number {
   return (b.date_created ?? "").localeCompare(a.date_created ?? "");
 }
 
