@@ -50,7 +50,7 @@ async function main() {
       sort: "name",
       limit: "-1",
     })),
-    prayerRequests: await get(items("field_updates", {
+    prayerRequests: await get(items("prayer_requests", {
       "filter[status][_eq]": "published",
       "filter[type][_eq]": "prayer",
       fields: "id,status,type,missionaryId,title,body,date,sensitive,image",
@@ -69,7 +69,7 @@ async function main() {
 
   const source = `import type {
   FaqRecord,
-  PublicFieldUpdateRecord,
+  PublicPrayerRequestRecord,
   PublicMissionaryRecord,
   PublicNewsRecord,
   ResourceRecord,
@@ -82,7 +82,7 @@ async function main() {
 export const CONTENT_SNAPSHOT = ${JSON.stringify(snapshot, null, 2)} satisfies {
   news: PublicNewsRecord[];
   missionaries: PublicMissionaryRecord[];
-  prayerRequests: PublicFieldUpdateRecord[];
+  prayerRequests: PublicPrayerRequestRecord[];
   resources: ResourceRecord[];
   faqs: FaqRecord[];
 };

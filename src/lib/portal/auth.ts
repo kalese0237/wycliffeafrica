@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import type { FieldUpdateRecord, MissionaryRecord, NewsRecord, PublishStatus, UpdateType } from "@/lib/directus/schema";
+import type { PrayerRequestRecord, MissionaryRecord, NewsRecord, PublishStatus, UpdateType } from "@/lib/directus/schema";
 import { submissionImageValue, SUBMISSION_LIMITS } from "./validation";
 
 /**
@@ -129,7 +129,7 @@ export async function getPortalUser(): Promise<PortalUser | null> {
 
 /**
  * Portal-facing view of a submission, normalized across the two collections
- * "update" and "prayer" submissions now live in (`news` and `field_updates`
+ * "update" and "prayer" submissions now live in (`news` and `prayer_requests`
  * respectively) — `body` flattens to a single string for the edit form.
  */
 export interface MySubmission {
@@ -172,7 +172,7 @@ export async function getMySubmissions(
   });
   const [news, prayers] = await Promise.all([
     directusFetch<NewsRecord[]>(`/items/news?${newsParams}`, {}, token),
-    directusFetch<FieldUpdateRecord[]>(`/items/field_updates?${prayerParams}`, {}, token),
+    directusFetch<PrayerRequestRecord[]>(`/items/prayer_requests?${prayerParams}`, {}, token),
   ]);
   const fromNews: MySubmission[] = news.map((n) => ({
     id: n.id,
@@ -212,8 +212,8 @@ function slugify(title: string): string {
     .slice(0, 60);
 }
 
-function collectionFor(type: UpdateType): "news" | "field_updates" {
-  return type === "update" ? "news" : "field_updates";
+function collectionFor(type: UpdateType): "news" | "prayer_requests" {
+  return type === "update" ? "news" : "prayer_requests";
 }
 
 export interface NewSubmission {
@@ -284,7 +284,7 @@ export async function createSubmission(input: NewSubmission): Promise<void> {
       }),
     }, DIRECTUS_TOKEN);
   } else {
-    await directusFetch("/items/field_updates", {
+    await directusFetch("/items/prayer_requests", {
       method: "POST",
       body: JSON.stringify({
         type,

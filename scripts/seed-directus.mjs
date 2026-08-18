@@ -1,7 +1,7 @@
 /**
  * One-time Directus bootstrap for the Wycliffe Africa site.
  *
- * Creates the content collections (missionaries, field_updates, news,
+ * Creates the content collections (missionaries, prayer_requests, news,
  * resources, faqs), a read-only "Site" role for the Next.js server, a
  * "Missionary" role for portal logins (create drafts + read own items),
  * a site API user with a static token, a demo missionary account, and
@@ -323,7 +323,7 @@ const COLLECTIONS = [
     ],
   },
   {
-    collection: "field_updates",
+    collection: "prayer_requests",
     meta: { icon: "volunteer_activism", note: "Prayer requests drafted via the missionary portal", archive_field: "status", archive_value: "archived", unarchive_value: "draft" },
     fields: [
       uuidPk,
@@ -414,7 +414,7 @@ async function main() {
   const sitePolicy = await api("/policies", { method: "POST", body: { name: "Site (read-only)", icon: "public", admin_access: false, app_access: false } });
   await api("/permissions", { method: "POST", body: [
     { policy: sitePolicy.id, collection: "missionaries", action: "read", fields: ["*"], permissions: {} },
-    { policy: sitePolicy.id, collection: "field_updates", action: "read", fields: ["id", "status", "type", "missionaryId", "title", "body", "date", "sensitive", "image", "date_created"], permissions: { _and: [{ status: { _eq: "published" } }, { type: { _eq: "prayer" } }] } },
+    { policy: sitePolicy.id, collection: "prayer_requests", action: "read", fields: ["id", "status", "type", "missionaryId", "title", "body", "date", "sensitive", "image", "date_created"], permissions: { _and: [{ status: { _eq: "published" } }, { type: { _eq: "prayer" } }] } },
     { policy: sitePolicy.id, collection: "news", action: "read", fields: ["id", "status", "category", "slug", "title", "excerpt", "body", "author", "missionaryId", "place", "journey", "tagLabel", "date", "image"], permissions: { status: { _eq: "published" } } },
     { policy: sitePolicy.id, collection: "resources", action: "read", fields: ["*"], permissions: {} },
     { policy: sitePolicy.id, collection: "faqs", action: "read", fields: ["*"], permissions: {} },
@@ -428,13 +428,13 @@ async function main() {
   await api("/permissions", { method: "POST", body: [
     {
       policy: missionaryPolicy.id,
-      collection: "field_updates",
+      collection: "prayer_requests",
       action: "create",
       fields: ["type", "title", "body", "sensitive", "missionaryId", "date", "status"],
       validation: { _and: [{ status: { _eq: "draft" } }, { type: { _eq: "prayer" } }] },
       presets: { type: "prayer", status: "draft" },
     },
-    { policy: missionaryPolicy.id, collection: "field_updates", action: "read", fields: ["*"], permissions: { user_created: { _eq: "$CURRENT_USER" } } },
+    { policy: missionaryPolicy.id, collection: "prayer_requests", action: "read", fields: ["*"], permissions: { user_created: { _eq: "$CURRENT_USER" } } },
     { policy: missionaryPolicy.id, collection: "missionaries", action: "read", fields: ["*"], permissions: { user: { _eq: "$CURRENT_USER" } } },
     { policy: missionaryPolicy.id, collection: "directus_users", action: "read", fields: ["id", "email", "first_name"], permissions: { id: { _eq: "$CURRENT_USER" } } },
   ] });
@@ -466,7 +466,7 @@ async function main() {
 
   // --- Content ---
   await api("/items/missionaries", { method: "POST", body: MISSIONARIES.map((m) => m.id === "otieno" ? { ...m, user: demoUser.id } : m) });
-  await api("/items/field_updates", { method: "POST", body: PRAYERS });
+  await api("/items/prayer_requests", { method: "POST", body: PRAYERS });
   await api("/items/news", { method: "POST", body: NEWS });
   await api("/items/resources", { method: "POST", body: RESOURCES });
   await api("/items/faqs", { method: "POST", body: FAQS });

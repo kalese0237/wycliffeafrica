@@ -4,10 +4,10 @@ import { Newspaper, HandHeart, ShieldCheck } from "lucide-react";
 import { Avatar } from "@/components/atoms/Avatar";
 import { PhotoPlaceholder } from "@/components/molecules/PhotoPlaceholder";
 import { cn } from "@/lib/cn";
-import type { FieldUpdateRecord } from "@/lib/directus/schema";
+import type { PrayerRequestRecord } from "@/lib/directus/schema";
 
 export interface UpdateCardProps {
-  update: FieldUpdateRecord;
+  update: PrayerRequestRecord;
   authorName: string;
   className?: string;
 }

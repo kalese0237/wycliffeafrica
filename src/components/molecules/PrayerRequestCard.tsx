@@ -2,10 +2,10 @@ import * as React from "react";
 import { HandHeart, MapPin, ShieldCheck } from "lucide-react";
 import { Avatar } from "@/components/atoms/Avatar";
 import { cn } from "@/lib/cn";
-import type { PublicFieldUpdateRecord, PublicMissionaryRecord } from "@/lib/directus/schema";
+import type { PublicPrayerRequestRecord, PublicMissionaryRecord } from "@/lib/directus/schema";
 
 export interface PrayerRequestCardProps {
-  request: PublicFieldUpdateRecord;
+  request: PublicPrayerRequestRecord;
   missionary?: PublicMissionaryRecord;
   className?: string;
 }

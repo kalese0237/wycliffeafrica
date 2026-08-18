@@ -1,6 +1,6 @@
 import { readItems } from "@directus/sdk";
 import { directus } from "./client";
-import type { PublicFieldUpdateRecord, PublicMissionaryRecord, PublicNewsRecord } from "./schema";
+import type { PublicPrayerRequestRecord, PublicMissionaryRecord, PublicNewsRecord } from "./schema";
 
 /**
  * Live Directus queries. Function names and signatures mirror
@@ -188,9 +188,9 @@ export async function getUpdatesForMissionary(missionaryId: string): Promise<Pub
   );
 }
 
-export async function getPrayerRequests(): Promise<PublicFieldUpdateRecord[]> {
+export async function getPrayerRequests(): Promise<PublicPrayerRequestRecord[]> {
   return directus.request(
-    readItems("field_updates", {
+    readItems("prayer_requests", {
       fields: [...PRAYER_PUBLIC_FIELDS],
       filter: { _and: [PUBLISHED, { type: { _eq: "prayer" } }] },
       sort: ["-date"],
@@ -204,9 +204,9 @@ export async function getPrayerRequests(): Promise<PublicFieldUpdateRecord[]> {
  */
 export async function getPrayerRequestsForMissionary(
   missionaryId: string,
-): Promise<PublicFieldUpdateRecord[]> {
+): Promise<PublicPrayerRequestRecord[]> {
   return directus.request(
-    readItems("field_updates", {
+    readItems("prayer_requests", {
       fields: [...PRAYER_PUBLIC_FIELDS],
       filter: {
         _and: [
