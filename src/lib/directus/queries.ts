@@ -173,7 +173,7 @@ export async function getUpdatesForMissionary(missionaryId: string): Promise<Pub
           filter: {
             _and: [PUBLISHED, { category: { _eq: "update" } }, { missionaryId: { _eq: missionaryId } }],
           },
-          sort: ["-date"],
+          sort: ["-date_created"],
         }),
       ),
     () =>
@@ -183,7 +183,7 @@ export async function getUpdatesForMissionary(missionaryId: string): Promise<Pub
           filter: {
             _and: [PUBLISHED, { category: { _eq: "update" } }, { missionaryId: { _eq: missionaryId } }],
           },
-          sort: ["-date"],
+          sort: ["-date_created"],
         }),
       ),
   );

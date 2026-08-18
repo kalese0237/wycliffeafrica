@@ -415,7 +415,7 @@ async function main() {
   await api("/permissions", { method: "POST", body: [
     { policy: sitePolicy.id, collection: "missionaries", action: "read", fields: ["*"], permissions: {} },
     { policy: sitePolicy.id, collection: "prayer_requests", action: "read", fields: ["id", "status", "type", "missionaryId", "title", "body", "date", "sensitive", "image", "date_created"], permissions: { _and: [{ status: { _eq: "published" } }, { type: { _eq: "prayer" } }] } },
-    { policy: sitePolicy.id, collection: "news", action: "read", fields: ["id", "status", "category", "slug", "title", "excerpt", "body", "author", "missionaryId", "place", "journey", "tagLabel", "date", "image"], permissions: { status: { _eq: "published" } } },
+    { policy: sitePolicy.id, collection: "news", action: "read", fields: ["id", "status", "category", "slug", "title", "excerpt", "body", "author", "missionaryId", "place", "journey", "tagLabel", "date", "image", "date_created"], permissions: { status: { _eq: "published" } } },
     { policy: sitePolicy.id, collection: "resources", action: "read", fields: ["*"], permissions: {} },
     { policy: sitePolicy.id, collection: "faqs", action: "read", fields: ["*"], permissions: {} },
   ] });

@@ -39,10 +39,13 @@ function items(collection, params) {
 
 async function main() {
   const snapshot = {
+    // date_created isn't in `fields` (never written to the snapshot) but
+    // sorting by it is still allowed, and gives true chronological order —
+    // `date` is a loosely-formatted editorial label, not sortable reliably.
     news: await get(items("news", {
       "filter[status][_eq]": "published",
       fields: "id,status,category,slug,title,excerpt,body,author,missionaryId,place,journey,tagLabel,date,image",
-      sort: "-date",
+      sort: "-date_created",
       limit: "-1",
     })),
     missionaries: await get(items("missionaries", {
