@@ -9,7 +9,7 @@ import { PhotoPlaceholder } from "@/components/molecules/PhotoPlaceholder";
 import { PrayerRequestCard } from "@/components/molecules/PrayerRequestCard";
 import { PageTemplate } from "@/components/templates/PageTemplate";
 import type {
-  PublicFieldUpdateRecord,
+  PublicPrayerRequestRecord,
   PublicMissionaryRecord,
   PublicNewsRecord,
 } from "@/lib/directus/schema";
@@ -28,7 +28,7 @@ function readingMinutes(paragraphs: string[]): number {
 export interface NewsArticleTemplateProps {
   item: PublicNewsRecord;
   missionary?: PublicMissionaryRecord;
-  prayers?: PublicFieldUpdateRecord[];
+  prayers?: PublicPrayerRequestRecord[];
 }
 
 /** Public news-article composition; route pages supply resolved CMS data only. */

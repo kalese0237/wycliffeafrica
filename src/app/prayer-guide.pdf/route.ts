@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import PDFDocument from "pdfkit";
 import { getMissionaries, getPrayerRequests } from "@/lib/content";
-import type { PublicFieldUpdateRecord, PublicMissionaryRecord } from "@/lib/directus/schema";
+import type { PublicPrayerRequestRecord, PublicMissionaryRecord } from "@/lib/directus/schema";
 
 export const runtime = "nodejs";
 /** Regenerate at most every 14 days; readers in between get the cached PDF. */
@@ -63,7 +63,7 @@ function regionOf(place?: string) {
 }
 
 function renderPdf(
-  requests: PublicFieldUpdateRecord[],
+  requests: PublicPrayerRequestRecord[],
   missionaries: PublicMissionaryRecord[],
   dateLabel: string,
 ): Promise<Buffer> {

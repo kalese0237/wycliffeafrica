@@ -9,7 +9,7 @@ import { PhotoPlaceholder } from "@/components/molecules/PhotoPlaceholder";
 import { NewsCard } from "@/components/molecules/NewsCard";
 import { UpdateCard } from "@/components/molecules/UpdateCard";
 import type {
-  PublicFieldUpdateRecord,
+  PublicPrayerRequestRecord,
   PublicMissionaryRecord,
   PublicNewsRecord,
 } from "@/lib/directus/schema";
@@ -19,7 +19,7 @@ export interface MissionaryProfileTemplateProps {
   /** Published `news` posts (category "update") authored by this missionary. */
   updates: PublicNewsRecord[];
   /** Published, non-sensitive prayer requests from this missionary. */
-  prayerRequests: PublicFieldUpdateRecord[];
+  prayerRequests: PublicPrayerRequestRecord[];
 }
 
 /**

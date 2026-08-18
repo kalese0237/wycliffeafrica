@@ -35,11 +35,11 @@ async function ensureUserPolicy(user, policy) {
 async function ensureReviewPreset(user) {
   const bookmark = "Missionary submissions awaiting review";
   const current = await api(
-    `/presets?filter[user][_eq]=${user}&filter[collection][_eq]=field_updates&filter[bookmark][_eq]=${encodeURIComponent(bookmark)}&limit=1`,
+    `/presets?filter[user][_eq]=${user}&filter[collection][_eq]=prayer_requests&filter[bookmark][_eq]=${encodeURIComponent(bookmark)}&limit=1`,
   );
   const body = {
     user,
-    collection: "field_updates",
+    collection: "prayer_requests",
     bookmark,
     layout: "tabular",
     filter: { status: { _eq: "draft" } },

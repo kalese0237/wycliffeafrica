@@ -46,7 +46,7 @@ async function main() {
     if (visibleProfiles.length !== 1 || visibleProfiles[0].id !== linked[0].id) {
       throw new Error("Missionary profile read policy did not resolve the current user correctly.");
     }
-    await request("/items/field_updates", {
+    await request("/items/prayer_requests", {
       method: "POST",
       token: temporaryToken,
       expected: 403,
@@ -84,7 +84,7 @@ async function main() {
       method: "POST",
       body: { user: reviewer.id, policy: reviewerPolicies[0].id },
     });
-    await request("/items/field_updates", {
+    await request("/items/prayer_requests", {
       method: "POST",
       token: SITE_TOKEN,
       body: {
@@ -97,56 +97,56 @@ async function main() {
       },
     });
     const [draft] = await request(
-      `/items/field_updates?filter[title][_eq]=${encodeURIComponent(testTitle)}&fields=id,status&limit=1`,
+      `/items/prayer_requests?filter[title][_eq]=${encodeURIComponent(testTitle)}&fields=id,status&limit=1`,
     );
     if (!draft) throw new Error("The service token did not create the temporary draft.");
     draftId = draft.id;
     if (draft.status !== "draft") throw new Error("New submission did not receive draft status.");
 
-    await request(`/items/field_updates/${draftId}`, {
+    await request(`/items/prayer_requests/${draftId}`, {
       method: "PATCH",
       token: SITE_TOKEN,
       body: { title: "Portal authorization test updated" },
     });
-    const ownItems = await request(`/items/field_updates?filter[id][_eq]=${draftId}&fields=id`, { token: temporaryToken });
+    const ownItems = await request(`/items/prayer_requests?filter[id][_eq]=${draftId}&fields=id`, { token: temporaryToken });
     if (ownItems.length !== 1) throw new Error("The missionary could not read their own service-created draft.");
-    await request(`/items/field_updates/${draftId}`, {
+    await request(`/items/prayer_requests/${draftId}`, {
       method: "PATCH",
       token: reviewerToken,
       body: { status: "rejected", reviewNotes: "Please add one concrete outcome before resubmitting." },
     });
-    const [reviewed] = await request(`/items/field_updates?filter[id][_eq]=${draftId}&fields=id,status,reviewNotes`, {
+    const [reviewed] = await request(`/items/prayer_requests?filter[id][_eq]=${draftId}&fields=id,status,reviewNotes`, {
       token: temporaryToken,
     });
     if (reviewed?.status !== "rejected" || !reviewed.reviewNotes) {
       throw new Error("Reviewer feedback was not visible to the owning missionary.");
     }
-    await request(`/items/field_updates/${draftId}`, {
+    await request(`/items/prayer_requests/${draftId}`, {
       method: "PATCH",
       token: SITE_TOKEN,
       body: { status: "draft", title: "Portal authorization test resubmitted" },
     });
-    const [resubmitted] = await request(`/items/field_updates?filter[id][_eq]=${draftId}&fields=id,status`, {
+    const [resubmitted] = await request(`/items/prayer_requests?filter[id][_eq]=${draftId}&fields=id,status`, {
       token: temporaryToken,
     });
     if (resubmitted?.status !== "draft") throw new Error("Rejected submission could not be resubmitted.");
-    await request(`/items/field_updates/${draftId}`, {
+    await request(`/items/prayer_requests/${draftId}`, {
       method: "PATCH",
       token: reviewerToken,
       body: { status: "published", reviewNotes: null },
     });
-    const publicItems = await request(`/items/field_updates?filter[id][_eq]=${draftId}&fields=id,status`, { token: SITE_TOKEN });
+    const publicItems = await request(`/items/prayer_requests?filter[id][_eq]=${draftId}&fields=id,status`, { token: SITE_TOKEN });
     if (publicItems.length !== 1 || publicItems[0].status !== "published") {
       throw new Error("Published submission was not visible to the public site token.");
     }
-    await request(`/items/field_updates/${draftId}`, {
+    await request(`/items/prayer_requests/${draftId}`, {
       method: "PATCH",
       token: reviewerToken,
       body: { status: "archived" },
     });
-    const archivedPublicItems = await request(`/items/field_updates?filter[id][_eq]=${draftId}&fields=id`, { token: SITE_TOKEN });
+    const archivedPublicItems = await request(`/items/prayer_requests?filter[id][_eq]=${draftId}&fields=id`, { token: SITE_TOKEN });
     if (archivedPublicItems.length) throw new Error("Archived submission remained publicly visible.");
-    await request(`/items/field_updates/${draftId}`, { method: "DELETE" });
+    await request(`/items/prayer_requests/${draftId}`, { method: "DELETE" });
     draftId = undefined;
 
     const newsTitle = `Portal news authorization test ${crypto.randomUUID()}`;
@@ -240,7 +240,7 @@ async function main() {
 
     if (!SITE_URL) throw new Error("SITE_URL is required for public media-proxy verification.");
     const mediaTestTitle = `Portal media authorization test ${crypto.randomUUID()}`;
-    await request("/items/field_updates", {
+    await request("/items/prayer_requests", {
       method: "POST",
       token: SITE_TOKEN,
       body: {
@@ -254,7 +254,7 @@ async function main() {
       },
     });
     const [mediaDraft] = await request(
-      `/items/field_updates?filter[title][_eq]=${encodeURIComponent(mediaTestTitle)}&fields=id&limit=1`,
+      `/items/prayer_requests?filter[title][_eq]=${encodeURIComponent(mediaTestTitle)}&fields=id&limit=1`,
     );
     if (!mediaDraft) throw new Error("The media authorization draft was not created.");
     mediaDraftId = mediaDraft.id;
@@ -262,7 +262,7 @@ async function main() {
     if (draftMedia.status !== 404) {
       throw new Error(`Draft media proxy returned ${draftMedia.status}; expected 404.`);
     }
-    await request(`/items/field_updates/${mediaDraftId}`, {
+    await request(`/items/prayer_requests/${mediaDraftId}`, {
       method: "PATCH",
       token: reviewerToken,
       body: { status: "published" },
@@ -271,7 +271,7 @@ async function main() {
     if (!publishedMedia.ok) {
       throw new Error(`Published media proxy returned ${publishedMedia.status}; expected 200.`);
     }
-    await request(`/items/field_updates/${mediaDraftId}`, {
+    await request(`/items/prayer_requests/${mediaDraftId}`, {
       method: "PATCH",
       token: reviewerToken,
       body: { sensitive: true },
@@ -280,7 +280,7 @@ async function main() {
     if (sensitiveMedia.status !== 404) {
       throw new Error(`Sensitive prayer media proxy returned ${sensitiveMedia.status}; expected 404.`);
     }
-    await request(`/items/field_updates/${mediaDraftId}`, { method: "DELETE" });
+    await request(`/items/prayer_requests/${mediaDraftId}`, { method: "DELETE" });
     mediaDraftId = undefined;
     await request(`/files/${fileId}`, { method: "DELETE", token: SITE_TOKEN });
     fileId = undefined;
@@ -295,9 +295,9 @@ async function main() {
     console.log("✓ image upload and authenticated delivery work");
     console.log("✓ public media proxy follows publication and sensitivity status");
   } finally {
-    if (draftId) await request(`/items/field_updates/${draftId}`, { method: "DELETE" }).catch(() => undefined);
+    if (draftId) await request(`/items/prayer_requests/${draftId}`, { method: "DELETE" }).catch(() => undefined);
     if (newsDraftId) await request(`/items/news/${newsDraftId}`, { method: "DELETE" }).catch(() => undefined);
-    if (mediaDraftId) await request(`/items/field_updates/${mediaDraftId}`, { method: "DELETE" }).catch(() => undefined);
+    if (mediaDraftId) await request(`/items/prayer_requests/${mediaDraftId}`, { method: "DELETE" }).catch(() => undefined);
     if (fileId) await request(`/files/${fileId}`, { method: "DELETE" }).catch(() => undefined);
     if (reviewerId) await request(`/users/${reviewerId}`, { method: "DELETE" }).catch(() => undefined);
     await request(`/users/${linked[0].user}`, {

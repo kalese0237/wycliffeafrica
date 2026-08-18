@@ -4,7 +4,7 @@
  * for new missionaries going forward. This changes their public profile URLs
  * (/missionaries/otieno → /missionaries/samuel-grace-otieno).
  *
- * Only the `slug` field changes — `id` (used internally by field_updates)
+ * Only the `slug` field changes — `id` (used internally by prayer_requests)
  * and every other field are left untouched.
  *
  * Usage (static admin token):

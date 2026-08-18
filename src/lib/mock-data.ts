@@ -1,6 +1,6 @@
 import type {
   NewsRecord,
-  FieldUpdateRecord,
+  PrayerRequestRecord,
   MissionaryRecord,
   InternRecord,
   ResourceRecord,
@@ -287,7 +287,7 @@ const NEWS: NewsRecord[] = [
   },
 ];
 
-const PRAYERS: FieldUpdateRecord[] = [
+const PRAYERS: PrayerRequestRecord[] = [
   {
     id: "u2",
     type: "prayer",
@@ -383,7 +383,7 @@ export async function getUpdatesForMissionary(missionaryId: string): Promise<New
   return NEWS.filter((n) => n.category === "update" && n.missionaryId === missionaryId && n.status === "published");
 }
 
-export async function getPrayerRequests(): Promise<FieldUpdateRecord[]> {
+export async function getPrayerRequests(): Promise<PrayerRequestRecord[]> {
   return PRAYERS.filter((u) => u.status === "published");
 }
 
@@ -391,7 +391,7 @@ export async function getPrayerRequests(): Promise<FieldUpdateRecord[]> {
  * Scoped to a missionary's own profile page — excludes `sensitive` requests,
  * which only ever appear anonymized on `/prayer`, never tied to a name here.
  */
-export async function getPrayerRequestsForMissionary(missionaryId: string): Promise<FieldUpdateRecord[]> {
+export async function getPrayerRequestsForMissionary(missionaryId: string): Promise<PrayerRequestRecord[]> {
   return PRAYERS.filter(
     (u) => u.missionaryId === missionaryId && u.status === "published" && !u.sensitive,
   );

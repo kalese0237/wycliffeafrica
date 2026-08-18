@@ -11,7 +11,7 @@ export type NewsCategory = "story" | "update" | "project";
  * Unified content collection behind the public "News" section: staff-written
  * stories, missionary field updates, and project updates all live here,
  * distinguished by `category`. Prayer requests are deliberately not part of
- * this collection — see `FieldUpdateRecord` — since they need anonymization
+ * this collection — see `PrayerRequestRecord` — since they need anonymization
  * and never get a public detail page.
  */
 export interface NewsRecord {
@@ -60,7 +60,7 @@ export type UpdateType = "update" | "prayer";
  * `"prayer"` so historical `"update"`-tagged rows stay typeable during
  * migration.
  */
-export interface FieldUpdateRecord {
+export interface PrayerRequestRecord {
   id: string;
   type: UpdateType;
   missionaryId: string;
@@ -82,8 +82,8 @@ export interface FieldUpdateRecord {
   date_updated?: string | null;
 }
 
-export type PublicFieldUpdateRecord = Omit<
-  FieldUpdateRecord,
+export type PublicPrayerRequestRecord = Omit<
+  PrayerRequestRecord,
   "reviewNotes" | "reviewedAt" | "reviewedBy" | "date_created" | "date_updated"
 >;
 
@@ -148,7 +148,7 @@ export interface FaqRecord {
 /** Collection map matching the PID's content model — used to type the Directus client. */
 export interface DirectusSchema {
   news: NewsRecord[];
-  field_updates: FieldUpdateRecord[];
+  prayer_requests: PrayerRequestRecord[];
   missionaries: MissionaryRecord[];
   interns: InternRecord[];
   resources: ResourceRecord[];

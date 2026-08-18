@@ -18,7 +18,7 @@ function requestFor(
 ) {
   return vi.fn(async (input: string | URL | Request) => {
     const url = String(input);
-    if (url.includes("/items/field_updates")) return directusResponse(updates);
+    if (url.includes("/items/prayer_requests")) return directusResponse(updates);
     if (url.includes("/items/news")) {
       return directusResponse(url.includes("inlineImage") ? inlineNews : news);
     }
@@ -110,7 +110,7 @@ describe("portal media authorization", () => {
       "fetch",
       vi.fn(async (input: string | URL | Request) => {
         const url = String(input);
-        if (url.includes("/items/field_updates")) return directusResponse([]);
+        if (url.includes("/items/prayer_requests")) return directusResponse([]);
         if (url.includes("/items/news") && url.includes("inlineImage")) {
           return new Response(null, { status: 403 });
         }

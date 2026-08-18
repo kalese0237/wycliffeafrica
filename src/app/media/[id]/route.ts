@@ -63,7 +63,7 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
   });
   const [updates, news, inlineNews, missionaries] = await Promise.all([
     getJson<DirectusList<UpdateReference>>(
-      `${directusUrl}/items/field_updates?${updateParams}`,
+      `${directusUrl}/items/prayer_requests?${updateParams}`,
       token,
     ),
     getJson<DirectusList<NewsReference>>(
