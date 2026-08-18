@@ -6,6 +6,12 @@ import type {
   ResourceRecord,
   FaqRecord,
 } from "@/lib/directus/schema";
+import { isFreshPrayer } from "@/lib/prayer-freshness";
+
+/** Relative so the fixture keeps demonstrating both fresh and stale prayers regardless of when it runs. */
+function daysAgo(n: number): string {
+  return new Date(Date.now() - n * 24 * 60 * 60 * 1000).toISOString();
+}
 
 /**
  * Local fixtures shaped identically to the Directus schema (src/lib/directus/schema.ts).
@@ -296,6 +302,7 @@ const PRAYERS: PrayerRequestRecord[] = [
     body: "Miriam leaves next week to train twelve new literacy teachers. Pray for safe travel and for teachers eager to learn.",
     date: "June 2026",
     status: "published",
+    date_created: daysAgo(3),
   },
   {
     id: "u4",
@@ -305,6 +312,7 @@ const PRAYERS: PrayerRequestRecord[] = [
     body: "An outside consultant arrives this month to check the drafted books. Pray for clarity, patience, and unity with the translation team.",
     date: "May 2026",
     status: "published",
+    date_created: daysAgo(9),
   },
   {
     id: "u6",
@@ -314,6 +322,7 @@ const PRAYERS: PrayerRequestRecord[] = [
     body: "Joseph asks for prayer as the team finalises this year's accounts: for wisdom in stewardship and provision for next year's projects.",
     date: "April 2026",
     status: "published",
+    date_created: daysAgo(20),
   },
   {
     id: "u7",
@@ -324,6 +333,7 @@ const PRAYERS: PrayerRequestRecord[] = [
     date: "June 2026",
     status: "published",
     sensitive: true,
+    date_created: daysAgo(5),
   },
 ];
 
@@ -383,8 +393,14 @@ export async function getUpdatesForMissionary(missionaryId: string): Promise<New
   return NEWS.filter((n) => n.category === "update" && n.missionaryId === missionaryId && n.status === "published");
 }
 
+function byNewestCreated(a: PrayerRequestRecord, b: PrayerRequestRecord): number {
+  return (b.date_created ?? "").localeCompare(a.date_created ?? "");
+}
+
 export async function getPrayerRequests(): Promise<PrayerRequestRecord[]> {
-  return PRAYERS.filter((u) => u.status === "published");
+  return PRAYERS.filter((u) => u.status === "published" && isFreshPrayer(u.date_created)).sort(
+    byNewestCreated,
+  );
 }
 
 /**
@@ -393,8 +409,12 @@ export async function getPrayerRequests(): Promise<PrayerRequestRecord[]> {
  */
 export async function getPrayerRequestsForMissionary(missionaryId: string): Promise<PrayerRequestRecord[]> {
   return PRAYERS.filter(
-    (u) => u.missionaryId === missionaryId && u.status === "published" && !u.sensitive,
-  );
+    (u) =>
+      u.missionaryId === missionaryId &&
+      u.status === "published" &&
+      !u.sensitive &&
+      isFreshPrayer(u.date_created),
+  ).sort(byNewestCreated);
 }
 
 export async function getResources(): Promise<ResourceRecord[]> {

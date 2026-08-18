@@ -67,6 +67,31 @@ export const CONTENT_SNAPSHOT = {
       "image": null
     },
     {
+      "id": "2d607d56-1fc8-4867-81b8-ea245ffd95ae",
+      "status": "published",
+      "category": "update",
+      "slug": "living-the-good-news-through-everyday-life",
+      "title": "Living the Good News Through Everyday Life",
+      "excerpt": "Whether in a workplace or a children's Bible club, missionary Lilian Barah continues to share the love of Christ by helping people discover what it means to live out the Gospel every day.",
+      "body": [
+        "Whether in a workplace or a children's Bible club, missionary Lilian Barah continues to share the love of Christ by helping people discover what it means to live out the Gospel every day.",
+        "Lilian serves through discipleship, trauma healing, mentoring, and practical skills development. She has a special passion for children and young women, walking alongside them as they grow spiritually and practically through Bible study, sewing, and life-skills training.",
+        "After recently completing her school term, Lilian was warmly welcomed back by the women she mentors. They were eager for her to resume leading their Bible lessons — a reminder of the meaningful relationships she has built through consistent discipleship.",
+        "In her latest women's fellowship, Lilian taught on \"Living the Good News Through Empathy in Our Workplace.\" As the discussion unfolded, many women reflected honestly on their experiences at work and in business. The lesson challenged them to treat customers and colleagues with greater compassion, recognizing that their workplaces are also mission fields where they can demonstrate the love of Christ.",
+        "\"The women openly shared their experiences,\" Lilian says. \"Many appreciated the lesson and admitted there were times they had not treated others well. We desire to use our workplaces to share the Good News and reach those who may never hear it otherwise.\"",
+        "Lilian also continued her children's Bible Club, even though attendance was smaller because many children were away on holiday. Together they explored the theme \"God Created Me,\" based on Psalm 139:14: \"I praise You because I am fearfully and wonderfully made.\"",
+        "Through stories, questions, and lively discussions, the children learned that every person is created in God's image and deeply valued by Him. While none of the children made a decision to follow Christ during the session, Lilian remains encouraged by their growing understanding and continues to pray that the seeds planted in their hearts will bear lasting fruit.",
+        "As Lilian faithfully serves through teaching, mentoring, and discipleship, lives are being shaped one lesson, one conversation, and one child at a time."
+      ],
+      "author": "Lilian Barah",
+      "missionaryId": "barah",
+      "place": "Yaoundé, Cameroon",
+      "journey": null,
+      "tagLabel": null,
+      "date": "August 2026",
+      "image": "443ea694-a0bf-493c-9637-54eaf5dbffc1"
+    },
+    {
       "id": "28cdd589-80eb-4859-8ab2-0e98f40d9377",
       "status": "published",
       "category": "update",
@@ -85,20 +110,20 @@ export const CONTENT_SNAPSHOT = {
       "image": null
     },
     {
-      "id": "a094a33b-dd04-4b5f-8aec-12cd6634977b",
+      "id": "90fc8f0a-13a2-4d66-afc6-ac52384ea7fc",
       "status": "published",
       "category": "story",
-      "slug": "member",
-      "title": "Becoming a member: your first step into the work",
-      "excerpt": "From linguists to teachers, accountants to pilots — every calling has a place in Bible translation. Discover how to join.",
+      "slug": "church",
+      "title": "Partnering churches into the Great Commission",
+      "excerpt": "We walk with congregations to adopt language communities in prayer, giving and people — until every group has the Word.",
       "body": [
-        "From linguists to teachers, accountants to pilots — every calling has a place in Bible translation. Discover how to join."
+        "We walk with congregations to adopt language communities in prayer, giving and people — until every group has the Word."
       ],
-      "author": "Membership Team",
+      "author": "Partnership Team",
       "missionaryId": null,
-      "place": "Nairobi, Kenya",
-      "journey": "serve",
-      "tagLabel": "Serve",
+      "place": "Kenya",
+      "journey": "churches",
+      "tagLabel": "Church partnership",
       "date": "2026",
       "image": null
     },
@@ -122,21 +147,53 @@ export const CONTENT_SNAPSHOT = {
       "image": null
     },
     {
-      "id": "90fc8f0a-13a2-4d66-afc6-ac52384ea7fc",
+      "id": "a094a33b-dd04-4b5f-8aec-12cd6634977b",
       "status": "published",
       "category": "story",
-      "slug": "church",
-      "title": "Partnering churches into the Great Commission",
-      "excerpt": "We walk with congregations to adopt language communities in prayer, giving and people — until every group has the Word.",
+      "slug": "member",
+      "title": "Becoming a member: your first step into the work",
+      "excerpt": "From linguists to teachers, accountants to pilots — every calling has a place in Bible translation. Discover how to join.",
       "body": [
-        "We walk with congregations to adopt language communities in prayer, giving and people — until every group has the Word."
+        "From linguists to teachers, accountants to pilots — every calling has a place in Bible translation. Discover how to join."
       ],
-      "author": "Partnership Team",
+      "author": "Membership Team",
       "missionaryId": null,
-      "place": "Kenya",
-      "journey": "churches",
-      "tagLabel": "Church partnership",
+      "place": "Nairobi, Kenya",
+      "journey": "serve",
+      "tagLabel": "Serve",
       "date": "2026",
+      "image": null
+    },
+    {
+      "id": "6abe5ceb-a39c-477d-958f-3414d1e67d90",
+      "status": "published",
+      "category": "story",
+      "slug": "marakwet-community-receives-full-bible",
+      "title": "A Long-Awaited Gift: The Marakwet Community Receives the Full Bible",
+      "excerpt": "After more than four decades of translation work, the Marakwet community gathered at Tot Primary School on 1 August 2026 to dedicate the complete Bible in their own language — the answer to a prayer first voiced when only the New Testament arrived in 2009.",
+      "body": [
+        "For years, the Marakwet church celebrated one remarkable gift. The New Testament in the language of their hearts. It transformed worship, deepened discipleship, and opened God's Word to many in a deeply personal way. Yet even in celebration, one prayer remained.",
+        "\"We now have half a beehive,\" church leaders said after the New Testament was dedicated in 2009. \"Help us receive the whole beehive.\"",
+        "In Marakwet culture, a beehive is a symbol of abundance and sweetness. For the church, it became a picture of something even greater. The New Testament had nourished their faith, but they longed for the richness of the entire counsel of God.",
+        "That prayer was answered on 1 August 2026, when the Marakwet community gathered at Tot Primary School to dedicate the complete Bible in the Marakwet language. It was more than the launch of a book. It was the celebration of a journey marked by faith, perseverance, and God's faithfulness over more than four decades.",
+        "The journey began in 1983, when Bible Translation and Literacy (BTL) initiated language development, Bible translation, and literacy work among the Endo–Marakwet people, who number about 120,000.",
+        "Like many Bible translation journeys, the road was not without challenges. Periods of insecurity in the region disrupted the work, requiring the translation team to temporarily relocate to Eldoret while they waited for stability to return. Even then, the vision never faded. When peace was restored, the translators returned with renewed determination, continuing the work that would eventually place the Scriptures into the hands of their own community.",
+        "Their perseverance bore fruit in 2009 with the dedication of the Marakwet New Testament. Three years later, inspired by the church's heartfelt appeal for \"the whole beehive,\" work on translating the Old Testament began. Fourteen years later, that vision has become reality.",
+        "For Wycliffe Africa Director Emeritus Edwyn Kiptinness, this milestone is deeply personal.",
+        "Long before the Marakwet Bible became a reality, a young boy lay in a hospital bed recovering from a devastating leg injury. During the ten months he spent there, two missionaries placed a Nandi Bible in his hands. He read it eagerly, but because it was not in his own language, much of it remained difficult to understand.",
+        "That experience planted a conviction that would shape the rest of his life: every community deserves the opportunity to encounter God's Word in the language they understand best.",
+        "As a Marakwet speaker, Kiptinness became one of the strongest advocates for translating the Bible into Marakwet. The proposal initially faced resistance, with concerns that recognizing Marakwet separately might divide the wider Kalenjin community. Still, he remained convinced that making Scripture accessible in people's heart language was worth pursuing. His persistence helped pave the way for the project, and he even donated family land to support the translation work.",
+        "Today, the dedication of the complete Marakwet Bible stands as a testimony to what God can accomplish through faithful partnership, patient perseverance, and a community that refused to stop praying.",
+        "Somewhere in Marakwet today, a child will hear the story of creation in the language spoken at home. A family will read from Genesis together for the first time in their mother tongue. A pastor will preach from both the Old and New Testaments without leaving the language of the people before him.",
+        "That is the true significance of this milestone.",
+        "The Marakwet Bible is more than a completed translation. It is an answered prayer, a legacy of faithful partnership, and an invitation for generations to encounter God through His Word in the language of their hearts."
+      ],
+      "author": "Wycliffe Africa",
+      "missionaryId": null,
+      "place": "Marakwet, Kenya",
+      "journey": "stories",
+      "tagLabel": "Bible dedication",
+      "date": "1 August 2026",
       "image": null
     }
   ],
@@ -251,6 +308,61 @@ export const CONTENT_SNAPSHOT = {
   ],
   "prayerRequests": [
     {
+      "id": "86927681-304c-4262-89c6-1680d5d7ec7e",
+      "status": "published",
+      "type": "prayer",
+      "missionaryId": "barah",
+      "title": "Pray for Lilian's strength and wisdom",
+      "body": "Pray for God's strength, wisdom, and continued fruitfulness as Lilian serves through discipleship and mentoring.",
+      "date": "August 2026",
+      "sensitive": false,
+      "image": null
+    },
+    {
+      "id": "7c691d9e-7035-439a-921f-414a8516bc4d",
+      "status": "published",
+      "type": "prayer",
+      "missionaryId": "barah",
+      "title": "Pray for the children at Bible Club",
+      "body": "Pray for the children who attended Bible Club, that the truths they learned will take root and lead them to faith in Christ.",
+      "date": "August 2026",
+      "sensitive": false,
+      "image": null
+    },
+    {
+      "id": "6ab4b96d-5e0e-446f-b37b-df978b063461",
+      "status": "published",
+      "type": "prayer",
+      "missionaryId": "barah",
+      "title": "Pray for everyday opportunities to share Jesus' love",
+      "body": "Pray that their daily interactions will become opportunities to share the love of Jesus.",
+      "date": "August 2026",
+      "sensitive": false,
+      "image": null
+    },
+    {
+      "id": "e1270861-09de-4ec4-b57f-2d94673adee5",
+      "status": "published",
+      "type": "prayer",
+      "missionaryId": "barah",
+      "title": "Pray for women reflecting Christ in their workplaces",
+      "body": "Thank God for the women who are growing in their desire to reflect Christ in their workplaces.",
+      "date": "August 2026",
+      "sensitive": false,
+      "image": null
+    },
+    {
+      "id": "d81328ef-8b9d-4d7c-b0f0-5579c2836827",
+      "status": "published",
+      "type": "prayer",
+      "missionaryId": "kamau",
+      "title": "Pray for provision as we close the fiscal year",
+      "body": "Joseph asks for prayer as the team finalises this year's accounts — for wisdom in stewardship and provision for next year's projects.",
+      "date": "April 2026",
+      "sensitive": false,
+      "image": null
+    },
+    {
       "id": "8ec7ef52-00fb-4ddc-aa56-cdeea135cecc",
       "status": "published",
       "type": "prayer",
@@ -281,17 +393,6 @@ export const CONTENT_SNAPSHOT = {
       "body": "A new Scripture listening group has begun meeting quietly in a community where open Christian gatherings draw hostility. Pray for the group's protection, and for the Word to take root.",
       "date": "June 2026",
       "sensitive": true,
-      "image": null
-    },
-    {
-      "id": "d81328ef-8b9d-4d7c-b0f0-5579c2836827",
-      "status": "published",
-      "type": "prayer",
-      "missionaryId": "kamau",
-      "title": "Pray for provision as we close the fiscal year",
-      "body": "Joseph asks for prayer as the team finalises this year's accounts — for wisdom in stewardship and provision for next year's projects.",
-      "date": "April 2026",
-      "sensitive": false,
       "image": null
     }
   ],

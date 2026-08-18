@@ -50,11 +50,15 @@ async function main() {
       sort: "name",
       limit: "-1",
     })),
+    // date_created isn't in `fields` (never written to the snapshot) but
+    // filtering/sorting by it is still allowed — matches src/lib/prayer-freshness.ts's
+    // 14-day cutoff, applied here at generation time since the snapshot is static.
     prayerRequests: await get(items("prayer_requests", {
       "filter[status][_eq]": "published",
       "filter[type][_eq]": "prayer",
+      "filter[date_created][_gte]": new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
       fields: "id,status,type,missionaryId,title,body,date,sensitive,image",
-      sort: "-date",
+      sort: "-date_created",
       limit: "-1",
     })),
     resources: await get(items("resources", {
