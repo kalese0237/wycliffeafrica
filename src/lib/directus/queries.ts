@@ -1,6 +1,7 @@
 import { readItems } from "@directus/sdk";
 import { directus } from "./client";
 import type { PublicPrayerRequestRecord, PublicMissionaryRecord, PublicNewsRecord } from "./schema";
+import { prayerFreshnessCutoffIso } from "@/lib/prayer-freshness";
 
 /**
  * Live Directus queries. Function names and signatures mirror
@@ -192,8 +193,19 @@ export async function getPrayerRequests(): Promise<PublicPrayerRequestRecord[]> 
   return directus.request(
     readItems("prayer_requests", {
       fields: [...PRAYER_PUBLIC_FIELDS],
-      filter: { _and: [PUBLISHED, { type: { _eq: "prayer" } }] },
-      sort: ["-date"],
+      // date_created isn't in `fields` above (never returned to callers) but
+      // filtering/sorting by it is still allowed — see prayer-freshness.ts.
+      // Cast needed: the SDK's generated filter type doesn't offer range
+      // operators for a plain `string` field, though Directus itself
+      // supports `_gte` on timestamp columns fine.
+      filter: {
+        _and: [
+          PUBLISHED,
+          { type: { _eq: "prayer" } },
+          { date_created: { _gte: prayerFreshnessCutoffIso() } },
+        ],
+      } as Record<string, unknown>,
+      sort: ["-date_created"],
     }),
   );
 }
@@ -214,9 +226,10 @@ export async function getPrayerRequestsForMissionary(
           { type: { _eq: "prayer" } },
           { missionaryId: { _eq: missionaryId } },
           { sensitive: { _neq: true } },
+          { date_created: { _gte: prayerFreshnessCutoffIso() } },
         ],
-      },
-      sort: ["-date"],
+      } as Record<string, unknown>,
+      sort: ["-date_created"],
     }),
   );
 }
