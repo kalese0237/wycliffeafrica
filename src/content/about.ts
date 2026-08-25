@@ -137,13 +137,3 @@ export const HISTORY: HistoryMilestone[] = [
     pending: false,
   },
 ];
-
-/** Initials for the monogram tile that stands in for a missing portrait. */
-export function initials(name: string): string {
-  return name
-    .split(/\s+/)
-    .map((part) => part[0])
-    .join("")
-    .slice(0, 3)
-    .toUpperCase();
-}

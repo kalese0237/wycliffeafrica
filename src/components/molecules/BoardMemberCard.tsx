@@ -1,6 +1,7 @@
 import * as React from "react";
 import Image from "next/image";
-import { initials, type BoardMember } from "@/content/about";
+import { initialsOf } from "@/lib/initials";
+import type { BoardMember } from "@/content/about";
 
 export interface BoardMemberCardProps {
   member: BoardMember;
@@ -28,7 +29,7 @@ export function BoardMemberCard({ member }: BoardMemberCardProps) {
               aria-hidden
               className="absolute inset-0 flex items-center justify-center font-display text-2xl font-semibold text-terra-300"
             >
-              {initials(name)}
+              {initialsOf(name)}
             </span>
             <span className="absolute inset-x-0 bottom-2.5 text-center font-ui font-semibold text-[9px] uppercase tracking-caps text-faint">
               Portrait pending

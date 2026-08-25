@@ -1,6 +1,5 @@
 import * as React from "react";
-
-const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"] as const;
+import { ROMAN } from "./roman";
 
 export interface ArticleListProps {
   eyebrow: string;
