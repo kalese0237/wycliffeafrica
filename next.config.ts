@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Traces and copies only the runtime-needed node_modules into .next/standalone
+  // instead of running `next start` against the full install, cutting the
+  // server's baseline memory footprint.
+  output: "standalone",
   // pdfkit reads its font metrics (.afm) files from disk relative to its own
   // module directory at runtime — bundling it breaks that path resolution,
   // so it must run as a plain require() instead.
