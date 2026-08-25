@@ -11,8 +11,6 @@ import {
   getPortalUser,
   loginWithPassword,
   PortalInputError,
-  requestPasswordReset,
-  resetPassword,
   updateSubmission,
   uploadPortalImage,
 } from "./auth";
@@ -149,35 +147,3 @@ export async function deleteEntryAction(formData: FormData): Promise<void> {
   revalidatePath("/portal");
 }
 
-export async function requestPasswordResetAction(
-  _prev: ActionState,
-  formData: FormData,
-): Promise<ActionState> {
-  const email = String(formData.get("email") ?? "").trim().toLowerCase();
-  if (!email) return { error: "Please enter your email address." };
-  const siteUrl = process.env.SITE_URL ?? "http://localhost:3000";
-  try {
-    await requestPasswordReset(email, `${siteUrl.replace(/\/$/, "")}/portal/reset-password`);
-  } catch {
-    // Return the same response whether the account exists to prevent user enumeration.
-  }
-  return { success: "If that address has a portal account, a password-reset link is on its way." };
-}
-
-export async function resetPasswordAction(
-  _prev: ActionState,
-  formData: FormData,
-): Promise<ActionState> {
-  const token = String(formData.get("token") ?? "");
-  const password = String(formData.get("password") ?? "");
-  const confirmation = String(formData.get("confirmation") ?? "");
-  if (!token) return { error: "This password-reset link is invalid or has expired." };
-  if (password.length < 12) return { error: "Use a password of at least 12 characters." };
-  if (password !== confirmation) return { error: "The passwords do not match." };
-  try {
-    await resetPassword(token, password);
-  } catch {
-    return { error: "This password-reset link is invalid or has expired. Request a new one." };
-  }
-  return { success: "Password updated. You can now sign in." };
-}

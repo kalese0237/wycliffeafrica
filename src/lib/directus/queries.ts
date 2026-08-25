@@ -105,11 +105,19 @@ export async function getNews(): Promise<PublicNewsRecord[]> {
   return withCompatibleNewsFields(
     () =>
       directus.request(
-        readItems("news", { fields: [...NEWS_RICH_PUBLIC_FIELDS], filter: PUBLISHED, sort: ["-date"] }),
+        readItems("news", {
+          fields: [...NEWS_RICH_PUBLIC_FIELDS],
+          filter: PUBLISHED,
+          sort: ["-date_created"],
+        }),
       ),
     () =>
       directus.request(
-        readItems("news", { fields: [...NEWS_CORE_PUBLIC_FIELDS], filter: PUBLISHED, sort: ["-date"] }),
+        readItems("news", {
+          fields: [...NEWS_CORE_PUBLIC_FIELDS],
+          filter: PUBLISHED,
+          sort: ["-date_created"],
+        }),
       ),
   );
 }

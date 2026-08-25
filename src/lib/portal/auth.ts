@@ -445,17 +445,3 @@ export async function deleteSubmission(id: string, missionaryId: string, type: U
   await deletePortalImage(submission.image).catch(() => undefined);
   await deletePortalImage(submission.inlineImage).catch(() => undefined);
 }
-
-export async function requestPasswordReset(email: string, resetUrl: string): Promise<void> {
-  await directusFetch("/auth/password/request", {
-    method: "POST",
-    body: JSON.stringify({ email, reset_url: resetUrl }),
-  });
-}
-
-export async function resetPassword(token: string, password: string): Promise<void> {
-  await directusFetch("/auth/password/reset", {
-    method: "POST",
-    body: JSON.stringify({ token, password }),
-  });
-}
