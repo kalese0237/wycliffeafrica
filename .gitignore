@@ -46,3 +46,11 @@ next-env.d.ts
 /design-references/source-images/
 # Ignore DOS 8.3 aliases supplied alongside the canonical reference files.
 /design-references/outputs/*~*
+
+# Impeccable design-review working directory. Comps, screenshots, and hook
+# cache are local tooling scratch space (large binaries, regenerable) — kept
+# out of the repo. The surface docs that record the actual design decisions
+# are small and tracked normally.
+/.impeccable/mocks/
+/.impeccable/shots/
+/.impeccable/hook.cache.json

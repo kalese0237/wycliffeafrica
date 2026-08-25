@@ -12,7 +12,7 @@ import { cn } from "@/lib/cn";
 interface NavItem {
   label: string;
   href: string;
-  menu?: [string, string][];
+  menu?: [label: string, href: string, nested?: boolean][];
 }
 
 interface NavGroup {
@@ -25,10 +25,10 @@ const PRIMARY_NAV: NavItem[] = [
     label: "About Us",
     href: "/about",
     menu: [
-      ["Why Bible Translation", "/about"],
-      ["What We Believe", "/about"],
-      ["Our Core Values", "/about"],
-      ["Leadership", "/about"],
+      ["Why Bible Translation", "/about/why-bible-translation"],
+      ["What We Believe", "/about/what-we-believe"],
+      ["Our Core Values", "/about/what-we-believe#core-values", true],
+      ["Leadership", "/about/leadership"],
     ],
   },
   {
@@ -248,11 +248,14 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
                     </Link>
                     {item.menu && (
                       <div className="invisible absolute left-0 top-full z-10 min-w-[240px] translate-y-1 rounded-md border border-hair bg-card py-2 opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
-                        {item.menu.map(([label, href]) => (
+                        {item.menu.map(([label, href, nested]) => (
                           <Link
                             key={label}
                             href={href}
-                            className="block px-4 py-2 font-ui text-sm text-body hover:bg-sunk hover:text-green-700"
+                            className={cn(
+                              "block py-2 font-ui text-sm text-body hover:bg-sunk hover:text-green-700",
+                              nested ? "pl-8 pr-4 text-muted" : "px-4",
+                            )}
                           >
                             {label}
                           </Link>
@@ -375,13 +378,14 @@ export function SiteHeader({ transparent = false }: SiteHeaderProps) {
               </Link>
               {item.menu && (
                 <ul className="space-y-5">
-                  {item.menu.map(([label, href]) => (
+                  {item.menu.map(([label, href, nested]) => (
                     <li key={`${item.label}-${label}`}>
                       <Link
                         href={href}
                         onClick={() => setDrawerOpen(false)}
                         className={cn(
-                          "block max-w-[16ch] font-ui text-[22px] leading-snug tracking-wide text-body transition-colors hover:text-green-700",
+                          "block max-w-[16ch] font-ui leading-snug tracking-wide text-body transition-colors hover:text-green-700",
+                          nested ? "pl-4 text-md text-muted" : "text-[22px]",
                           isActivePath(pathname, href) && "text-green-700",
                         )}
                       >

@@ -1,3 +1,4 @@
+export * from "./about";
 export * from "./DonationCTA";
 export * from "./ImpactStats";
 export * from "./PageHero";

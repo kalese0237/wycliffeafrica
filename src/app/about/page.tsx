@@ -67,7 +67,12 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
-          <Button href="/faqs" variant="secondary" iconRight={<ArrowRight size={16} />} className="mt-8">
+          <Button
+            href="/about/what-we-believe"
+            variant="secondary"
+            iconRight={<ArrowRight size={16} />}
+            className="mt-8"
+          >
             Read our statement of faith
           </Button>
         </div>

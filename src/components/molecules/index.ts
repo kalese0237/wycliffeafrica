@@ -1,3 +1,4 @@
+export * from "./BoardMemberCard";
 export * from "./FormField";
 export * from "./EditorialImage";
 export * from "./MissionaryCard";
