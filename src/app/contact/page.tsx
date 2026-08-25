@@ -6,7 +6,7 @@ import { ContactForm } from "@/components/organisms/ContactForm";
 const DETAILS: { icon: LucideIcon; label: string; value: string }[] = [
   { icon: MapPin, label: "Visit us", value: "Masaba Road, Nairobi – Kenya" },
   { icon: Mail, label: "Email", value: "info@wycliffeafrica.org" },
-  { icon: Phone, label: "Call", value: "+254 722 703 131 / +254 722 209606" },
+  { icon: Phone, label: "Call", value: "+254 701 345769 / +254 753 522370" },
   { icon: Clock, label: "Hours", value: "Mon to Fri – 8:00am to 5:00pm" },
 ];
 

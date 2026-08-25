@@ -31,7 +31,7 @@ export function TopBar() {
         <span className="hidden h-4 w-px bg-white/20 sm:block" />
         <span className="flex items-center gap-2">
           <Phone size={14} className="text-green-300" />
-          +254 722 703 131 / +254 722 209606
+          +254 701 345769 / +254 753 522370
         </span>
       </div>
     </div>

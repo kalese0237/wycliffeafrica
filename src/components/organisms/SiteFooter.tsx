@@ -18,7 +18,7 @@ const involvedLinks: [string, string][] = [
 const contactRows: { icon: LucideIcon; text: string }[] = [
   { icon: MapPin, text: "Masaba Road, Nairobi – Kenya" },
   { icon: Mail, text: "info@wycliffeafrica.org" },
-  { icon: Phone, text: "+254 722 703 131 / +254 722 209606" },
+  { icon: Phone, text: "+254 701 345769 / +254 753 522370" },
   { icon: Globe, text: "www.wycliffeafrica.org" },
   { icon: Clock, text: "Mon to Fri – 8:00am to 5:00pm" },
 ];
