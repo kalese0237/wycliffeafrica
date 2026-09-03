@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-01T00:00:00Z",
+  "title": "Design System: Wycliffe Africa",
+  "extensions": {
+    "colorMeta": {
+      "terra-500": { "role": "primary", "displayName": "Terracotta", "canonical": "#b5471b", "tonalRamp": ["#2a140a", "#42200e", "#8c3313", "#a23d16", "#b5471b", "#d98a5c", "#f3d9c4", "#fbeee3"] },
+      "terra-900": { "role": "primary", "displayName": "Burnt Umber", "canonical": "#2a140a", "tonalRamp": ["#160a05", "#2a140a", "#42200e", "#5e2d12", "#8c3313", "#b5471b", "#d98a5c", "#f3d9c4"] },
+      "green-700": { "role": "secondary", "displayName": "Logo Green", "canonical": "#1e7d08", "tonalRamp": ["#001e09", "#0f4a05", "#1e7d08", "#269a0b", "#33b00f", "#5cc23f", "#8dd674", "#e6f5de"] },
+      "green-500": { "role": "secondary", "displayName": "Spark Green", "canonical": "#33b00f", "tonalRamp": ["#001e09", "#0f4a05", "#1e7d08", "#269a0b", "#33b00f", "#5cc23f", "#8dd674", "#c1e8b3"] },
+      "green-900": { "role": "secondary", "displayName": "Deep Forest", "canonical": "#001e09", "tonalRamp": ["#001205", "#001e09", "#0f4a05", "#1e7d08", "#269a0b", "#33b00f", "#8dd674", "#e6f5de"] },
+      "cream": { "role": "neutral", "displayName": "Warm Cream", "canonical": "#fdfbf8", "tonalRamp": ["#17140f", "#3a332b", "#514940", "#9e8470", "#eadfcf", "#f3e9d6", "#fdf7ec", "#fdfbf8"] },
+      "paper-1": { "role": "neutral", "displayName": "Sunk Paper", "canonical": "#fdf7ec", "tonalRamp": ["#17140f", "#3a332b", "#514940", "#9e8470", "#eadfcf", "#f3e9d6", "#fdf7ec", "#ffffff"] },
+      "paper-3": { "role": "neutral", "displayName": "Hairline Paper", "canonical": "#eadfcf", "tonalRamp": ["#17140f", "#3a332b", "#514940", "#9e8470", "#eadfcf", "#f3e9d6", "#fdf7ec", "#fdfbf8"] },
+      "ink-0": { "role": "neutral", "displayName": "Document Ink", "canonical": "#17140f", "tonalRamp": ["#0b0908", "#17140f", "#3a332b", "#514940", "#9e8470", "#eadfcf", "#f3e9d6", "#fdfbf8"] },
+      "ink-3": { "role": "neutral", "displayName": "Faint Clay Ink", "canonical": "#9e8470", "tonalRamp": ["#17140f", "#3a332b", "#514940", "#9e8470", "#c0ab99", "#eadfcf", "#f3e9d6", "#fdfbf8"] },
+      "tag-serve": { "role": "tertiary", "displayName": "Serve Indigo", "canonical": "#1f2350", "tonalRamp": ["#0b0c26", "#1f2350", "#343a78", "#4a4fa0", "#7a7ec4", "#adb0dd", "#e2e4ef", "#f3f4f9"] },
+      "tag-stories": { "role": "tertiary", "displayName": "Stories Gold", "canonical": "#b0761a", "tonalRamp": ["#3d2905", "#6b470d", "#8e5f14", "#b0761a", "#d2a153", "#e5c48f", "#f6ecd6", "#fdf8ee"] },
+      "tag-churches": { "role": "tertiary", "displayName": "Churches Teal", "canonical": "#0f6f7d", "tonalRamp": ["#03272c", "#074750", "#0f6f7d", "#1795a7", "#4fb9c8", "#95d6e0", "#d9edf0", "#eff8fa"] },
+      "danger": { "role": "neutral", "displayName": "Alert Red", "canonical": "#c2372c", "tonalRamp": ["#3a100c", "#5c1a14", "#8f271f", "#c2372c", "#d96b62", "#eba49e", "#f7dcd9", "#fdf0ee"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Page H1 inside a masthead or photo hero; 76px Fraunces with the tail word in italic, .wonk axes engaged." },
+      "headline": { "displayName": "Section Head", "purpose": "Section headings set against a 2px rule." },
+      "creed": { "displayName": "Creed", "purpose": "Doctrinal statements only. Display face at reading scale because these are read word by word." },
+      "title": { "displayName": "Entry Title", "purpose": "Country divisions, institution names, board names, core-value titles." },
+      "standfirst": { "displayName": "Standfirst", "purpose": "The paragraph beneath a display headline or opening a list." },
+      "lead": { "displayName": "Lead", "purpose": "Article statements and long-form supporting prose." },
+      "body": { "displayName": "Body", "purpose": "Entry descriptions, notes, captions. Source Sans 3 at the ordinary 16px web floor." },
+      "label": { "displayName": "Division Label", "purpose": "Uppercase 12px micro-labels: Article N, Contents, masthead rubric, host folio, counts." },
+      "scripture": { "displayName": "Scripture", "purpose": "Gentium Book Plus. Scripture quotation only — carries the extended-Latin diacritics African orthographies need." },
+      "code": { "displayName": "Code", "purpose": "JetBrains Mono. Paybill numbers and transaction references only." }
+    },
+    "shadows": [
+      { "name": "resting", "value": "0 1px 2px rgba(60, 35, 10, 0.07)", "purpose": "Buttons and small tiles at rest. Separates object from paper and no more." },
+      { "name": "object", "value": "0 3px 12px rgba(60, 35, 10, 0.1)", "purpose": "Image frames and photo placeholders — anything standing for a physical print." },
+      { "name": "floating", "value": "0 12px 34px rgba(60, 35, 10, 0.15)", "purpose": "Only for things that leave the flow: the header navigation dropdown." },
+      { "name": "pressed", "value": "inset 0 1px 2px rgba(60, 35, 10, 0.1)", "purpose": "Active state of a button." },
+      { "name": "focus-glow", "value": "0 0 0 3px var(--color-spark-tint)", "purpose": "Input focus-within only, paired with a spark-green border." }
+    ],
+    "motion": [
+      { "name": "dur-fast", "value": "130ms", "purpose": "Button and input state transitions." },
+      { "name": "dur-base", "value": "220ms", "purpose": "Dropdown reveal and general interface transitions." },
+      { "name": "dur-slow", "value": "380ms", "purpose": "Fade-in entrances." },
+      { "name": "ease-standard", "value": "cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Default easing for state transitions." },
+      { "name": "ease-out", "value": "cubic-bezier(0, 0, 0.2, 1)", "purpose": "Entrance easing for the fade-in keyframe." },
+      { "name": "ease-rail", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The 300ms slide of the contents-rail position marker." },
+      { "name": "rule-draw", "value": "animation-timeline: view(); animation-range: entry 10% entry 60%; clip-path inset(0 100% 0 0) to inset(0)", "purpose": "The one authored scroll moment: a division rule draws in from the left. Ships fully drawn; only animates where scroll-driven animation and motion are both available." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" },
+      { "name": "container-max", "value": "1200px" },
+      { "name": "container-prose", "value": "68ch" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The institutional action — terracotta fill, softly cornered, warm resting shadow.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Preliminary questionnaire</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--color-terra-500, #b5471b); background: var(--color-terra-500, #b5471b); color: #fff; font-family: var(--font-source-sans, 'Source Sans 3', system-ui, sans-serif); font-weight: 600; font-size: 16px; padding: 10px 22px; border-radius: 6px; text-decoration: none; box-shadow: 0 1px 2px rgba(60,35,10,0.07); transition: background-color 130ms cubic-bezier(0.4,0,0.2,1), box-shadow 130ms cubic-bezier(0.4,0,0.2,1); } .ds-btn-primary:hover { background: var(--color-terra-700, #8c3313); border-color: var(--color-terra-700, #8c3313); } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-green-400, #5cc23f); outline-offset: 2px; } .ds-btn-primary:active { box-shadow: inset 0 1px 2px rgba(60,35,10,0.1); }"
+    },
+    {
+      "name": "Accent Button",
+      "kind": "button",
+      "refersTo": "button-accent",
+      "description": "The forward action in green — used for the primary action inside the closing CTA band.",
+      "html": "<a class=\"ds-btn-accent\" href=\"#\">Give today</a>",
+      "css": ".ds-btn-accent { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--color-green-700, #1e7d08); background: var(--color-green-700, #1e7d08); color: #fff; font-family: var(--font-source-sans, 'Source Sans 3', system-ui, sans-serif); font-weight: 600; font-size: 16px; padding: 10px 22px; border-radius: 6px; text-decoration: none; box-shadow: 0 1px 2px rgba(60,35,10,0.07); transition: background-color 130ms cubic-bezier(0.4,0,0.2,1); } .ds-btn-accent:hover { background: #155f05; border-color: #155f05; } .ds-btn-accent:focus-visible { outline: 2px solid var(--color-green-400, #5cc23f); outline-offset: 2px; } .ds-btn-accent:active { box-shadow: inset 0 1px 2px rgba(60,35,10,0.1); }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "The quiet second action. Transparent with terracotta text and no shadow; overridden to white on dark ground.",
+      "html": "<a class=\"ds-btn-ghost\" href=\"#\">Contact us</a>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; justify-content: center; border: 1px solid transparent; background: transparent; color: var(--color-terra-500, #b5471b); font-family: var(--font-source-sans, 'Source Sans 3', system-ui, sans-serif); font-weight: 600; font-size: 16px; padding: 10px 22px; border-radius: 6px; text-decoration: none; transition: background-color 130ms cubic-bezier(0.4,0,0.2,1); } .ds-btn-ghost:hover { background: var(--color-paper-1, #fdf7ec); } .ds-btn-ghost:focus-visible { outline: 2px solid var(--color-green-400, #5cc23f); outline-offset: 2px; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input-text",
+      "description": "Text field on warm paper — hairline border, green focus ring.",
+      "html": "<div class=\"ds-input\"><input placeholder=\"you@example.com\" /></div>",
+      "css": ".ds-input { display: flex; align-items: center; gap: 8px; background: #fff; border: 1px solid var(--color-paper-3, #eadfcf); border-radius: 6px; padding: 10px 14px; transition: border-color 130ms cubic-bezier(0.4,0,0.2,1), box-shadow 130ms cubic-bezier(0.4,0,0.2,1); } .ds-input:focus-within { border-color: var(--color-green-500, #33b00f); box-shadow: 0 0 0 3px var(--color-green-100, #e6f5de); } .ds-input input { flex: 1; min-width: 0; border: none; background: transparent; outline: none; font-family: var(--font-source-sans, 'Source Sans 3', system-ui, sans-serif); font-size: 16px; color: #000; } .ds-input input::placeholder { color: var(--color-ink-3, #9e8470); }"
+    },
+    {
+      "name": "Journey Tag",
+      "kind": "chip",
+      "refersTo": "tag-journey",
+      "description": "Pill colour-coding one of the six visitor journeys. Audience labels only.",
+      "html": "<span class=\"ds-tag\"><span class=\"ds-tag-dot\"></span>Give</span>",
+      "css": ".ds-tag { display: inline-flex; align-items: center; gap: 7px; border-radius: 999px; padding: 5px 13px; font-family: var(--font-source-sans, 'Source Sans 3', system-ui, sans-serif); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; background: var(--color-green-100, #e6f5de); color: var(--color-tag-give, #1e7d08); } .ds-tag-dot { width: 6px; height: 6px; border-radius: 999px; background: var(--color-tag-give, #1e7d08); }"
+    },
+    {
+      "name": "Masthead",
+      "kind": "custom",
+      "refersTo": "masthead-band",
+      "description": "The non-photographic page opening: terra-900 ground with faint vertical column rules, a division label ruled against the rubric, and a 76px Fraunces headline with an italic tail.",
+      "html": "<section class=\"ds-masthead\"><div class=\"ds-masthead-rule\"><span class=\"ds-masthead-hair\"></span><span class=\"ds-masthead-rubric\">SIL Partner Schools in Africa</span></div><h1 class=\"ds-masthead-h1\">Where to get <em>training</em></h1><p class=\"ds-masthead-standfirst\">Translation work is learned before it is done. These are the SIL partner schools on the continent.</p></section>",
+      "css": ".ds-masthead { position: relative; overflow: hidden; background: var(--color-terra-900, #2a140a); padding: 64px 48px; background-image: repeating-linear-gradient(90deg, rgba(243,217,196,0.09) 0 1px, transparent 1px 92px); } .ds-masthead-rule { display: flex; align-items: center; gap: 20px; margin-bottom: 32px; } .ds-masthead-hair { flex: 1; height: 1px; background: rgba(243,217,196,0.3); } .ds-masthead-rubric { font-family: var(--font-source-sans, 'Source Sans 3', system-ui, sans-serif); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-terra-300, #d98a5c); } .ds-masthead-h1 { margin: 0; max-width: 15ch; font-family: var(--font-fraunces, Fraunces, Georgia, serif); font-variation-settings: 'SOFT' 40, 'WONK' 1; font-weight: 400; font-size: clamp(48px, 7vw, 76px); line-height: 1.05; letter-spacing: -0.015em; color: #fff; text-wrap: balance; } .ds-masthead-h1 em { font-style: italic; color: var(--color-terra-300, #d98a5c); } .ds-masthead-standfirst { margin: 24px 0 0; max-width: 56ch; font-family: var(--font-source-sans, 'Source Sans 3', system-ui, sans-serif); font-size: 20px; line-height: 1.6; color: var(--color-terra-100, #f3d9c4); }"
+    },
+    {
+      "name": "Index Row",
+      "kind": "custom",
+      "refersTo": "index-row",
+      "description": "The unit of every ruled series: hanging numeral, title in the display face, description beneath, host folio at the far right. No card, no shadow, no hover fill.",
+      "html": "<ol class=\"ds-index\"><li class=\"ds-index-row\"><a class=\"ds-index-link\" href=\"#\"><span class=\"ds-index-num\">1</span><span class=\"ds-index-body\"><span class=\"ds-index-main\"><span class=\"ds-index-title\">Africa International University</span><span class=\"ds-index-desc\">MA in Translation Studies</span></span><span class=\"ds-index-folio\">aiu.ac.ke<svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7 17 17 7\"/><path d=\"M7 7h10v10\"/></svg></span></span></a></li></ol>",
+      "css": ".ds-index { list-style: none; margin: 0; padding: 0; } .ds-index-row { border-bottom: 1px solid var(--color-paper-3, #eadfcf); } .ds-index-link { display: grid; grid-template-columns: 52px 1fr; column-gap: 16px; padding: 24px 0; text-decoration: none; } .ds-index-link:focus-visible { outline: 2px solid var(--color-green-400, #5cc23f); outline-offset: 4px; } .ds-index-num { padding-top: 6px; font-family: var(--font-fraunces, Fraunces, Georgia, serif); font-size: 14px; color: var(--color-terra-500, #b5471b); } .ds-index-body { display: flex; align-items: baseline; justify-content: space-between; gap: 40px; } .ds-index-main { max-width: 58ch; } .ds-index-title { display: block; font-family: var(--font-fraunces, Fraunces, Georgia, serif); font-size: 20px; line-height: 1.2; color: var(--color-ink-0, #17140f); text-underline-offset: 4px; } .ds-index-link:hover .ds-index-title { text-decoration: underline; } .ds-index-desc { display: block; margin-top: 6px; font-family: var(--font-source-sans, 'Source Sans 3', system-ui, sans-serif); font-size: 16px; line-height: 1.6; color: var(--color-ink-2, #514940); } .ds-index-folio { display: inline-flex; align-items: center; gap: 6px; flex: none; font-family: var(--font-source-sans, 'Source Sans 3', system-ui, sans-serif); font-size: 12px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-ink-2, #514940); } .ds-index-link:hover .ds-index-folio { color: var(--color-terra-500, #b5471b); } .ds-index-folio svg { transition: transform 130ms cubic-bezier(0.4,0,0.2,1); } .ds-index-link:hover .ds-index-folio svg { transform: translate(2px, -2px); }"
+    },
+    {
+      "name": "Section Head",
+      "kind": "custom",
+      "refersTo": "headline",
+      "description": "A division label, a Fraunces heading, and an italic rubric opposite — all sitting on the 2px section rule.",
+      "html": "<div class=\"ds-sechead\"><div><p class=\"ds-sechead-label\">Article Four</p><h2 class=\"ds-sechead-title\">Our core values</h2></div><p class=\"ds-sechead-rubric\">Five commitments we work by</p></div>",
+      "css": ".ds-sechead { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; border-bottom: 2px solid var(--color-ink-0, #17140f); padding-bottom: 20px; } .ds-sechead-label { margin: 0 0 14px; font-family: var(--font-source-sans, 'Source Sans 3', system-ui, sans-serif); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-terra-800, #42200e); } .ds-sechead-title { margin: 0; font-family: var(--font-fraunces, Fraunces, Georgia, serif); font-weight: 400; font-size: 48px; line-height: 1.05; color: var(--color-ink-0, #17140f); } .ds-sechead-rubric { flex: none; margin: 0; font-family: var(--font-fraunces, Fraunces, Georgia, serif); font-style: italic; font-size: 18px; color: var(--color-ink-2, #514940); }"
+    },
+    {
+      "name": "Pending Note",
+      "kind": "custom",
+      "refersTo": "badge-status",
+      "description": "The designed marker for content that has not been supplied. Dashed terra border on sunk paper with an uppercase chip.",
+      "html": "<p class=\"ds-pending\"><span class=\"ds-pending-chip\">Placeholder</span><span>Initials stand in until portraits arrive, and roles are awaiting confirmation. Nothing here is invented.</span></p>",
+      "css": ".ds-pending { display: flex; gap: 14px; max-width: 74ch; margin: 0; border: 1px dashed var(--color-terra-300, #d98a5c); border-radius: 3px; background: var(--color-paper-1, #fdf7ec); padding: 16px 20px; font-family: var(--font-source-sans, 'Source Sans 3', system-ui, sans-serif); font-size: 14px; line-height: 1.6; color: var(--color-ink-2, #514940); } .ds-pending-chip { flex: none; padding-top: 2px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-terra-700, #8c3313); }"
+    },
+    {
+      "name": "Nav Dropdown",
+      "kind": "nav",
+      "refersTo": "button-ghost",
+      "description": "Header navigation item with its hover-revealed panel: 6px corner, hairline border, floating warm shadow.",
+      "html": "<div class=\"ds-nav\"><button class=\"ds-nav-item\">About Us</button><div class=\"ds-nav-panel\"><a href=\"#\">Why Bible Translation</a><a href=\"#\">What We Believe</a><a href=\"#\">Leadership</a></div></div>",
+      "css": ".ds-nav { position: relative; display: inline-block; padding-bottom: 8px; } .ds-nav-item { border: none; background: transparent; font-family: var(--font-source-sans, 'Source Sans 3', system-ui, sans-serif); font-size: 16px; font-weight: 600; color: var(--color-ink-0, #17140f); cursor: pointer; padding: 8px 12px; border-radius: 6px; transition: color 130ms cubic-bezier(0.4,0,0.2,1); } .ds-nav:hover .ds-nav-item { color: var(--color-terra-500, #b5471b); } .ds-nav-panel { position: absolute; left: 0; top: 100%; min-width: 240px; background: #fff; border: 1px solid var(--color-paper-3, #eadfcf); border-radius: 6px; padding: 8px 0; box-shadow: 0 12px 34px rgba(60,35,10,0.15); opacity: 0; visibility: hidden; transform: translateY(4px); transition: all 200ms cubic-bezier(0.4,0,0.2,1); } .ds-nav:hover .ds-nav-panel, .ds-nav:focus-within .ds-nav-panel { opacity: 1; visibility: visible; transform: translateY(0); } .ds-nav-panel a { display: block; padding: 8px 20px; font-family: var(--font-source-sans, 'Source Sans 3', system-ui, sans-serif); font-size: 15px; color: var(--color-ink-1, #3a332b); text-decoration: none; } .ds-nav-panel a:hover { background: var(--color-paper-1, #fdf7ec); color: var(--color-terra-500, #b5471b); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Bound Document",
+    "overview": "Wycliffe Africa reads as a printed thing that happens to be on the web: a confession, a prospectus, a roster. The ground is warm cream, the openings are dark terracotta bands, and the content beneath them is set as ruled series — hanging numerals in their own column, a 2px rule under the section head, 1px hairlines between entries — rather than as tiles. Readers arriving here are vetting: a pastor weighing doctrine, a prospective missionary weighing a school, a donor weighing governance. The document grammar is the argument that these words are owned and can be read closely, printed, forwarded.\n\nThe world is flat where it is editorial and lifted only where something is genuinely an object. Long-form surfaces carry no shadow and no card at all; elevation is reserved for the small collectible units — a board portrait tile, a header dropdown, an image frame. Photography is used sparingly and always full-bleed under a heavy terra-900 scrim, never as a decorative inset beside prose. Where content has not been supplied, the build ships a visibly marked placeholder rather than a plausible-looking fact; that honesty is part of the visual system, not a temporary state.\n\nAnti-references confirmed by the build: the mission-statement-over-tiles arrangement, the directory of equal-sized logo cards, doctrine buried in an accordion.",
+    "keyCharacteristics": [
+      "Warm cream ground (#fdfbf8) under dark terracotta opening bands (#2a140a)",
+      "Fraunces for everything that is read as a document; Source Sans 3 for everything that is read as interface",
+      "Hanging Roman numerals in a fixed 44/70px (or 28/52px) column so entries share a left edge",
+      "Two line weights only: a 2px section rule and a 1px hairline",
+      "No cards and no elevation on editorial lists; radii are small (3-6px) where they exist at all",
+      "Placeholders are designed, labelled and impossible to mistake for content"
+    ],
+    "rules": [
+      { "name": "The Terra-Above, Cream-Below Rule", "body": "A page opens on terracotta and reads on cream. Dark ground belongs to mastheads, photographic heroes and the closing CTA band; the body of a page is never inverted mid-scroll.", "section": "colors" },
+      { "name": "The One Green Rule", "body": "Green is action, growth and translation progress — buttons that move a reader forward, links, the accent rule, the focus ring. Green is never a heading, a background for prose, or a decorative fill.", "section": "colors" },
+      { "name": "The Alias Rule", "body": "Components reference the semantic aliases (--color-primary, --color-hair, --color-body, --color-sunk), not the ramp steps, wherever an alias exists. Re-theming means repointing aliases, never hand-picking a new hex.", "section": "colors" },
+      { "name": "The Wonk-At-Hero-Only Rule", "body": "Fraunces' SOFT 40 / WONK 1 axes read as intent above ~40px and as noise below it. .wonk is permitted on H1s, on the creed title, and on a country division head; nowhere smaller.", "section": "typography" },
+      { "name": "The Reading-Scale Rule", "body": "Text that is weighed gets a display face at reading size (25px creed); text that is understood once gets the body face (16-18px article list). The ramp is what tells the reader which kind of text they are looking at.", "section": "typography" },
+      { "name": "The Face-Per-Job Rule", "body": "Gentium appears only where Scripture is quoted. JetBrains Mono appears only on codes and reference numbers. An ordinal is neither — numerals in a list are Fraunces.", "section": "typography" },
+      { "name": "The Shared Left Edge Rule", "body": "In any numbered series, the numeral hangs in its own fixed column so every entry title starts on the same left edge. The list scans as a series; a numeral inline with the title breaks it.", "section": "layout" },
+      { "name": "The Measure Rule", "body": "No prose block runs unbounded. Standfirsts cap at 50-60ch, article statements at 66ch, creed statements at 34ch, notes at 68-74ch, and display headlines at 15-18ch with text-balance.", "section": "layout" },
+      { "name": "The No-Card List Rule", "body": "A list of things is ruled rows on the page ground. It is never a grid of shadowed cards. This is the single most load-bearing rule in the system: the About family and the training index both exist because the card grid was refused.", "section": "elevation" },
+      { "name": "The Warm Shadow Rule", "body": "Every shadow is cast in warm brown (rgba(60, 35, 10, …)), never neutral black. Shadows are diffuse and directly below; there is no offset or hard-edged shadow anywhere in this world.", "section": "elevation" },
+      { "name": "The Two Weights Rule", "body": "Rules are 1px or 2px. 1px separates entries; 2px heads a section. There is no third weight, and no rule is ever dotted or coloured outside the hair / ink-0 / terra-900 / terra-500 set.", "section": "shapes" },
+      { "name": "The Dashed-Means-Pending Rule", "body": "A dashed border appears only on a PendingNote. Never use dashes decoratively.", "section": "shapes" },
+      { "name": "The Never-Hidden-Waiting Rule", "body": "No content is hidden at rest waiting for an animation to reveal it. Every animated element is complete on first paint; motion only moves what is already there.", "section": "components" }
+    ],
+    "dos": [
+      "Do open a page on a terra-900 band and read it on cream. The masthead or photo hero is the only inverted region above the closing CTA.",
+      "Do set numbered series with the numeral hanging in its own column (44/70px, or 28/52px on tighter rows) so titles share a left edge.",
+      "Do use exactly two rule weights: 1px --color-hair between entries, 2px under a section head.",
+      "Do reference semantic aliases (--color-primary, --color-hair, --color-sunk) and the numeric spacing utilities; never hand-pick a hex or a px.",
+      "Do cap every prose block by measure — 34ch creed, 50-60ch standfirst, 66-68ch article and note.",
+      "Do ship a visibly marked placeholder when content is unsupplied: dashed terra border, uppercase chip, plain statement of what is missing. Nothing unverified may look like fact.",
+      "Do keep motion to one authored moment per page and make it degrade to the finished state."
+    ],
+    "donts": [
+      "Don't render a list of things as a grid of shadowed cards. Ruled rows on the page ground are the house form for a series.",
+      "Don't put a shadow on an editorial surface. Shadows belong to discrete objects (portrait tiles, image frames, dropdowns, buttons), and only in the warm brown vocabulary — no offset shadows, no neutral black.",
+      "Don't engage .wonk below ~40px, or set a heading in the body face.",
+      "Don't use Gentium for anything but Scripture, or JetBrains Mono for anything but codes and reference numbers. A list ordinal is Fraunces.",
+      "Don't use green as a heading colour, a prose background, or a decorative fill. Green is action, links and focus.",
+      "Don't use a dashed border for anything other than a pending-content note.",
+      "Don't place an image beside body prose as decoration; photography is full-bleed under a terra scrim or it is not on the page."
+    ]
+  }
+}

@@ -1,6 +1,7 @@
 import * as React from "react";
 import Image from "next/image";
 import { Button } from "@/components/atoms/Button";
+import { cn } from "@/lib/cn";
 
 export interface AboutCTAProps {
   title: string;
@@ -9,6 +10,8 @@ export interface AboutCTAProps {
   secondary: { label: string; href: string };
   image?: string;
   imageAlt?: string;
+  /** Drops the top margin where the band follows a section that already owns its own ground. */
+  flush?: boolean;
 }
 
 /**
@@ -24,9 +27,13 @@ export function AboutCTA({
   secondary,
   image = "/Missionaries/wycliffe-africa-team.webp",
   imageAlt = "The Wycliffe Africa team gathered together",
+  flush = false,
 }: AboutCTAProps) {
   return (
-    <section className="relative mt-20 flex min-h-[300px] items-center overflow-hidden bg-terra-900 sm:mt-24">
+    <section className={cn(
+        "relative flex min-h-[300px] items-center overflow-hidden bg-terra-900",
+        !flush && "mt-20 sm:mt-24",
+      )}>
       {/* Eager, not lazy: this band is full-bleed, and a lazy image leaves the whole close painted
           flat terra until it arrives. The asset is one small webp already shared across the family. */}
       <Image

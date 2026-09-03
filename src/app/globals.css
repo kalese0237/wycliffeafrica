@@ -227,3 +227,25 @@ body {
     scroll-behavior: auto;
   }
 }
+
+/* Division rules on the training index draw across as the reader scrolls each country into view.
+   The rule is fully drawn by default and only animates where scroll-driven animation and motion are
+   both available, so nothing is ever hidden waiting for a timeline that never runs. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes rule-draw {
+      from {
+        clip-path: inset(0 100% 0 0);
+      }
+      to {
+        clip-path: inset(0 0 0 0);
+      }
+    }
+
+    .rule-draw {
+      animation: rule-draw linear both;
+      animation-timeline: view();
+      animation-range: entry 10% entry 60%;
+    }
+  }
+}
