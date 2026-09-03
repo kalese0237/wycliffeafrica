@@ -1,8 +1,8 @@
 import * as React from "react";
 
 export interface AboutMastheadProps {
-  /** Left side of the rule, e.g. "About Us · II". */
-  eyebrow: string;
+  /** Left side of the rule, e.g. "About Us · II" — omit where no division label is carried. */
+  eyebrow?: string;
   /** Right side of the rule, e.g. "Statement of Faith". */
   rubric: string;
   title: string;
@@ -24,7 +24,9 @@ export function AboutMasthead({ eyebrow, rubric, title, titleAccent, standfirst 
       />
       <div className="relative z-10 mx-auto max-w-(--container-max) px-5 py-16 sm:px-12 sm:py-20">
         <div className="mb-8 flex items-center gap-5">
-          <span className="font-display text-xs uppercase tracking-caps-loose text-terra-300">{eyebrow}</span>
+          {eyebrow && (
+            <span className="font-display text-xs uppercase tracking-caps-loose text-terra-300">{eyebrow}</span>
+          )}
           <span aria-hidden className="h-px flex-1 bg-terra-100/30" />
           <span className="font-ui text-xs font-semibold uppercase tracking-caps text-terra-300">{rubric}</span>
         </div>

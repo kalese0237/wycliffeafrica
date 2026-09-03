@@ -46,6 +46,9 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   iconRight?: React.ReactNode;
   /** Renders as a Next.js Link instead of a <button> when provided. */
   href?: string;
+  /** Link-only, for an href that leaves the site: pass together with rel="noopener noreferrer". */
+  target?: string;
+  rel?: string;
 }
 
 export function Button({
@@ -57,6 +60,8 @@ export function Button({
   className,
   disabled,
   href,
+  target,
+  rel,
   type = "button",
   ...rest
 }: ButtonProps) {
@@ -64,7 +69,7 @@ export function Button({
 
   if (href) {
     return (
-      <Link href={href} className={classes} aria-disabled={disabled}>
+      <Link href={href} target={target} rel={rel} className={classes} aria-disabled={disabled}>
         {iconLeft}
         {children}
         {iconRight}
