@@ -317,7 +317,7 @@ const COLLECTIONS = [
       str("place"),
       str("roles"),
       text("intro"),
-      json("bio"),
+      text("bio"),
       { field: "user", type: "uuid", schema: {}, meta: { interface: "select-dropdown-m2o", note: "Portal login that owns this profile" } },
       str("image"),
     ],

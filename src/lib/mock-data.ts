@@ -27,12 +27,14 @@ export const LYDIA_TEERA: MissionaryRecord = {
   roles: "Programme Manager, Learning & Development – SIL Africa",
   intro:
     "Lydia works with schools and churches in Uganda so that refugee and host communities can learn, and read God’s Word, in the languages they speak at home.",
-  bio: [
-    "Lydia Teera is a Ugandan mission leader serving as Programme Manager with the Learning & Development team at SIL Africa, seconded from Wycliffe Africa. She has been in missionary service for more than twenty years, most of them spent on one problem: across Africa, children and adults are asked to learn, worship and read Scripture in languages they only half understand.",
-    "Much of her current work is with refugee and host communities in Uganda, where a single classroom can hold speakers of five languages and the lessons reach none of them well. She has co-led programmes that train teachers to work multilingually, with methods practical enough for schools and governments to adopt, and she is co-author of a bridging programme that helps refugee children settle into Ugandan schools.",
-    "Her call to missions came more than twenty years ago, when she decided to give her working life to Bible translation and language development. Ask her about Scripture, or about what language does to a person’s sense of identity and faith, and the conversation will run long. At home, she gardens.",
-    "Among the communities she has served, the Pokot of northeastern Uganda hold a particular place in her heart: a marginalised people with low literacy, few basic services, and a church that has long lacked Scripture it can read. She has given years to their language development. She also works on Wycliffe Africa’s partnerships with other mission agencies to recruit and send African missionaries into translation work. Several of those now serving in Uganda came through her.",
-  ],
+  bio: `Lydia Teera is a Ugandan mission leader serving as Programme Manager with the Learning & Development team at SIL Africa, seconded from Wycliffe Africa. She has been in missionary service for more than twenty years, most of them spent on one problem: across Africa, children and adults are asked to learn, worship and read Scripture in languages they only half understand.
+
+Much of her current work is with refugee and host communities in Uganda, where a single classroom can hold speakers of five languages and the lessons reach none of them well. She has co-led programmes that train teachers to work multilingually, with methods practical enough for schools and governments to adopt, and she is co-author of a bridging programme that helps refugee children settle into Ugandan schools.
+
+Her call to missions came more than twenty years ago, when she decided to give her working life to Bible translation and language development. Ask her about Scripture, or about what language does to a person’s sense of identity and faith, and the conversation will run long. At home, she gardens.
+
+Among the communities she has served, the Pokot of northeastern Uganda hold a particular place in her heart: a marginalised people with low literacy, few basic services, and a church that has long lacked Scripture it can read. She has given years to their language development. She also works on Wycliffe Africa’s partnerships with other mission agencies to recruit and send African missionaries into translation work. Several of those now serving in Uganda came through her.`,
+  email: "lydia_teera@wycliffeafrica.org",
 };
 
 const MISSIONARIES: MissionaryRecord[] = [
@@ -44,11 +46,12 @@ const MISSIONARIES: MissionaryRecord[] = [
     roles: "Language Technology Consultant & Discipleship Ministry",
     intro:
       "Frans and Lilian are Cameroonian missionaries based in Yaoundé: Frans in translation technology, Lilian in discipleship and trauma healing. They have served together for over twenty years.",
-    bio: [
-      "Frans is a Language Technology Consultant and Associate Domain Team Leader for Language Technology in the SIL Africa Area. He trains and supports Bible translation teams across Africa in the software they use for translation, literacy work, and producing printed and digital Scripture. What he cares about most is training African specialists, so that the work no longer depends on outside help.",
-      "Lilian's ministry is discipleship and trauma healing, mostly among children and young women. Her groups pair Bible study with sewing and other practical skills.",
-      "Two decades in, their aim has not changed: to know Christ and make Him known, mostly by equipping other people to do the work.",
-    ],
+    bio: `Frans is a Language Technology Consultant and Associate Domain Team Leader for Language Technology in the SIL Africa Area. He trains and supports Bible translation teams across Africa in the software they use for translation, literacy work, and producing printed and digital Scripture. What he cares about most is training African specialists, so that the work no longer depends on outside help.
+
+Lilian's ministry is discipleship and trauma healing, mostly among children and young women. Her groups pair Bible study with sewing and other practical skills.
+
+Two decades in, their aim has not changed: to know Christ and make Him known, mostly by equipping other people to do the work.`,
+    email: "frans_barah@wycliffeafrica.org",
   },
   {
     id: "otieno",
@@ -58,10 +61,10 @@ const MISSIONARIES: MissionaryRecord[] = [
     roles: "Translation Team Advisors",
     intro:
       "Samuel and Grace walk alongside mother-tongue translators drafting the New Testament, checking each book with the community until it reads clearly and naturally.",
-    bio: [
-      "Samuel grew up in Kisumu hearing Scripture read in a language his grandmother never fully understood. That memory carried him through linguistics training and, in 2014, into full-time translation work with Grace, a trained teacher.",
-      "Today they serve the Turkana cluster as team advisors: coaching mother-tongue translators through drafting, arranging community checks in village congregations, and preparing each book for consultant review. Their long-term prayer is a complete Turkana New Testament read aloud in every church in the region.",
-    ],
+    bio: `Samuel grew up in Kisumu hearing Scripture read in a language his grandmother never fully understood. That memory carried him through linguistics training and, in 2014, into full-time translation work with Grace, a trained teacher.
+
+Today they serve the Turkana cluster as team advisors: coaching mother-tongue translators through drafting, arranging community checks in village congregations, and preparing each book for consultant review. Their long-term prayer is a complete Turkana New Testament read aloud in every church in the region.`,
+    email: "portal-demo@wycliffeafrica.org",
   },
   LYDIA_TEERA,
   {
@@ -72,10 +75,9 @@ const MISSIONARIES: MissionaryRecord[] = [
     roles: "Literacy Specialist",
     intro:
       "Miriam develops reading primers and adult literacy programmes so that when Scripture arrives, communities can read it for themselves.",
-    bio: [
-      "A translated Bible no one can read stays closed. Miriam joined the movement after a decade teaching primary school, convinced that literacy is the bridge between a finished translation and a transformed community.",
-      "From Nairobi she designs reading primers, trains volunteer literacy teachers, and runs adult reading groups in partner language areas, most recently in the Kakuma refugee settlement.",
-    ],
+    bio: `A translated Bible no one can read stays closed. Miriam joined the movement after a decade teaching primary school, convinced that literacy is the bridge between a finished translation and a transformed community.
+
+From Nairobi she designs reading primers, trains volunteer literacy teachers, and runs adult reading groups in partner language areas, most recently in the Kakuma refugee settlement.`,
   },
   {
     id: "mwangi",
@@ -85,10 +87,9 @@ const MISSIONARIES: MissionaryRecord[] = [
     roles: "Scripture Engagement",
     intro:
       "David helps churches put translated Scripture to use in worship, discipleship and daily life, through song, audio and Bible study.",
-    bio: [
-      "David's conviction is simple: translation is finished not when the books are printed, but when people meet God in them. He serves churches in South Sudan as a Scripture engagement facilitator.",
-      "His weeks are spent helping congregations weave newly translated Scripture into worship: recording Scripture songs with local choirs, distributing audio Bibles for listening groups, and training pastors to preach from the mother-tongue text.",
-    ],
+    bio: `David's conviction is simple: translation is finished not when the books are printed, but when people meet God in them. He serves churches in South Sudan as a Scripture engagement facilitator.
+
+His weeks are spent helping congregations weave newly translated Scripture into worship: recording Scripture songs with local choirs, distributing audio Bibles for listening groups, and training pastors to preach from the mother-tongue text.`,
   },
   {
     id: "achieng",
@@ -97,10 +98,9 @@ const MISSIONARIES: MissionaryRecord[] = [
     place: "Uganda",
     roles: "Language Survey Specialist",
     intro: "Esther travels across language areas gathering the data that guides where translation work is needed most.",
-    bio: [
-      "Before a single verse can be drafted, someone has to listen. Esther leads survey trips across Uganda's language areas: recording word lists, testing comprehension between dialects, and sitting with elders to understand how communities actually speak.",
-      "Her reports guide where the movement begins its next translation projects, making her work the first chapter of every future Scripture launch.",
-    ],
+    bio: `Before a single verse can be drafted, someone has to listen. Esther leads survey trips across Uganda's language areas: recording word lists, testing comprehension between dialects, and sitting with elders to understand how communities actually speak.
+
+Her reports guide where the movement begins its next translation projects, making her work the first chapter of every future Scripture launch.`,
   },
   {
     id: "kamau",
@@ -109,10 +109,9 @@ const MISSIONARIES: MissionaryRecord[] = [
     place: "Nairobi, Kenya",
     roles: "Finance & Administration",
     intro: "Joseph stewards the funds entrusted to the movement, ensuring every gift is accounted for and directed to the field.",
-    bio: [
-      "Every translation project runs on the trust of language communities, churches, and the givers who fund the work. Joseph keeps that trust: he manages the movement's accounts from Nairobi, ensuring every gift is tracked from donor to field.",
-      "A certified accountant, he left corporate practice in 2018 because he wanted his ledgers to count for something eternal.",
-    ],
+    bio: `Every translation project runs on the trust of language communities, churches, and the givers who fund the work. Joseph keeps that trust: he manages the movement's accounts from Nairobi, ensuring every gift is tracked from donor to field.
+
+A certified accountant, he left corporate practice in 2018 because he wanted his ledgers to count for something eternal.`,
   },
   {
     id: "njoroge",
@@ -121,10 +120,9 @@ const MISSIONARIES: MissionaryRecord[] = [
     place: "Cameroon",
     roles: "Bible Translation Advisors",
     intro: "Peter and Hannah serve a cluster of related languages, training local translators and checking drafts with consultants.",
-    bio: [
-      "Peter and Hannah moved to Cameroon in 2019 to serve a cluster of four related languages in the Northwest. Rather than translating themselves, they train and mentor local translation teams, one team per language, sharing tools, terminology and checked drafts across the cluster.",
-      "Their joy is watching a community leader read a freshly checked chapter aloud and hearing the room answer back in recognition.",
-    ],
+    bio: `Peter and Hannah moved to Cameroon in 2019 to serve a cluster of four related languages in the Northwest. Rather than translating themselves, they train and mentor local translation teams, one team per language, sharing tools, terminology and checked drafts across the cluster.
+
+Their joy is watching a community leader read a freshly checked chapter aloud and hearing the room answer back in recognition.`,
   },
 ];
 

@@ -1,42 +1,59 @@
 import type { Metadata } from "next";
-import { Fraunces, Source_Sans_3, Gentium_Book_Plus, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
+
+// Local files instead of next/font/google: the latter fetches from Google's
+// font CDN at compile time, which this environment cannot always reach.
+// These are the same Google Fonts, vendored once into src/fonts (originally
+// sourced via @fontsource) — next/font/local still runs its usual build-time
+// optimization (fallback metric matching, preload) over them, so this is the
+// Next.js-recommended way to self-host rather than a workaround.
 
 /** Display voice. Variable across wght + opsz; SOFT and WONK are the axes that
  *  give Fraunces its character — see the `.wonk` utility in globals.css, which
  *  engages them only at hero sizes. */
-const fraunces = Fraunces({
+const fraunces = localFont({
   variable: "--font-fraunces",
-  subsets: ["latin"],
-  axes: ["SOFT", "WONK", "opsz"],
-  style: ["normal", "italic"],
   display: "swap",
+  src: [
+    { path: "../fonts/fraunces/fraunces-latin-full-normal.woff2", weight: "100 900", style: "normal" },
+    { path: "../fonts/fraunces/fraunces-latin-full-italic.woff2", weight: "100 900", style: "italic" },
+  ],
 });
 
 /** Text and interface — one face for prose and UI. */
-const sourceSans = Source_Sans_3({
+const sourceSans = localFont({
   variable: "--font-source-sans",
-  subsets: ["latin"],
-  style: ["normal", "italic"],
   display: "swap",
+  src: [
+    { path: "../fonts/source-sans-3/source-sans-3-latin-wght-normal.woff2", weight: "200 900", style: "normal" },
+    { path: "../fonts/source-sans-3/source-sans-3-latin-wght-italic.woff2", weight: "200 900", style: "italic" },
+  ],
 });
 
-/** Scripture only. SIL's Gentium carries the extended-Latin diacritics that
- *  African orthographies need and the display faces do not. */
-const gentium = Gentium_Book_Plus({
+/** Scripture only. SIL's Gentium carries extended-Latin diacritics used by
+ *  some African orthographies that the display faces do not. */
+const gentium = localFont({
   variable: "--font-gentium",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
   display: "swap",
+  preload: false,
+  src: [
+    { path: "../fonts/gentium-book-plus/gentium-book-plus-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/gentium-book-plus/gentium-book-plus-latin-400-italic.woff2", weight: "400", style: "italic" },
+    { path: "../fonts/gentium-book-plus/gentium-book-plus-latin-700-normal.woff2", weight: "700", style: "normal" },
+    { path: "../fonts/gentium-book-plus/gentium-book-plus-latin-700-italic.woff2", weight: "700", style: "italic" },
+  ],
 });
 
 /** Codes and reference numbers only (M-Pesa paybill, transaction refs). */
-const jbMono = JetBrains_Mono({
+const jbMono = localFont({
   variable: "--font-jbmono",
-  subsets: ["latin"],
-  weight: ["400", "500"],
   display: "swap",
+  preload: false,
+  src: [
+    { path: "../fonts/jetbrains-mono/jetbrains-mono-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/jetbrains-mono/jetbrains-mono-latin-500-normal.woff2", weight: "500", style: "normal" },
+  ],
 });
 
 export const metadata: Metadata = {

@@ -10,6 +10,25 @@ const DIRECTUS_URL = (process.env.DIRECTUS_INTERNAL_URL ?? process.env.DIRECTUS_
 const TOKEN = process.env.DIRECTUS_TOKEN;
 const OUTPUT = new URL("../src/lib/content-snapshot.ts", import.meta.url);
 
+function normalizeMissionaryBio(value) {
+  if (Array.isArray(value)) {
+    const paragraphs = value.filter((item) => typeof item === "string");
+    return paragraphs.join("\n\n") || null;
+  }
+
+  if (typeof value !== "string") return null;
+
+  const trimmed = value.trim();
+  if (!trimmed.startsWith("[")) return value;
+
+  try {
+    const parsed = JSON.parse(trimmed);
+    return Array.isArray(parsed) ? normalizeMissionaryBio(parsed) : value;
+  } catch {
+    return value;
+  }
+}
+
 if (!DIRECTUS_URL || !TOKEN) {
   console.error("Set DIRECTUS_URL (or DIRECTUS_INTERNAL_URL) and DIRECTUS_TOKEN.");
   process.exit(1);
@@ -48,10 +67,14 @@ async function main() {
       sort: "-date_created",
       limit: "-1",
     })),
-    missionaries: await get(items("missionaries", {
-      fields: "id,slug,name,place,roles,intro,bio,image",
+    missionaries: (await get(items("missionaries", {
+      fields: "id,slug,name,place,roles,intro,bio,image,familyImage,familyCaption,user.email",
       sort: "name",
       limit: "-1",
+    }))).map(({ user, bio, ...m }) => ({
+      ...m,
+      bio: normalizeMissionaryBio(bio),
+      email: user?.email ?? null,
     })),
     // date_created isn't in `fields` (never written to the snapshot) but
     // filtering/sorting by it is still allowed — matches src/lib/prayer-freshness.ts's
@@ -85,14 +108,17 @@ async function main() {
 /**
  * Last-known-good public CMS snapshot for cold builds and cold starts.
  * Refresh intentionally from published Directus content after editorial changes.
+ *
+ * Annotated, not "satisfies" — an empty array in the live data (e.g. no prayer requests inside the
+ * freshness window) would otherwise infer as never[] from the literal and break every caller.
  */
-export const CONTENT_SNAPSHOT = ${JSON.stringify(snapshot, null, 2)} satisfies {
+export const CONTENT_SNAPSHOT: {
   news: PublicNewsRecord[];
   missionaries: PublicMissionaryRecord[];
   prayerRequests: PublicPrayerRequestRecord[];
   resources: ResourceRecord[];
   faqs: FaqRecord[];
-};
+} = ${JSON.stringify(snapshot, null, 2)};
 `;
   await writeFile(OUTPUT, source);
   console.log(

@@ -194,7 +194,22 @@ async function main() {
     field: "image",
     type: "uuid",
     schema: {},
-    meta: { interface: "file-image", note: "Missionary profile photo" },
+    meta: { interface: "file-image", note: "Missionary profile photo (portrait, 4:5)" },
+  });
+  await ensureField("missionaries", {
+    field: "familyImage",
+    type: "uuid",
+    schema: {},
+    meta: {
+      interface: "file-image",
+      note: "Optional landscape family photograph (16:9). When set, it opens the profile page.",
+    },
+  });
+  await ensureField("missionaries", {
+    field: "familyCaption",
+    type: "string",
+    schema: {},
+    meta: { interface: "input", note: "Names the people in the family photograph" },
   });
   await ensureField("news", {
     field: "missionaryId",
@@ -375,6 +390,20 @@ async function main() {
   });
   const siteRole = await ensureRole("Website", { icon: "public" });
   await ensureAccess(siteRole, sitePolicy);
+
+  // A missionary's public contact address is their portal login email, exposed only for accounts
+  // holding the "Missionary" role — a separate policy so the fields:["id"] reviewer-lookup rule above
+  // stays untouched (one permission row per policy+collection+action can't mix two field sets).
+  const missionaryContactPolicy = await ensurePolicy("Missionary contact (read-only)", {
+    icon: "alternate_email",
+    admin_access: false,
+    app_access: false,
+  });
+  await ensurePermission(missionaryContactPolicy, "directus_users", "read", {
+    fields: ["email"],
+    permissions: { role: { name: { _eq: "Missionary" } } },
+  });
+  await ensureAccess(siteRole, missionaryContactPolicy);
 
   const reviewerPolicy = await ensurePolicy("Portal review", {
     icon: "fact_check",
