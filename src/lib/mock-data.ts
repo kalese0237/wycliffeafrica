@@ -201,10 +201,7 @@ const NEWS: NewsRecord[] = [
     title: "2,000+ languages still wait for Scripture",
     excerpt:
       "Across Africa, millions have never read a single verse in the language they think, pray and dream in. Bible translation closes that gap.",
-    body: [
-      "Across Africa, millions have never read a single verse in the language they think, pray and dream in. Bible translation closes that gap.",
-      "For generations, prayers, songs and Sunday readings have come in a language learned at school, never the one spoken at home. Translation closes that distance. When it does, people stop overhearing the gospel and start hearing it.",
-    ],
+    body: "Across Africa, millions have never read a single verse in the language they think, pray and dream in. Bible translation closes that gap.\n\nFor generations, prayers, songs and Sunday readings have come in a language learned at school, never the one spoken at home. Translation closes that distance. When it does, people stop overhearing the gospel and start hearing it.",
     author: "Wycliffe Africa",
     place: "Continental",
     date: "2026",
@@ -220,9 +217,7 @@ const NEWS: NewsRecord[] = [
     title: "Becoming a member: your first step into the work",
     excerpt:
       "Translation teams need more than linguists. Teachers, accountants, IT people and pilots all keep the work moving. Here is how membership works.",
-    body: [
-      "Translation teams need more than linguists. Teachers, accountants, IT people and pilots all keep the work moving. Here is how membership works.",
-    ],
+    body: "Translation teams need more than linguists. Teachers, accountants, IT people and pilots all keep the work moving. Here is how membership works.",
     author: "Membership Team",
     place: "Nairobi, Kenya",
     date: "2026",
@@ -238,9 +233,7 @@ const NEWS: NewsRecord[] = [
     title: "Partnering churches into the Great Commission",
     excerpt:
       "We walk with congregations to adopt language communities in prayer, giving and people, until every group has the Word.",
-    body: [
-      "We walk with congregations to adopt language communities in prayer, giving and people, until every group has the Word.",
-    ],
+    body: "We walk with congregations to adopt language communities in prayer, giving and people, until every group has the Word.",
     author: "Partnership Team",
     place: "Kenya",
     date: "2026",
@@ -255,9 +248,7 @@ const NEWS: NewsRecord[] = [
     title: "New Testament draft reaches Turkana churches",
     excerpt:
       "After three years of drafting and community checking, the Gospels are now being read aloud in Sunday services across six Turkana congregations.",
-    body: [
-      "After three years of drafting and community checking, the Gospels are now being read aloud in Sunday services across six Turkana congregations.",
-    ],
+    body: "After three years of drafting and community checking, the Gospels are now being read aloud in Sunday services across six Turkana congregations.",
     date: "June 2026",
     status: "published",
     date_created: daysAgo(5),
@@ -270,11 +261,7 @@ const NEWS: NewsRecord[] = [
     title: "First recorded Scripture songs released",
     excerpt:
       "A local choir has recorded the first Scripture songs in their language, already spreading through phones and radio in the community.",
-    body: [
-      "A local choir has recorded the first Scripture songs in their language. We set up in the back room of the church with a borrowed microphone, and by the second evening the neighbours had started drifting in to listen.",
-      "The songs carry passages the choir helped check during translation, so the words are already familiar to them. Now they are set to melodies people hum while they work. One recording reached a market town two valleys away within the week, passed phone to phone.",
-      "For people who do not yet read, this is how Scripture arrives first: sung, memorised, repeated. It is not a substitute for the printed text, but it opens the door to it.",
-    ],
+    body: "A local choir has recorded the first Scripture songs in their language. We set up in the back room of the church with a borrowed microphone, and by the second evening the neighbours had started drifting in to listen.\n\nThe songs carry passages the choir helped check during translation, so the words are already familiar to them. Now they are set to melodies people hum while they work. One recording reached a market town two valleys away within the week, passed phone to phone.\n\nFor people who do not yet read, this is how Scripture arrives first: sung, memorised, repeated. It is not a substitute for the printed text, but it opens the door to it.",
     pullQuote: "By the second evening, the neighbours had started drifting in to listen.",
     inlineImageCaption: "The choir recording in the back room of the church.",
     date: "May 2026",
@@ -289,9 +276,7 @@ const NEWS: NewsRecord[] = [
     title: "Language survey completed in three new communities",
     excerpt:
       "Esther's team has finished surveying three previously undocumented language communities, the first step toward future translation work.",
-    body: [
-      "Esther's team has finished surveying three previously undocumented language communities, the first step toward future translation work.",
-    ],
+    body: "Esther's team has finished surveying three previously undocumented language communities, the first step toward future translation work.",
     date: "April 2026",
     status: "published",
     date_created: daysAgo(40),
