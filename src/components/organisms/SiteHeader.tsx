@@ -39,6 +39,8 @@ const PRIMARY_NAV: NavItem[] = [
     label: "Get Involved",
     href: "/involved",
     menu: [
+      ["Pray With Us", "/prayer"],
+      ["Prayer Requests", "/prayer/requests", true],
       ["Become a Member", "/involved"],
       ["Serve Part-Time", "/involved"],
       ["Support a Missionary", "/missionaries"],

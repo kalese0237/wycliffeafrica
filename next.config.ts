@@ -9,6 +9,12 @@ const nextConfig: NextConfig = {
   // module directory at runtime — bundling it breaks that path resolution,
   // so it must run as a plain require() instead.
   serverExternalPackages: ["pdfkit"],
+  async redirects() {
+    return [
+      // The Pray With Us page briefly lived here before it became the prayer hub.
+      { source: "/prayer/pray-with-us", destination: "/prayer", permanent: true },
+    ];
+  },
   images: {
     // Every <Image> (public/photos and the /media/[id] Directus proxy) is
     // re-encoded to whichever of these the browser's Accept header supports.
