@@ -1,63 +1,61 @@
 import * as React from "react";
-import Image from "next/image";
-import { Clock, Compass, Gift, ArrowRight, type LucideIcon } from "lucide-react";
-import { Button } from "@/components/atoms/Button";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
-const CARDS: { icon: LucideIcon; title: string; href: string; body: string; image: string; imagePosition?: string }[] = [
+const WAYS: { title: string; href: string; body: string; cta: string }[] = [
   {
-    icon: Clock,
-    title: "Serve part-time",
+    title: "Serve from home",
     href: "/involved",
-    body: "You don't have to move to the field. Individuals and groups serve from home, on their own schedule.",
-    image: "/photos/pexels-oudneypatsika-2769437.jpg",
-    imagePosition: "60% 55%",
+    body:
+      "You don't have to move to the field. Individuals, churches and groups give hours to a translation project from wherever they already are.",
+    cta: "See part-time roles",
   },
   {
-    icon: Compass,
-    title: "Serve",
+    title: "Serve on the field",
     href: "/involved",
-    body: "Field assignments run from a few months to a career, and not only for linguists.",
-    image: "/photos/pexels-b-aristotle-guweh-jr-1643208950-35610368.jpg",
-    imagePosition: "50% 40%",
+    body:
+      "Assignments run from a few months to a career, and not only for linguists. Teachers, technicians and administrators are needed just as badly.",
+    cta: "See field assignments",
   },
   {
-    icon: Gift,
     title: "Give",
     href: "/give",
-    body: "Missionaries raise their own support before they can go. Monthly gifts get them to the field and keep them there.",
-    image: "/photos/pexels-zeal-creative-studios-58866141-31283604.jpg",
-    imagePosition: "50% 50%",
+    body:
+      "Missionaries raise their own support before they can go. A monthly gift gets someone to the field and is what keeps them there.",
+    cta: "Support a missionary",
   },
 ];
 
 export function ServeGiveCards() {
   return (
     <section className="border-y border-hair bg-sunk">
-      <div className="mx-auto grid max-w-(--container-max) grid-cols-1 gap-6 px-5 py-16 sm:px-12 md:grid-cols-3">
-        {CARDS.map(({ icon: CardIcon, title, href, body, image, imagePosition }) => (
-          <div key={title} className="flex flex-col overflow-hidden rounded-lg border border-hair bg-card shadow-sm">
-            <div className="relative aspect-video">
-              <Image
-                src={image}
-                alt=""
-                fill
-                sizes="(min-width: 768px) 33vw, 100vw"
-                className="object-cover"
-                style={{ objectPosition: imagePosition }}
-              />
+      <div className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12 sm:py-20">
+        <h2 className="font-display text-2xl font-semibold leading-[1.1] text-strong">
+          Three ways in
+        </h2>
+        <div className="mt-5 h-[2px] w-full bg-ink-0" />
+
+        <div className="grid grid-cols-1 md:grid-cols-3">
+          {WAYS.map(({ title, href, body, cta }) => (
+            <div
+              key={title}
+              className="flex flex-col border-b border-hair py-8 last:border-b-0 md:border-b-0 md:border-l md:py-10 md:pl-8 md:first:border-l-0 md:first:pl-0 md:not-first:ml-8 md:last:pr-0"
+            >
+              <h3 className="font-display text-lg font-semibold leading-[1.2] text-strong">{title}</h3>
+              <p className="mt-3 max-w-[46ch] flex-1 font-body text-base leading-[1.6] text-body">{body}</p>
+              <Link
+                href={href}
+                className="group mt-6 inline-flex w-fit items-center gap-2 font-ui text-xs font-bold uppercase tracking-caps text-primary transition-colors duration-150 hover:text-primary-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-green-400"
+              >
+                {cta}
+                <ArrowRight
+                  size={14}
+                  className="transition-transform duration-150 ease-out group-hover:translate-x-1"
+                />
+              </Link>
             </div>
-            <div className="flex flex-1 flex-col p-5">
-              <span className="mt-[-46px] inline-flex h-[46px] w-[46px] items-center justify-center rounded-[10px] border-[3px] border-card bg-primary-tint text-green-700 shadow-sm">
-                <CardIcon size={22} />
-              </span>
-              <h3 className="mb-2 mt-3.5 font-display text-lg font-semibold text-strong">{title}</h3>
-              <p className="mb-4 flex-1 font-body text-base leading-[1.55] text-body">{body}</p>
-              <Button href={href} variant="ghost" size="sm" iconRight={<ArrowRight size={14} />} className="w-fit px-0">
-                Read more
-              </Button>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
