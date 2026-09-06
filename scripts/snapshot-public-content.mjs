@@ -68,7 +68,8 @@ async function main() {
       limit: "-1",
     })),
     missionaries: (await get(items("missionaries", {
-      fields: "id,slug,name,place,roles,intro,bio,image,familyImage,familyCaption,pullQuote,user.email",
+      "filter[status][_eq]": "published",
+      fields: "id,slug,status,name,place,roles,intro,bio,image,familyImage,familyCaption,pullQuote,user.email",
       sort: "name",
       limit: "-1",
     }))).map(({ user, bio, ...m }) => ({

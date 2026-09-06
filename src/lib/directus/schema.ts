@@ -90,6 +90,8 @@ export type PublicPrayerRequestRecord = Omit<
 export interface MissionaryRecord {
   id: string;
   slug: string;
+  /** New profiles land as `draft`; an admin publishes them once the office fills them in. */
+  status: PublishStatus;
   name: string;
   place: string;
   roles: string;

@@ -22,6 +22,7 @@ function daysAgo(n: number): string {
 export const LYDIA_TEERA: MissionaryRecord = {
   id: "teera",
   slug: "lydia-teera",
+  status: "published",
   name: "Lydia Teera",
   place: "Uganda",
   roles: "Programme Manager, Learning & Development – SIL Africa",
@@ -41,6 +42,7 @@ const MISSIONARIES: MissionaryRecord[] = [
   {
     id: "barah",
     slug: "frans-lilian-barah",
+    status: "published",
     name: "Frans & Lilian Barah",
     place: "Yaoundé, Cameroon",
     roles: "Language Technology Consultant & Discipleship Ministry",
@@ -56,6 +58,7 @@ Two decades in, their aim has not changed: to know Christ and make Him known, mo
   {
     id: "otieno",
     slug: "samuel-grace-otieno",
+    status: "published",
     name: "Samuel & Grace Otieno",
     place: "Turkana, Kenya",
     roles: "Translation Team Advisors",
@@ -71,6 +74,7 @@ Today they serve the Turkana cluster as team advisors: coaching mother-tongue tr
   {
     id: "wanjiru",
     slug: "miriam-wanjiru",
+    status: "published",
     name: "Miriam Wanjiru",
     place: "Nairobi, Kenya",
     roles: "Literacy Specialist",
@@ -83,6 +87,7 @@ From Nairobi she designs reading primers, trains volunteer literacy teachers, an
   {
     id: "mwangi",
     slug: "david-mwangi",
+    status: "published",
     name: "David Mwangi",
     place: "South Sudan",
     roles: "Scripture Engagement",
@@ -95,6 +100,7 @@ His weeks are spent helping congregations weave newly translated Scripture into 
   {
     id: "achieng",
     slug: "esther-achieng",
+    status: "published",
     name: "Esther Achieng",
     place: "Uganda",
     roles: "Language Survey Specialist",
@@ -106,6 +112,7 @@ Her reports guide where the movement begins its next translation projects, makin
   {
     id: "kamau",
     slug: "joseph-kamau",
+    status: "published",
     name: "Joseph Kamau",
     place: "Nairobi, Kenya",
     roles: "Finance & Administration",
@@ -113,17 +120,6 @@ Her reports guide where the movement begins its next translation projects, makin
     bio: `Every translation project runs on the trust of language communities, churches, and the givers who fund the work. Joseph keeps that trust: he manages the movement's accounts from Nairobi, ensuring every gift is tracked from donor to field.
 
 A certified accountant, he left corporate practice in 2018 because he wanted his ledgers to count for something eternal.`,
-  },
-  {
-    id: "njoroge",
-    slug: "peter-hannah-njoroge",
-    name: "Peter & Hannah Njoroge",
-    place: "Cameroon",
-    roles: "Bible Translation Advisors",
-    intro: "Peter and Hannah serve a cluster of related languages, training local translators and checking drafts with consultants.",
-    bio: `Peter and Hannah moved to Cameroon in 2019 to serve a cluster of four related languages in the Northwest. Rather than translating themselves, they train and mentor local translation teams, one team per language, sharing tools, terminology and checked drafts across the cluster.
-
-Their joy is watching a community leader read a freshly checked chapter aloud and hearing the room answer back in recognition.`,
   },
 ];
 
@@ -293,16 +289,6 @@ const PRAYERS: PrayerRequestRecord[] = [
     date: "June 2026",
     status: "published",
     date_created: daysAgo(3),
-  },
-  {
-    id: "u4",
-    type: "prayer",
-    missionaryId: "njoroge",
-    title: "Pray for Peter & Hannah's consultant check",
-    body: "An outside consultant arrives this month to check the drafted books. Pray for clarity, patience, and unity with the translation team.",
-    date: "May 2026",
-    status: "published",
-    date_created: daysAgo(9),
   },
   {
     id: "u6",
