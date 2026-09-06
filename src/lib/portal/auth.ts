@@ -178,7 +178,7 @@ export async function getMySubmissions(
     id: n.id,
     type: "update",
     title: n.title,
-    body: n.body?.join("\n\n") ?? n.excerpt,
+    body: n.body ?? n.excerpt,
     date: n.date,
     status: n.status,
     reviewNotes: n.reviewNotes ?? undefined,
@@ -274,7 +274,7 @@ export async function createSubmission(input: NewSubmission): Promise<void> {
         slug: `${slugify(content.title)}-${Date.now().toString(36)}`,
         title: content.title,
         excerpt: content.body,
-        body: [content.body],
+        body: content.body,
         missionaryId: content.missionaryId,
         date: content.date,
         ...(safeImage ? { image: safeImage } : {}),
@@ -403,7 +403,7 @@ export async function updateSubmission(
       ? {
           title,
           excerpt: body,
-          body: [body],
+          body,
           status: "draft",
           ...(richFieldsSupported
             ? {
