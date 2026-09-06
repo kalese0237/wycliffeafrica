@@ -115,6 +115,8 @@ export interface MissionaryRecord {
   familyImage?: string | null;
   /** Names the people in `familyImage`, e.g. "Samuel and Grace with Akiru and Ekitela". */
   familyCaption?: string | null;
+  /** A sentence already present in `bio`, set apart as a pull-quote after the opening paragraph. */
+  pullQuote?: string | null;
 }
 
 export type PublicMissionaryRecord = Omit<MissionaryRecord, "user">;

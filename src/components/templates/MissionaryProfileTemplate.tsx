@@ -1,8 +1,5 @@
 import * as React from "react";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import { PageTemplate } from "@/components/templates/PageTemplate";
-import { AboutCTA } from "@/components/organisms/about";
 import {
   FieldUpdatesIndex,
   MissionaryCardFace,
@@ -27,11 +24,12 @@ export interface MissionaryProfileTemplateProps {
 /**
  * Missionary profile — the prayer card at page scale.
  *
- * Card face (the opening: family photograph where there is one, terra masthead with a tipped-in
- * portrait where there is not) → the reverse (fact rail, then the story) → the prayer points you
- * pray down → the ledger of updates → the response slip. The previous layout's sticky support rail
- * is gone: the ask now closes the page, where a supporter arrives at it having read the reason for
- * it, rather than being asked for money beside the first paragraph.
+ * Card face (the opening: family photograph with the portrait tucked into its corner where there is
+ * one, terra masthead with the portrait tipped in at the right where there is not) → the reverse (the
+ * story, with the back link and the partner ask stacked beside it, sticky once the column is taller
+ * than the viewport) → the prayer points you pray down → the ledger of updates. No closing CTA band —
+ * the sticky partner card already carries "Support" and "Send a greeting" the whole way down the
+ * page, so a second copy of the same ask at the bottom was the page repeating itself, not adding one.
  */
 export function MissionaryProfileTemplate({
   missionary: m,
@@ -44,7 +42,6 @@ export function MissionaryProfileTemplate({
     .split(/\n\s*\n/)
     .map((paragraph) => paragraph.trim())
     .filter(Boolean);
-  const hasFamilyPhoto = Boolean(m.familyImage);
 
   return (
     <PageTemplate>
@@ -57,38 +54,11 @@ export function MissionaryProfileTemplate({
         familyCaption={m.familyCaption}
       />
 
-      <div className="mx-auto max-w-(--container-max) px-5 py-6 sm:px-12 sm:py-7">
-        <Link
-          href="/missionaries"
-          className="inline-flex items-center gap-1.5 font-ui text-sm font-semibold text-link underline-offset-4 hover:underline"
-        >
-          <ArrowLeft size={15} aria-hidden /> All missionaries
-        </Link>
-      </div>
-
-      <MissionaryDossier
-        name={m.name}
-        place={m.place}
-        bio={bio}
-        portrait={m.image}
-        showPortrait={hasFamilyPhoto}
-        email={m.email}
-      />
+      <MissionaryDossier name={m.name} bio={bio} pullQuote={m.pullQuote} email={m.email} />
 
       <PrayerPoints firstName={firstName} requests={prayerRequests} />
 
       <FieldUpdatesIndex updates={fieldUpdates} authorName={m.name} />
-
-      <div className="pt-16 sm:pt-20">
-        <AboutCTA
-          flush
-          flat
-          title={`Stand with ${firstName}`}
-          body="Missionaries serve on the monthly support and the prayers of partners. A gift here goes to this ministry; a greeting reaches them on the field."
-          primary={{ label: `Support ${firstName}`, href: "/give" }}
-          secondary={{ label: "Send a greeting", href: "/contact" }}
-        />
-      </div>
     </PageTemplate>
   );
 }

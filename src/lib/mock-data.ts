@@ -64,6 +64,7 @@ Two decades in, their aim has not changed: to know Christ and make Him known, mo
     bio: `Samuel grew up in Kisumu hearing Scripture read in a language his grandmother never fully understood. That memory carried him through linguistics training and, in 2014, into full-time translation work with Grace, a trained teacher.
 
 Today they serve the Turkana cluster as team advisors: coaching mother-tongue translators through drafting, arranging community checks in village congregations, and preparing each book for consultant review. Their long-term prayer is a complete Turkana New Testament read aloud in every church in the region.`,
+    pullQuote: "Their long-term prayer is a complete Turkana New Testament read aloud in every church in the region.",
     email: "portal-demo@wycliffeafrica.org",
   },
   LYDIA_TEERA,

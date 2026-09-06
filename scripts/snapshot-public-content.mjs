@@ -63,12 +63,12 @@ async function main() {
     // `date` is a loosely-formatted editorial label, not sortable reliably.
     news: await get(items("news", {
       "filter[status][_eq]": "published",
-      fields: "id,status,category,slug,title,excerpt,body,author,missionaryId,place,journey,tagLabel,date,image",
+      fields: "id,status,category,slug,title,excerpt,body,author,missionaryId,place,journey,tagLabel,date,image,pullQuote,inlineImage,inlineImageCaption",
       sort: "-date_created",
       limit: "-1",
     })),
     missionaries: (await get(items("missionaries", {
-      fields: "id,slug,name,place,roles,intro,bio,image,familyImage,familyCaption,user.email",
+      fields: "id,slug,name,place,roles,intro,bio,image,familyImage,familyCaption,pullQuote,user.email",
       sort: "name",
       limit: "-1",
     }))).map(({ user, bio, ...m }) => ({
