@@ -2,6 +2,7 @@ import { readItems } from "@directus/sdk";
 import { directus } from "./client";
 import type { PublicPrayerRequestRecord, PublicMissionaryRecord, PublicNewsRecord } from "./schema";
 import { prayerFreshnessCutoffIso } from "@/lib/prayer-freshness";
+import { normalizeMissionaryBio } from "@/lib/missionary-bio";
 
 /**
  * Live Directus queries. Function names and signatures mirror
@@ -32,7 +33,23 @@ const NEWS_RICH_PUBLIC_FIELDS = [
   "inlineImage",
   "inlineImageCaption",
 ] as const;
-const MISSIONARY_PUBLIC_FIELDS = ["id", "slug", "name", "place", "roles", "intro", "bio", "image"] as const;
+const MISSIONARY_PUBLIC_FIELDS = ["id", "slug", "name", "place", "roles", "intro", "bio", "image", "familyImage", "familyCaption"] as const;
+/**
+ * `user.email` is a relation into `directus_users`, a system collection our `DirectusSchema` map
+ * doesn't model — the SDK has no way to type that join, so the field list and result both need a
+ * manual cast at the boundary. `flattenContactEmail` does the actual reshaping.
+ */
+const MISSIONARY_QUERY_FIELDS = [...MISSIONARY_PUBLIC_FIELDS, "user.email"] as unknown as (typeof MISSIONARY_PUBLIC_FIELDS)[number][];
+
+type MissionaryQueryRow = Omit<PublicMissionaryRecord, "email" | "bio"> & {
+  bio?: unknown;
+  user?: { email?: string | null } | null;
+};
+
+function flattenContactEmail(row: MissionaryQueryRow): PublicMissionaryRecord {
+  const { user, bio, ...rest } = row;
+  return { ...rest, bio: normalizeMissionaryBio(bio), email: user?.email ?? null };
+}
 const PRAYER_PUBLIC_FIELDS = [
   "id",
   "status",
@@ -145,31 +162,32 @@ export async function getNewsBySlug(slug: string): Promise<PublicNewsRecord | un
 }
 
 export async function getMissionaries(): Promise<PublicMissionaryRecord[]> {
-  return directus.request(
-    readItems("missionaries", { fields: [...MISSIONARY_PUBLIC_FIELDS], sort: ["name"] }),
-  );
+  const results = (await directus.request(
+    readItems("missionaries", { fields: MISSIONARY_QUERY_FIELDS, sort: ["name"] }),
+  )) as unknown as MissionaryQueryRow[];
+  return results.map(flattenContactEmail);
 }
 
 export async function getMissionaryBySlug(slug: string): Promise<PublicMissionaryRecord | undefined> {
-  const results = await directus.request(
+  const results = (await directus.request(
     readItems("missionaries", {
-      fields: [...MISSIONARY_PUBLIC_FIELDS],
+      fields: MISSIONARY_QUERY_FIELDS,
       filter: { slug: { _eq: slug } },
       limit: 1,
     }),
-  );
-  return results[0];
+  )) as unknown as MissionaryQueryRow[];
+  return results[0] && flattenContactEmail(results[0]);
 }
 
 export async function getMissionaryById(id: string): Promise<PublicMissionaryRecord | undefined> {
-  const results = await directus.request(
+  const results = (await directus.request(
     readItems("missionaries", {
-      fields: [...MISSIONARY_PUBLIC_FIELDS],
+      fields: MISSIONARY_QUERY_FIELDS,
       filter: { id: { _eq: id } },
       limit: 1,
     }),
-  );
-  return results[0];
+  )) as unknown as MissionaryQueryRow[];
+  return results[0] && flattenContactEmail(results[0]);
 }
 
 export async function getUpdatesForMissionary(missionaryId: string): Promise<PublicNewsRecord[]> {

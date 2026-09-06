@@ -159,8 +159,10 @@
   }
 }
 
-/* Font families are bound in the RootLayout via next/font, which sets these
-   CSS vars on <html>; `inline` because they reference those runtime vars. */
+/* Font families are bound in the RootLayout via next/font/local (self-hosted
+   files in src/fonts, not next/font/google — see layout.tsx for why), which
+   sets these CSS vars on <html>; `inline` because they reference those
+   runtime vars. */
 @theme inline {
   --font-display: var(--font-fraunces);
   --font-body: var(--font-source-sans);

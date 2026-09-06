@@ -1,18 +1,20 @@
 import * as React from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowLeft, HandHeart, Heart, Mail, MapPin } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { PageTemplate } from "@/components/templates/PageTemplate";
-import { Button } from "@/components/atoms/Button";
-import { Divider } from "@/components/atoms/Divider";
-import { PhotoPlaceholder } from "@/components/molecules/PhotoPlaceholder";
-import { NewsCard } from "@/components/molecules/NewsCard";
-import { UpdateCard } from "@/components/molecules/UpdateCard";
+import { AboutCTA } from "@/components/organisms/about";
+import {
+  FieldUpdatesIndex,
+  MissionaryCardFace,
+  MissionaryDossier,
+  PrayerPoints,
+} from "@/components/organisms/missionary";
 import type {
   PublicPrayerRequestRecord,
   PublicMissionaryRecord,
   PublicNewsRecord,
 } from "@/lib/directus/schema";
+import { normalizeMissionaryBio } from "@/lib/missionary-bio";
 
 export interface MissionaryProfileTemplateProps {
   missionary: PublicMissionaryRecord;
@@ -23,8 +25,13 @@ export interface MissionaryProfileTemplateProps {
 }
 
 /**
- * Missionary profile page — portrait + support rail on the left, story on the
- * right, followed by prayer requests and field updates. Composes PageTemplate.
+ * Missionary profile — the prayer card at page scale.
+ *
+ * Card face (the opening: family photograph where there is one, terra masthead with a tipped-in
+ * portrait where there is not) → the reverse (fact rail, then the story) → the prayer points you
+ * pray down → the ledger of updates → the response slip. The previous layout's sticky support rail
+ * is gone: the ask now closes the page, where a supporter arrives at it having read the reason for
+ * it, rather than being asked for money beside the first paragraph.
  */
 export function MissionaryProfileTemplate({
   missionary: m,
@@ -32,107 +39,56 @@ export function MissionaryProfileTemplate({
   prayerRequests,
 }: MissionaryProfileTemplateProps) {
   const firstName = m.name.split(" ")[0];
-  const bio = m.bio?.length ? m.bio : [m.intro];
+  const normalizedBio = normalizeMissionaryBio(m.bio);
+  const bio = (normalizedBio?.trim() ? normalizedBio : m.intro)
+    .split(/\n\s*\n/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
+  const hasFamilyPhoto = Boolean(m.familyImage);
 
   return (
     <PageTemplate>
-      <section className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12">
+      <MissionaryCardFace
+        name={m.name}
+        place={m.place}
+        roles={m.roles}
+        image={m.image}
+        familyImage={m.familyImage}
+        familyCaption={m.familyCaption}
+      />
+
+      <div className="mx-auto max-w-(--container-max) px-5 py-6 sm:px-12 sm:py-7">
         <Link
           href="/missionaries"
-          className="mb-8 inline-flex items-center gap-1.5 font-ui text-sm font-semibold text-link"
+          className="inline-flex items-center gap-1.5 font-ui text-sm font-semibold text-link underline-offset-4 hover:underline"
         >
-          <ArrowLeft size={15} /> All missionaries
+          <ArrowLeft size={15} aria-hidden /> All missionaries
         </Link>
+      </div>
 
-        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-14">
-          {/* Portrait + support rail */}
-          <div className="lg:sticky lg:top-[calc(var(--site-header-stack-height,116px)+24px)] lg:transition-[top] lg:duration-300">
-            {m.image ? (
-              <div className="relative aspect-4/5 overflow-hidden rounded-lg border border-hair bg-sunk shadow-md">
-                <Image src={`/media/${m.image}`} alt={`${m.name} portrait`} fill sizes="(min-width: 1024px) 35vw, 100vw" className="object-cover" priority />
-              </div>
-            ) : (
-              <PhotoPlaceholder caption={`${m.name} portrait`} person={m.name} aspect="4/5" />
-            )}
-            <div className="mt-5 rounded-lg border border-hair bg-sunk p-5">
-              <h2 className="mb-1.5 font-display text-md font-semibold text-strong">
-                Partner with {firstName}
-              </h2>
-              <p className="mb-4 font-body text-sm leading-relaxed text-body">
-                Missionaries serve through the monthly support and prayers of partners. Your gift
-                goes directly to this ministry.
-              </p>
-              <div className="flex flex-col gap-2.5">
-                <Button href="/give" variant="accent" iconLeft={<Heart size={16} />}>
-                  Support {firstName}
-                </Button>
-                <Button href="/contact" variant="secondary" iconLeft={<Mail size={16} />}>
-                  Send a greeting
-                </Button>
-              </div>
-            </div>
-          </div>
+      <MissionaryDossier
+        name={m.name}
+        place={m.place}
+        bio={bio}
+        portrait={m.image}
+        showPortrait={hasFamilyPhoto}
+        email={m.email}
+      />
 
-          {/* Story */}
-          <div>
-            <div className="mb-1.5 flex items-center gap-1.5 font-ui text-sm font-bold uppercase tracking-wide text-green-700">
-              <MapPin size={15} /> {m.place}
-            </div>
-            <h1 className="mb-2 font-display text-2xl font-semibold leading-tight text-strong sm:text-3xl">
-              {m.name}
-            </h1>
-            <div className="mb-6 font-ui text-sm text-faint">{m.roles}</div>
-            <Divider variant="accent" width={56} className="mb-6" />
-            <div className="space-y-5 pr-5">
-              {bio.map((paragraph, i) => (
-                <p key={i} className="font-body text-md leading-relaxed text-body">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <PrayerPoints firstName={firstName} requests={prayerRequests} />
 
-      {prayerRequests.length > 0 && (
-        <section className="border-t border-hair bg-sunk">
-          <div className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12">
-            <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <h2 className="mb-1.5 font-display text-2xl font-semibold text-strong">
-                  Pray with {firstName}
-                </h2>
-                <p className="font-body text-base text-body">
-                  Current prayer requests from the field.
-                </p>
-              </div>
-              <Button href="/prayer" variant="ghost" size="sm" iconLeft={<HandHeart size={15} />}>
-                All prayer requests
-              </Button>
-            </div>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-              {prayerRequests.map((u) => (
-                <UpdateCard key={u.id} update={u} authorName={m.name} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      <FieldUpdatesIndex updates={fieldUpdates} authorName={m.name} />
 
-      {fieldUpdates.length > 0 && (
-        <section className="border-t border-hair">
-          <div className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12">
-            <h2 className="mb-8 font-display text-2xl font-semibold text-strong">
-              Updates from the field
-            </h2>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-              {fieldUpdates.map((u) => (
-                <NewsCard key={u.id} item={u} authorName={m.name} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      <div className="pt-16 sm:pt-20">
+        <AboutCTA
+          flush
+          flat
+          title={`Stand with ${firstName}`}
+          body="Missionaries serve on the monthly support and the prayers of partners. A gift here goes to this ministry; a greeting reaches them on the field."
+          primary={{ label: `Support ${firstName}`, href: "/give" }}
+          secondary={{ label: "Send a greeting", href: "/contact" }}
+        />
+      </div>
     </PageTemplate>
   );
 }

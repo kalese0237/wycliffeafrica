@@ -94,11 +94,27 @@ export interface MissionaryRecord {
   place: string;
   roles: string;
   intro: string;
-  /** Longer profile paragraphs for the missionary profile page. */
-  bio?: string[] | null;
+  /** Longer profile prose for the missionary profile page — paragraphs separated by a blank line. */
+  bio?: string | null;
   /** Directus user id owning this profile — links portal logins to the record. */
   user?: string | null;
+  /**
+   * Public contact address — not a stored column, but the linked portal account's login email
+   * (`user.email`), joined in at query time. Missionaries without a portal account have none, so
+   * callers fall back to the general contact page rather than assuming every profile has one.
+   */
+  email?: string | null;
+  /** Portrait, 4:5. The face on the prayer card. */
   image?: string | null;
+  /**
+   * Optional landscape photograph of the whole household. Many of our workers
+   * serve as couples or families, and a portrait alone under-represents who
+   * the supporter is actually praying for. When present it becomes the
+   * profile's opening; when absent the profile opens on the terra masthead.
+   */
+  familyImage?: string | null;
+  /** Names the people in `familyImage`, e.g. "Samuel and Grace with Akiru and Ekitela". */
+  familyCaption?: string | null;
 }
 
 export type PublicMissionaryRecord = Omit<MissionaryRecord, "user">;

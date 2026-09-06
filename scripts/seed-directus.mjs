@@ -299,7 +299,10 @@ const FAQS = [
 
 // ------------------------------------------------------------ field helpers
 
-const stringPk = { field: "id", type: "string", schema: { is_primary_key: true, length: 64 }, meta: { interface: "input", readonly: true } };
+// String column (existing rows keep readable ids like "otieno"), but
+// special:["uuid"] tells the admin app to auto-fill a UUID on create
+// instead of requiring a manually typed value.
+const stringPkAuto = { field: "id", type: "string", schema: { is_primary_key: true, length: 64 }, meta: { special: ["uuid"], interface: "input", readonly: true } };
 const uuidPk = { field: "id", type: "uuid", schema: { is_primary_key: true }, meta: { special: ["uuid"], readonly: true } };
 const str = (field, opts = {}) => ({ field, type: "string", schema: {}, meta: { interface: "input", ...opts } });
 const text = (field) => ({ field, type: "text", schema: {}, meta: { interface: "input-multiline" } });
@@ -311,13 +314,13 @@ const COLLECTIONS = [
     collection: "missionaries",
     meta: { icon: "person", note: "Serving missionaries shown on the website" },
     fields: [
-      stringPk,
+      stringPkAuto,
       str("slug"),
       str("name"),
       str("place"),
       str("roles"),
       text("intro"),
-      json("bio"),
+      text("bio"),
       { field: "user", type: "uuid", schema: {}, meta: { interface: "select-dropdown-m2o", note: "Portal login that owns this profile" } },
       str("image"),
     ],
@@ -383,12 +386,12 @@ const COLLECTIONS = [
   {
     collection: "resources",
     meta: { icon: "folder" },
-    fields: [stringPk, str("type"), str("title"), str("meta"), str("href")],
+    fields: [stringPkAuto, str("type"), str("title"), str("meta"), str("href")],
   },
   {
     collection: "faqs",
     meta: { icon: "help" },
-    fields: [stringPk, str("question"), text("answer")],
+    fields: [stringPkAuto, str("question"), text("answer")],
   },
 ];
 

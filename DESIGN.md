@@ -169,7 +169,7 @@ components:
 
 Wycliffe Africa reads as a printed thing that happens to be on the web: a confession, a prospectus, a roster. The ground is warm cream, the openings are dark terracotta bands, and the content beneath them is set as ruled series — hanging numerals in their own column, a 2px rule under the section head, 1px hairlines between entries — rather than as tiles. Readers arriving here are vetting: a pastor weighing doctrine, a prospective missionary weighing a school, a donor weighing governance. The document grammar is the argument that these words are owned and can be read closely, printed, forwarded.
 
-The world is flat where it is editorial and lifted only where something is genuinely an object. Long-form surfaces (the creed, the article lists, the training index, the core values) carry no shadow and no card at all; elevation is reserved for the small collectible units — a board portrait tile, a header dropdown, an image frame. Photography is used sparingly and always full-bleed under a heavy terra-900 scrim, never as a decorative inset beside prose. Where content has not been supplied, the build ships a visibly marked placeholder rather than a plausible-looking fact; that honesty is part of the visual system, not a temporary state.
+The world is flat where it is editorial and lifted only where something is genuinely an object. Long-form surfaces (the creed, the article lists, the training index, the core values) carry no shadow and no card at all; elevation is reserved for the small collectible units — a board portrait tile, a header dropdown, an image frame. Photography is used sparingly and in two forms only: full-bleed under a heavy terra-900 scrim, or a captioned figure standing in its own column with a folio beneath it. It is never a decorative inset beside prose. Where content has not been supplied, the build ships a visibly marked placeholder rather than a plausible-looking fact; that honesty is part of the visual system, not a temporary state.
 
 Anti-references confirmed by the build: the mission-statement-over-tiles arrangement, the directory of equal-sized logo cards, doctrine buried in an accordion.
 
@@ -251,21 +251,25 @@ The signature spatial move is the **two-column document grid**: a fixed narrow l
 
 Grids for collectible objects are exception, not rule: the board is 2 / 3 / 5 across so ten members fill complete rows, and the history rail is 1 / 2 / 4 across. Header offsets are tokenised (`--site-topbar-height` 42px, `--site-main-header-height` 74px) and every anchor scrolls to `header-stack + 24px`.
 
+A full-bleed photographic opening resolves differently at the two ends of the range. Below `sm` the image sits in the flow at its own aspect (16:9) with no scrim and the type block beneath it on solid terra-900; from `sm` up the same element goes absolute and the type overlays it under the scrim. It is one image element and one type block, not two components — a landscape photograph cropped to a short band loses its subject on a phone, and type over the thinnest stop of the scrim does not hold contrast at that width.
+
 ### Named Rules
 **The Shared Left Edge Rule.** In any numbered series, the numeral hangs in its own fixed column so every entry title starts on the same left edge. The list scans as a series; a numeral inline with the title breaks it.
+
+**The Scrim-Or-Solid Rule.** Type sits over a photograph only where the scrim was built for it. Where the composition cannot carry the scrim — narrow viewports, a subject that would be cropped away — the image drops into the flow and the type moves onto solid ground beneath it. Type is never set on a weakened scrim to keep one composition.
 
 **The Measure Rule.** No prose block runs unbounded. Standfirsts cap at 50-60ch, article statements at 66ch, creed statements at 34ch, notes at 68-74ch, and display headlines at 15-18ch with `text-balance`.
 
 ## Elevation & Depth
 
-The system is **flat where it is editorial and lifted only where something is an object**. Every long-form surface — the creed band, article lists, core values, the training index, the endnote — carries no shadow whatsoever. Depth on those surfaces is made from three things instead: tonal ground shifts (cream to `paper-1` for a recessed band), rule weight (2px above, 1px between), and the dark terra band that separates one movement of the page from the next.
+The system is **flat where it is editorial and lifted only where something is an object**. Every long-form surface — the creed band, article lists, core values, the training index, the endnote — carries no shadow whatsoever. Depth on those surfaces is made from three things instead: tonal ground shifts (cream to `paper-1` for a recessed band), rule weight (2px above, 1px between), and the dark terra band that separates one movement of the page from the next. The sunk band can carry a section on its own: a `paper-1` ground closed top and bottom by hairlines marks the section without a heading or a 2px rule above it, the tone change doing the work a section head would otherwise do. A full-bleed sunk band centres its measure rather than pinning it left: a 66ch column against the left edge of a 1200px container leaves half the ground empty and reads as a missing second column, where the same column centred reads as the leaf of a book.
 
 Shadows exist and are used, but only on discrete objects: a board portrait tile, an image frame, a header dropdown, a button at rest. They are warm and low — the token comment calls them "paper lifting off a desk" — and none of them is offset or hard-edged.
 
 ### Shadow Vocabulary
 - **Resting** (`box-shadow: 0 1px 2px rgba(60, 35, 10, 0.07)`): buttons and small tiles at rest. Barely present; it separates the object from the paper and no more.
 - **Object** (`box-shadow: 0 3px 12px rgba(60, 35, 10, 0.1)`): image frames and photo placeholders — anything that stands for a physical print.
-- **Floating** (`box-shadow: 0 12px 34px rgba(60, 35, 10, 0.15)`): only for things that leave the flow, i.e. the header navigation dropdown.
+- **Floating** (`box-shadow: 0 12px 34px rgba(60, 35, 10, 0.15)`): things that leave the flow (the header navigation dropdown) and the portrait tipped onto a terra-900 band, where the resting and object shadows have no cream left to read against.
 - **Pressed** (`box-shadow: inset 0 1px 2px rgba(60, 35, 10, 0.1)`): the active state of a button.
 - **Focus glow** (`box-shadow: 0 0 0 3px var(--color-spark-tint)`): input focus-within only, paired with a green border.
 
@@ -313,7 +317,15 @@ Two texture treatments recur, both `aria-hidden`: faint vertical column rules ac
 - **Footer:** Deep forest green ground, white/72 body text, green-300 for column headings and leading icons, a white/12 hairline above the legal strip.
 
 ### Masthead (signature)
-Dark terra-900 band, faint vertical column rules behind. A head row runs an optional division label at the left, a hairline that flexes to fill the middle, and the uppercase rubric at the right. Below it, the 76px Fraunces H1 with its tail word in `terra-300` italic, then a standfirst in `terra-100`. This is the non-photographic opening; the photographic sibling (`AboutPhotoHero`) is the same type block set bottom-left on a full-bleed image under a four-stop terra scrim.
+Dark terra-900 band, faint vertical column rules behind. A head row runs an optional division label at the left, a hairline that flexes to fill the middle, and the uppercase rubric at the right. Below it, the 76px Fraunces H1 with its tail word in `terra-300` italic, then a standfirst in `terra-100`. This is the non-photographic opening; the photographic sibling is the same type block set bottom-left on a full-bleed image under a four-stop terra scrim.
+
+The two openings are one card stock, and a single template may choose between them from the record rather than from the page: where a photograph exists it takes the ground, where it does not the masthead does, and the rubric row, the H1 with its tail word in `terra-300` italic, the standfirst and the folio are identical across both. Only the ground changes — and with it the rubric row's colour, which lifts from `terra-300` with a `terra-300/40` hairline on solid terra-900 to `terra-100` with a `terra-100/40` hairline over photography, because clay does not hold on the thinnest stop of a scrim.
+
+**The One Card Stock Rule.** Where a surface has two openings, they differ in ground only. Same rubric row, same type block, same folio; a second opening is never a second layout.
+
+### Closing CTA Band
+- **Default:** full-bleed team photograph under a left-weighted terra scrim (97% / 90% / 78%), heading and body at the left, accent and ghost buttons at the right.
+- **Flat:** solid terra-900 carrying the masthead's column-rule texture in place of the photograph. Used where the page already opened on a photograph under a scrim, so the close does not read as the opening again.
 
 ### Index Row (signature)
 The unit of every ruled series: a grid of `[numeral | content]`, the numeral hanging in Fraunces terracotta, the content a title in the display face with a description beneath in the body face and — where the row links out — a lowercase host folio plus a 14px arrow at the far right. The whole row is one link with a 2px green focus outline at 4px offset. Bottom hairline; no card, no fill, no hover background. Hover underlines the title and warms the folio to terracotta.
@@ -344,4 +356,4 @@ The budget is deliberately small: **one authored motion moment per page**, plus 
 - **Don't** use Gentium for anything but Scripture, or JetBrains Mono for anything but codes and reference numbers. A list ordinal is Fraunces.
 - **Don't** use green as a heading colour, a prose background, or a decorative fill. Green is action, links and focus.
 - **Don't** use a dashed border for anything other than a pending-content note.
-- **Don't** place an image beside body prose as decoration; photography is full-bleed under a terra scrim or it is not on the page.
+- **Don't** place an image beside body prose as decoration. Photography is full-bleed under a terra scrim, or it is a captioned figure — its own column, its own aspect, a folio naming where it was made — or it is not on the page. A picture that carries no caption and names nothing is decoration.

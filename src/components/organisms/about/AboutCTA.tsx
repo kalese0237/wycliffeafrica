@@ -12,6 +12,12 @@ export interface AboutCTAProps {
   imageAlt?: string;
   /** Drops the top margin where the band follows a section that already owns its own ground. */
   flush?: boolean;
+  /**
+   * Closes on solid terra-900 with the masthead's column rules instead of the team photograph. For
+   * pages that already opened on a full-bleed photograph under a scrim, where repeating the move
+   * makes the close read as the opening again.
+   */
+  flat?: boolean;
 }
 
 /**
@@ -28,27 +34,37 @@ export function AboutCTA({
   image = "/Missionaries/wycliffe-africa-team.webp",
   imageAlt = "The Wycliffe Africa team gathered together",
   flush = false,
+  flat = false,
 }: AboutCTAProps) {
   return (
     <section className={cn(
         "relative flex min-h-[300px] items-center overflow-hidden bg-terra-900",
         !flush && "mt-20 sm:mt-24",
       )}>
-      {/* Eager, not lazy: this band is full-bleed, and a lazy image leaves the whole close painted
-          flat terra until it arrives. The asset is one small webp already shared across the family. */}
-      <Image
-        src={image}
-        alt={imageAlt}
-        fill
-        loading="eager"
-        sizes="100vw"
-        className="object-cover"
-        style={{ objectPosition: "50% 40%" }}
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-[linear-gradient(90deg,rgba(42,20,10,0.97)_0%,rgba(42,20,10,0.9)_55%,rgba(42,20,10,0.78)_100%)]"
-      />
+      {flat ? (
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-[repeating-linear-gradient(to_right,transparent_0px,transparent_91px,rgba(243,217,196,0.09)_91px,rgba(243,217,196,0.09)_92px)]"
+        />
+      ) : (
+        <>
+          {/* Eager, not lazy: this band is full-bleed, and a lazy image leaves the whole close painted
+              flat terra until it arrives. The asset is one small webp already shared across the family. */}
+          <Image
+            src={image}
+            alt={imageAlt}
+            fill
+            loading="eager"
+            sizes="100vw"
+            className="object-cover"
+            style={{ objectPosition: "50% 40%" }}
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-[linear-gradient(90deg,rgba(42,20,10,0.97)_0%,rgba(42,20,10,0.9)_55%,rgba(42,20,10,0.78)_100%)]"
+          />
+        </>
+      )}
       <div className="relative z-10 mx-auto flex w-full max-w-(--container-max) flex-col gap-8 px-5 py-14 sm:px-12 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
         <div>
           <h2 className="max-w-[18ch] text-balance font-display text-xl font-normal leading-snug text-white sm:text-2xl">
