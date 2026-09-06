@@ -12,6 +12,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: "Invalid secret" }, { status: 401 });
   }
 
-  revalidateTag("directus-content");
+  // Next 16 requires a profile argument; "max" means purge immediately
+  // rather than reuse the tag's original cache-life window.
+  revalidateTag("directus-content", "max");
   return NextResponse.json({ revalidated: true, now: Date.now() });
 }
