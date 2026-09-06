@@ -33,13 +33,15 @@ const NEWS_RICH_PUBLIC_FIELDS = [
   "inlineImage",
   "inlineImageCaption",
 ] as const;
-const MISSIONARY_PUBLIC_FIELDS = ["id", "slug", "name", "place", "roles", "intro", "bio", "image", "familyImage", "familyCaption"] as const;
+const MISSIONARY_CORE_PUBLIC_FIELDS = ["id", "slug", "name", "place", "roles", "intro", "bio", "image", "familyImage", "familyCaption"] as const;
+const MISSIONARY_RICH_PUBLIC_FIELDS = [...MISSIONARY_CORE_PUBLIC_FIELDS, "pullQuote"] as const;
 /**
  * `user.email` is a relation into `directus_users`, a system collection our `DirectusSchema` map
  * doesn't model — the SDK has no way to type that join, so the field list and result both need a
  * manual cast at the boundary. `flattenContactEmail` does the actual reshaping.
  */
-const MISSIONARY_QUERY_FIELDS = [...MISSIONARY_PUBLIC_FIELDS, "user.email"] as unknown as (typeof MISSIONARY_PUBLIC_FIELDS)[number][];
+const missionaryQueryFields = (fields: readonly string[]) =>
+  [...fields, "user.email"] as unknown as (typeof MISSIONARY_RICH_PUBLIC_FIELDS)[number][];
 
 type MissionaryQueryRow = Omit<PublicMissionaryRecord, "email" | "bio"> & {
   bio?: unknown;
@@ -153,31 +155,89 @@ export async function getNewsBySlug(slug: string): Promise<PublicNewsRecord | un
   return results[0];
 }
 
+/**
+ * `pullQuote` was added after the original missionaries collection. Some deployments can briefly run
+ * the newer frontend before their Directus schema is migrated — fall back to the original field set
+ * instead of turning that rollout mismatch into a page-level server error.
+ */
+let richMissionaryFieldsSupported: boolean | undefined;
+
+function isUnsupportedRichMissionaryFields(error: unknown): boolean {
+  if (!error || typeof error !== "object") return false;
+  const message = "message" in error && typeof error.message === "string" ? error.message : "";
+  return message.includes("pullQuote");
+}
+
+async function withCompatibleMissionaryFields<T>(
+  richRequest: () => Promise<T>,
+  coreRequest: () => Promise<T>,
+): Promise<T> {
+  if (richMissionaryFieldsSupported === false) return coreRequest();
+  try {
+    const result = await richRequest();
+    richMissionaryFieldsSupported = true;
+    return result;
+  } catch (error) {
+    if (!isUnsupportedRichMissionaryFields(error)) throw error;
+    richMissionaryFieldsSupported = false;
+    return coreRequest();
+  }
+}
+
 export async function getMissionaries(): Promise<PublicMissionaryRecord[]> {
-  const results = (await directus.request(
-    readItems("missionaries", { fields: MISSIONARY_QUERY_FIELDS, sort: ["name"] }),
+  const results = (await withCompatibleMissionaryFields(
+    () =>
+      directus.request(
+        readItems("missionaries", { fields: missionaryQueryFields(MISSIONARY_RICH_PUBLIC_FIELDS), sort: ["name"] }),
+      ),
+    () =>
+      directus.request(
+        readItems("missionaries", { fields: missionaryQueryFields(MISSIONARY_CORE_PUBLIC_FIELDS), sort: ["name"] }),
+      ),
   )) as unknown as MissionaryQueryRow[];
   return results.map(flattenContactEmail);
 }
 
 export async function getMissionaryBySlug(slug: string): Promise<PublicMissionaryRecord | undefined> {
-  const results = (await directus.request(
-    readItems("missionaries", {
-      fields: MISSIONARY_QUERY_FIELDS,
-      filter: { slug: { _eq: slug } },
-      limit: 1,
-    }),
+  const results = (await withCompatibleMissionaryFields(
+    () =>
+      directus.request(
+        readItems("missionaries", {
+          fields: missionaryQueryFields(MISSIONARY_RICH_PUBLIC_FIELDS),
+          filter: { slug: { _eq: slug } },
+          limit: 1,
+        }),
+      ),
+    () =>
+      directus.request(
+        readItems("missionaries", {
+          fields: missionaryQueryFields(MISSIONARY_CORE_PUBLIC_FIELDS),
+          filter: { slug: { _eq: slug } },
+          limit: 1,
+        }),
+      ),
   )) as unknown as MissionaryQueryRow[];
   return results[0] && flattenContactEmail(results[0]);
 }
 
 export async function getMissionaryById(id: string): Promise<PublicMissionaryRecord | undefined> {
-  const results = (await directus.request(
-    readItems("missionaries", {
-      fields: MISSIONARY_QUERY_FIELDS,
-      filter: { id: { _eq: id } },
-      limit: 1,
-    }),
+  const results = (await withCompatibleMissionaryFields(
+    () =>
+      directus.request(
+        readItems("missionaries", {
+          fields: missionaryQueryFields(MISSIONARY_RICH_PUBLIC_FIELDS),
+          filter: { id: { _eq: id } },
+          limit: 1,
+        }),
+      ),
+    () =>
+      directus.request(
+        readItems("missionaries", {
+          fields: missionaryQueryFields(MISSIONARY_CORE_PUBLIC_FIELDS),
+          filter: { id: { _eq: id } },
+          limit: 1,
+        }),
+      ),
   )) as unknown as MissionaryQueryRow[];
   return results[0] && flattenContactEmail(results[0]);
 }

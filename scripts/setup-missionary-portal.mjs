@@ -211,6 +211,12 @@ async function main() {
     schema: {},
     meta: { interface: "input", note: "Names the people in the family photograph" },
   });
+  await ensureField("missionaries", {
+    field: "pullQuote",
+    type: "text",
+    schema: {},
+    meta: { interface: "input", note: "Optional sentence copied from bio, set apart after the opening paragraph" },
+  });
   await ensureField("news", {
     field: "missionaryId",
     type: "string",
