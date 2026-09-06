@@ -126,18 +126,6 @@ const MISSIONARIES = [
       "A certified accountant, he left corporate practice in 2018 because he wanted his ledgers to count for something eternal.",
     ],
   },
-  {
-    id: "njoroge",
-    slug: "peter-hannah-njoroge",
-    name: "Peter & Hannah Njoroge",
-    place: "Cameroon",
-    roles: "Bible Translation Advisors",
-    intro: "Peter and Hannah serve a cluster of related languages, training local translators and checking drafts with consultants.",
-    bio: [
-      "Peter and Hannah moved to Cameroon in 2019 to serve a cluster of four related languages in the Northwest. Rather than translating themselves, they train and mentor local translation teams — one team per language, sharing tools, terminology and checked drafts across the cluster.",
-      "Their joy is watching a community leader read a freshly checked chapter aloud and hearing the room answer back in recognition.",
-    ],
-  },
 ];
 
 const PRAYERS = [
@@ -147,15 +135,6 @@ const PRAYERS = [
     title: "Pray for the literacy workshop in Kakuma",
     body: "Miriam leaves next week to train twelve new literacy teachers. Pray for safe travel and for teachers eager to learn.",
     date: "June 2026",
-    status: "published",
-    sensitive: false,
-  },
-  {
-    type: "prayer",
-    missionaryId: "njoroge",
-    title: "Pray for Peter & Hannah's consultant check",
-    body: "An outside consultant arrives this month to check the drafted books. Pray for clarity, patience, and unity with the translation team.",
-    date: "May 2026",
     status: "published",
     sensitive: false,
   },

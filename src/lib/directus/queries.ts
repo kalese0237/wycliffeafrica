@@ -33,7 +33,7 @@ const NEWS_RICH_PUBLIC_FIELDS = [
   "inlineImage",
   "inlineImageCaption",
 ] as const;
-const MISSIONARY_CORE_PUBLIC_FIELDS = ["id", "slug", "name", "place", "roles", "intro", "bio", "image", "familyImage", "familyCaption"] as const;
+const MISSIONARY_CORE_PUBLIC_FIELDS = ["id", "slug", "status", "name", "place", "roles", "intro", "bio", "image", "familyImage", "familyCaption"] as const;
 const MISSIONARY_RICH_PUBLIC_FIELDS = [...MISSIONARY_CORE_PUBLIC_FIELDS, "pullQuote"] as const;
 /**
  * `user.email` is a relation into `directus_users`, a system collection our `DirectusSchema` map
@@ -226,6 +226,7 @@ export async function getMissionaries(): Promise<PublicMissionaryRecord[]> {
         directus.request(
           readItems("missionaries", {
             fields: missionaryQueryFields(MISSIONARY_RICH_PUBLIC_FIELDS, includeEmail),
+            filter: PUBLISHED,
             sort: ["name"],
           }),
         ),
@@ -233,6 +234,7 @@ export async function getMissionaries(): Promise<PublicMissionaryRecord[]> {
         directus.request(
           readItems("missionaries", {
             fields: missionaryQueryFields(MISSIONARY_CORE_PUBLIC_FIELDS, includeEmail),
+            filter: PUBLISHED,
             sort: ["name"],
           }),
         ),
@@ -248,7 +250,7 @@ export async function getMissionaryBySlug(slug: string): Promise<PublicMissionar
         directus.request(
           readItems("missionaries", {
             fields: missionaryQueryFields(MISSIONARY_RICH_PUBLIC_FIELDS, includeEmail),
-            filter: { slug: { _eq: slug } },
+            filter: { _and: [PUBLISHED, { slug: { _eq: slug } }] },
             limit: 1,
           }),
         ),
@@ -256,7 +258,7 @@ export async function getMissionaryBySlug(slug: string): Promise<PublicMissionar
         directus.request(
           readItems("missionaries", {
             fields: missionaryQueryFields(MISSIONARY_CORE_PUBLIC_FIELDS, includeEmail),
-            filter: { slug: { _eq: slug } },
+            filter: { _and: [PUBLISHED, { slug: { _eq: slug } }] },
             limit: 1,
           }),
         ),
@@ -272,7 +274,7 @@ export async function getMissionaryById(id: string): Promise<PublicMissionaryRec
         directus.request(
           readItems("missionaries", {
             fields: missionaryQueryFields(MISSIONARY_RICH_PUBLIC_FIELDS, includeEmail),
-            filter: { id: { _eq: id } },
+            filter: { _and: [PUBLISHED, { id: { _eq: id } }] },
             limit: 1,
           }),
         ),
@@ -280,7 +282,7 @@ export async function getMissionaryById(id: string): Promise<PublicMissionaryRec
         directus.request(
           readItems("missionaries", {
             fields: missionaryQueryFields(MISSIONARY_CORE_PUBLIC_FIELDS, includeEmail),
-            filter: { id: { _eq: id } },
+            filter: { _and: [PUBLISHED, { id: { _eq: id } }] },
             limit: 1,
           }),
         ),
