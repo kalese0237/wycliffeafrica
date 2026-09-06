@@ -20,8 +20,8 @@ export interface NewsRecord {
   category: NewsCategory;
   title: string;
   excerpt: string;
-  /** Body paragraphs for the detail page. */
-  body?: string[] | null;
+  /** Body copy for the detail page; paragraphs are separated by a blank line. */
+  body?: string | null;
   /** Staff byline — set for `story` and `project` posts. */
   author?: string | null;
   /** Links to the authoring missionary — set for `update` posts. */

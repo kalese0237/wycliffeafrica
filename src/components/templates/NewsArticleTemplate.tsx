@@ -38,8 +38,12 @@ export function NewsArticleTemplate({
   prayers = [],
 }: NewsArticleTemplateProps) {
   const author = item.category === "update" ? missionary?.name ?? "Wycliffe Africa" : item.author;
-  const hasBody = Boolean(item.body?.length);
-  const paragraphs = item.body?.length ? item.body : [item.excerpt];
+  const bodyText = item.body?.trim();
+  const hasBody = Boolean(bodyText);
+  const paragraphs = (bodyText || item.excerpt)
+    .split(/\n\s*\n/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
   const meta = [item.place, item.date, `${readingMinutes(paragraphs)} min read`]
     .filter(Boolean)
     .join(" · ");
