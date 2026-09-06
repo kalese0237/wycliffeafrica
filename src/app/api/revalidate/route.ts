@@ -12,8 +12,10 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: "Invalid secret" }, { status: 401 });
   }
 
-  // Next 16 requires a profile argument; "max" means purge immediately
-  // rather than reuse the tag's original cache-life window.
-  revalidateTag("directus-content", "max");
+  // Next 16 requires a profile argument. Named profiles like "max" only
+  // mark the tag stale while pushing its expiry a year out, so cached
+  // pages never actually count as expired. { expire: 0 } is what forces
+  // an immediate, blocking regeneration on the next request.
+  revalidateTag("directus-content", { expire: 0 });
   return NextResponse.json({ revalidated: true, now: Date.now() });
 }
