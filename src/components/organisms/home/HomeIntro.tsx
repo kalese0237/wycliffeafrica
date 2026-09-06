@@ -1,54 +1,79 @@
 import * as React from "react";
 import Image from "next/image";
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/atoms/Button";
+import { Divider } from "@/components/atoms/Divider";
+
+const ROLES = [
+  "Linguists",
+  "Translators",
+  "Literacy teachers",
+  "Ethnomusicologists",
+  "Computer specialists",
+  "Administrators",
+];
 
 export function HomeIntro() {
   return (
-    <section className="mx-auto grid max-w-(--container-max) grid-cols-1 gap-10 px-5 py-20 sm:px-12 lg:grid-cols-2 lg:gap-16">
-      <div>
-        <h2 className="mb-5 font-display text-2xl font-semibold leading-[1.1] text-strong">
-          Changing lives through Bible translation in Africa
-        </h2>
-        <div className="space-y-4 font-body text-base leading-relaxed text-body">
-          <p>
-            Church planters can&apos;t effectively share the gospel and faithfully disciple new believers without
-            God&apos;s written word. Christian radio can&apos;t beam Scripture into remote areas unless it has been
-            translated.
-          </p>
-          <p>
-            Evangelism, teaching and worship are all hampered when people don&apos;t have a Bible in a language
-            they understand well. Hundreds of African language groups still have no Scripture at all. Millions
-            of people remain cut off from God&apos;s Word.
-          </p>
-          <p>
-            How do Scriptures become available where they are still needed? Only through a broad, skilled team:
-            linguists, translators, literacy teachers, ethnomusicologists, computer specialists, administrators.
-          </p>
-          <p>
-            Perhaps someone like you. If this is work you could see yourself in, contact us. The ways to get
-            involved are below.
-          </p>
+    <section className="mx-auto max-w-(--container-max) px-5 py-20 sm:px-12">
+      <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+        <div className="lg:self-start">
+          <div className="font-ui text-xs font-bold uppercase tracking-caps-loose text-accent-hover">
+            Why translation
+          </div>
+          <Divider variant="accent" width={56} className="mb-6 mt-4" />
+          <h2 className="max-w-[16ch] font-display text-2xl font-semibold leading-[1.08] text-strong">
+            Changing lives through Bible translation in Africa
+          </h2>
+
+          <div className="relative mt-8 aspect-4/3 overflow-hidden rounded-lg border border-hair shadow-md">
+            <Image
+              src="/photos/pexels-olukoya-isreal-ayomikun-2057424626-34221789.jpg"
+              alt="A woman reading Scripture in her own language"
+              fill
+              sizes="(min-width: 1024px) 38vw, 90vw"
+              className="object-cover"
+              style={{ objectPosition: "50% 40%" }}
+            />
+          </div>
         </div>
-      </div>
-      <div className="relative pb-8">
-        <div className="relative z-0 aspect-4/3 overflow-hidden rounded-lg border border-hair shadow-md">
-          <Image
-            src="/photos/pexels-tima-miroshnichenko-6860497.jpg"
-            alt="A woman in prayer"
-            fill
-            sizes="(min-width: 1024px) 25vw, 45vw"
-            className="object-cover"
-            style={{ objectPosition: "50% 35%" }}
-          />
-        </div>
-        <div className="relative z-10 -mt-16 ml-12 aspect-4/3 overflow-hidden rounded-lg border border-hair shadow-md">
-          <Image
-            src="/photos/pexels-olukoya-isreal-ayomikun-2057424626-34221789.jpg"
-            alt="Reading Scripture in a heart language"
-            fill
-            sizes="(min-width: 1024px) 25vw, 45vw"
-            className="object-cover"
-            style={{ objectPosition: "50% 40%" }}
-          />
+
+        <div>
+          <p className="font-body text-md leading-[1.5] text-strong sm:text-lg">
+            A church planter can only preach what people can read. A radio station can only broadcast Scripture
+            that has been translated. Everything the church does downstream depends on the Word arriving first.
+          </p>
+
+          <div className="mt-6 space-y-4 font-body text-base leading-relaxed text-body">
+            <p>
+              Where it has not arrived, worship, teaching and evangelism all run at half strength. Hundreds of
+              African language groups still have no Scripture in the language they think and pray in. Millions of
+              people are waiting on a book that has never been written in their words.
+            </p>
+            <p>
+              That work is never done by one person. A single translation project takes years and a whole team
+              standing behind it &mdash; and the team needs far more than translators.
+            </p>
+          </div>
+
+          <ul className="mt-8 grid grid-cols-2 gap-x-6 border-t border-hair sm:grid-cols-3">
+            {ROLES.map((role) => (
+              <li
+                key={role}
+                className="border-b border-hair py-3 font-ui text-xs font-semibold uppercase tracking-caps-loose text-muted"
+              >
+                {role}
+              </li>
+            ))}
+          </ul>
+
+          <p className="mt-8 font-body text-base leading-relaxed text-body">
+            Perhaps someone like you. If this is work you could see yourself in, we would like to hear from you.
+          </p>
+
+          <Button href="/contact" variant="accent" iconRight={<ArrowRight size={16} />} className="mt-6">
+            Get involved
+          </Button>
         </div>
       </div>
     </section>
