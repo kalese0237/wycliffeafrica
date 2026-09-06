@@ -6,7 +6,7 @@ colors:
   paper-0: "#ffffff"
   paper-1: "#fdf7ec"
   paper-2: "#f3e9d6"
-  paper-3: "#eadfcf"
+  paper-3: "#e3ddd6"
   ink-0: "#17140f"
   ink-1: "#3a332b"
   ink-2: "#514940"
