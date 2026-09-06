@@ -6,6 +6,7 @@ import { NewsletterSignup } from "@/components/molecules/NewsletterSignup";
 
 const involvedLinks: [string, string][] = [
   ["Pray with us", "/prayer"],
+  ["Prayer requests", "/prayer/requests"],
   ["Become a member", "/involved"],
   ["Serve part-time", "/involved"],
   ["Support a missionary", "/missionaries"],

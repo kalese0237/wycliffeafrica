@@ -47,7 +47,7 @@ const TOPICS: NewsTopic[] = [
   {
     value: "prayer",
     label: "Prayer requests",
-    href: "/prayer",
+    href: "/prayer/requests",
     image: "/photos/pexels-mbaraga-bernard-2158456013-35388499.jpg",
     imagePosition: "22% 45%",
   },

@@ -19,8 +19,8 @@ const WAYS: { icon: LucideIcon; title: string; body: string; href: string }[] = 
   {
     icon: HandHeart,
     title: "Pray",
-    body: "Join the prayer network and pray for translators and their communities by name.",
-    href: "/involved",
+    body: "Pray for translators and the communities still waiting, by name and by project.",
+    href: "/prayer",
   },
   {
     icon: UserPlus,
