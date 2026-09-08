@@ -33,7 +33,7 @@ export function MembershipSteps({ steps, standfirst, figure }: MembershipStepsPr
           <p className="max-w-[62ch] font-body text-md leading-relaxed text-body sm:text-lg">{standfirst}</p>
 
           {steps.map((step, index) => (
-            <section key={step.id} id={step.id} className="mt-14 max-w-[760px] scroll-mt-28 first:mt-12">
+            <section key={step.id} id={step.id} className="reveal mt-14 max-w-[760px] scroll-mt-28 first:mt-12">
               <div className="flex flex-col gap-2 pb-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-10">
                 <h2 className="flex items-baseline gap-4 font-display text-2xl font-normal leading-snug text-strong sm:text-3xl">
                   <span aria-hidden className="font-display text-sm text-primary">
@@ -76,7 +76,7 @@ export function MembershipSteps({ steps, standfirst, figure }: MembershipStepsPr
                   )}
 
                   {figure?.stepId === step.id && (
-                    <figure className="mt-8 max-w-[540px]">
+                    <figure className="reveal mt-8 max-w-[540px]">
                       <div className="relative aspect-4/3 overflow-hidden rounded-lg border border-hair shadow-md">
                         <Image
                           src={figure.src}

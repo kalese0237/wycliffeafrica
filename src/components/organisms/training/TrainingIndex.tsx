@@ -46,7 +46,7 @@ export function TrainingIndex({ countries, standfirst, moreHref, moreLabel, more
           {countries.map((entry, index) => (
             <section key={entry.id} id={entry.id} className="mt-14 scroll-mt-28 first:mt-12">
               <div className="flex items-baseline justify-between gap-6 pb-3">
-                <h2 className="wonk flex items-baseline gap-4 font-display text-2xl font-normal leading-snug text-strong sm:text-3xl">
+                <h2 className="reveal wonk flex items-baseline gap-4 font-display text-2xl font-normal leading-snug text-strong sm:text-3xl">
                   <span aria-hidden className="font-display text-sm text-primary">
                     {ROMAN[index] ?? index + 1}
                   </span>
@@ -62,7 +62,7 @@ export function TrainingIndex({ countries, standfirst, moreHref, moreLabel, more
 
               <ol>
                 {entry.programmes.map((programme, programmeIndex) => (
-                  <li key={programme.href} className="border-b border-hair">
+                  <li key={programme.href} className="reveal border-b border-hair">
                     <a
                       href={programme.href}
                       target="_blank"

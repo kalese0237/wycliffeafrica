@@ -30,16 +30,16 @@ export function ServeGiveCards() {
   return (
     <section className="border-y border-hair bg-sunk">
       <div className="mx-auto max-w-(--container-max) px-5 py-16 sm:px-12 sm:py-20">
-        <h2 className="font-display text-2xl font-semibold leading-[1.1] text-strong">
+        <h2 className="reveal font-display text-2xl font-semibold leading-[1.1] text-strong">
           Three ways in
         </h2>
         <div className="mt-5 h-[2px] w-full bg-ink-0" />
 
-        <div className="grid grid-cols-1 md:grid-cols-3">
+        <div className="reveal-group grid grid-cols-1 md:grid-cols-3">
           {WAYS.map(({ title, href, body, cta }) => (
             <div
               key={title}
-              className="flex flex-col border-b border-hair py-8 last:border-b-0 md:border-b-0 md:border-l md:py-10 md:pl-8 md:first:border-l-0 md:first:pl-0 md:not-first:ml-8 md:last:pr-0"
+              className="reveal flex flex-col border-b border-hair py-8 last:border-b-0 md:border-b-0 md:border-l md:py-10 md:pl-8 md:first:border-l-0 md:first:pl-0 md:not-first:ml-8 md:last:pr-0"
             >
               <h3 className="font-display text-lg font-semibold leading-[1.2] text-strong">{title}</h3>
               <p className="mt-3 max-w-[46ch] flex-1 font-body text-base leading-[1.6] text-body">{body}</p>

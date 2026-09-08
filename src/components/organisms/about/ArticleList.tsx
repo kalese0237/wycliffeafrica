@@ -31,7 +31,7 @@ export function ArticleList({ eyebrow, title, rubric, items, coda, id }: Article
       id={id}
       className="mx-auto grid max-w-(--container-max) grid-cols-1 gap-x-16 gap-y-8 px-5 pt-16 sm:px-12 sm:pt-20 lg:grid-cols-[minmax(220px,1fr)_1.9fr]"
     >
-      <div className="lg:sticky lg:top-28 lg:self-start">
+      <div className="reveal lg:sticky lg:top-28 lg:self-start">
         <p className="mb-3.5 font-ui text-xs font-semibold uppercase tracking-caps text-primary-active">
           {eyebrow}
         </p>
@@ -50,7 +50,7 @@ export function ArticleList({ eyebrow, title, rubric, items, coda, id }: Article
           {items.map((item, index) => (
             <li
               key={item}
-              className="grid grid-cols-[44px_1fr] border-b border-hair py-6 last:border-b-0 sm:grid-cols-[70px_1fr]"
+              className="reveal grid grid-cols-[44px_1fr] border-b border-hair py-6 last:border-b-0 sm:grid-cols-[70px_1fr]"
             >
               <span aria-hidden className="pt-1 font-display text-sm font-semibold tracking-wide text-primary">
                 {ROMAN[index] ?? index + 1}
@@ -61,7 +61,7 @@ export function ArticleList({ eyebrow, title, rubric, items, coda, id }: Article
         </ol>
 
         {coda && (
-          <p className="max-w-[66ch] border-t border-hair pt-7 font-display text-base italic leading-relaxed text-muted sm:text-md">
+          <p className="reveal max-w-[66ch] border-t border-hair pt-7 font-display text-base italic leading-relaxed text-muted sm:text-md">
             {coda}
           </p>
         )}

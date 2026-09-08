@@ -16,6 +16,12 @@ const involvedLinks: [string, string][] = [
   ["Missionary portal", "/portal/login"],
 ];
 
+const LEGAL_LINKS: [string, string][] = [
+  ["Privacy", "/faqs"],
+  ["Statement of Faith", "/faqs"],
+  ["Financial accountability", "/faqs"],
+];
+
 const contactRows: { icon: LucideIcon; text: string }[] = [
   { icon: MapPin, text: "Masaba Road, Nairobi – Kenya" },
   { icon: Mail, text: "info@wycliffeafrica.org" },
@@ -42,9 +48,13 @@ export function SiteFooter() {
               <Link
                 key={label}
                 href={href}
-                className="flex items-center gap-1.5 py-1.5 font-ui text-base text-white/72 hover:text-white"
+                className="group flex items-center gap-1.5 py-1.5 font-ui text-base text-white/72 transition-colors duration-130 ease-[cubic-bezier(0.4,0,0.2,1)] hover:text-white"
               >
-                <ChevronRight size={14} className="flex-none text-green-300" /> {label}
+                <ChevronRight
+                  size={14}
+                  className="flex-none text-green-300 transition-transform duration-130 ease-out group-hover:translate-x-0.5"
+                />{" "}
+                {label}
               </Link>
             ))}
           </div>
@@ -72,9 +82,15 @@ export function SiteFooter() {
         <div className="mx-auto flex max-w-(--container-max) flex-wrap items-center justify-between gap-3 px-5 py-4 font-ui text-xs text-white/60 sm:px-12">
           <span>Copyright © 2026 Wycliffe Africa. All rights reserved.</span>
           <span className="flex items-center gap-5">
-            <Link href="/faqs">Privacy</Link>
-            <Link href="/faqs">Statement of Faith</Link>
-            <Link href="/faqs">Financial accountability</Link>
+            {LEGAL_LINKS.map(([label, href]) => (
+              <Link
+                key={label}
+                href={href}
+                className="transition-colors duration-130 ease-[cubic-bezier(0.4,0,0.2,1)] hover:text-white"
+              >
+                {label}
+              </Link>
+            ))}
           </span>
         </div>
       </div>

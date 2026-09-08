@@ -16,7 +16,7 @@ export function MissionaryCard({ missionary: m, className }: MissionaryCardProps
   return (
     <article
       className={cn(
-        "group relative flex flex-col overflow-hidden rounded-lg border border-hair bg-card shadow-sm transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-1 hover:border-primary-border hover:shadow-lg",
+        "reveal group relative flex flex-col overflow-hidden rounded-lg border border-hair bg-card shadow-sm transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-1 hover:border-primary-border hover:shadow-lg",
         className,
       )}
     >

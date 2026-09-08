@@ -14,7 +14,7 @@ export interface PageIntroProps {
  */
 export function PageIntro({ title, subtitle }: PageIntroProps) {
   return (
-    <section className="mx-auto max-w-(--container-max) px-5 pb-8 pt-16 sm:px-12">
+    <section className="reveal mx-auto max-w-(--container-max) px-5 pb-8 pt-16 sm:px-12">
       <h1 className="mb-2.5 max-w-[20ch] text-balance font-display text-2xl font-semibold leading-tight text-strong sm:text-3xl">
         {title}
       </h1>
