@@ -41,8 +41,8 @@ const PRIMARY_NAV: NavItem[] = [
     menu: [
       ["Pray With Us", "/prayer"],
       ["Prayer Requests", "/prayer/requests", true],
-      ["Become a Member", "/involved"],
-      ["Serve Part-Time", "/involved"],
+      ["Become a Member", "/involved/become-a-member"],
+      ["Serve", "/involved/serve"],
       ["Support a Missionary", "/missionaries"],
       ["Church Partnership", "/involved/partnership"],
       ["Motivate your Church", "/involved/motivate-your-church"],

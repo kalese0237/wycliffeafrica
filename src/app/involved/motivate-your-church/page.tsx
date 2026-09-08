@@ -6,11 +6,12 @@ import { PageIntro, StickySideNav } from "@/components/organisms";
 import { Button } from "@/components/atoms/Button";
 
 const SIDE_NAV = [
-  { label: "Serve Part-time", href: "/involved" },
-  { label: "Serve", href: "/involved" },
-  { label: "Give", href: "/give" },
+  { label: "Become a Member", href: "/involved/become-a-member" },
+  { label: "Serve", href: "/involved/serve" },
+  { label: "Church Partnership", href: "/involved/partnership" },
   { label: "Motivate your Church", href: "/involved/motivate-your-church" },
-  { label: "Pray with Us", href: "/involved" },
+  { label: "Pray with Us", href: "/prayer" },
+  { label: "Give", href: "/give" },
 ];
 
 const WEB_LINKS = ["www.calebproject.org", "www.acmcnetwork.com", "www.wycliffe.org.uk/getinvolved.html"];

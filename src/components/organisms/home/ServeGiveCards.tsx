@@ -5,14 +5,14 @@ import { ArrowRight } from "lucide-react";
 const WAYS: { title: string; href: string; body: string; cta: string }[] = [
   {
     title: "Serve from home",
-    href: "/involved",
+    href: "/involved/serve",
     body:
       "You don't have to move to the field. Individuals, churches and groups give hours to a translation project from wherever they already are.",
     cta: "See part-time roles",
   },
   {
     title: "Serve on the field",
-    href: "/involved",
+    href: "/involved/serve",
     body:
       "Assignments run from a few months to a career, and not only for linguists. Teachers, technicians and administrators are needed just as badly.",
     cta: "See field assignments",

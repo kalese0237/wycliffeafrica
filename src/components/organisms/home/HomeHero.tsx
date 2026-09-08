@@ -55,7 +55,7 @@ const SLIDES: Slide[] = [
     body: "Translation teams need linguists, but also teachers, accountants and IT specialists. We train Africans and send them to the field, whether for a season or for a lifetime.",
     bodyMaxCh: 73,
     ctaA: { label: "Meet our missionaries", href: "/missionaries" },
-    ctaB: { label: "Become a member", href: "/involved" },
+    ctaB: { label: "Become a member", href: "/involved/become-a-member" },
     image: "/Internship/equipping-missionaries.webp",
     imagePosition: "50% 30%",
   },

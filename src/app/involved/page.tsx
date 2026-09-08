@@ -2,7 +2,6 @@ import * as React from "react";
 import {
   HandHeart,
   UserPlus,
-  Clock,
   Compass,
   HeartHandshake,
   Church,
@@ -26,19 +25,13 @@ const WAYS: { icon: LucideIcon; title: string; body: string; href: string }[] = 
     icon: UserPlus,
     title: "Become a Member",
     body: "Make Wycliffe Africa your sending organisation and serve long-term.",
-    href: "/involved",
-  },
-  {
-    icon: Clock,
-    title: "Serve Part-Time",
-    body: "Give your time and expertise from where you are, on your schedule.",
-    href: "/involved",
+    href: "/involved/become-a-member",
   },
   {
     icon: Compass,
     title: "Serve",
-    body: "Join a mission assignment in the field, from a season to a career.",
-    href: "/involved",
+    body: "Give your skills to a translation programme — from home or on the field, for a season or a career.",
+    href: "/involved/serve",
   },
   {
     icon: HeartHandshake,
