@@ -166,8 +166,33 @@ export interface FaqRecord {
 }
 
 /** Collection map matching the PID's content model — used to type the Directus client. */
+/**
+ * A message sent from the public contact form. Written by the site, never read back by it — the
+ * office works these in Directus. The collection needs `create` permission for the public role (or
+ * for the token the server uses); nothing here is ever exposed to browser code.
+ */
+export interface ContactMessageRecord {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+  /** Where on the site the message was sent from, for context in the inbox. */
+  source_path?: string | null;
+  date_created?: string;
+}
+
+/** An email address captured by the newsletter signup. Write-only, same as `contact_messages`. */
+export interface NewsletterSubscriberRecord {
+  id: string;
+  email: string;
+  source_path?: string | null;
+  date_created?: string;
+}
+
 export interface DirectusSchema {
   news: NewsRecord[];
+  contact_messages: ContactMessageRecord[];
+  newsletter_subscribers: NewsletterSubscriberRecord[];
   prayer_requests: PrayerRequestRecord[];
   missionaries: MissionaryRecord[];
   interns: InternRecord[];
