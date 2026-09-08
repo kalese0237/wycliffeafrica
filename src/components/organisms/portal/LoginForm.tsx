@@ -82,7 +82,7 @@ export function LoginForm() {
               carrying the account address already typed above. */}
           <a
             href={passwordResetMailto(email)}
-            className="mt-2 inline-flex items-center gap-1.5 font-ui text-sm font-semibold text-primary hover:underline"
+            className="mt-2 inline-flex items-center gap-1.5 font-ui text-sm font-semibold text-primary transition-colors duration-130 ease-[cubic-bezier(0.4,0,0.2,1)] hover:text-primary-hover hover:underline"
           >
             <Mail size={14} />
             Forgot your password? Email the office

@@ -5,3 +5,5 @@ export * from "./NewsArticleTemplate";
 export * from "./ProjectPageTemplate";
 export * from "./MissionaryProfileTemplate";
 export * from "./InternProfileTemplate";
+export * from "./RouteTransition";
+export * from "./RevealObserver";

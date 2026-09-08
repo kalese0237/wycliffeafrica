@@ -32,7 +32,7 @@ export function NewsCard({ item, authorName, className }: NewsCardProps) {
     >
       <article
         className={cn(
-          "flex h-full flex-col overflow-hidden rounded-lg border border-hair bg-card shadow-sm transition-[box-shadow,transform] duration-220 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-0.5 hover:shadow-md",
+          "reveal flex h-full flex-col overflow-hidden rounded-lg border border-hair bg-card shadow-sm transition-[box-shadow,transform] duration-220 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-0.5 hover:shadow-md",
           className,
         )}
       >

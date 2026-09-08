@@ -1,5 +1,6 @@
 export * from "./BoardMemberCard";
 export * from "./FormField";
+export * from "./LoadingBlocks";
 export * from "./EditorialImage";
 export * from "./MissionaryCard";
 export * from "./NewsCard";

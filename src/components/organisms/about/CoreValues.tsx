@@ -22,7 +22,7 @@ export function CoreValues() {
           <p className="mb-3.5 font-ui text-xs font-semibold uppercase tracking-caps text-primary-active">
             Article Four
           </p>
-          <h2 className="font-display text-2xl font-normal leading-tight text-strong sm:text-[48px]">
+          <h2 className="reveal font-display text-2xl font-normal leading-tight text-strong sm:text-[48px]">
             Our core values
           </h2>
         </div>
@@ -35,7 +35,7 @@ export function CoreValues() {
         {CORE_VALUES.map(({ title, body }, index) => (
           <li
             key={title}
-            className="grid grid-cols-[56px_1fr] items-baseline gap-x-4 border-b border-hair py-6 sm:grid-cols-[112px_1fr_1.2fr] sm:gap-x-0"
+            className="reveal grid grid-cols-[56px_1fr] items-baseline gap-x-4 border-b border-hair py-6 sm:grid-cols-[112px_1fr_1.2fr] sm:gap-x-0"
           >
             <span aria-hidden className="font-display text-xl font-semibold leading-none text-terra-100">
               {String(index + 1).padStart(2, "0")}

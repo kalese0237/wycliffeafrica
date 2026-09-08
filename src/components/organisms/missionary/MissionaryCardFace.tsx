@@ -2,6 +2,7 @@ import * as React from "react";
 import Image from "next/image";
 import { PortraitTile } from "@/components/molecules/PortraitTile";
 import { Rubric } from "@/components/molecules/Rubric";
+import { FISH_DENSE } from "@/lib/fish-pattern";
 
 export interface MissionaryCardFaceProps {
   name: string;
@@ -118,11 +119,8 @@ export function MissionaryCardFace({
 
   return (
     <section className="relative overflow-hidden bg-terra-900 sm:flex sm:min-h-88.5 sm:items-center lg:min-h-103.5">
-      {/* Faint column rules — the masthead texture the About family established. */}
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-[repeating-linear-gradient(to_right,transparent_0px,transparent_91px,rgba(243,217,196,0.09)_91px,rgba(243,217,196,0.09)_92px)]"
-      />
+      {/* The ichthys watermark — the texture the About family established. */}
+      <div aria-hidden className="absolute inset-0" style={{ backgroundImage: FISH_DENSE }} />
       {/* Always two columns here — unlike the family-photo opening, this one never has a photo of
           its own to fall back to full-width, so the portrait column (its placeholder standing in for
           a missing file) is a constant, not conditional on `image`. */}

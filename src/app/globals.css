@@ -251,3 +251,86 @@ body {
     }
   }
 }
+
+/* Loading placeholders. The sweep is a moving highlight across the warm paper tints rather than a
+   grey pulse, so a page that is still fetching reads as the same document as the page that arrived.
+   Motion is opt-in: with reduced motion the block holds its flat tint and nothing moves. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes skeleton-sweep {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+
+  .skeleton {
+    background-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--color-paper-1) 42%,
+      var(--color-paper-1) 58%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-sweep 1.6s var(--ease-standard) infinite;
+  }
+}
+
+/* Entrances.
+   Elements marked `.reveal` start displaced and settle when they scroll into view. The trigger is an
+   IntersectionObserver (see RevealObserver) rather than `animation-timeline: view()`, which only
+   Chromium supports — a scroll-driven entrance that does nothing in Firefox and Safari is not an
+   entrance. `.reveal-group` staggers its own children in sequence.
+
+   The displaced start state is applied only under `html.js-reveal`, a class set by an inline script
+   before first paint. With JavaScript unavailable the class never lands and every element renders in
+   its final state: nothing is ever left invisible waiting for a script that did not run. */
+.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 620ms var(--ease-out),
+    transform 620ms var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.js-reveal .reveal-is-visible {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* A row of cards arrives in sequence rather than all at once. */
+.js-reveal .reveal-group > * {
+  --reveal-delay: calc(var(--reveal-index, 0) * 90ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Route changes. The incoming page lifts a few pixels into place so a navigation reads as one
+   document replacing another rather than as an instant repaint. Short, and once per navigation. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes route-enter {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .route-enter {
+    animation: route-enter var(--dur-base) var(--ease-out) both;
+  }
+}

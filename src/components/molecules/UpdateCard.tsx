@@ -20,7 +20,7 @@ export function UpdateCard({ update, authorName, className }: UpdateCardProps) {
   const isPrayer = update.type === "prayer";
   const sensitive = Boolean(update.sensitive);
   return (
-    <article className={cn("flex flex-col overflow-hidden rounded-lg border border-hair bg-card shadow-sm", className)}>
+    <article className={cn("reveal flex flex-col overflow-hidden rounded-lg border border-hair bg-card shadow-sm", className)}>
       {!isPrayer && (
         update.image ? (
           <div className="relative aspect-video overflow-hidden bg-sunk">

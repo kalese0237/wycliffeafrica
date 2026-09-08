@@ -3,7 +3,7 @@ import { Divider } from "@/components/atoms/Divider";
 
 export function Vision2025() {
   return (
-    <section className="mx-auto max-w-(--container-max) px-5 py-20 text-center sm:px-12">
+    <section className="reveal mx-auto max-w-(--container-max) px-5 py-20 text-center sm:px-12">
       <Divider variant="accent" width={56} className="mx-auto" />
       <h2 className="mx-auto mb-6 mt-6 max-w-[22ch] font-display text-2xl font-semibold leading-[1.15] text-strong">
         Gathering momentum of the Bible translation movement

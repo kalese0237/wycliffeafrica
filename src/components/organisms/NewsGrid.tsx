@@ -31,7 +31,7 @@ export function NewsGrid({ items, authorNames }: NewsGridProps) {
     <>
       <div className="mb-9 flex items-end justify-between gap-4 border-b border-hair pb-5">
         <div>
-          <h2 className="font-display text-2xl font-semibold leading-tight text-strong">
+          <h2 className="reveal font-display text-2xl font-semibold leading-tight text-strong">
             {FILTER_LABEL[filter]}
           </h2>
         </div>
@@ -40,7 +40,7 @@ export function NewsGrid({ items, authorNames }: NewsGridProps) {
         </p>
       </div>
       {visible.length ? (
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="reveal-group grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {visible.map((item) => (
             <NewsCard
               key={item.id}

@@ -16,7 +16,7 @@ const ROLES = [
 export function HomeIntro() {
   return (
     <section className="mx-auto max-w-(--container-max) px-5 py-20 sm:px-12">
-      <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+      <div className="reveal-group grid grid-cols-1 gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
         <div className="lg:self-start">
           <div className="font-ui text-xs font-bold uppercase tracking-caps-loose text-accent-hover">
             Why translation

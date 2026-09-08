@@ -39,7 +39,7 @@ export function CreedBand({
           <p className="mb-4 font-ui text-xs font-semibold uppercase tracking-caps text-primary-active">
             {eyebrow}
           </p>
-          <h2 className="wonk font-display text-2xl font-normal leading-tight text-strong sm:text-3xl">
+          <h2 className="reveal wonk font-display text-2xl font-normal leading-tight text-strong sm:text-3xl">
             {title}
           </h2>
           <p className="mx-auto mt-4 max-w-[50ch] font-body text-base text-muted sm:text-md">{intro}</p>
@@ -49,7 +49,7 @@ export function CreedBand({
           {articles.map((article, index) => (
             <li
               key={article}
-              className="grid grid-cols-[44px_1fr] border-t border-paper-3 py-6 last:border-b sm:grid-cols-[70px_1fr]"
+              className="reveal grid grid-cols-[44px_1fr] border-t border-paper-3 py-6 last:border-b sm:grid-cols-[70px_1fr]"
             >
               <span
                 aria-hidden
