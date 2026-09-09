@@ -119,6 +119,12 @@ export interface MissionaryRecord {
   familyCaption?: string | null;
   /** A sentence already present in `bio`, set apart as a pull-quote after the opening paragraph. */
   pullQuote?: string | null;
+  /**
+   * Standing prayer points for this missionary's ongoing calling — one per line. Always shown on
+   * the profile page, unlike `prayer_requests`, which are deliberately time-boxed (see
+   * `PrayerRequestRecord`) and hide themselves after two weeks. Set once and rarely revised.
+   */
+  prayerPoints?: string | null;
 }
 
 export type PublicMissionaryRecord = Omit<MissionaryRecord, "user">;
