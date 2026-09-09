@@ -19,7 +19,7 @@ export function BoardMemberCard({ member }: BoardMemberCardProps) {
   const { name, role, bio, photo } = member;
 
   return (
-    <li className="flex flex-col overflow-hidden rounded-md border border-hair bg-card shadow-sm">
+    <li className="reveal flex flex-col overflow-hidden rounded-md border border-hair bg-card shadow-sm">
       <div className="relative aspect-square border-b border-hair bg-[linear-gradient(140deg,var(--color-terra-050),var(--color-paper-2))]">
         {photo ? (
           <Image src={photo} alt={`Portrait of ${name}`} fill sizes="(min-width: 1024px) 20vw, 50vw" className="object-cover" />

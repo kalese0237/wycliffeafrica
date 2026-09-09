@@ -2,6 +2,7 @@ import * as React from "react";
 import Image from "next/image";
 import { Button } from "@/components/atoms/Button";
 import { cn } from "@/lib/cn";
+import { FISH_DENSE } from "@/lib/fish-pattern";
 
 export interface AboutCTAProps {
   title: string;
@@ -42,10 +43,7 @@ export function AboutCTA({
         !flush && "mt-20 sm:mt-24",
       )}>
       {flat ? (
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-[repeating-linear-gradient(to_right,transparent_0px,transparent_91px,rgba(243,217,196,0.09)_91px,rgba(243,217,196,0.09)_92px)]"
-        />
+        <div aria-hidden className="absolute inset-0" style={{ backgroundImage: FISH_DENSE }} />
       ) : (
         <>
           {/* Eager, not lazy: this band is full-bleed, and a lazy image leaves the whole close painted

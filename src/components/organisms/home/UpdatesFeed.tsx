@@ -12,13 +12,13 @@ export async function UpdatesFeed() {
     <section className="mx-auto max-w-(--container-max) px-5 py-20 sm:px-12">
       <div className="mb-10 flex flex-wrap items-end justify-between gap-5">
         <div>
-          <h2 className="font-display text-2xl font-semibold text-strong">Latest news</h2>
+          <h2 className="reveal font-display text-2xl font-semibold text-strong">Latest news</h2>
         </div>
         <Button href="/news" variant="secondary" iconRight={<ArrowRight size={16} />}>
           See all news
         </Button>
       </div>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div className="reveal-group grid grid-cols-1 gap-6 md:grid-cols-3">
         {items.slice(0, 3).map((item) => (
           <NewsCard
             key={item.id}

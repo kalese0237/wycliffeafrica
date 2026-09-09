@@ -72,10 +72,26 @@ export default function RootLayout({
     // font tokens are declared at :root and substituted there, so a variable
     // defined only on <body> resolves to nothing and every untagged element
     // silently falls back to the Tailwind system sans.
+    //
+    // suppressHydrationWarning: the inline script below adds a class to this
+    // element before React hydrates, so its className legitimately differs
+    // from the server-rendered markup — the same tradeoff Next.js's own
+    // dark-mode-script docs make for this pattern.
     <html
       lang="en"
       className={`${fraunces.variable} ${sourceSans.variable} ${gentium.variable} ${jbMono.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        {/* Sets the flag that arms the entrance animations, before first paint. The displaced start
+            state is scoped to this class, so if scripting is unavailable the class never lands and
+            every `.reveal` element renders in its final position instead of staying invisible. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js-reveal')",
+          }}
+        />
+      </head>
       <body className="antialiased">{children}</body>
     </html>
   );

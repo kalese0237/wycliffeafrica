@@ -52,7 +52,7 @@ export function MissionaryDirectory({ missionaries }: MissionaryDirectoryProps) 
           ))}
         </div>
       </div>
-      <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="reveal-group grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
         {visible.map((m) => (
           <MissionaryCard key={m.id} missionary={m} />
         ))}

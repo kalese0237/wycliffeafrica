@@ -1,4 +1,5 @@
 import * as React from "react";
+import { FISH_SPARSE } from "@/lib/fish-pattern";
 
 export interface AboutMastheadProps {
   /** Left side of the rule, e.g. "About Us · II" — omit where no division label is carried. */
@@ -11,18 +12,15 @@ export interface AboutMastheadProps {
 }
 
 /**
- * The non-photographic opening used by What We Believe. A dark terra ground ruled with faint vertical
- * column lines — the page as a printed document rather than a photographed scene. The vertical rules
- * are decorative, so they sit on a `aria-hidden` layer and never enter the accessibility tree.
+ * The non-photographic opening used by What We Believe and Get Involved. A dark terra ground carrying
+ * the sparse ichthys watermark — the page as a printed document rather than a photographed scene. The
+ * pattern is decorative, so it sits on an `aria-hidden` layer and never enters the accessibility tree.
  */
 export function AboutMasthead({ eyebrow, rubric, title, titleAccent, standfirst }: AboutMastheadProps) {
   return (
     <section className="relative overflow-hidden bg-terra-900">
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-[repeating-linear-gradient(90deg,rgba(243,217,196,0.09)_0_1px,transparent_1px_92px)]"
-      />
-      <div className="relative z-10 mx-auto max-w-(--container-max) px-5 py-16 sm:px-12 sm:py-20">
+      <div aria-hidden className="absolute inset-0" style={{ backgroundImage: FISH_SPARSE }} />
+      <div className="reveal relative z-10 mx-auto max-w-(--container-max) px-5 py-16 sm:px-12 sm:py-20">
         <div className="mb-8 flex items-center gap-5">
           {eyebrow && (
             <span className="font-display text-xs uppercase tracking-caps-loose text-terra-300">{eyebrow}</span>

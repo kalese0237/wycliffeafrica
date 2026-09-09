@@ -50,7 +50,7 @@ export function AboutPhotoHero({
         aria-hidden
         className="absolute inset-0 bg-[linear-gradient(to_top,rgba(42,20,10,0.94)_0%,rgba(42,20,10,0.72)_38%,rgba(42,20,10,0.18)_74%,rgba(42,20,10,0.35)_100%)]"
       />
-      <div className="relative z-10 mx-auto w-full max-w-(--container-max) px-5 pb-12 pt-24 sm:px-12 sm:pb-16">
+      <div className="reveal relative z-10 mx-auto w-full max-w-(--container-max) px-5 pb-12 pt-24 sm:px-12 sm:pb-16">
         <h1 className="wonk max-w-[16ch] text-balance font-display text-3xl font-normal leading-tight tracking-tight text-white sm:text-4xl lg:text-[76px]">
           {title} <em className="italic">{titleAccent}</em>
         </h1>

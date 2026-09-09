@@ -1,98 +1,103 @@
 import * as React from "react";
-import {
-  HandHeart,
-  UserPlus,
-  Compass,
-  HeartHandshake,
-  Church,
-  Megaphone,
-  Gift,
-  ArrowRight,
-  type LucideIcon,
-} from "lucide-react";
 import { PageTemplate } from "@/components/templates";
-import { PageIntro, DonationCTA } from "@/components/organisms";
-import { Button } from "@/components/atoms/Button";
-
-const WAYS: { icon: LucideIcon; title: string; body: string; href: string }[] = [
-  {
-    icon: HandHeart,
-    title: "Pray",
-    body: "Pray for translators and the communities still waiting, by name and by project.",
-    href: "/prayer",
-  },
-  {
-    icon: UserPlus,
-    title: "Become a Member",
-    body: "Make Wycliffe Africa your sending organisation and serve long-term.",
-    href: "/involved/become-a-member",
-  },
-  {
-    icon: Compass,
-    title: "Serve",
-    body: "Give your skills to a translation programme — from home or on the field, for a season or a career.",
-    href: "/involved/serve",
-  },
-  {
-    icon: HeartHandshake,
-    title: "Support a Missionary",
-    body: "Commit to one field worker with monthly giving and prayer.",
-    href: "/missionaries",
-  },
-  {
-    icon: Church,
-    title: "Church Partnership",
-    body: "Mobilise your congregation to adopt a language community.",
-    href: "/involved/partnership",
-  },
-  {
-    icon: Megaphone,
-    title: "Motivate your Church",
-    body: "Inspire your church to care for the Bibleless, with ready-made resources.",
-    href: "/involved/motivate-your-church",
-  },
-  {
-    icon: Gift,
-    title: "Give",
-    body: "Fund the work itself, once or month by month.",
-    href: "/give",
-  },
-];
+import { AboutMasthead, AboutCTA } from "@/components/organisms/about";
+import { InvolvedWays, type InvolvedWay } from "@/components/organisms/involved";
+import { HandHeart, HeartHandshake, Compass, UserPlus, Megaphone, Church, Gift } from "lucide-react";
 
 export const metadata = {
   title: "Get Involved | Wycliffe Africa",
+  description:
+    "Seven ways to take part in Bible translation in Africa, from praying for one language community this week to sending a missionary from your own congregation.",
+};
+
+/**
+ * Ordered by what each one asks of the reader: what anyone can start this week first, what a whole
+ * congregation commits to over years last. Giving is not in this set — it asks for money rather than
+ * time, and closes the section on a band of its own.
+ */
+const WAYS: InvolvedWay[] = [
+  {
+    title: "Pray",
+    body: "Take one language community, or one missionary, and hold them before God by name. Current requests from the field are published as they come in.",
+    href: "/prayer",
+    audience: "Anyone, this week",
+    cta: "Pray with us",
+    icon: HandHeart,
+  },
+  {
+    title: "Support a missionary",
+    body: "Commit to one field worker: their monthly support, their prayer, and the letters that tell them somebody at home is still there.",
+    href: "/missionaries",
+    audience: "Individuals and families",
+    cta: "Meet the missionaries",
+    icon: HeartHandshake,
+  },
+  {
+    title: "Serve",
+    body: "Give your skills to a translation programme. Teachers, accountants, builders and IT people are needed as badly as linguists, from home or on the field.",
+    href: "/involved/serve",
+    audience: "Working professionals",
+    cta: "See what is needed",
+    icon: Compass,
+  },
+  {
+    title: "Become a member",
+    body: "Make Wycliffe Africa your sending organisation and go — after orientation, an internship, and a church that commissions you.",
+    href: "/involved/become-a-member",
+    audience: "Long-term service",
+    cta: "The seven steps",
+    icon: UserPlus,
+  },
+  {
+    title: "Motivate your church",
+    body: "Bring the need home to your congregation, with ideas, materials and a structure that does not depend on one enthusiast.",
+    href: "/involved/motivate-your-church",
+    audience: "Church members",
+    cta: "Get the ideas",
+    icon: Megaphone,
+  },
+  {
+    title: "Church partnership",
+    body: "Your congregation takes on a language community, a missionary, or a whole project, and stays with it for as long as the work takes.",
+    href: "/involved/partnership",
+    audience: "Pastors and leaders",
+    cta: "How partnership works",
+    icon: Church,
+  },
+];
+
+/** The one way in that costs money rather than time. */
+const GIVE = {
+  title: "Give",
+  body: "Fund the work itself, once or month by month. Translation runs on people who decided it was worth paying for.",
+  href: "/give",
+  cta: "Give now",
+  icon: Gift,
 };
 
 export default function InvolvedPage() {
   return (
     <PageTemplate>
-      <PageIntro
-        title="There's a place for you in Bible translation."
-        subtitle="Some people move to the field. Most serve from where they are, praying, giving, or bringing their church along."
+      <AboutMasthead
+        rubric="Get Involved"
+        title="There is a place for you in"
+        titleAccent="Bible translation"
+        standfirst="Some people move to the field. Most serve from where they already are — praying, giving, lending a profession, or bringing a whole congregation along with them."
       />
 
-      <section className="mx-auto grid max-w-(--container-max) grid-cols-1 gap-6 px-5 pb-20 pt-4 sm:grid-cols-2 sm:px-12 lg:grid-cols-3">
-        {WAYS.map(({ icon: WayIcon, title, body, href }) => (
-          <div key={title} className="flex flex-col rounded-lg border border-hair bg-card p-6 shadow-sm">
-            <span className="inline-flex h-[52px] w-[52px] items-center justify-center rounded-xl bg-green-100 text-green-700">
-              <WayIcon size={24} />
-            </span>
-            <h3 className="mb-2 mt-4 font-display text-lg font-semibold text-strong">{title}</h3>
-            <p className="mb-5 flex-1 font-body text-base leading-relaxed text-body">{body}</p>
-            <Button
-              href={href}
-              variant={title === "Give" ? "accent" : "secondary"}
-              size="sm"
-              iconRight={<ArrowRight size={15} />}
-              className="w-fit"
-            >
-              {title === "Give" ? "Give now" : "Learn more"}
-            </Button>
-          </div>
-        ))}
-      </section>
+      <InvolvedWays
+        ways={WAYS}
+        feature={GIVE}
+        standfirst="Seven ways in, ordered by what each one asks of you. Start at the top: the first costs you nothing but attention, and the work has never yet run short of people who began there."
+      />
 
-      <DonationCTA />
+      <AboutCTA
+        title="Not sure which one is yours?"
+        body="Fill in the preliminary questionnaire, or simply write to us and say where you have got to. Neither commits you to anything, and both reach a person who will answer."
+        primary={{ label: "Preliminary questionnaire", href: "/questionnaire" }}
+        secondary={{ label: "Contact us", href: "/contact" }}
+        flush
+      />
     </PageTemplate>
   );
 }

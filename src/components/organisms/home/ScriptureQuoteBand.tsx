@@ -8,7 +8,7 @@ export function ScriptureQuoteBand() {
         className="absolute inset-0 bg-fixed bg-cover bg-center bg-[url('/Sunrise-africa/african-sunrise.webp')]"
       />
       <div aria-hidden className="absolute inset-0 bg-terra-900/80" />
-      <div className="relative mx-auto flex max-w-(--container-max) flex-col items-center gap-6 px-5 py-24 text-center sm:px-12">
+      <div className="reveal relative mx-auto flex max-w-(--container-max) flex-col items-center gap-6 px-5 py-24 text-center sm:px-12">
         <div className="font-ui text-xs font-bold uppercase tracking-caps-loose text-green-400">
           Matthew 28:19-20
         </div>

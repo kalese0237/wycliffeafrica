@@ -6,7 +6,7 @@ import { Button } from "@/components/atoms/Button";
 export function MissionsMovementFeature() {
   return (
     <section className="bg-paper-1">
-      <div className="mx-auto grid max-w-(--container-max) grid-cols-1 items-center gap-10 px-5 py-20 sm:px-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+      <div className="reveal-group mx-auto grid max-w-(--container-max) grid-cols-1 items-center gap-10 px-5 py-20 sm:px-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         <div className="relative aspect-4/5 overflow-hidden rounded-lg border border-hair shadow-md">
           <Image
             src="/photos/pexels-nappy-935944.jpg"
