@@ -34,7 +34,7 @@ const NEWS_RICH_PUBLIC_FIELDS = [
   "inlineImageCaption",
 ] as const;
 const MISSIONARY_CORE_PUBLIC_FIELDS = ["id", "slug", "status", "name", "place", "roles", "intro", "bio", "image", "familyImage", "familyCaption"] as const;
-const MISSIONARY_RICH_PUBLIC_FIELDS = [...MISSIONARY_CORE_PUBLIC_FIELDS, "pullQuote"] as const;
+const MISSIONARY_RICH_PUBLIC_FIELDS = [...MISSIONARY_CORE_PUBLIC_FIELDS, "pullQuote", "prayerPoints"] as const;
 /**
  * `user.email` is a relation into `directus_users`, a system collection our `DirectusSchema` map
  * doesn't model — the SDK has no way to type that join, so the field list and result both need a
@@ -191,16 +191,17 @@ export async function getNewsBySlug(slug: string): Promise<PublicNewsRecord | un
 }
 
 /**
- * `pullQuote` was added after the original missionaries collection. Some deployments can briefly run
- * the newer frontend before their Directus schema is migrated — fall back to the original field set
- * instead of turning that rollout mismatch into a page-level server error.
+ * `pullQuote` and `prayerPoints` were added after the original missionaries collection. Some
+ * deployments can briefly run the newer frontend before their Directus schema is migrated — fall
+ * back to the original field set instead of turning that rollout mismatch into a page-level server
+ * error.
  */
 let richMissionaryFieldsSupported: boolean | undefined;
 
 function isUnsupportedRichMissionaryFields(error: unknown): boolean {
   if (!error || typeof error !== "object") return false;
   const message = "message" in error && typeof error.message === "string" ? error.message : "";
-  return message.includes("pullQuote");
+  return message.includes("pullQuote") || message.includes("prayerPoints");
 }
 
 async function withCompatibleMissionaryFields<T>(

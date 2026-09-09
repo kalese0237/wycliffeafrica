@@ -36,6 +36,11 @@ Her call to missions came more than twenty years ago, when she decided to give h
 
 Among the communities she has served, the Pokot of northeastern Uganda hold a particular place in her heart: a marginalised people with low literacy, few basic services, and a church that has long lacked Scripture it can read. She has given years to their language development. She also works on Wycliffe Africa’s partnerships with other mission agencies to recruit and send African missionaries into translation work. Several of those now serving in Uganda came through her.`,
   email: "lydia_teera@wycliffeafrica.org",
+  prayerPoints: `Pray for Lydia as she advocates for language-inclusive education and meaningful engagement with Scripture across African communities.
+Pray for refugee and host communities in Uganda, that language barriers would not prevent children and families from accessing education and opportunities to thrive.
+Pray for the Pokot community and for continued progress in language development, literacy and access to God's Word.
+Pray for Wycliffe Africa's partnerships and missionary mobilisation efforts, that more African Christians would respond to God's call to serve in Bible translation around the world.
+Pray for wisdom, strength and grace for Lydia as she continues to serve across education, language development and mission mobilisation.`,
 };
 
 const MISSIONARIES: MissionaryRecord[] = [
@@ -54,6 +59,10 @@ Lilian's ministry is discipleship and trauma healing, mostly among children and 
 
 Two decades in, their aim has not changed: to know Christ and make Him known, mostly by equipping other people to do the work.`,
     email: "frans_barah@wycliffeafrica.org",
+    prayerPoints: `Pray for wisdom and strength as Frans trains and supports Bible translation teams across Africa.
+Pray for Lilian as she disciples and mentors children and young women, especially those walking through difficult experiences.
+Pray for continued opportunities to develop African leaders and strengthen local capacity for Bible translation.
+Pray for Frans and Lilian as they serve together, that God would continue to use their gifts to make Christ known and see His Word transform lives.`,
   },
   {
     id: "otieno",

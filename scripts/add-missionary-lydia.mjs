@@ -9,9 +9,9 @@
  *   DIRECTUS_ADMIN_TOKEN=... \
  *   node scripts/add-missionary-lydia.mjs
  *
- * Usage (email/password login):
+ * Usage (email/password login, any Directus admin account):
  *   DIRECTUS_URL=https://directus-production-3ac1.up.railway.app \
- *   ADMIN_EMAIL=admin@wycliffeafrica.org \
+ *   ADMIN_EMAIL=your-admin@example.com \
  *   ADMIN_PASSWORD=... \
  *   node scripts/add-missionary-lydia.mjs
  */

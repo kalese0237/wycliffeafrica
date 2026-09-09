@@ -42,6 +42,10 @@ export function MissionaryProfileTemplate({
     .split(/\n\s*\n/)
     .map((paragraph) => paragraph.trim())
     .filter(Boolean);
+  const prayerPoints = (m.prayerPoints ?? "")
+    .split("\n")
+    .map((point) => point.trim())
+    .filter(Boolean);
 
   return (
     <PageTemplate>
@@ -54,7 +58,13 @@ export function MissionaryProfileTemplate({
         familyCaption={m.familyCaption}
       />
 
-      <MissionaryDossier name={m.name} bio={bio} pullQuote={m.pullQuote} email={m.email} />
+      <MissionaryDossier
+        name={m.name}
+        bio={bio}
+        pullQuote={m.pullQuote}
+        email={m.email}
+        prayerPoints={prayerPoints}
+      />
 
       <PrayerPoints firstName={firstName} requests={prayerRequests} />
 
