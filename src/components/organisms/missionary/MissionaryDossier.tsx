@@ -2,6 +2,7 @@ import * as React from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { PartnerCallout } from "@/components/molecules/PartnerCallout";
+import type { AlternateGiving } from "@/components/molecules/AlternateGivingCallout";
 import { PrayerFocusCard } from "@/components/molecules/PrayerFocusCard";
 import { cn } from "@/lib/cn";
 
@@ -14,6 +15,8 @@ export interface MissionaryDossierProps {
   email?: string | null;
   /** Standing prayer points, already split into lines. Renders no card when empty. */
   prayerPoints?: string[];
+  /** A one-off alternate giving route shown in the partner callout, for profiles that have one. */
+  alternateGiving?: AlternateGiving | null;
 }
 
 /**
@@ -42,7 +45,14 @@ export interface MissionaryDossierProps {
  * rubric row and the roles line — and a labelled table restating them one scroll later is length,
  * not information.
  */
-export function MissionaryDossier({ name, bio, pullQuote, email, prayerPoints = [] }: MissionaryDossierProps) {
+export function MissionaryDossier({
+  name,
+  bio,
+  pullQuote,
+  email,
+  prayerPoints = [],
+  alternateGiving,
+}: MissionaryDossierProps) {
   const firstName = name.split(" ")[0];
 
   return (
@@ -79,7 +89,7 @@ export function MissionaryDossier({ name, bio, pullQuote, email, prayerPoints = 
             >
               <ArrowLeft size={15} aria-hidden /> All missionaries
             </Link>
-            <PartnerCallout firstName={firstName} email={email} />
+            <PartnerCallout firstName={firstName} email={email} alternateGiving={alternateGiving} />
             <PrayerFocusCard firstName={firstName} points={prayerPoints} />
           </div>
         </div>

@@ -1,17 +1,23 @@
 import * as React from "react";
 import { Heart, Mail } from "lucide-react";
 import { Button } from "@/components/atoms/Button";
+import { AlternateGivingCallout, type AlternateGiving } from "@/components/molecules/AlternateGivingCallout";
 import { cn } from "@/lib/cn";
 
 export interface PartnerCalloutProps {
   firstName: string;
   /** Direct contact address, where the missionary has a linked portal account. */
   email?: string | null;
+  /**
+   * A one-off alternate giving route for this profile only (e.g. a partner-team code on the
+   * global Wycliffe site), shown below the usual give/greet buttons.
+   */
+  alternateGiving?: AlternateGiving | null;
   className?: string;
 }
 
 /** The support ask, restated beside the story rather than only at the page's close. */
-export function PartnerCallout({ firstName, email, className }: PartnerCalloutProps) {
+export function PartnerCallout({ firstName, email, alternateGiving, className }: PartnerCalloutProps) {
   return (
     <aside className={cn("w-full rounded-lg border border-hair bg-card p-6 shadow-sm", className)}>
       <h3 className="font-display text-lg font-semibold text-strong">Partner with {firstName}</h3>
@@ -32,6 +38,7 @@ export function PartnerCallout({ firstName, email, className }: PartnerCalloutPr
           Send a greeting
         </Button>
       </div>
+      {alternateGiving && <AlternateGivingCallout {...alternateGiving} />}
     </aside>
   );
 }
