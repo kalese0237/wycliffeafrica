@@ -12,6 +12,21 @@ import type {
   PublicNewsRecord,
 } from "@/lib/directus/schema";
 import { normalizeMissionaryBio } from "@/lib/missionary-bio";
+import type { AlternateGiving } from "@/components/molecules/AlternateGivingCallout";
+
+/**
+ * One-off alternate giving route, keyed by missionary slug rather than a schema field since it
+ * applies to this single profile only. Add more entries here if other missionaries need the same.
+ */
+const ALTERNATE_GIVING: Record<string, AlternateGiving> = {
+  "frans-lilian-barah": {
+    text: "You can also give through the Wycliffe Bible Translators website. Copy the partner code below, then continue there to enter it and choose an amount.",
+    label: "216000",
+    copyValue: "216000",
+    href: "https://www.wycliffe.org/partnerteam",
+    cta: "Continue to Wycliffe Bible Translators",
+  },
+};
 
 export interface MissionaryProfileTemplateProps {
   missionary: PublicMissionaryRecord;
@@ -64,6 +79,7 @@ export function MissionaryProfileTemplate({
         pullQuote={m.pullQuote}
         email={m.email}
         prayerPoints={prayerPoints}
+        alternateGiving={ALTERNATE_GIVING[m.slug]}
       />
 
       <PrayerPoints firstName={firstName} requests={prayerRequests} />
