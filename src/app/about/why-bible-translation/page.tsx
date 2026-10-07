@@ -39,24 +39,23 @@ export default function WhyBibleTranslationPage() {
         imageAlt="A congregation worshipping with hands raised"
       />
 
-      <section className="mx-auto grid max-w-(--container-max) grid-cols-1 gap-10 px-5 pt-16 sm:px-12 sm:pt-20 lg:grid-cols-[1fr_1.35fr] lg:gap-20">
-        <div>
-          <h2 className="font-display text-2xl font-normal leading-snug text-strong">
-            The water does not change when the <em className="italic text-primary-active">glass</em> does.
-          </h2>
-        </div>
-        <div>
-          <p className="mb-4.5 font-body text-md leading-relaxed text-body sm:text-[18.5px]">
-            Translation takes the meaning of a message and transfers it from one language to another.
-            Just as we can pour water from a pitcher into differently shaped glasses without the water
-            changing, so we can translate into different languages without the message changing.
+      {/* No heading: the statement opens the section in the display face, and Luther's line answers it
+          at headline size across the full content width. */}
+      <section className="mx-auto max-w-(--container-max) px-5 pt-16 pb-8 sm:px-12 sm:pt-24 sm:pb-12 lg:pb-16">
+        <p className="font-display text-lg font-normal leading-snug text-strong sm:text-xl">
+          The Bible is not merely a book to be read; it is God&rsquo;s living Word that speaks to us,
+          reaches us, and transforms our lives. Bible translation makes it possible for people to
+          encounter that living Word in the language that speaks most deeply to their hearts.
+        </p>
+        <blockquote className="mt-12 border-l-2 border-primary pl-6 sm:mt-16 sm:pl-8 lg:mt-20">
+          <p className="font-display text-2xl font-normal leading-tight tracking-tight text-balance text-primary-active sm:text-3xl">
+            &ldquo;The Bible is alive, it speaks to me, it has feet, it runs after me, it has hands, it
+            lays hold of me.&rdquo;
           </p>
-          <p className="font-body text-md leading-relaxed text-body sm:text-[18.5px]">
-            Because we are dealing with the Bible, which is inspired and holy, fidelity to the original
-            is crucial. And because we are dealing with human beings, and we want them to understand the
-            message, sounding natural is also important.
-          </p>
-        </div>
+          <cite className="mt-5 block font-ui text-xs font-semibold not-italic uppercase tracking-caps text-muted">
+            Martin Luther
+          </cite>
+        </blockquote>
       </section>
 
       {/* The two-hands image: the metaphor the supplied copy turns on, given a full band of its own. */}
