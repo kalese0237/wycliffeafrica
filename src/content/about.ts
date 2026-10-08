@@ -26,6 +26,11 @@ export interface BoardMember {
   bio?: string;
   /** Absent until portraits arrive — the card renders a monogram tile instead. */
   photo?: string;
+  /**
+   * Set for members whose portrait is not to be published. The monogram tile becomes permanent and
+   * drops its "Portrait pending" stamp, so nothing implies a photo is coming.
+   */
+  photoWithheld?: boolean;
 }
 
 /** The seven truths, verbatim. Rendered as Roman-numeraled articles; never as a plain bullet list. */
@@ -89,21 +94,24 @@ export const CORE_VALUES: { title: string; body: string }[] = [
 ];
 
 /**
- * The ten board members. Names are the only board fact currently on file; roles, bios and portraits
- * are deliberately absent rather than invented. Adding a `role`, `bio` or `photo` here is all that is
- * needed — no layout change.
+ * The ten board members. Names and eight portraits are on file; roles and bios are deliberately absent
+ * rather than invented. Adding a `role`, `bio` or `photo` here is all that is needed — no layout change.
+ * Portraits are square head-and-shoulders crops in `public/Leadership/`, at most 800px.
+ *
+ * Bryan is listed by first name only, without a portrait, by decision of the office. Do not add a
+ * surname, photo or location for him.
  */
 export const BOARD: BoardMember[] = [
-  { name: "Daniel Muvengi" },
-  { name: "Joyce Kule" },
-  { name: "Edwyn Kiptinness" },
+  { name: "Daniel Muvengi", photo: "/Leadership/daniel-muvengi.webp" },
+  { name: "Joyce Kule", photo: "/Leadership/joyce-kule.webp" },
+  { name: "Edwyn Kiptinness", photo: "/Leadership/edwyn-kiptinness.webp" },
   { name: "Joseph Namutala" },
-  { name: "George Mwita" },
-  { name: "Bryan Harrison" },
-  { name: "Mary Wamey" },
-  { name: "Onesmas Muchesia" },
-  { name: "Mark Mwanzia" },
-  { name: "Jerry Faruk" },
+  { name: "George Mwita", photo: "/Leadership/george-mwita.webp" },
+  { name: "Bryan", photoWithheld: true },
+  { name: "Mary Wamey", photo: "/Leadership/mary-wamey.webp" },
+  { name: "Onesmas Muchesia", photo: "/Leadership/onesmas-muchesia.webp" },
+  { name: "Mark Mwanzia", photo: "/Leadership/mark-mwanzia.webp" },
+  { name: "Jerry Faruk", photo: "/Leadership/jerry-faruk.webp" },
 ];
 
 /**

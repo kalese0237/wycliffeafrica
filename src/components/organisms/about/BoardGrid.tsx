@@ -25,8 +25,7 @@ export function BoardGrid() {
       </ul>
 
       <PendingNote>
-        Initials stand in until portraits arrive, and roles and biographies are awaiting confirmation.
-        The ten names are the only board fact currently on file — nothing here is invented.
+        Roles and biographies are awaiting confirmation — nothing here is invented.
       </PendingNote>
     </section>
   );

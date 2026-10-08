@@ -30,7 +30,7 @@ const DRAFTS = [
   { id: "rasoambola", slug: "vonjitiana-rasoambola", name: "Vonjitiana Rasoambola", place: "South Africa" },
   { id: "razafinjatoniry-serge", slug: "serge-razafinjatoniry", name: "Serge Razafinjatoniry", place: "South Africa" },
   { id: "gambo", slug: "danjuma-gambo", name: "Danjuma Gambo", place: "Nigeria" },
-  { id: "harrison", slug: "byan-harrison", name: "Byan Harrison", place: "Tunisia" },
+  { id: "bryan", slug: "bryan", name: "Bryan", place: "North Africa" },
   { id: "razafinjatoniry-olivia", slug: "olivia-razafinjatoniry", name: "Olivia Razafinjatoniry", place: "Madagascar" },
   { id: "otabil", slug: "arthur-otabil", name: "Arthur Otabil", place: "Ghana" },
   { id: "marara", slug: "martin-faith-marara", name: "Martin & Faith Marara", place: "Cameroon" },
