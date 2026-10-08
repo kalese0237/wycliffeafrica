@@ -7,7 +7,7 @@ import { MembershipSteps } from "@/components/organisms/involved";
 import { MEMBERSHIP_STEPS } from "@/content/membership";
 
 export const metadata = {
-  title: "Become a Member | Wycliffe Africa",
+  title: "Become a Missionary | Wycliffe Africa",
   description:
     "How to join Wycliffe Africa: the qualifications, the application, prayer and financial support, church commissioning, orientation and assignment — the seven steps to membership.",
 };
@@ -17,7 +17,7 @@ export default function BecomeAMemberPage() {
     <PageTemplate>
       <AboutPhotoHero
         title="Become a"
-        titleAccent="member"
+        titleAccent="missionary"
         standfirst="Are you committed to seeing God's Word translated and used? This is what joining Wycliffe Africa asks of you, and what we take responsibility for in return."
         image="/photos/pexels-mbaraga-bernard-2158456013-35388499.jpg"
         imageAlt="Two men worshipping with hands raised in a church service"
