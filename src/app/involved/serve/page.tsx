@@ -100,7 +100,7 @@ export default function ServePage() {
         title="Tell us what you can do."
         body="The preliminary questionnaire is short. It is how we match a real skill to a real need instead of guessing, and it commits you to nothing."
         primary={{ label: "Preliminary questionnaire", href: "/questionnaire" }}
-        secondary={{ label: "Become a member", href: "/involved/become-a-member" }}
+        secondary={{ label: "Become a missionary", href: "/involved/become-a-member" }}
         flat
       />
     </PageTemplate>

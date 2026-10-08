@@ -41,7 +41,7 @@ const WAYS: InvolvedWay[] = [
     icon: Compass,
   },
   {
-    title: "Become a member",
+    title: "Become a missionary",
     body: "Make Wycliffe Africa your sending organisation and go — after orientation, an internship, and a church that commissions you.",
     href: "/involved/become-a-member",
     audience: "Long-term service",

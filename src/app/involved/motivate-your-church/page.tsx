@@ -6,7 +6,7 @@ import { PageIntro, StickySideNav } from "@/components/organisms";
 import { Button } from "@/components/atoms/Button";
 
 const SIDE_NAV = [
-  { label: "Become a Member", href: "/involved/become-a-member" },
+  { label: "Become a Missionary", href: "/involved/become-a-member" },
   { label: "Serve", href: "/involved/serve" },
   { label: "Church Partnership", href: "/involved/partnership" },
   { label: "Motivate your Church", href: "/involved/motivate-your-church" },
