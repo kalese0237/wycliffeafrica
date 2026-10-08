@@ -13,10 +13,11 @@ export interface BoardMemberCardProps {
  * Wycliffe Africa has supplied names only, so the portrait slot is a designed placeholder rather than
  * an empty box: a monogram tile in the terra tints, stamped "Portrait pending". It holds the exact
  * square the real photograph will occupy, so dropping a `photo` into `BOARD` swaps the image in with
- * no relayout and no visual surprise. The same applies to `role` and `bio`.
+ * no relayout and no visual surprise. The same applies to `role` and `bio`. With `photoWithheld` the
+ * monogram is the final state, so the stamp is left off.
  */
 export function BoardMemberCard({ member }: BoardMemberCardProps) {
-  const { name, role, bio, photo } = member;
+  const { name, role, bio, photo, photoWithheld } = member;
 
   return (
     <li className="reveal flex flex-col overflow-hidden rounded-md border border-hair bg-card shadow-sm">
@@ -31,9 +32,11 @@ export function BoardMemberCard({ member }: BoardMemberCardProps) {
             >
               {initialsOf(name)}
             </span>
-            <span className="absolute inset-x-0 bottom-2.5 text-center font-ui font-semibold text-[9px] uppercase tracking-caps text-faint">
-              Portrait pending
-            </span>
+            {!photoWithheld && (
+              <span className="absolute inset-x-0 bottom-2.5 text-center font-ui font-semibold text-[9px] uppercase tracking-caps text-faint">
+                Portrait pending
+              </span>
+            )}
           </>
         )}
       </div>
