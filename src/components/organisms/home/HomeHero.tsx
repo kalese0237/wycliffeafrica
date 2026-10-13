@@ -74,7 +74,7 @@ const SLIDES: Slide[] = [
   },
 ];
 
-const SLIDE_DELAY_MS = 18000;
+const SLIDE_DELAY_MS = 8000;
 
 /**
  * The emphasised segment is a solid tone, not a gradient: emphasis comes from
