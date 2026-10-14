@@ -1,4 +1,5 @@
 export * from "./HomeHero";
+export * from "./HomeHistory";
 export * from "./HomeIntro";
 export * from "./MissionarySpotlight";
 export * from "./MissionsMovementFeature";

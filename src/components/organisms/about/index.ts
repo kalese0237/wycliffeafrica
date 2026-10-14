@@ -6,4 +6,5 @@ export * from "./BoardGrid";
 export * from "./CoreValues";
 export * from "./CreedBand";
 export * from "./HistoryRail";
+export * from "./HistoryStory";
 export * from "./PendingNote";
