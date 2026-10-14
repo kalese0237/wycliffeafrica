@@ -45,7 +45,7 @@ Verbatim doctrinal text; nothing unverified shipped as fact; mid-range Android o
 
 1. The "Wycliffe Africa believes" list repeats the last two doctrinal truths verbatim — building with the five unique items, awaiting the user's confirmation that the duplicates were a copy-paste slip.
 2. Founding year, founders, and all history milestones read TBC. The team photo in `public/Missionaries/wycliffe-africa-team.webp` shows a "20th Anniversary" backdrop — a real date the user has not yet confirmed.
-3. Board roles and biographies absent; rows are sized for a 40–70 word bio when it arrives.
+3. Board profiles supplied for eight members (`docs/content/board-profiles.md`); Onesmas Muchesia and Mark Mwanzia still to come. Built 2026-10-13 as `BoardRoster`: a ruled roster where each row opens the member's profile in a native `<dialog>` (side panel from `sm`, bottom sheet below), addressed by `#slug` so every profile has a shareable URL. Bios are in the row markup for print only.
 4. Whether board/history/values become Directus collections or stay typed local constants. Building as local constants.
 
 ## Cited adaptations from the approved comps

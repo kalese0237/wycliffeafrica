@@ -53,8 +53,8 @@ African-led. The missionaries, the board, and the sending churches are African; 
 ## Evidence on Hand
 
 - Real photography: `public/photos/*` (African church and community photography), `public/Missionaries/wycliffe-africa-team.webp`, two missionary portraits, `public/Sunrise-africa/african-sunrise.webp`, `public/Internship/`.
-- Real board roster, names only: Daniel Muvengi, Joyce Kule, Edwyn Kiptinness, Joseph Namutala, George Mwita, Bryan Harrison, Mary Wamey, Onesmas Muchesia, Mark Mwanzia, Jerry Faruk.
-- **Absent, must not be fabricated:** board portraits, board roles/titles, board bios, founding dates, founders' names, and the history narrative. The user confirmed all of these will be supplied later. Any placeholder must be visibly marked as such and must never read as fact.
+- Real board roster with bios for eight members, roles for seven, and portraits for eight: `docs/content/board-profiles.md`. Bryan is listed by first name only, with no portrait or location, by decision of the office.
+- **Absent, must not be fabricated:** profiles for Onesmas Muchesia and Mark Mwanzia, Bryan's role, Joseph Opanda Namutala's portrait, founding dates, founders' names, and the history narrative. The user confirmed all of these will be supplied later. Any placeholder must be visibly marked as such and must never read as fact.
 - Verbatim supplied copy: the *Why We Do Bible Translation* prose, the seven doctrinal truths, the Wycliffe Africa beliefs list, the role-of-the-church list, and the five core values.
 
 ## Product Principles
