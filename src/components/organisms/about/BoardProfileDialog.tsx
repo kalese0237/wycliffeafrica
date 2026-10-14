@@ -72,14 +72,14 @@ export function BoardProfileDialog({
         </div>
 
         <div className="flex-1 overflow-y-auto px-5 pb-8 pt-6 sm:px-10 sm:pt-8">
-          <div className="flex items-center gap-5 sm:block">
+          <div className="flex items-center gap-5 sm:gap-8">
             <BoardPortrait
               member={member}
               sizes="(min-width: 640px) 200px, 112px"
               className="w-28 flex-none sm:w-50"
               monogramClassName="text-2xl sm:text-4xl"
             />
-            <div className="min-w-0 sm:mt-7">
+            <div className="min-w-0">
               <h2
                 id="board-profile-name"
                 className="font-display text-xl font-normal leading-tight text-strong sm:text-2xl"
