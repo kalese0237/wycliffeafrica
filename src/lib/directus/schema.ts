@@ -215,6 +215,25 @@ export interface ContactMessageRecord {
   date_created?: string;
 }
 
+/**
+ * A response to the preliminary questionnaire at /questionnaire. Written by the site, never read back
+ * by it — the membership team works these in Directus, tracking follow-up in `review`. The website
+ * policy gets `create` only, with `review` forced to `new`.
+ */
+export interface QuestionnaireSubmissionRecord {
+  id: string;
+  review: "new" | "contacted" | "closed";
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone?: string | null;
+  country: string;
+  church?: string | null;
+  skills?: string | null;
+  motivation?: string | null;
+  date_created?: string;
+}
+
 /** An email address captured by the newsletter signup. Write-only, same as `contact_messages`. */
 export interface NewsletterSubscriberRecord {
   id: string;
@@ -227,6 +246,7 @@ export interface DirectusSchema {
   news: NewsRecord[];
   contact_messages: ContactMessageRecord[];
   newsletter_subscribers: NewsletterSubscriberRecord[];
+  questionnaire_submissions: QuestionnaireSubmissionRecord[];
   prayer_requests: PrayerRequestRecord[];
   missionaries: MissionaryRecord[];
   interns: InternRecord[];
