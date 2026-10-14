@@ -3,6 +3,7 @@ import type {
   PublicPrayerRequestRecord,
   PublicMissionaryRecord,
   PublicNewsRecord,
+  PublicStaffPositionRecord,
   ResourceRecord,
 } from "@/lib/directus/schema";
 
@@ -19,6 +20,7 @@ export const CONTENT_SNAPSHOT: {
   prayerRequests: PublicPrayerRequestRecord[];
   resources: ResourceRecord[];
   faqs: FaqRecord[];
+  staffPositions: PublicStaffPositionRecord[];
 } = {
   "news": [
     {
@@ -207,5 +209,6 @@ export const CONTENT_SNAPSHOT: {
       "question": "How do I apply to serve with Wycliffe Africa?",
       "answer": "Start with the preliminary questionnaire — it takes about ten minutes and helps our team understand where your skills might fit the work."
     }
-  ]
+  ],
+  "staffPositions": []
 };

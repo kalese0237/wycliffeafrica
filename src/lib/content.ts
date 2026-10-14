@@ -53,6 +53,9 @@ const snapshotSource = {
   async getFaqs() {
     return CONTENT_SNAPSHOT.faqs;
   },
+  async getStaffPositions() {
+    return CONTENT_SNAPSHOT.staffPositions;
+  },
   async getMissionaries() {
     return CONTENT_SNAPSHOT.missionaries;
   },
@@ -84,6 +87,11 @@ const liveSource = {
   ),
   getResources: cachedLiveQuery("resources", live.getResources, snapshotSource.getResources),
   getFaqs: cachedLiveQuery("faqs", live.getFaqs, snapshotSource.getFaqs),
+  getStaffPositions: cachedLiveQuery(
+    "staff-positions",
+    live.getStaffPositions,
+    snapshotSource.getStaffPositions,
+  ),
   getMissionaries: cachedLiveQuery("missionaries", live.getMissionaries, snapshotSource.getMissionaries),
   getMissionaryBySlug: cachedLiveQuery(
     "missionary-by-slug",
@@ -107,6 +115,7 @@ export const {
   getPrayerRequestsForMissionary,
   getResources,
   getFaqs,
+  getStaffPositions,
 } = source;
 
 /**

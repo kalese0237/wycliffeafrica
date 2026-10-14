@@ -171,6 +171,34 @@ export interface FaqRecord {
   answer: string;
 }
 
+/**
+ * An open staff position on the /careers page. The office opens a position by publishing it and
+ * closes it by archiving it, so the public list is always exactly the `published` rows. Positions
+ * may be filled by full-time or part-time volunteers, or by staff who raise their own support. The
+ * page says so once rather than every row carrying a salary field.
+ */
+export interface StaffPositionRecord {
+  id: string;
+  status: PublishStatus;
+  /** Manual order in the Directus admin (drag handle); lowest first. */
+  sort?: number | null;
+  title: string;
+  /** The discipline the role sits in, e.g. "Finance", "IT", "Translation". */
+  area?: string | null;
+  /** Where the work is done, e.g. "Nairobi, Kenya" or "Remote". */
+  location?: string | null;
+  /** "Full-time", "Part-time", "Short-term", or whatever the office types. */
+  commitment?: string | null;
+  /** What the role is for, in a sentence or two. */
+  summary: string;
+  /** What the person needs to bring, one per line. */
+  requirements?: string | null;
+  date_created?: string | null;
+  date_updated?: string | null;
+}
+
+export type PublicStaffPositionRecord = Omit<StaffPositionRecord, "date_created" | "date_updated">;
+
 /** Collection map matching the PID's content model — used to type the Directus client. */
 /**
  * A message sent from the public contact form. Written by the site, never read back by it — the
@@ -204,4 +232,5 @@ export interface DirectusSchema {
   interns: InternRecord[];
   resources: ResourceRecord[];
   faqs: FaqRecord[];
+  staff_positions: StaffPositionRecord[];
 }

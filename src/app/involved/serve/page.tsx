@@ -72,7 +72,7 @@ export default function ServePage() {
 
           <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
             {[
-              { label: "Staff positions needed", href: "/resources" },
+              { label: "Staff positions needed", href: "/careers" },
               { label: "More about support", href: "/give" },
             ].map(({ label, href }) => (
               <Link

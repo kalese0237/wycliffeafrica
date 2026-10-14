@@ -73,7 +73,7 @@ export default function BecomeAMemberPage() {
         title="Tell us where you have got to."
         body="The preliminary questionnaire is short and the office reads every one. If you would rather see what the team is short of first, the staff positions list is the place to look."
         primary={{ label: "Preliminary questionnaire", href: "/questionnaire" }}
-        secondary={{ label: "Staff positions needed", href: "/resources" }}
+        secondary={{ label: "Staff positions needed", href: "/careers" }}
         flat
       />
     </PageTemplate>

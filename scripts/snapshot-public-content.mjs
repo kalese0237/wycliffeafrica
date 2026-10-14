@@ -96,6 +96,12 @@ async function main() {
       fields: "id,question,answer",
       limit: "-1",
     })),
+    staffPositions: await get(items("staff_positions", {
+      "filter[status][_eq]": "published",
+      fields: "id,status,sort,title,area,location,commitment,summary,requirements",
+      sort: "sort,title",
+      limit: "-1",
+    })),
   };
 
   const source = `import type {
@@ -103,6 +109,7 @@ async function main() {
   PublicPrayerRequestRecord,
   PublicMissionaryRecord,
   PublicNewsRecord,
+  PublicStaffPositionRecord,
   ResourceRecord,
 } from "@/lib/directus/schema";
 
@@ -119,12 +126,14 @@ export const CONTENT_SNAPSHOT: {
   prayerRequests: PublicPrayerRequestRecord[];
   resources: ResourceRecord[];
   faqs: FaqRecord[];
+  staffPositions: PublicStaffPositionRecord[];
 } = ${JSON.stringify(snapshot, null, 2)};
 `;
   await writeFile(OUTPUT, source);
   console.log(
     `✓ snapshot: ${snapshot.news.length} news, ${snapshot.missionaries.length} missionaries, ` +
-    `${snapshot.prayerRequests.length} prayers, ${snapshot.resources.length} resources, ${snapshot.faqs.length} FAQs`,
+    `${snapshot.prayerRequests.length} prayers, ${snapshot.resources.length} resources, ${snapshot.faqs.length} FAQs, ` +
+    `${snapshot.staffPositions.length} staff positions`,
   );
 }
 
