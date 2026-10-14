@@ -28,9 +28,11 @@ export async function MissionarySpotlight() {
             {missionary.name}
           </h2>
           <div className="mb-3 flex flex-wrap items-center gap-x-4 gap-y-1">
-            <span className="flex items-center gap-1.5 font-ui text-xs font-bold uppercase tracking-wide text-green-700">
-              <MapPin size={13} /> {missionary.place}
-            </span>
+            {missionary.place && (
+              <span className="flex items-center gap-1.5 font-ui text-xs font-bold uppercase tracking-wide text-green-700">
+                <MapPin size={13} /> {missionary.place}
+              </span>
+            )}
             <span className="font-ui text-sm text-faint">{missionary.roles}</span>
           </div>
           <p className="mb-6 font-body text-base leading-relaxed text-body sm:text-md">{missionary.intro}</p>
