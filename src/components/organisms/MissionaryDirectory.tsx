@@ -18,7 +18,7 @@ function countryOf(m: PublicMissionaryRecord): string {
 /** Filterable missionary grid — country chips above the card grid. */
 export function MissionaryDirectory({ missionaries }: MissionaryDirectoryProps) {
   const countries = React.useMemo(
-    () => Array.from(new Set(missionaries.map(countryOf))).sort(),
+    () => Array.from(new Set(missionaries.map(countryOf).filter(Boolean))).sort(),
     [missionaries],
   );
   const [active, setActive] = React.useState<string | null>(null);

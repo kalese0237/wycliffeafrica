@@ -15,7 +15,7 @@ export const revalidate = 300;
 
 export default async function MissionariesPage() {
   const missionaries = await getMissionaries();
-  const countries = new Set(missionaries.map((m) => m.place.split(",").pop()?.trim()));
+  const countries = new Set(missionaries.map((m) => m.place.split(",").pop()?.trim()).filter(Boolean));
 
   return (
     <PageTemplate>
