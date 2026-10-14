@@ -17,6 +17,8 @@ export type SubmitResult = { ok: true } | { ok: false; error: string };
 
 const FALLBACK_EMAIL = "info@wycliffeafrica.org";
 
+const BOT_CHECK_ERROR = "We could not confirm you are not a bot. Please try again.";
+
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function failed(what: string) {
@@ -36,6 +38,10 @@ export async function submitContactMessage(formData: FormData): Promise<SubmitRe
   if (!EMAIL_PATTERN.test(email)) return { ok: false, error: "That email address does not look right." };
   if (message.length > 5000) return { ok: false, error: "Please keep the message under 5000 characters." };
 
+  if (!(await verifyTurnstile(String(formData.get("cf-turnstile-response") ?? "") || null))) {
+    return { ok: false, error: BOT_CHECK_ERROR };
+  }
+
   try {
     await directus.request(
       createItem("contact_messages", { name, email, message, source_path: sourcePath }),
@@ -52,6 +58,10 @@ export async function subscribeToNewsletter(formData: FormData): Promise<SubmitR
   const sourcePath = String(formData.get("sourcePath") ?? "") || null;
 
   if (!EMAIL_PATTERN.test(email)) return { ok: false, error: "That email address does not look right." };
+
+  if (!(await verifyTurnstile(String(formData.get("cf-turnstile-response") ?? "") || null))) {
+    return { ok: false, error: BOT_CHECK_ERROR };
+  }
 
   try {
     await directus.request(createItem("newsletter_subscribers", { email, source_path: sourcePath }));
@@ -80,7 +90,7 @@ export async function submitQuestionnaire(formData: FormData): Promise<SubmitRes
   }
 
   if (!(await verifyTurnstile(String(formData.get("cf-turnstile-response") ?? "") || null))) {
-    return { ok: false, error: "We could not confirm you are not a bot. Please try again." };
+    return { ok: false, error: BOT_CHECK_ERROR };
   }
 
   try {

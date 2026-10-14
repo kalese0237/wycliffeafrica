@@ -6,6 +6,7 @@ import { Check, Loader2, Send, TriangleAlert } from "lucide-react";
 import { Button } from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
 import { FormField } from "@/components/molecules/FormField";
+import { TurnstileWidget, type TurnstileHandle } from "@/components/molecules/TurnstileWidget";
 import { submitContactMessage, type SubmitResult } from "@/app/actions/submit";
 import { positionEnquiryMessage } from "@/lib/staff-positions";
 
@@ -21,6 +22,7 @@ export function ContactForm() {
   const pathname = usePathname();
   const [pending, startTransition] = React.useTransition();
   const [result, setResult] = React.useState<SubmitResult | null>(null);
+  const turnstile = React.useRef<TurnstileHandle>(null);
   const messageRef = React.useRef<HTMLTextAreaElement>(null);
 
   // Reached from a position on /careers: open the message by naming it. Read in an effect rather
@@ -37,7 +39,9 @@ export function ContactForm() {
     formData.set("sourcePath", pathname);
     setResult(null);
     startTransition(async () => {
-      setResult(await submitContactMessage(formData));
+      const outcome = await submitContactMessage(formData);
+      setResult(outcome);
+      if (!outcome.ok) turnstile.current?.reset();
     });
   }
 
@@ -89,6 +93,7 @@ export function ContactForm() {
         />
       </FormField>
 
+      <TurnstileWidget ref={turnstile} className="mb-5" />
       {result && !result.ok && (
         <p
           role="alert"

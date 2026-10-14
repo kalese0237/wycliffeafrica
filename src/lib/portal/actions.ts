@@ -15,6 +15,7 @@ import {
   uploadPortalImage,
 } from "./auth";
 import { parseSubmission } from "./validation";
+import { verifyTurnstile } from "@/lib/turnstile";
 import { supportsRichNewsFields } from "@/lib/directus/queries";
 
 export interface ActionState {
@@ -32,6 +33,9 @@ export async function loginAction(_prev: ActionState, formData: FormData): Promi
   const email = String(formData.get("email") ?? "").trim();
   const password = String(formData.get("password") ?? "");
   if (!email || !password) return { error: "Please enter your email and password.", email };
+  if (!(await verifyTurnstile(String(formData.get("cf-turnstile-response") ?? "") || null))) {
+    return { error: "We could not confirm you are not a bot. Please try again.", email };
+  }
 
   try {
     await loginWithPassword(email, password);

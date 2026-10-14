@@ -6,6 +6,7 @@ import { Check, Loader2, Mail, TriangleAlert } from "lucide-react";
 import { Button, type ButtonSize } from "@/components/atoms/Button";
 import { Input, type InputSize } from "@/components/atoms/Input";
 import { cn } from "@/lib/cn";
+import { TurnstileWidget, type TurnstileHandle } from "@/components/molecules/TurnstileWidget";
 import { subscribeToNewsletter, type SubmitResult } from "@/app/actions/submit";
 
 export interface NewsletterSignupProps {
@@ -35,6 +36,9 @@ export function NewsletterSignup({
   const pathname = usePathname();
   const [pending, startTransition] = React.useTransition();
   const [result, setResult] = React.useState<SubmitResult | null>(null);
+  // The challenge loads when the reader first touches the form, not on every page view.
+  const [armed, setArmed] = React.useState(false);
+  const turnstile = React.useRef<TurnstileHandle>(null);
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -42,7 +46,9 @@ export function NewsletterSignup({
     formData.set("sourcePath", pathname);
     setResult(null);
     startTransition(async () => {
-      setResult(await subscribeToNewsletter(formData));
+      const outcome = await subscribeToNewsletter(formData);
+      setResult(outcome);
+      if (!outcome.ok) turnstile.current?.reset();
     });
   }
 
@@ -68,7 +74,7 @@ export function NewsletterSignup({
   if (compact) {
     return (
       <div className={className}>
-        <form className={cn("flex gap-2", stacked ? "flex-col" : "flex-row")} onSubmit={onSubmit}>
+        <form className={cn("flex flex-wrap gap-2", stacked ? "flex-col" : "flex-row")} onSubmit={onSubmit} onFocusCapture={() => setArmed(true)}>
           <Input
             type="email"
             name="email"
@@ -88,6 +94,7 @@ export function NewsletterSignup({
           >
             {pending ? "Sending" : cta}
           </Button>
+          <TurnstileWidget ref={turnstile} armed={armed} className="basis-full" />
         </form>
         {notice}
       </div>
@@ -97,7 +104,7 @@ export function NewsletterSignup({
     <div className={className}>
       <h3 className="mb-2 font-display text-xl font-semibold text-strong">{title}</h3>
       <p className="mb-4 max-w-[46ch] font-body text-base text-body">{blurb}</p>
-      <form className="flex max-w-[460px] gap-2" onSubmit={onSubmit}>
+      <form className="flex max-w-[460px] flex-wrap gap-2" onSubmit={onSubmit} onFocusCapture={() => setArmed(true)}>
         <Input
           type="email"
           name="email"
@@ -115,6 +122,7 @@ export function NewsletterSignup({
         >
           {pending ? "Sending" : cta}
         </Button>
+        <TurnstileWidget ref={turnstile} armed={armed} className="basis-full" />
       </form>
       {notice}
     </div>

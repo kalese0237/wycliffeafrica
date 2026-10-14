@@ -6,6 +6,7 @@ import { LogIn, Mail, Lock } from "lucide-react";
 import { Button } from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
 import { FormField } from "@/components/molecules/FormField";
+import { TurnstileWidget, type TurnstileHandle } from "@/components/molecules/TurnstileWidget";
 import { loginAction, type ActionState } from "@/lib/portal/actions";
 import { passwordResetMailto } from "@/lib/portal/contact";
 
@@ -20,6 +21,12 @@ export function LoginForm() {
     setSeenState(state);
     if (state.email !== undefined) setEmail(state.email);
   }
+
+  // Tokens are single-use and React resets the form after every attempt, so each result needs a fresh one.
+  const turnstile = React.useRef<TurnstileHandle>(null);
+  React.useEffect(() => {
+    if (state.error) turnstile.current?.reset();
+  }, [state]);
 
   return (
     <form action={formAction}>
@@ -89,6 +96,8 @@ export function LoginForm() {
           </a>
         </div>
       </div>
+
+      <TurnstileWidget ref={turnstile} className="mt-6" />
 
       <Button
         type="submit"
