@@ -2,9 +2,10 @@
 
 import { createItem } from "@directus/sdk";
 import { directus } from "@/lib/directus/client";
+import { verifyTurnstile } from "@/lib/turnstile";
 
 /**
- * The two public write paths on the site: the contact form and the newsletter signup.
+ * The public write paths on the site: the contact form, the newsletter signup and the questionnaire.
  *
  * Both post into Directus collections that the office reads there; nothing is emailed from here and
  * no address is exposed to browser code. If the collections or their create permission are missing,
@@ -58,5 +59,46 @@ export async function subscribeToNewsletter(formData: FormData): Promise<SubmitR
   } catch (error) {
     console.error("newsletter signup failed", error);
     return failed("add you to the list");
+  }
+}
+
+export async function submitQuestionnaire(formData: FormData): Promise<SubmitResult> {
+  const field = (name: string) => String(formData.get(name) ?? "").trim();
+  const optional = (name: string) => field(name) || null;
+
+  const firstName = field("firstName");
+  const lastName = field("lastName");
+  const email = field("email");
+  const country = field("country");
+  const skills = optional("skills");
+  const motivation = optional("motivation");
+
+  if (!firstName || !lastName || !email || !country) return { ok: false, error: "Please fill in every required field." };
+  if (!EMAIL_PATTERN.test(email)) return { ok: false, error: "That email address does not look right." };
+  if ((skills?.length ?? 0) > 5000 || (motivation?.length ?? 0) > 5000) {
+    return { ok: false, error: "Please keep each answer under 5000 characters." };
+  }
+
+  if (!(await verifyTurnstile(String(formData.get("cf-turnstile-response") ?? "") || null))) {
+    return { ok: false, error: "We could not confirm you are not a bot. Please try again." };
+  }
+
+  try {
+    await directus.request(
+      createItem("questionnaire_submissions", {
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        phone: optional("phone"),
+        country,
+        church: optional("church"),
+        skills,
+        motivation,
+      }),
+    );
+    return { ok: true };
+  } catch (error) {
+    console.error("questionnaire submission failed", error);
+    return failed("send your questionnaire");
   }
 }
