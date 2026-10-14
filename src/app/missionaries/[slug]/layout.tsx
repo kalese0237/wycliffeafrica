@@ -1,3 +1,6 @@
+import { notFound } from "next/navigation";
+import { getMissionaryBySlug } from "@/lib/content";
+
 /** Impeccable direction contract for /missionaries/[slug] — audited against the shipped render. */
 const DIRECTION_CONTRACT = `<!-- impeccable:direction deeec26c — Missionary profile (/missionaries/[slug])
 
@@ -25,7 +28,18 @@ const DIRECTION_CONTRACT = `<!-- impeccable:direction deeec26c — Missionary pr
   verdict, and DESIGN.md
 -->`;
 
-export default function MissionaryProfileLayout({ children }: { children: React.ReactNode }) {
+export default async function MissionaryProfileLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ slug: string }>;
+}) {
+  // Checked here, above loading.tsx's Suspense boundary, so an unknown slug answers 404 before any
+  // HTML streams. Inside the boundary the status is already committed as 200.
+  const { slug } = await params;
+  if (!(await getMissionaryBySlug(slug))) notFound();
+
   return (
     <>
       {/* Emitted as a real HTML comment so the contract survives the production build; JSX comments

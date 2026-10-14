@@ -7,7 +7,7 @@ related_targets: ["src/app/about/why-bible-translation","src/app/about/what-we-b
 
 ## Scope
 
-The About Us family: `/about/why-bible-translation`, `/about/what-we-believe` (core values folded in at `#core-values`), `/about/leadership` (board + brief history). `/about` remains the hub. Visitor mode: **Read** — the visitor is here to understand something and decide whether to trust it.
+The About Us family: `/about/why-bible-translation`, `/about/what-we-believe` (core values folded in at `#core-values`), `/about/leadership` (history + board). `/about` remains the hub. Visitor mode: **Read** — the visitor is here to understand something and decide whether to trust it.
 
 ## Audience and job
 
@@ -44,7 +44,7 @@ Verbatim doctrinal text; nothing unverified shipped as fact; mid-range Android o
 ## Unresolved
 
 1. The "Wycliffe Africa believes" list repeats the last two doctrinal truths verbatim — building with the five unique items, awaiting the user's confirmation that the duplicates were a copy-paste slip.
-2. Founding year, founders, and all history milestones read TBC. The team photo in `public/Missionaries/wycliffe-africa-team.webp` shows a "20th Anniversary" backdrop — a real date the user has not yet confirmed.
+2. Resolved 2026-10-13: history supplied (`docs/content/history-of-wycliffe-africa.md`). `/about/leadership` now shows a four-milestone rail and the full verbatim text (`HistoryStory`) above the board. Open queries to Wycliffe Africa: the closing calls the founders "two African leaders", and "Eurasia" sits in a list of African countries.
 3. Board profiles supplied for eight members (`docs/content/board-profiles.md`); Onesmas Muchesia and Mark Mwanzia still to come. Built 2026-10-13 as `BoardRoster`: a ruled roster where each row opens the member's profile in a native `<dialog>` (side panel from `sm`, bottom sheet below), addressed by `#slug` so every profile has a shareable URL. Bios are in the row markup for print only.
 4. Whether board/history/values become Directus collections or stay typed local constants. Building as local constants.
 

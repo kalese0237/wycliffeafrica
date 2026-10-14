@@ -1,11 +1,11 @@
 import * as React from "react";
 import { PageTemplate } from "@/components/templates";
-import { AboutPhotoHero, HistoryRail, BoardRoster, AboutCTA } from "@/components/organisms";
+import { AboutPhotoHero, HistoryRail, HistoryStory, BoardRoster, AboutCTA } from "@/components/organisms";
 
 export const metadata = {
   title: "Leadership & History | Wycliffe Africa",
   description:
-    "The board accountable for Wycliffe Africa, and a brief history of how the movement began.",
+    "How Wycliffe Africa began in the late 1990s and grew, and the board accountable for it today.",
 };
 
 export default function LeadershipPage() {
@@ -21,6 +21,7 @@ export default function LeadershipPage() {
       />
 
       <HistoryRail />
+      <HistoryStory />
       <BoardRoster />
 
       <AboutCTA

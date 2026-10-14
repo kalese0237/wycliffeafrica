@@ -2,6 +2,7 @@ import { PageTemplate } from "@/components/templates";
 import { DonationCTA } from "@/components/organisms";
 import {
   HomeHero,
+  HomeHistory,
   HomeIntro,
   MissionarySpotlight,
   ServeGiveCards,
@@ -15,6 +16,7 @@ export default function HomePage() {
   return (
     <PageTemplate transparentHeader>
       <HomeHero />
+      <HomeHistory />
       <HomeIntro />
       <MissionarySpotlight />
       <UpdatesFeed />

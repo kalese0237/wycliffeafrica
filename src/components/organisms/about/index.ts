@@ -7,4 +7,5 @@ export * from "./BoardRoster";
 export * from "./CoreValues";
 export * from "./CreedBand";
 export * from "./HistoryRail";
+export * from "./HistoryStory";
 export * from "./PendingNote";
