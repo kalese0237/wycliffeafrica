@@ -66,7 +66,7 @@ const PRIMARY_NAV: NavItem[] = [
     href: "/resources",
     menu: [
       ["Where to get Training", "/resources/training"],
-      ["Staff Positions Needed", "/resources"],
+      ["Staff Positions Needed", "/careers"],
       ["Application Process", "/resources"],
       ["Preliminary Questionnaire", "/questionnaire"],
       ["Downloads", "/resources"],

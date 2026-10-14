@@ -1,6 +1,11 @@
 import { readItems } from "@directus/sdk";
 import { directus } from "./client";
-import type { PublicPrayerRequestRecord, PublicMissionaryRecord, PublicNewsRecord } from "./schema";
+import type {
+  PublicPrayerRequestRecord,
+  PublicMissionaryRecord,
+  PublicNewsRecord,
+  PublicStaffPositionRecord,
+} from "./schema";
 import { prayerFreshnessCutoffIso } from "@/lib/prayer-freshness";
 import { normalizeMissionaryBio } from "@/lib/missionary-bio";
 
@@ -368,4 +373,54 @@ export async function getFaqs() {
 
 export async function getResources() {
   return directus.request(readItems("resources", { fields: ["id", "type", "title", "meta", "href"] }));
+}
+
+const STAFF_POSITION_PUBLIC_FIELDS = [
+  "id",
+  "status",
+  "sort",
+  "title",
+  "area",
+  "location",
+  "commitment",
+  "summary",
+  "requirements",
+] as const;
+
+let warnedMissingStaffPositions = false;
+
+/**
+ * Directus answers 403, not 404, for a collection that does not exist or that the Site policy
+ * cannot read. `staff_positions` is created by scripts/add-staff-positions-collection.mjs, and the
+ * site can deploy before that script runs; an empty list is the honest answer until it has.
+ */
+function isMissingStaffPositions(error: unknown): boolean {
+  if (!error || typeof error !== "object") return false;
+  const message = "message" in error && typeof error.message === "string" ? error.message : "";
+  const response = "response" in error ? error.response : undefined;
+  const status =
+    response && typeof response === "object" && "status" in response && typeof response.status === "number"
+      ? response.status
+      : undefined;
+  return status === 403 && message.includes("staff_positions");
+}
+
+export async function getStaffPositions(): Promise<PublicStaffPositionRecord[]> {
+  try {
+    return await directus.request(
+      readItems("staff_positions", {
+        fields: [...STAFF_POSITION_PUBLIC_FIELDS],
+        filter: PUBLISHED,
+        sort: ["sort", "title"],
+        limit: -1,
+      }),
+    );
+  } catch (error) {
+    if (!isMissingStaffPositions(error)) throw error;
+    if (!warnedMissingStaffPositions) {
+      warnedMissingStaffPositions = true;
+      console.warn("[content] staff_positions is missing or unreadable; /careers shows no positions.");
+    }
+    return [];
+  }
 }

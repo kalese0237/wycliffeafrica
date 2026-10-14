@@ -7,6 +7,7 @@ import { Button } from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
 import { FormField } from "@/components/molecules/FormField";
 import { submitContactMessage, type SubmitResult } from "@/app/actions/submit";
+import { positionEnquiryMessage } from "@/lib/staff-positions";
 
 /**
  * Contact form — name/email/message, posting to the `contact_messages` collection in Directus.
@@ -20,6 +21,15 @@ export function ContactForm() {
   const pathname = usePathname();
   const [pending, startTransition] = React.useTransition();
   const [result, setResult] = React.useState<SubmitResult | null>(null);
+  const messageRef = React.useRef<HTMLTextAreaElement>(null);
+
+  // Reached from a position on /careers: open the message by naming it. Read in an effect rather
+  // than through useSearchParams so the contact page stays statically rendered.
+  React.useEffect(() => {
+    const opening = positionEnquiryMessage(new URLSearchParams(window.location.search).get("position"));
+    const field = messageRef.current;
+    if (opening && field && !field.value) field.value = opening;
+  }, []);
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -69,6 +79,7 @@ export function ContactForm() {
       </div>
       <FormField label="Message" required className="mb-5">
         <textarea
+          ref={messageRef}
           name="message"
           rows={6}
           required

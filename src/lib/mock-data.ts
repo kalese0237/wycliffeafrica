@@ -5,6 +5,7 @@ import type {
   InternRecord,
   ResourceRecord,
   FaqRecord,
+  StaffPositionRecord,
 } from "@/lib/directus/schema";
 import { isFreshPrayer } from "@/lib/prayer-freshness";
 
@@ -331,6 +332,13 @@ const RESOURCES: ResourceRecord[] = [
   { id: "r6", type: "pdf", title: "No Bible Sunday Planning Kit", meta: "5 pages", href: "#" },
 ];
 
+/**
+ * Deliberately empty: Wycliffe Africa has not supplied any open positions yet, and the project rule
+ * is that nothing unverified ships looking like fact. /careers renders its empty state until the
+ * office publishes a position in Directus.
+ */
+const STAFF_POSITIONS: StaffPositionRecord[] = [];
+
 const FAQS: FaqRecord[] = [
   {
     id: "f1",
@@ -410,6 +418,10 @@ export async function getResources(): Promise<ResourceRecord[]> {
 
 export async function getFaqs(): Promise<FaqRecord[]> {
   return FAQS;
+}
+
+export async function getStaffPositions(): Promise<StaffPositionRecord[]> {
+  return STAFF_POSITIONS.filter((p) => p.status === "published");
 }
 
 export async function getMissionaryById(id: string): Promise<MissionaryRecord | undefined> {
