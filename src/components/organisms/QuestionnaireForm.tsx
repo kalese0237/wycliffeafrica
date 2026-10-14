@@ -5,6 +5,7 @@ import { Check, Loader2, Send, TriangleAlert } from "lucide-react";
 import { Button } from "@/components/atoms/Button";
 import { Input } from "@/components/atoms/Input";
 import { FormField } from "@/components/molecules/FormField";
+import { TurnstileWidget } from "@/components/molecules/TurnstileWidget";
 import { submitQuestionnaire, type SubmitResult } from "@/app/actions/submit";
 
 const textareaClasses =
@@ -14,13 +15,16 @@ const textareaClasses =
 export function QuestionnaireForm() {
   const [pending, startTransition] = React.useTransition();
   const [result, setResult] = React.useState<SubmitResult | null>(null);
+  const turnstile = React.useRef<{ reset: () => void }>(null);
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     setResult(null);
     startTransition(async () => {
-      setResult(await submitQuestionnaire(formData));
+      const outcome = await submitQuestionnaire(formData);
+      setResult(outcome);
+      if (!outcome.ok) turnstile.current?.reset();
     });
   }
 
@@ -75,6 +79,7 @@ export function QuestionnaireForm() {
       <FormField label="Tell us briefly why you're interested in serving" className="mb-6">
         <textarea name="motivation" rows={4} disabled={pending} className={textareaClasses} />
       </FormField>
+      <TurnstileWidget ref={turnstile} />
       {result && !result.ok && (
         <p
           role="alert"

@@ -2,6 +2,7 @@
 
 import { createItem } from "@directus/sdk";
 import { directus } from "@/lib/directus/client";
+import { verifyTurnstile } from "@/lib/turnstile";
 
 /**
  * The public write paths on the site: the contact form, the newsletter signup and the questionnaire.
@@ -76,6 +77,10 @@ export async function submitQuestionnaire(formData: FormData): Promise<SubmitRes
   if (!EMAIL_PATTERN.test(email)) return { ok: false, error: "That email address does not look right." };
   if ((skills?.length ?? 0) > 5000 || (motivation?.length ?? 0) > 5000) {
     return { ok: false, error: "Please keep each answer under 5000 characters." };
+  }
+
+  if (!(await verifyTurnstile(String(formData.get("cf-turnstile-response") ?? "") || null))) {
+    return { ok: false, error: "We could not confirm you are not a bot. Please try again." };
   }
 
   try {
