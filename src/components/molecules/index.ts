@@ -1,4 +1,5 @@
-export * from "./BoardMemberCard";
+export * from "./BoardMemberRow";
+export * from "./BoardPortrait";
 export * from "./FormField";
 export * from "./LoadingBlocks";
 export * from "./EditorialImage";

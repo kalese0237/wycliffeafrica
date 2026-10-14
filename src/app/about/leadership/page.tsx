@@ -1,6 +1,6 @@
 import * as React from "react";
 import { PageTemplate } from "@/components/templates";
-import { AboutPhotoHero, HistoryRail, HistoryStory, BoardGrid, AboutCTA } from "@/components/organisms";
+import { AboutPhotoHero, HistoryRail, HistoryStory, BoardRoster, AboutCTA } from "@/components/organisms";
 
 export const metadata = {
   title: "Leadership & History | Wycliffe Africa",
@@ -22,7 +22,7 @@ export default function LeadershipPage() {
 
       <HistoryRail />
       <HistoryStory />
-      <BoardGrid />
+      <BoardRoster />
 
       <AboutCTA
         title="Every gift is accounted for."
